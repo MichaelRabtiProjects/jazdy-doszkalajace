@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /panel.html
+Disallow: /platnosc-mock.html
+Disallow: /rezerwacja-potwierdzona.html
+
+Sitemap: https://jazdy-doszkalajace.example/sitemap.xml

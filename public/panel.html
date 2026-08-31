@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel admina | Jazdy Doszkalające</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/panel.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-bar">
+  <div class="container admin-bar-inner">
+    <span class="logo">Panel admina</span>
+    <button id="logout-btn" class="btn btn-ghost" hidden>Wyloguj</button>
+  </div>
+</header>
+
+<main class="container admin-main">
+
+  <section id="login-view" class="admin-card admin-login">
+    <h1>Logowanie</h1>
+    <form id="login-form">
+      <label for="password">Hasło</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+      <button type="submit" class="btn btn-primary">Zaloguj</button>
+      <p id="login-error" class="admin-error" hidden></p>
+    </form>
+  </section>
+
+  <div id="panel-view" hidden>
+
+    <section class="admin-card">
+      <h2>Szablon tygodniowy</h2>
+      <p class="admin-hint">Powtarzalne godziny dostępności w każdym tygodniu.</p>
+      <table class="admin-table" id="template-table">
+        <thead>
+          <tr><th>Dzień</th><th>Od</th><th>Do</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <form id="template-form" class="admin-inline-form">
+        <select id="template-day" required>
+          <option value="1">Poniedziałek</option>
+          <option value="2">Wtorek</option>
+          <option value="3">Środa</option>
+          <option value="4">Czwartek</option>
+          <option value="5">Piątek</option>
+          <option value="6">Sobota</option>
+          <option value="0">Niedziela</option>
+        </select>
+        <input type="number" id="template-start" min="0" max="23" placeholder="Od (godz.)" required>
+        <input type="number" id="template-end" min="1" max="24" placeholder="Do (godz.)" required>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+      </form>
+    </section>
+
+    <section class="admin-card">
+      <h2>Kalendarz — szybkie blokowanie</h2>
+      <p class="admin-hint">
+        Kliknij godzinę, żeby ją zablokować albo odblokować.
+        <span class="legend-dot legend-available"></span> wolne ·
+        <span class="legend-dot legend-blocked"></span> zablokowane ·
+        <span class="legend-dot legend-booked"></span> rezerwacja klienta (bez zmian stąd)
+      </p>
+      <div class="calendar-week-nav">
+        <button type="button" id="admin-prev-week" class="btn btn-ghost-dark">&larr;</button>
+        <span id="admin-week-range"></span>
+        <button type="button" id="admin-next-week" class="btn btn-ghost-dark">&rarr;</button>
+      </div>
+      <div class="admin-calendar-scroll">
+        <table class="admin-calendar-table">
+          <thead><tr id="admin-calendar-header"></tr></thead>
+          <tbody id="admin-calendar-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Wyjątki</h2>
+      <p class="admin-hint">Punktowe zmiany dla konkretnej daty — zablokuj (np. urlop) albo dodaj (np. dodatkowa sobota).</p>
+      <table class="admin-table" id="exceptions-table">
+        <thead>
+          <tr><th>Data</th><th>Od</th><th>Do</th><th>Typ</th><th>Notatka</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <form id="exception-form" class="admin-inline-form">
+        <input type="date" id="exception-date" required>
+        <input type="number" id="exception-start" min="0" max="23" placeholder="Od (godz.)" required>
+        <input type="number" id="exception-end" min="1" max="24" placeholder="Do (godz.)" required>
+        <select id="exception-kind" required>
+          <option value="block">Zablokuj</option>
+          <option value="add">Dodaj</option>
+        </select>
+        <input type="text" id="exception-note" placeholder="Notatka (opcjonalnie)">
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+      </form>
+    </section>
+
+    <section class="admin-card">
+      <h2>Rezerwacje</h2>
+      <table class="admin-table" id="bookings-table">
+        <thead>
+          <tr><th>Kod</th><th>Klient</th><th>Kontakt</th><th>Data</th><th>Godz.</th><th>Czas</th><th>Kwota</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="bookings-empty" class="admin-hint" hidden>Brak rezerwacji.</p>
+    </section>
+
+  </div>
+
+</main>
+
+<script src="/js/panel.js"></script>
+</body>
+</html>

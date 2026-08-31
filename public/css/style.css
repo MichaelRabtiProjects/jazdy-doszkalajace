@@ -1,0 +1,440 @@
+/* ==========================================================================
+   Zmienne kolorów — motyw drogowy.
+   Zmiana wartości tutaj zmienia kolor w całej stronie (stąd "zmienne").
+   ========================================================================== */
+:root {
+  --asphalt: #1b1d21;
+  --asphalt-2: #26282d;
+  --amber: #f5a300;
+  --amber-dark: #cf8a00;
+  --sign-green: #00753d;
+  --paper: #f6f4ef;
+  --paper-alt: #ecebe4;
+  --ink: #1f2023;
+  --ink-soft: #55585f;
+  --white: #ffffff;
+
+  --font-head: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+a {
+  color: inherit;
+}
+
+/* ==========================================================================
+   Nagłówek — ciemny asfalt, przyklejony do góry
+   ========================================================================== */
+.site-header {
+  background: var(--asphalt);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 3px solid var(--amber);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.logo-accent {
+  color: var(--amber);
+}
+
+.main-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.main-nav a:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--white);
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  background: linear-gradient(180deg, var(--asphalt) 0%, var(--asphalt-2) 100%);
+  color: var(--white);
+  padding: 90px 0 100px;
+}
+
+.hero-inner {
+  max-width: 720px;
+}
+
+.hero-kicker {
+  font-weight: 600;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 20px;
+}
+
+.hero-lead {
+  font-size: 1.1rem;
+  color: #d8d8d4;
+  margin-bottom: 32px;
+  max-width: 560px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: var(--asphalt);
+}
+
+.btn-primary:hover {
+  background: var(--amber-dark);
+}
+
+/* ==========================================================================
+   Przerywana linia jak pasy na jezdni — separator między sekcjami
+   ========================================================================== */
+.lane-divider {
+  height: 18px;
+  background: var(--asphalt-2);
+  position: relative;
+}
+
+.lane-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--amber) 0,
+    var(--amber) 34px,
+    transparent 34px,
+    transparent 58px
+  );
+}
+
+/* ==========================================================================
+   Sekcje ogólnie
+   ========================================================================== */
+.section {
+  padding: 64px 0;
+}
+
+.section-alt {
+  background: var(--paper-alt);
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+}
+
+.section-lead {
+  color: var(--ink-soft);
+  margin-bottom: 36px;
+  max-width: 620px;
+}
+
+/* ==========================================================================
+   Oferta
+   ========================================================================== */
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.offer-card {
+  background: var(--white);
+  border: 1px solid #e2e0d8;
+  border-top: 4px solid var(--amber);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.offer-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.offer-card p {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Plakietki tras egzaminacyjnych stylizowane na zielone drogowskazy */
+.route-badges {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.route-badge {
+  background: var(--sign-green);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 6px 12px;
+  border: 2px solid var(--white);
+  outline: 1px solid var(--sign-green);
+  border-radius: 3px;
+}
+
+/* ==========================================================================
+   Cennik
+   ========================================================================== */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.price-card {
+  background: var(--white);
+  border: 1px solid #e2e0d8;
+  border-radius: 6px;
+  padding: 24px;
+  text-align: center;
+}
+
+.price-card-rate {
+  background: var(--asphalt);
+  color: var(--white);
+  border-color: var(--asphalt);
+}
+
+.price-duration {
+  display: block;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.price-card-rate .price-unit {
+  display: block;
+  color: var(--amber);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.price-value {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.price-note {
+  margin-top: 28px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Galeria — placeholdery do czasu dodania zdjęć
+   ========================================================================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.gallery-item {
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e2e0d8;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   Grafik / rezerwacja — placeholder do etapu 5
+   ========================================================================== */
+.booking-placeholder {
+  background: var(--white);
+  border: 1px dashed var(--amber-dark);
+  border-radius: 6px;
+  padding: 28px;
+  max-width: 520px;
+}
+
+.booking-placeholder p {
+  margin: 0 0 8px;
+  color: var(--ink-soft);
+}
+
+.booking-placeholder p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Kontakt
+   ========================================================================== */
+.contact-grid p {
+  margin: 0 0 10px;
+}
+
+/* ==========================================================================
+   Stopka
+   ========================================================================== */
+.site-footer {
+  background: var(--asphalt);
+  color: #b9b9b4;
+  padding: 28px 0;
+  border-top: 3px solid var(--amber);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Responsywność — menu mobilne poniżej 720px
+   ========================================================================== */
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--asphalt);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+    border-bottom: 3px solid var(--amber);
+  }
+
+  .main-nav.is-open {
+    max-height: 320px;
+  }
+
+  .main-nav a {
+    padding: 16px 20px;
+    border-bottom: 1px solid #34363b;
+  }
+
+  .hero {
+    padding: 60px 0 70px;
+  }
+}

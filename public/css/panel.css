@@ -1,0 +1,263 @@
+.admin-body {
+  background: var(--paper-alt);
+  min-height: 100vh;
+}
+
+.admin-bar {
+  background: var(--asphalt);
+  color: var(--white);
+  border-bottom: 3px solid var(--amber);
+}
+
+.admin-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+  padding: 8px 18px;
+  font-size: 0.9rem;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.admin-main {
+  padding: 36px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-card {
+  background: var(--white);
+  border: 1px solid #e2e0d8;
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.admin-card h1,
+.admin-card h2 {
+  margin-bottom: 6px;
+}
+
+.admin-hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 16px;
+}
+
+.admin-login {
+  max-width: 360px;
+  margin: 40px auto 0;
+}
+
+.admin-login form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-login label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-error {
+  color: #b3261e;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+input,
+select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 8px 10px;
+  border: 1px solid #cfccc0;
+  border-radius: 4px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2e0d8;
+}
+
+.admin-table th {
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.admin-table .delete-btn {
+  background: none;
+  border: none;
+  color: #b3261e;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.btn-ghost-dark {
+  background: none;
+  border: 1px solid var(--asphalt);
+  color: var(--asphalt);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-ghost-dark:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin: 0 2px -1px 8px;
+}
+
+.legend-available { background: #fff8ea; border: 1px solid var(--amber-dark); }
+.legend-blocked { background: #eeece4; border: 1px solid #cfccc0; }
+.legend-booked { background: #f6c9c3; border: 1px solid #b3261e; }
+
+.calendar-week-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.calendar-week-nav span {
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.admin-calendar-scroll {
+  overflow-x: auto;
+  max-height: 480px;
+  overflow-y: auto;
+  border: 1px solid #e2e0d8;
+  border-radius: 4px;
+}
+
+.admin-calendar-table {
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  width: 100%;
+}
+
+.admin-calendar-table th,
+.admin-calendar-table td {
+  border: 1px solid #ece9df;
+  padding: 0;
+  text-align: center;
+}
+
+.admin-calendar-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--paper-alt);
+  padding: 6px 4px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.hour-label {
+  padding: 2px 8px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--paper-alt);
+  position: sticky;
+  left: 0;
+}
+
+.cal-cell {
+  width: 44px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cal-cell.cal-available {
+  background: #fff8ea;
+}
+.cal-cell.cal-available:hover {
+  background: var(--amber);
+}
+
+.cal-cell.cal-blocked {
+  background: #eeece4;
+}
+.cal-cell.cal-blocked:hover {
+  background: #ddd9cc;
+}
+
+.cal-cell.cal-booked {
+  background: #f6c9c3;
+  cursor: not-allowed;
+}
+
+.admin-inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-pending_payment {
+  background: #fff2cc;
+  color: #8a6d00;
+}
+
+.status-paid {
+  background: #d9f0e1;
+  color: var(--sign-green);
+}
+
+.status-cancelled,
+.status-expired {
+  background: #eee;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

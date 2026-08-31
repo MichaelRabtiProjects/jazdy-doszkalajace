@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezerwacja terminu | Jazdy Doszkalające</title>
+<meta name="description" content="Zarezerwuj termin jazdy doszkalającej online — wybierz dzień, godzinę i długość jazdy, zapłać online i dostaniesz potwierdzenie mailem.">
+<link rel="canonical" href="https://jazdy-doszkalajace.example/rezerwacja.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/rezerwacja.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="/#oferta">Oferta</a>
+      <a href="/#cennik">Cennik</a>
+      <a href="/#galeria">Galeria</a>
+      <a href="/rezerwacja.html">Grafik</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main class="container booking-main">
+
+  <h1>Zarezerwuj termin</h1>
+
+  <div id="step-calendar" class="booking-step">
+
+    <div class="duration-picker">
+      <span class="duration-label">Długość jazdy:</span>
+      <div class="duration-options" id="duration-options">
+        <button type="button" class="duration-btn" data-hours="2">2h — 320 zł</button>
+        <button type="button" class="duration-btn" data-hours="3">3h — 480 zł</button>
+        <button type="button" class="duration-btn" data-hours="4">4h — 640 zł</button>
+      </div>
+    </div>
+
+    <div class="week-nav">
+      <button type="button" id="prev-week" class="btn btn-ghost-dark">&larr; Poprzedni tydzień</button>
+      <span id="week-range"></span>
+      <button type="button" id="next-week" class="btn btn-ghost-dark">Następny tydzień &rarr;</button>
+    </div>
+
+    <div id="calendar-grid" class="calendar-grid"></div>
+    <p id="calendar-message" class="calendar-message" hidden></p>
+  </div>
+
+  <div id="step-form" class="booking-step" hidden>
+    <button type="button" id="back-to-calendar" class="btn btn-ghost-dark">&larr; Zmień termin</button>
+
+    <div class="booking-summary" id="booking-summary"></div>
+
+    <form id="booking-form">
+      <label for="client_name">Imię i nazwisko</label>
+      <input type="text" id="client_name" name="client_name" required minlength="2">
+
+      <label for="client_phone">Telefon</label>
+      <input type="tel" id="client_phone" name="client_phone" required minlength="6">
+
+      <label for="client_email">E-mail</label>
+      <input type="email" id="client_email" name="client_email" required>
+
+      <button type="submit" class="btn btn-primary">Rezerwuję i przechodzę do płatności</button>
+      <p id="form-error" class="admin-error" hidden></p>
+    </form>
+  </div>
+
+  <div id="step-confirmation" class="booking-step" hidden>
+    <div class="booking-summary booking-summary-success">
+      <h2>Rezerwacja wstępna utworzona</h2>
+      <p id="confirmation-status-line">Przekierowujemy Cię do płatności…</p>
+      <p id="confirmation-error" class="admin-error" hidden></p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <p class="footer-area">Jazdy doszkalające Warszawa · Wawer</p>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/rezerwacja.js"></script>
+</body>
+</html>
