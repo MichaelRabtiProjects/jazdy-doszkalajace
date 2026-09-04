@@ -40,10 +40,12 @@ app.use('/api/admin', adminRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/payments', paymentsRouter);
 
-// Folder "public" (dwa poziomy wyżej: src -> server -> repo root -> public)
-// jest serwowany jako pliki statyczne — Express sam dopasuje np. /style.css
-// do public/style.css bez osobnej trasy (route) dla każdego pliku.
-const publicDir = path.join(__dirname, '..', '..', 'public');
+// Folder "public" jest teraz WEWNĄTRZ "server" (server/public), nie obok
+// niego — to ważne przy hostingu typu Railway, gdzie "Root Directory"
+// ogranicza wdrożenie do zawartości jednego folderu (server/). Gdyby
+// public/ leżał poza nim (jako sąsiad server/), nie trafiłby w ogóle do
+// wdrożenia, mimo że lokalnie wszystko działałoby normalnie.
+const publicDir = path.join(__dirname, '..', 'public');
 app.use(express.static(publicDir));
 
 app.listen(PORT, () => {

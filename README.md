@@ -42,9 +42,13 @@ pomijane. Uruchom go ponownie po każdej nowej migracji, którą dodamy.
 ## Struktura projektu
 
 ```
-server/     — backend Express (API, baza danych, płatności, e-maile)
-public/     — frontend serwowany statycznie przez Express
+server/            — backend Express (API, baza danych, płatności, e-maile)
+server/public/     — frontend serwowany statycznie przez Express
 ```
+
+`public/` jest CELOWO wewnątrz `server/`, a nie obok — hosting typu Railway
+z ustawionym "Root Directory: server" wdraża tylko zawartość tego jednego
+folderu, więc wszystko, czego serwer potrzebuje, musi się w nim znaleźć.
 
 ## Wysyłka e-maili (Gmail)
 
@@ -103,7 +107,7 @@ NIE był jeszcze przetestowany z prawdziwym kontem.
 
 ## Zdjęcia w galerii
 
-Prawdziwe zdjęcia kursantów w `public/img/galeria/` (Etap 1, uzupełnione później).
+Prawdziwe zdjęcia kursantów w `server/public/img/galeria/` (Etap 1, uzupełnione później).
 Dwa pliki ze źródłowego folderu świadomie pominięto: jedno z czytelnym
 imieniem i nazwiskiem kursanta na arkuszu egzaminacyjnym (ryzyko RODO) i
 jedno z nieprzyzwoitym gestem. `szkola-jazdy-wawer-nauka-kat-b.jpg` pokazuje
