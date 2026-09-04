@@ -12,6 +12,11 @@ instruktora nauki jazdy (jazdy doszkalające, Warszawa Wawer).
   ma tu Pythona/Visual Studio Build Tools potrzebnych do skompilowania
   popularnej alternatywy `better-sqlite3`)
 
+**WYMAGANY Node.js 24+** — moduł `node:sqlite` nie istnieje w starszych
+wersjach (Node 18 wywala się z błędem `No such built-in module: node:sqlite`).
+Wersja jest wymuszona w dwóch miejscach, bo różne systemy hostingowe czytają
+różne źródła: `engines.node` w `server/package.json` oraz plik `server/.nvmrc`.
+
 ## Jak uruchomić (Etap 1)
 
 ```powershell
