@@ -39,6 +39,19 @@ npm run dev
 numerów — bezpiecznie odpalać wielokrotnie, już zastosowane migracje są
 pomijane. Uruchom go ponownie po każdej nowej migracji, którą dodamy.
 
+## Dwie wersje strony
+
+Projekt zawiera dwie niezależne wersje:
+
+| Folder | Co to jest | Gdzie działa |
+|---|---|---|
+| `server/` | **Pełna wersja** — Node.js + Express + SQLite, rezerwacje online, płatności, e-maile, panel admina | Railway (wymaga Node.js, bazy, zmiennych środowiskowych, wolumenu) |
+| `static/` | **Wersja uproszczona** — sama wizytówka, czysty HTML/CSS/JS, bez backendu. Zamiast kalendarza rezerwacji ma sekcję "Umów jazdę" (telefon, e-mail, godziny pracy) | Dowolny darmowy hosting statyczny (Cloudflare Pages, Netlify, GitHub Pages) |
+
+Wersje są całkowicie rozdzielne — zmiany w `static/` nie ruszają `server/` i odwrotnie.
+Wersja pełna pozostaje gotowa do dokończenia (brakuje tylko podpięcia prawdziwej
+bramki Autopay — patrz sekcja niżej).
+
 ## Struktura projektu
 
 ```
