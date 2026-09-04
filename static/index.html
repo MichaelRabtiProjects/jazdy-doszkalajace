@@ -7,13 +7,13 @@
 <meta name="description" content="Jazdy doszkalające w Warszawie (Wawer i okolice): powrót za kierownicę, przygotowanie do egzaminu WORD na trasach Odlewnicza, Bemowo, Grójec, Garwolin, jazdy indywidualne. Zadzwoń i umów termin.">
 
 <!--
-  Adres poniżej (jazdy-doszkalajace.example) to tymczasowy placeholder —
-  ".example" to domena zarezerwowana specjalnie do takich celów (nigdy nie
-  będzie prawdziwą stroną). Podmień wszystkie 4 wystąpienia w tym pliku
-  (canonical, og:url, og:image, url w danych strukturalnych) oraz adres w
-  sitemap.xml i robots.txt, gdy kupisz prawdziwą domenę.
+  Adres docelowy strony: https://jazdy-doszkalajace.pl/
+  Występuje w 4 miejscach w tym pliku (canonical, og:url, og:image oraz url
+  w danych strukturalnych niżej) i dodatkowo w sitemap.xml i robots.txt.
+  UWAGA: żeby to miało sens dla Google, ta domena musi być faktycznie
+  zarejestrowana i skierowana na hosting, gdzie stoi ta strona.
 -->
-<link rel="canonical" href="https://jazdy-doszkalajace.example/">
+<link rel="canonical" href="https://jazdy-doszkalajace.pl/">
 
 <!-- Open Graph / podgląd linku przy udostępnianiu (Facebook, komunikatory, itp.) -->
 <meta property="og:type" content="website">
@@ -21,15 +21,17 @@
 <meta property="og:site_name" content="Jazdy Doszkalające">
 <meta property="og:title" content="Jazdy doszkalające Warszawa Wawer">
 <meta property="og:description" content="Powrót za kierownicę, przygotowanie do egzaminu WORD (Odlewnicza, Bemowo, Grójec, Garwolin), jazdy indywidualne. Zadzwoń i umów termin.">
-<meta property="og:url" content="https://jazdy-doszkalajace.example/">
-<meta property="og:image" content="https://jazdy-doszkalajace.example/img/galeria/jazdy-doszkalajace-kat-b-wawer.jpg">
+<meta property="og:url" content="https://jazdy-doszkalajace.pl/">
+<meta property="og:image" content="https://jazdy-doszkalajace.pl/img/galeria/jazdy-doszkalajace-kat-b-wawer.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <!--
   Dane strukturalne schema.org (JSON-LD) — to nie jest treść widoczna dla
   odwiedzających, tylko "ściągawka" dla wyszukiwarek: mówi wprost Google,
-  że to firma typu szkoła jazdy, jaki ma numer telefonu, godziny pracy i
-  jaki obszar obsługuje. Pomaga powiązać stronę z profilem Google Business.
+  że to firma typu szkoła jazdy, jaki ma numer telefonu, w jakie dni jest
+  dostępna i jaki obszar obsługuje. Pomaga powiązać stronę z profilem
+  Google Business. "Mo-Su" = dostępność od poniedziałku do niedzieli, bez
+  deklarowania sztywnych godzin (spójnie z treścią sekcji "Umów jazdę").
 -->
 <script type="application/ld+json">
 {
@@ -37,7 +39,7 @@
   "@type": "AutoDrivingSchool",
   "name": "Jazdy Doszkalające Michael",
   "description": "Jazdy doszkalające w Warszawie: powrót za kierownicę po przerwie, przygotowanie do egzaminu WORD na trasach Odlewnicza, Bemowo, Grójec, Garwolin, jazdy indywidualne.",
-  "url": "https://jazdy-doszkalajace.example/",
+  "url": "https://jazdy-doszkalajace.pl/",
   "telephone": "+48690360164",
   "email": "MichaelRabti@gmail.com",
   "areaServed": {
@@ -45,20 +47,7 @@
     "name": "Warszawa"
   },
   "priceRange": "160 zł/h",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "10:00",
-      "closes": "20:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday", "Sunday"],
-      "opens": "10:00",
-      "closes": "17:00"
-    }
-  ]
+  "openingHours": "Mo-Su"
 }
 </script>
 
@@ -231,10 +220,12 @@
       </div>
 
       <div class="hours-box">
-        <h3>Godziny pracy</h3>
-        <p><strong>Poniedziałek – piątek:</strong> 10:00 – 20:00</p>
-        <p><strong>Sobota i niedziela:</strong> 10:00 – 17:00</p>
-        <p class="hours-note">Terminy poza tymi godzinami — do ustalenia telefonicznie.</p>
+        <h3>Dostępność</h3>
+        <p><strong>Od poniedziałku do niedzieli</strong></p>
+        <p class="hours-note">
+          Termin ustalamy telefonicznie lub mailowo — dopasowany do Twojego grafiku,
+          również wcześnie rano albo wieczorem.
+        </p>
       </div>
     </div>
   </section>

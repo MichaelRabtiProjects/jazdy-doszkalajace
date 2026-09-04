@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jazdy-doszkalajace.example/sitemap.xml
+Sitemap: https://jazdy-doszkalajace.pl/sitemap.xml
