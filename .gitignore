@@ -2,3 +2,10 @@ node_modules/
 .env
 server/data/
 .DS_Store
+
+# Konfiguracja Cloudflare trzymana lokalnie — jedynym źródłem prawdy dla
+# wdrożenia jest panel Cloudflare Pages. Gdyby wrangler.toml trafił do repo,
+# Pages potraktowałyby go jako "konfigurację w kodzie" i nadpisał ustawienia
+# z panelu.
+wrangler.toml
+.wrangler/
