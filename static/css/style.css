@@ -475,9 +475,42 @@ section[id] {
   padding: 12px 16px;
 }
 
+/* "Pracuję tego dnia, ale wszystko już zajęte" — karta zostaje BIAŁA,
+   traci tylko bursztynowy akcent.
+   Wcześniej było tu opacity: 0.75, ale na beżowym tle sekcji przygaszona
+   biel robiła się prawie taka sama jak beż karty "nieczynne" — a to mają
+   być dwa różne komunikaty. Bez przezroczystości różnica jest czytelna. */
 .dzien-pusty {
   border-left-color: var(--line);
-  opacity: 0.75;
+}
+
+/* "Tego dnia nie pracuję" — inny komunikat, więc i inny wygląd:
+   szare tło zamiast białego. Nie używam tu opacity, bo zbiłoby kontrast
+   tekstu poniżej progu WCAG; zamiast tego wprost stonowane kolory. */
+.dzien-nieaktywny {
+  background: var(--paper-alt);
+  border-color: var(--line);
+  border-left-color: var(--line);
+}
+
+.dzien-nieaktywny .dzien-nazwa {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.dzien-nieczynne {
+  font-style: italic;
+}
+
+/* Notka o weekendach — informacja, nie ostrzeżenie: bez ramki, bez tła,
+   sam cienki pasek z boku. */
+.grafik-nota {
+  margin: 0 0 18px;
+  padding-left: 12px;
+  border-left: 3px solid var(--amber);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .dzien-naglowek {

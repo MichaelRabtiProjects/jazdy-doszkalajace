@@ -133,8 +133,15 @@
 
       if (pasujace.length > 0) czyCokolwiek = true;
 
+      // Dzień, w którym instruktor nie pracuje, zostaje widoczny, ale
+      // wyszarzony — inaczej klient nie widzi wzorca tygodnia i zastanawia
+      // się, czemu połowa dni po prostu nie istnieje.
+      var nieaktywny = dzien.aktywny === false;
+
       var karta = document.createElement('article');
-      karta.className = 'dzien' + (pasujace.length === 0 ? ' dzien-pusty' : '');
+      karta.className =
+        'dzien' + (nieaktywny ? ' dzien-nieaktywny' : pasujace.length === 0 ? ' dzien-pusty' : '');
+      if (nieaktywny) karta.setAttribute('aria-disabled', 'true');
 
       var head = document.createElement('header');
       head.className = 'dzien-naglowek';
@@ -143,8 +150,14 @@
         '<span class="dzien-data">' + krotkaData(dzien.data) + '</span>';
       karta.appendChild(head);
 
-      if (pasujace.length === 0) {
-        // Zablokowane godziny mają być niewidoczne — pokazujemy sam fakt braku
+      if (nieaktywny) {
+        var nieczynne = document.createElement('p');
+        nieczynne.className = 'dzien-brak dzien-nieczynne';
+        nieczynne.textContent = 'nieczynne';
+        karta.appendChild(nieczynne);
+      } else if (pasujace.length === 0) {
+        // Zablokowane pojedyncze godziny mają być niewidoczne — pokazujemy
+        // sam fakt braku, bez zdradzania, co zostało zablokowane
         var brak = document.createElement('p');
         brak.className = 'dzien-brak';
         brak.textContent = 'brak terminów';
