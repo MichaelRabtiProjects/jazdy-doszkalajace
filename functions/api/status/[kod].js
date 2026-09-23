@@ -1,19 +1,25 @@
 /**
- * GET /api/status/:kod
+ * GET /api/status/:kod — ZAPARKOWANY razem z płatnościami online.
  *
- * Status rezerwacji po kodzie — używany przez stronę potwierdzenia po
- * powrocie z płatności.
+ * Służył stronie potwierdzenia po powrocie z bramki płatniczej. Skoro
+ * płatności online nie ma, nie prowadzi tu żaden link — a rezerwacje
+ * wpisywane ręcznie z panelu też dostają kod w formacie JD-DDMM-GG.
+ * Ten format jest łatwy do zgadnięcia, więc zamiast zostawiać otwarty
+ * endpoint bez żadnego zastosowania, wyłączamy go tą samą flagą.
  *
- * ŚWIADOMIE nie zwraca imienia, telefonu ani e-maila. Kod ma przewidywalny
- * format (JD-DDMM-GG), więc ktoś mógłby zgadywać kolejne — a to, że dany
- * termin jest zajęty, i tak widać w publicznym grafiku. Dane osobowe
- * klienta nie mogą zależeć od zgadnięcia kodu.
+ * Gdy wracał odpowiedź, ŚWIADOMIE nie zwracał imienia, telefonu ani
+ * e-maila — dane osobowe nie mogą zależeć od zgadnięcia kodu.
  */
 
 import { wygasStareBlokady, STAWKA_GODZINOWA } from '../../../lib/dostepnosc.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
+import { PLATNOSCI_ONLINE_DOSTEPNE } from '../../../lib/ustawienia.js';
 
 export async function onRequestGet({ params, env }) {
+  if (!PLATNOSCI_ONLINE_DOSTEPNE) {
+    return blad('Sprawdzanie statusu rezerwacji jest wyłączone.', 403, 'TRYB_WYLACZONY');
+  }
+
   try {
     const db = wymagajBazy(env);
     const kod = String(params.kod || '').toUpperCase();

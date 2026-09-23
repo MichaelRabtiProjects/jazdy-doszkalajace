@@ -1,12 +1,20 @@
 /* Grafik wolnych terminów.
-   Jeden kod obsługuje oba tryby — o tym, czy klient rezerwuje online, czy
-   dzwoni, decyduje wyłącznie ustawienie platnosci_online z backendu. */
+
+   Grafik jest informacyjny: pokazuje wolne godziny i kieruje do bezpośredniego
+   kontaktu. Rezerwację wprowadza instruktor ręcznie z panelu.
+
+   Kod trybu B (formularz rezerwacji online) jest zaparkowany — zostaje
+   w pliku, ale backend zawsze zwraca platnosci_online = false, więc nigdy
+   się nie wyświetli. Szczegóły: lib/ustawienia.js, tag `autopay-wersja`. */
 
 (function () {
   'use strict';
 
   var TELEFON = '+48690360164';
   var TELEFON_ZAPIS = '690 360 164';
+  /* wa.me wymaga samych cyfr, bez znaku '+' i bez spacji */
+  var TELEFON_WA = '48690360164';
+  var EMAIL = 'michaelrabti@gmail.com';
 
   var widget = document.getElementById('grafik-widget');
   if (!widget) return;
@@ -194,6 +202,7 @@
     var opis = tekstOpisu(dzien.data, godzina, stan.dlugosc, dzien.nazwa_dnia);
     panelPodsumowanie.textContent = opis;
 
+    // Gałąź zaparkowana: backend zawsze zwraca platnosci_online = false
     if (stan.dane.platnosci_online) {
       panelTytul.textContent = 'Rezerwacja terminu';
       panelTresc.innerHTML = formularzHtml();
@@ -229,25 +238,52 @@
     if (!panel.hidden && e.key === 'Escape') zamknijPanel();
   });
 
-  /* --- Tryb A: kontakt telefoniczny -------------------------------- */
+  /* --- Panel kontaktowy (jedyny tryb publiczny) --------------------- */
 
   function trybKontaktowyHtml(opis) {
     var tresc =
-      'Dzień dobry, chciałbym zarezerwować jazdę doszkalającą: ' + opis + '.';
+      'Dzień dobry, chciałbym zarezerwować jazdę doszkalającą: ' + opis +
+      '. Proszę o potwierdzenie terminu.';
+    var temat = 'Rezerwacja jazdy doszkalającej: ' + opis;
+
     // Parametr ?body= obsługują dziś zarówno Android, jak i iOS
     var sms = 'sms:' + TELEFON + '?body=' + encodeURIComponent(tresc);
+    var whatsapp = 'https://wa.me/' + TELEFON_WA + '?text=' + encodeURIComponent(tresc);
+    var mail =
+      'mailto:' + EMAIL +
+      '?subject=' + encodeURIComponent(temat) +
+      '&body=' + encodeURIComponent(tresc);
+
+    // Kwoty bierzemy z ustawień w bazie, a nie z kodu — zadatek zmienia się
+    // z panelu i nie może wymagać wdrożenia strony na nowo.
+    var zadatek = stan.dane.kwota_zadatku;
+    var doZaplaty = stan.dlugosc * stan.dane.stawka_godzinowa - zadatek;
 
     return (
-      '<p class="termin-info">Zadzwoń lub napisz SMS, żeby go zarezerwować — potwierdzę termin od ręki.</p>' +
-      '<div class="termin-akcje">' +
-      '<a class="btn btn-primary" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a>' +
-      '<a class="btn btn-secondary" href="' + sms + '">Napisz SMS</a>' +
+      '<p class="termin-info">Odezwij się dowolnym kanałem — termin potwierdzę od ręki. ' +
+      'Data i godzina są już wpisane w wiadomości.</p>' +
+      '<div class="termin-akcje termin-akcje-kanaly">' +
+      '<a class="btn btn-primary" href="tel:' + TELEFON + '">Zadzwoń</a>' +
+      '<a class="btn btn-secondary" href="' + sms + '">SMS</a>' +
+      '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>' +
+      '<a class="btn btn-secondary" href="' + mail + '">E-mail</a>' +
       '</div>' +
-      '<p class="termin-drobne">SMS ma już wpisaną datę i godzinę — wystarczy wysłać.</p>'
+      '<div class="termin-kwoty">' +
+      '<p><span>Zadatek BLIK-iem na nr ' + TELEFON_ZAPIS + '</span><strong>' + zadatek + ' zł</strong></p>' +
+      '<p><span>Reszta gotówką po jeździe</span><strong>' + doZaplaty + ' zł</strong></p>' +
+      '</div>' +
+      '<p class="termin-drobne">Termin rezerwuję po kontakcie — dopiero wtedy znika z grafiku. ' +
+      'Zadatek potwierdza rezerwację.</p>'
     );
   }
 
-  /* --- Tryb B: rezerwacja online ----------------------------------- */
+  /* ------------------------------------------------------------------ */
+  /* ZAPARKOWANE: rezerwacja online + płatność zadatku                   */
+  /*                                                                     */
+  /* Poniższy kod jest nieosiągalny — /api/dostepnosc zawsze zwraca      */
+  /* platnosci_online = false, a /api/rezerwacja odpowiada 403.          */
+  /* Zostaje na wypadek powrotu do płatności online (tag autopay-wersja).*/
+  /* ------------------------------------------------------------------ */
 
   function formularzHtml() {
     var zadatek = stan.dane.kwota_zadatku;

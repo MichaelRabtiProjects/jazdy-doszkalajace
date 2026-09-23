@@ -610,6 +610,17 @@ section[id] {
   text-align: center;
 }
 
+/* Cztery kanały kontaktu: na telefonie układają się 2×2, na szerokim
+   ekranie w jeden rząd. Mniejsza podstawa niż 160px, żeby na 375px
+   zmieściły się dwa przyciski obok siebie razem z odstępem. */
+.termin-akcje-kanaly .btn {
+  flex: 1 1 120px;
+}
+
+.termin-akcje-kanaly + .termin-kwoty {
+  margin-top: 18px;
+}
+
 .termin-kwoty {
   background: var(--white);
   border: 1px solid var(--line);

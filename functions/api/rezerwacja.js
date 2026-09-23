@@ -1,17 +1,30 @@
 /**
- * POST /api/rezerwacja
+ * POST /api/rezerwacja — ZAPARKOWANY (płatności online wyłączone).
  *
- * Tworzy rezerwację ze statusem 'oczekuje' i 15-minutową blokadą terminu.
- * Działa wyłącznie w trybie B (platnosci_online = true) — w trybie A grafik
- * jest tylko informacyjny, a termin umawia się telefonicznie.
+ * Grafik jest dziś wyłącznie informacyjny: klient klika wolny termin
+ * i kontaktuje się bezpośrednio, a rezerwację wprowadza instruktor z panelu.
+ * Ten endpoint odpowiada więc zawsze 403 i nie przyjmuje żadnych danych.
  *
- * Właściwe przekierowanie do płatności dojdzie w Etapie 3 (Autopay).
+ * Kod tworzenia rezerwacji zostaje pod spodem, bo panel administratora
+ * będzie korzystał z tej samej funkcji `utworzRezerwacje`.
  */
 
 import { utworzRezerwacje, BladRezerwacji } from '../../lib/rezerwacje.js';
 import { json, blad, wymagajBazy } from '../../lib/http.js';
+import { PLATNOSCI_ONLINE_DOSTEPNE } from '../../lib/ustawienia.js';
 
 export async function onRequestPost({ request, env }) {
+  // Odrzucamy PRZED odczytaniem treści żądania. Gdybyśmy najpierw sparsowali
+  // JSON, imię, telefon i e-mail trafiłyby choćby na chwilę do pamięci
+  // serwera — a umówiliśmy się, że strona nie zbiera danych osobowych.
+  if (!PLATNOSCI_ONLINE_DOSTEPNE) {
+    return blad(
+      'Rezerwacja online jest wyłączona — wybierz termin w grafiku i skontaktuj się bezpośrednio.',
+      403,
+      'TRYB_WYLACZONY'
+    );
+  }
+
   let dane;
   try {
     dane = await request.json();
