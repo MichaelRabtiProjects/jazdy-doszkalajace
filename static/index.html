@@ -93,11 +93,11 @@
     <a href="#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
     <nav class="main-nav" id="main-nav">
       <a href="#oferta">Oferta</a>
+      <a href="#grafik">Grafik</a>
       <a href="#o-mnie">O mnie</a>
       <a href="#cennik">Cennik</a>
       <a href="#opinie">Opinie</a>
       <a href="#galeria">Galeria</a>
-      <a href="#umow">Umów jazdę</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
     <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
@@ -116,7 +116,7 @@
         Odświeżenie umiejętności po przerwie, przygotowanie do egzaminu na konkretnych trasach WORD
         oraz jazdy indywidualne dopasowane do Twoich potrzeb.
       </p>
-      <a href="#umow" class="btn btn-primary">Umów jazdę</a>
+      <a href="#grafik" class="btn btn-primary">Zobacz wolne terminy</a>
     </div>
   </section>
 
@@ -174,6 +174,46 @@
           </p>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="grafik" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Grafik</h2>
+      <p class="section-lead reveal">
+        Wolne terminy na najbliższe tygodnie. Wybierz długość jazdy, a potem kliknij godzinę,
+        która Ci pasuje.
+      </p>
+
+      <p class="umow-note reveal">
+        W okolicach Wawra zazwyczaj się umawiamy, ale jeśli dojazd Ci nie pasuje, wystarczy napisać
+        i uzgodnić inne miejsce. Napisz lub zadzwoń, żeby ustalić termin i szczegóły – im dłużej
+        zwlekasz, tym dłużej stres czeka na „kiedyś” :P
+      </p>
+
+      <div class="grafik reveal" id="grafik-widget">
+        <div class="grafik-dlugosci" id="grafik-dlugosci" role="group" aria-label="Długość jazdy">
+          <button type="button" class="dlugosc-btn is-active" data-dlugosc="2">
+            2 godziny <span class="dlugosc-cena">320 zł</span>
+          </button>
+          <button type="button" class="dlugosc-btn" data-dlugosc="3">
+            3 godziny <span class="dlugosc-cena">480 zł</span>
+          </button>
+          <button type="button" class="dlugosc-btn" data-dlugosc="4">
+            4 godziny <span class="dlugosc-cena">640 zł</span>
+          </button>
+        </div>
+
+        <p class="grafik-komunikat" id="grafik-komunikat">Wczytywanie wolnych terminów…</p>
+        <div class="grafik-dni" id="grafik-dni" hidden></div>
+      </div>
+
+      <div class="contact-cta reveal">
+        <a href="tel:+48690360164" class="btn btn-primary">Zadzwoń: 690 360 164</a>
+        <a href="mailto:MichaelRabti@gmail.com" class="btn btn-secondary">Napisz e-mail</a>
       </div>
     </div>
   </section>
@@ -529,38 +569,7 @@
 
   <div class="lane-divider" aria-hidden="true"></div>
 
-  <section id="umow" class="section section-alt">
-    <div class="container">
-      <h2 class="section-title reveal">Umów jazdę</h2>
-      <p class="section-lead reveal">
-        Najszybciej telefonicznie — ustalimy termin, długość jazdy i miejsce spotkania.
-      </p>
-
-      <p class="umow-note reveal">
-        W okolicach Wawra zazwyczaj się umawiamy, ale jeśli dojazd Ci nie pasuje, wystarczy napisać
-        i uzgodnić inne miejsce. Napisz lub zadzwoń, żeby ustalić termin i szczegóły – im dłużej
-        zwlekasz, tym dłużej stres czeka na „kiedyś” :P
-      </p>
-
-      <div class="contact-cta reveal">
-        <a href="tel:+48690360164" class="btn btn-primary">Zadzwoń: 690 360 164</a>
-        <a href="mailto:MichaelRabti@gmail.com" class="btn btn-secondary">Napisz e-mail</a>
-      </div>
-
-      <div class="hours-box reveal">
-        <h3>Dostępność</h3>
-        <p><strong>Od poniedziałku do niedzieli</strong></p>
-        <p class="hours-note">
-          Termin ustalamy telefonicznie lub mailowo — dopasowany do Twojego grafiku,
-          również wcześnie rano albo wieczorem.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="lane-divider" aria-hidden="true"></div>
-
-  <section id="kontakt" class="section">
+  <section id="kontakt" class="section section-alt">
     <div class="container">
       <h2 class="section-title reveal">Kontakt</h2>
       <div class="contact-grid reveal">
@@ -592,6 +601,16 @@
   <span class="call-fab-number">690 360 164</span>
 </a>
 
+<!-- Panel wybranego terminu — treść wypełnia grafik.js, zależnie od trybu -->
+<div class="termin-panel" id="termin-panel" role="dialog" aria-modal="true" aria-labelledby="termin-tytul" hidden>
+  <div class="termin-box">
+    <button type="button" class="termin-zamknij" id="termin-zamknij" aria-label="Zamknij">&times;</button>
+    <h3 class="termin-tytul" id="termin-tytul">Wybrany termin</h3>
+    <p class="termin-podsumowanie" id="termin-podsumowanie"></p>
+    <div id="termin-tresc"></div>
+  </div>
+</div>
+
 <!-- Lightbox — wspólny dla galerii i opinii -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd" hidden>
   <button type="button" class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Zamknij podgląd">&times;</button>
@@ -604,5 +623,6 @@
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/grafik.js"></script>
 </body>
 </html>

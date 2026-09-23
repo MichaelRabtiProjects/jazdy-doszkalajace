@@ -380,6 +380,412 @@ section[id] {
 }
 
 /* ==========================================================================
+   Grafik — wolne terminy
+   ========================================================================== */
+.grafik {
+  margin-bottom: 28px;
+}
+
+.grafik-dlugosci {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.dlugosc-btn {
+  flex: 1 1 140px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 16px;
+  min-height: 48px;
+  border-radius: 6px;
+  border: 1px solid var(--asphalt);
+  background: transparent;
+  color: var(--asphalt);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.dlugosc-btn .dlugosc-cena {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.dlugosc-btn:hover {
+  border-color: var(--amber-dark);
+}
+
+.dlugosc-btn.is-active {
+  background: var(--asphalt);
+  border-color: var(--asphalt);
+  color: var(--white);
+}
+
+.dlugosc-btn.is-active .dlugosc-cena {
+  color: var(--amber);
+}
+
+.grafik-komunikat {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+}
+
+.grafik-komunikat-blad {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+  padding: 14px 18px;
+  color: var(--ink);
+}
+
+.grafik-link-tel {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--amber-dark);
+}
+
+.grafik-tydzien {
+  font-size: 1.05rem;
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed var(--line);
+  color: var(--ink-soft);
+}
+
+.grafik-tydzien:first-child {
+  margin-top: 0;
+}
+
+.grafik-dni {
+  display: grid;
+  gap: 10px;
+}
+
+.dzien {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+.dzien-pusty {
+  border-left-color: var(--line);
+  opacity: 0.75;
+}
+
+.dzien-naglowek {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.dzien-nazwa {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.dzien-data {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.dzien-brak {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.dzien-godziny {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.godzina-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  min-width: 78px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--amber-dark);
+  background: #fff8ea;
+  color: var(--asphalt);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.godzina-btn:hover {
+  background: var(--amber);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Panel wybranego terminu
+   ========================================================================== */
+.termin-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(15, 16, 19, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.termin-box {
+  position: relative;
+  background: var(--paper);
+  border-radius: 8px;
+  border-top: 4px solid var(--amber);
+  padding: 24px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.termin-zamknij {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.6rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.termin-zamknij:hover {
+  color: var(--ink);
+}
+
+.termin-tytul {
+  font-size: 1.3rem;
+  margin: 0 32px 6px 0;
+}
+
+.termin-podsumowanie {
+  margin: 0 0 18px;
+  font-weight: 600;
+  color: var(--amber-dark);
+  text-transform: capitalize;
+}
+
+.termin-info {
+  margin: 0 0 12px;
+}
+
+.termin-drobne {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.termin-akcje {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.termin-akcje .btn {
+  flex: 1 1 160px;
+  text-align: center;
+}
+
+.termin-kwoty {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.termin-kwoty p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.termin-kwoty p:last-child {
+  margin-bottom: 0;
+}
+
+.termin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.termin-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.termin-form input[type='text'],
+.termin-form input[type='tel'],
+.termin-form input[type='email'] {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 11px 12px;
+  border: 1px solid #cfccc0;
+  border-radius: 6px;
+  min-height: 46px;
+}
+
+.termin-zgoda {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.termin-zgoda input[type='checkbox'] {
+  margin-top: 2px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.termin-form .btn {
+  margin-top: 18px;
+}
+
+.termin-blad {
+  margin: 12px 0 0;
+  color: #b3261e;
+  font-size: 0.9rem;
+}
+
+.termin-kod {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.termin-odliczanie {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+}
+
+body.panel-open {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Strona potwierdzenia rezerwacji
+   ========================================================================== */
+.header-link {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.header-link:hover {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.potwierdzenie-container {
+  max-width: 620px;
+}
+
+.potwierdzenie-karta {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.potwierdzenie-karta h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.potwierdzenie-ok {
+  border-left-color: #1f7a45;
+}
+
+.potwierdzenie-czeka {
+  border-left-color: var(--amber);
+}
+
+.potwierdzenie-blad {
+  border-left-color: #b3261e;
+}
+
+.potwierdzenie-kod {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 16px;
+}
+
+.potwierdzenie-dane {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+
+.potwierdzenie-dane dt {
+  color: var(--ink-soft);
+}
+
+.potwierdzenie-dane dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.potwierdzenie-drobne {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.potwierdzenie-powrot {
+  margin-top: 24px;
+}
+
+.potwierdzenie-powrot a {
+  color: var(--amber-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ==========================================================================
    O mnie
    ========================================================================== */
 .about-container {
