@@ -267,10 +267,22 @@
       '<input id="rez-email" name="email" type="email" required autocomplete="email">' +
       '<label class="termin-zgoda">' +
       '<input type="checkbox" id="rez-zgoda" required>' +
-      '<span>Rozumiem, że w razie niestawienia się na jazdę zadatek nie podlega zwrotowi.</span>' +
+      '<span>Rozumiem, że jeśli nie stawię się na jazdę albo odwołam ją później niż ' +
+      '24 godziny przed terminem, zadatek może nie podlegać zwrotowi ' +
+      '(&sect;&nbsp;5 i &sect;&nbsp;6 Regulaminu).</span>' +
+      '</label>' +
+      '<label class="termin-zgoda">' +
+      '<input type="checkbox" id="rez-zgoda-regulamin" required>' +
+      '<span>Zapoznałem się z <a href="regulamin.html" target="_blank" rel="noopener">Regulaminem</a> ' +
+      'i <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Polityką prywatności</a> ' +
+      'i akceptuję je.</span>' +
       '</label>' +
       '<p class="termin-blad" id="rez-blad" hidden></p>' +
       '<button type="submit" class="btn btn-primary">Rezerwuję i płacę zadatek</button>' +
+      '<p class="termin-platnosc">Zadatek zapłacisz <strong>BLIK-iem, szybkim przelewem ' +
+      'lub kartą</strong> na stronie operatora płatności <strong>Autopay&nbsp;S.A.</strong> ' +
+      'Dane Twojej karty i logowania do banku podajesz bezpośrednio operatorowi — ' +
+      'nie trafiają one do instruktora.</p>' +
       '</form>'
     );
   }
@@ -285,6 +297,12 @@
 
       if (!document.getElementById('rez-zgoda').checked) {
         blad.textContent = 'Potwierdź, że rozumiesz zasady dotyczące zadatku.';
+        blad.hidden = false;
+        return;
+      }
+
+      if (!document.getElementById('rez-zgoda-regulamin').checked) {
+        blad.textContent = 'Zaakceptuj Regulamin i Politykę prywatności.';
         blad.hidden = false;
         return;
       }
@@ -304,6 +322,7 @@
           telefon: form.telefon.value,
           email: form.email.value,
           zgoda_zadatek: true,
+          zgoda_regulamin: true,
         }),
       })
         .then(function (r) {

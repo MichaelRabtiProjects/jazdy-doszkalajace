@@ -670,6 +670,18 @@ section[id] {
   flex-shrink: 0;
 }
 
+.termin-zgoda a {
+  color: var(--amber-dark);
+  font-weight: 600;
+}
+
+.termin-platnosc {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
 .termin-form .btn {
   margin-top: 18px;
 }
@@ -1367,6 +1379,180 @@ body.lightbox-open {
 
 .footer-inner p {
   margin: 0;
+}
+
+.footer-dokumenty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.footer-dokumenty a {
+  color: #d8d6cf;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 163, 0, 0.5);
+}
+
+.footer-dokumenty a:hover {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+/* ==========================================================================
+   Dokumenty (regulamin, polityka prywatności)
+   ========================================================================== */
+.dokument {
+  /* Węższa kolumna niż reszta strony: długi tekst prawny czyta się źle,
+     gdy wiersz ma więcej niż ~80 znaków. */
+  max-width: 760px;
+}
+
+.dokument-wersja,
+.dokument-lead {
+  color: var(--ink-soft);
+  margin: -16px 0 28px;
+}
+
+.dokument-lead {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-top: 0;
+}
+
+.dokument-spis {
+  background: var(--paper-alt);
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 36px;
+}
+
+.dokument-spis h2 {
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+}
+
+.dokument-spis ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.dokument-spis li {
+  margin-bottom: 4px;
+}
+
+.dokument-spis a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.dokument-spis a:hover {
+  color: var(--amber-dark);
+  border-color: var(--amber-dark);
+}
+
+.dokument-sekcja {
+  margin-bottom: 36px;
+  /* Zapas, żeby nagłówek nie chował się pod przyklejonym paskiem strony
+     po kliknięciu w spis treści. */
+  scroll-margin-top: 90px;
+}
+
+.dokument-sekcja h2 {
+  font-size: 1.45rem;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line);
+}
+
+.dokument-sekcja ol,
+.dokument-sekcja ul {
+  padding-left: 22px;
+  margin: 0;
+}
+
+.dokument-sekcja li {
+  margin-bottom: 10px;
+}
+
+.dokument-sekcja ul {
+  margin-top: 8px;
+}
+
+.dokument-sekcja a {
+  color: var(--amber-dark);
+  font-weight: 600;
+}
+
+.dokument-uwaga {
+  background: var(--paper-alt);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+
+.dokument-mono {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.92em;
+  word-break: break-word;
+}
+
+.dokument-wzor {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 0;
+  padding: 18px 22px;
+  font-size: 0.95rem;
+}
+
+.dokument-wzor p {
+  margin: 0 0 12px;
+}
+
+.dokument-drobne {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* Tabela celów przetwarzania — na wąskim ekranie przewija się w poziomie
+   zamiast rozpychać całą stronę. */
+.dokument-tabela-wrap {
+  overflow-x: auto;
+}
+
+.dokument-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  min-width: 460px;
+}
+
+.dokument-tabela th,
+.dokument-tabela td {
+  text-align: left;
+  vertical-align: top;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+}
+
+.dokument-tabela th {
+  background: var(--paper-alt);
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+}
+
+.dokument-powrot {
+  margin-top: 32px;
+}
+
+.dokument-powrot a {
+  color: var(--amber-dark);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 /* ==========================================================================
