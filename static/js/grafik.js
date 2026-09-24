@@ -21,7 +21,11 @@
 
   var elDlugosci = document.getElementById('grafik-dlugosci');
   var elKomunikat = document.getElementById('grafik-komunikat');
-  var elDni = document.getElementById('grafik-dni');
+  var elKalendarz = document.getElementById('grafik-kalendarz');
+  var elPasek = document.getElementById('dni-pasek');
+  var elPanelGodzin = document.getElementById('godziny-panel');
+  var btnLewo = document.getElementById('dni-lewo');
+  var btnPrawo = document.getElementById('dni-prawo');
 
   var panel = document.getElementById('termin-panel');
   var panelTytul = document.getElementById('termin-tytul');
@@ -32,6 +36,9 @@
   var stan = {
     dane: null,
     dlugosc: 2,
+    // Indeks wybranego dnia w stan.dane.dni — dzień, którego godziny
+    // pokazuje dolny panel. null dopóki nie wybrano (jeszcze) żadnego.
+    wybranyIdx: null,
     wybrany: null,
     ostatnioKlikniety: null,
     odliczanie: null,
@@ -76,7 +83,7 @@
     elKomunikat.innerHTML =
       tekst +
       ' <a class="grafik-link-tel" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a>';
-    elDni.hidden = true;
+    elKalendarz.hidden = true;
   }
 
   function wczytaj() {
@@ -108,91 +115,195 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Rysowanie grafiku                                                   */
+  /* Rysowanie grafiku — pasek dni u góry, godziny wybranego dnia niżej  */
+  /*                                                                     */
+  /* Wcześniej grafik był jedną pionową listą wszystkich ~21 dni naraz.  */
+  /* Teraz klient wybiera dzień w przewijanym pasku (jak w Calendesku),  */
+  /* a poniżej widzi tylko godziny TEGO jednego dnia — mniej scrollowania*/
+  /* na telefonie, gęstszy układ godzin.                                 */
   /* ------------------------------------------------------------------ */
 
-  var ETYKIETY_TYGODNI = ['Najbliższe dni', 'Za tydzień', 'Za dwa tygodnie'];
+  /** Czy slot pasuje do aktualnie wybranej długości jazdy. */
+  function dlugoscPasuje(slot) {
+    return slot.dlugosci.indexOf(stan.dlugosc) !== -1;
+  }
+
+  var SKROTY_DNI = {
+    niedziela: 'Nd',
+    poniedziałek: 'Pon',
+    wtorek: 'Wt',
+    środa: 'Śr',
+    czwartek: 'Cz',
+    piątek: 'Pt',
+    sobota: 'Sob',
+  };
+
+  function skrotDnia(nazwa) {
+    return SKROTY_DNI[nazwa] || nazwa.slice(0, 2);
+  }
+
+  /** Pierwszy dzień z wolnymi godzinami dla aktualnej długości — domyślny wybór. */
+  function domyslnyIndeks(dni) {
+    for (var i = 0; i < dni.length; i++) {
+      if (dni[i].sloty.some(dlugoscPasuje)) return i;
+    }
+    return 0;
+  }
 
   function rysuj() {
     var dni = stan.dane.dni;
-    elDni.innerHTML = '';
 
-    var czyCokolwiek = false;
-
-    dni.forEach(function (dzien, i) {
-      if (i % 7 === 0) {
-        var naglowek = document.createElement('h3');
-        naglowek.className = 'grafik-tydzien';
-        naglowek.textContent = ETYKIETY_TYGODNI[Math.floor(i / 7)] || 'Dalsze terminy';
-        elDni.appendChild(naglowek);
-      }
-
-      var pasujace = dzien.sloty.filter(function (slot) {
-        return slot.dlugosci.indexOf(stan.dlugosc) !== -1;
-      });
-
-      if (pasujace.length > 0) czyCokolwiek = true;
-
-      // Dzień, w którym instruktor nie pracuje, zostaje widoczny, ale
-      // wyszarzony — inaczej klient nie widzi wzorca tygodnia i zastanawia
-      // się, czemu połowa dni po prostu nie istnieje.
-      var nieaktywny = dzien.aktywny === false;
-
-      var karta = document.createElement('article');
-      karta.className =
-        'dzien' + (nieaktywny ? ' dzien-nieaktywny' : pasujace.length === 0 ? ' dzien-pusty' : '');
-      if (nieaktywny) karta.setAttribute('aria-disabled', 'true');
-
-      var head = document.createElement('header');
-      head.className = 'dzien-naglowek';
-      head.innerHTML =
-        '<span class="dzien-nazwa">' + dzien.nazwa_dnia + '</span>' +
-        '<span class="dzien-data">' + krotkaData(dzien.data) + '</span>';
-      karta.appendChild(head);
-
-      if (nieaktywny) {
-        var nieczynne = document.createElement('p');
-        nieczynne.className = 'dzien-brak dzien-nieczynne';
-        nieczynne.textContent = 'nieczynne';
-        karta.appendChild(nieczynne);
-      } else if (pasujace.length === 0) {
-        // Zablokowane pojedyncze godziny mają być niewidoczne — pokazujemy
-        // sam fakt braku, bez zdradzania, co zostało zablokowane
-        var brak = document.createElement('p');
-        brak.className = 'dzien-brak';
-        brak.textContent = 'brak terminów';
-        karta.appendChild(brak);
-      } else {
-        var lista = document.createElement('div');
-        lista.className = 'dzien-godziny';
-        pasujace.forEach(function (slot) {
-          var btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'godzina-btn';
-          btn.textContent = godzinaTekst(slot.godzina);
-          btn.setAttribute(
-            'aria-label',
-            'Termin ' + dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) + ' o ' + godzinaTekst(slot.godzina)
-          );
-          btn.addEventListener('click', function () {
-            otworzPanel(dzien, slot.godzina, btn);
-          });
-          lista.appendChild(btn);
-        });
-        karta.appendChild(lista);
-      }
-
-      elDni.appendChild(karta);
+    // Dzień bez wolnych godzin (zamknięty albo zajęty) ma zawsze pustą
+    // listę sloty z backendu — nie trzeba osobno sprawdzać dzien.aktywny.
+    var czyCokolwiek = dni.some(function (d) {
+      return d.sloty.some(dlugoscPasuje);
     });
 
-    elDni.hidden = false;
-    elKomunikat.className = 'grafik-komunikat';
-    elKomunikat.hidden = czyCokolwiek;
     if (!czyCokolwiek) {
+      elKalendarz.hidden = true;
+      elKomunikat.hidden = false;
+      elKomunikat.className = 'grafik-komunikat';
       elKomunikat.textContent =
         'Brak wolnych terminów na ' + stan.dlugosc + ' h w najbliższych tygodniach — spróbuj krótszej jazdy albo zadzwoń.';
+      return;
+    }
+
+    // Domyślny wybór liczymy tylko raz, przy pierwszym renderze — zmiana
+    // długości jazdy nie ma przeskakiwać klientowi wybranego dnia.
+    if (stan.wybranyIdx === null || stan.wybranyIdx >= dni.length) {
+      stan.wybranyIdx = domyslnyIndeks(dni);
+    }
+
+    elKomunikat.hidden = true;
+    elKalendarz.hidden = false;
+    rysujPasek();
+    rysujGodziny();
+    wysrodkujChip(stan.wybranyIdx, 'auto');
+    aktualizujStrzalki();
+  }
+
+  /** Górny pasek: po jednej małej karcie ("chipie") na każdy dzień horyzontu. */
+  function rysujPasek() {
+    elPasek.innerHTML = '';
+
+    stan.dane.dni.forEach(function (dzien, i) {
+      var pasujace = dzien.sloty.filter(dlugoscPasuje);
+      var zamkniety = dzien.aktywny === false;
+      var pelny = !zamkniety && pasujace.length === 0;
+
+      // Kolor kropki i tła chipa odróżnia trzy stany dnia — tak samo jak
+      // kolor karty w panelu godzin niżej. Tekst przy obu "pustych"
+      // stanach jest już identyczny (patrz rysujGodziny), więc tu w opisie
+      // dla czytników ekranu też nie rozróżniamy powodu, tylko fakt.
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className =
+        'dzien-chip ' +
+        (zamkniety ? 'dzien-chip-zamkniety' : pelny ? 'dzien-chip-pelny' : 'dzien-chip-wolny') +
+        (i === stan.wybranyIdx ? ' is-wybrany' : '');
+      chip.setAttribute('aria-pressed', i === stan.wybranyIdx ? 'true' : 'false');
+      chip.setAttribute(
+        'aria-label',
+        dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) +
+          (pasujace.length === 0 ? ', brak terminów' : ', wolne terminy')
+      );
+      chip.innerHTML =
+        '<span class="dzien-chip-nazwa" aria-hidden="true">' + skrotDnia(dzien.nazwa_dnia) + '</span>' +
+        '<span class="dzien-chip-data" aria-hidden="true">' + krotkaData(dzien.data) + '</span>' +
+        '<span class="dzien-chip-kropka" aria-hidden="true"></span>';
+      chip.addEventListener('click', function () {
+        wybierzDzien(i);
+      });
+      elPasek.appendChild(chip);
+    });
+  }
+
+  /** Dolny panel: godziny WYBRANEGO dnia, w gęstszej siatce niż dawna lista. */
+  function rysujGodziny() {
+    var dzien = stan.dane.dni[stan.wybranyIdx];
+    var pasujace = dzien.sloty.filter(dlugoscPasuje);
+    var nieaktywny = dzien.aktywny === false;
+
+    elPanelGodzin.innerHTML = '';
+
+    var karta = document.createElement('div');
+    karta.className =
+      'dzien' + (nieaktywny ? ' dzien-nieaktywny' : pasujace.length === 0 ? ' dzien-pusty' : '');
+    if (nieaktywny) karta.setAttribute('aria-disabled', 'true');
+
+    var head = document.createElement('header');
+    head.className = 'dzien-naglowek';
+    head.innerHTML =
+      '<span class="dzien-nazwa">' + dzien.nazwa_dnia + '</span>' +
+      '<span class="dzien-data">' + krotkaData(dzien.data) + '</span>';
+    karta.appendChild(head);
+
+    if (pasujace.length === 0) {
+      // Jeden i ten sam napis, niezależnie od tego, czy dzień jest zamknięty,
+      // czy po prostu w pełni zajęty — różnicę widać po kolorze karty
+      // (biała = było otwarte i się zapełniło, beżowa = tu się nie pracuje),
+      // nie po słowach.
+      var brak = document.createElement('p');
+      brak.className = 'dzien-brak';
+      brak.textContent = 'brak terminów';
+      karta.appendChild(brak);
+    } else {
+      var lista = document.createElement('div');
+      lista.className = 'dzien-godziny';
+      pasujace.forEach(function (slot) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'godzina-btn';
+        btn.textContent = godzinaTekst(slot.godzina);
+        btn.setAttribute(
+          'aria-label',
+          'Termin ' + dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) + ' o ' + godzinaTekst(slot.godzina)
+        );
+        btn.addEventListener('click', function () {
+          otworzPanel(dzien, slot.godzina, btn);
+        });
+        lista.appendChild(btn);
+      });
+      karta.appendChild(lista);
+    }
+
+    elPanelGodzin.appendChild(karta);
+  }
+
+  function wybierzDzien(i) {
+    if (i === stan.wybranyIdx) return;
+    stan.wybranyIdx = i;
+    rysujPasek();
+    rysujGodziny();
+    wysrodkujChip(i, 'smooth');
+    aktualizujStrzalki();
+  }
+
+  /** Przewija pasek tak, żeby wybrany chip był w widoku (np. po zmianie długości jazdy). */
+  function wysrodkujChip(i, zachowanie) {
+    var chip = elPasek.children[i];
+    if (chip && chip.scrollIntoView) {
+      chip.scrollIntoView({ behavior: zachowanie || 'smooth', inline: 'nearest', block: 'nearest' });
     }
   }
+
+  /** Wyłącza strzałkę, gdy pasek jest już przewinięty do końca w tę stronę. */
+  function aktualizujStrzalki() {
+    // Drobne opóźnienie, żeby scrollWidth był policzony po dopisaniu chipów do DOM.
+    requestAnimationFrame(function () {
+      btnLewo.disabled = elPasek.scrollLeft <= 1;
+      btnPrawo.disabled = elPasek.scrollLeft + elPasek.clientWidth >= elPasek.scrollWidth - 1;
+    });
+  }
+
+  btnLewo.addEventListener('click', function () {
+    elPasek.scrollBy({ left: -220, behavior: 'smooth' });
+  });
+  btnPrawo.addEventListener('click', function () {
+    elPasek.scrollBy({ left: 220, behavior: 'smooth' });
+  });
+  elPasek.addEventListener('scroll', aktualizujStrzalki);
+  window.addEventListener('resize', aktualizujStrzalki);
 
   elDlugosci.querySelectorAll('.dlugosc-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {

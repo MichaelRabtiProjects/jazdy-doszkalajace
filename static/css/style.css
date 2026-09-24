@@ -450,22 +450,137 @@ section[id] {
   color: var(--amber-dark);
 }
 
-.grafik-tydzien {
-  font-size: 1.05rem;
-  margin: 24px 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 2px dashed var(--line);
+/* ---- Pasek dni (góra) ------------------------------------------------ */
+
+.grafik-kalendarz {
+  margin-top: 4px;
+}
+
+.dni-pasek-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.dni-pasek {
+  display: flex;
+  gap: 8px;
+  flex: 1 1 auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  /* Trochę miejsca pod spodem, żeby na dotykowych scrollbarach (np. Windows)
+     pasek przewijania nie nachodził na kropki statusu. */
+  padding: 2px 2px 8px;
+}
+
+.dni-strzalka {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--asphalt);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease;
+}
+
+.dni-strzalka:hover:not(:disabled) {
+  border-color: var(--amber-dark);
+}
+
+.dni-strzalka:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.dzien-chip {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 58px;
+  padding: 10px 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dzien-chip:hover {
+  border-color: var(--amber-dark);
+}
+
+.dzien-chip-nazwa {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: var(--ink-soft);
 }
 
-.grafik-tydzien:first-child {
-  margin-top: 0;
+.dzien-chip-data {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
-.grafik-dni {
-  display: grid;
-  gap: 10px;
+.dzien-chip-kropka {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber-dark);
 }
+
+/* Otwarty dzień, ale bez wolnych godzin dla wybranej długości — kropka
+   blednie, karta zostaje biała (patrz analogiczna reguła .dzien-pusty niżej). */
+.dzien-chip-pelny .dzien-chip-kropka {
+  background: var(--line);
+}
+
+/* Dzień, w którym instruktor nie pracuje — cały chip blednie. */
+.dzien-chip-zamkniety {
+  background: var(--paper-alt);
+}
+
+.dzien-chip-zamkniety .dzien-chip-nazwa,
+.dzien-chip-zamkniety .dzien-chip-data {
+  color: var(--ink-soft);
+}
+
+.dzien-chip-zamkniety .dzien-chip-kropka {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.dzien-chip.is-wybrany {
+  background: var(--asphalt);
+  border-color: var(--asphalt);
+}
+
+.dzien-chip.is-wybrany .dzien-chip-nazwa,
+.dzien-chip.is-wybrany .dzien-chip-data {
+  color: var(--white);
+}
+
+.dzien-chip.is-wybrany .dzien-chip-kropka {
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+/* ---- Panel wybranego dnia (dół) --------------------------------------- */
 
 .dzien {
   background: var(--white);
@@ -478,8 +593,10 @@ section[id] {
 /* "Pracuję tego dnia, ale wszystko już zajęte" — karta zostaje BIAŁA,
    traci tylko bursztynowy akcent.
    Wcześniej było tu opacity: 0.75, ale na beżowym tle sekcji przygaszona
-   biel robiła się prawie taka sama jak beż karty "nieczynne" — a to mają
-   być dwa różne komunikaty. Bez przezroczystości różnica jest czytelna. */
+   biel robiła się prawie taka sama jak beż karty dnia zamkniętego — a to
+   mają być dwa różne komunikaty. Bez przezroczystości różnica jest czytelna.
+   Tekst przy obu jest teraz identyczny ("brak terminów") — tylko kolor
+   karty niżej odróżnia "było otwarte i się zapełniło" od "tu nie pracuję". */
 .dzien-pusty {
   border-left-color: var(--line);
 }
@@ -496,10 +613,6 @@ section[id] {
 .dzien-nieaktywny .dzien-nazwa {
   color: var(--ink-soft);
   font-weight: 600;
-}
-
-.dzien-nieczynne {
-  font-style: italic;
 }
 
 /* Notka o weekendach — informacja, nie ostrzeżenie: bez ramki, bez tła,
@@ -538,19 +651,33 @@ section[id] {
   font-size: 0.9rem;
 }
 
+/* Siatka zamiast flex-wrap: teraz pokazujemy godziny JEDNEGO dnia zamiast
+   listy wszystkich 21 na raz, więc jest miejsce na gęstszy, regularny
+   układ — stałe kolumny zamiast poszarpanego ostatniego wiersza. */
 .dzien-godziny {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+}
+
+@media (min-width: 480px) {
+  .dzien-godziny {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 700px) {
+  .dzien-godziny {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .godzina-btn {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
-  min-width: 78px;
   min-height: 44px;
-  padding: 10px 14px;
+  padding: 10px 8px;
   border-radius: 6px;
   border: 1px solid var(--amber-dark);
   background: #fff8ea;
@@ -996,6 +1123,36 @@ body.panel-open {
   margin-top: 28px;
   color: var(--ink-soft);
   font-size: 0.95rem;
+}
+
+/* Karta pakietu — ten sam wzorzec co .price-card-rate (wyróżniona kolorem),
+   plus plakietka i dopisek z ceną za godzinę, żeby od razu było widać
+   oszczędność bez liczenia w głowie. */
+.price-card-pakiet {
+  position: relative;
+  background: var(--white);
+  border-color: var(--amber-dark);
+}
+
+.price-package-badge {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--amber);
+  color: var(--asphalt);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.price-package-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
 }
 
 /* ==========================================================================

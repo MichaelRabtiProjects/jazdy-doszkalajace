@@ -217,7 +217,16 @@
           W weekendy dostępność może się różnić — zadzwoń lub napisz, żeby dopytać o szczegóły.
         </p>
 
-        <div class="grafik-dni" id="grafik-dni" hidden></div>
+        <!-- Kalendarz w dwóch częściach, jak w Calendesk: u góry przewijany
+             pasek dni do wyboru, pod spodem godziny WYBRANEGO dnia. -->
+        <div class="grafik-kalendarz" id="grafik-kalendarz" hidden>
+          <div class="dni-pasek-wrap">
+            <button type="button" class="dni-strzalka dni-strzalka-lewo" id="dni-lewo" aria-label="Wcześniejsze dni">‹</button>
+            <div class="dni-pasek" id="dni-pasek" role="group" aria-label="Wybierz dzień"></div>
+            <button type="button" class="dni-strzalka dni-strzalka-prawo" id="dni-prawo" aria-label="Kolejne dni">›</button>
+          </div>
+          <div class="godziny-panel" id="godziny-panel"></div>
+        </div>
       </div>
 
       <div class="contact-cta reveal">
@@ -324,6 +333,41 @@
 
   <div class="lane-divider" aria-hidden="true"></div>
 
+  <!--
+    Sekcja po angielsku — wyłącznie fakty z listy ustalonej z klientem:
+    prowadził szkołę jazdy ALP, ponad 20 lat nauczania (Polska i zagranica),
+    uczy po angielsku i arabsku, kontakt tylko SMS/WhatsApp/telefon,
+    wycena indywidualna. Świadomie NIE wspomina o żadnym pokrewieństwie
+    ani nie dopisuje faktów spoza tej listy.
+  -->
+  <section id="khaled" class="section" lang="en">
+    <div class="container about-container">
+      <h2 class="section-title reveal">Driving Instructor Khaled</h2>
+
+      <p class="about-intro reveal">
+        Khaled ran the ALP driving school and has over 20 years of experience teaching drivers,
+        both in Poland and abroad. Lessons are taught in English and Arabic.
+      </p>
+
+      <p class="section-lead reveal">
+        Pricing is individual — get in touch to talk through what you need and agree on a rate.
+      </p>
+
+      <p class="umow-note reveal">
+        Khaled doesn't use e-mail or an online form for this — the fastest way to reach him is
+        by SMS, WhatsApp, or a phone call.
+      </p>
+
+      <div class="contact-cta reveal">
+        <a href="tel:+48570971757" class="btn btn-primary">Call</a>
+        <a href="sms:+48570971757" class="btn btn-secondary">SMS</a>
+        <a href="https://wa.me/48570971757" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
   <section id="cennik" class="section">
     <div class="container">
       <h2 class="section-title reveal">Cennik</h2>
@@ -346,10 +390,17 @@
           <span class="price-duration">4 godziny</span>
           <span class="price-value">640 zł</span>
         </div>
+        <div class="price-card price-card-pakiet reveal">
+          <span class="price-package-badge">Pakiet</span>
+          <span class="price-duration">10 godzin</span>
+          <span class="price-value">1500 zł</span>
+          <span class="price-package-note">150 zł/h — 10 zł taniej za godzinę</span>
+        </div>
       </div>
 
       <p class="price-note reveal">
-        Jedna jazda trwa minimum 2, maksimum 4 godziny. Pakiety wielogodzinne — wkrótce.
+        Jedna jazda trwa minimum 2, maksimum 4 godziny — pakiet 10-godzinny rozkłada się na kilka
+        spotkań, do uzgodnienia przy kontakcie.
       </p>
     </div>
   </section>
