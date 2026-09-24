@@ -90,18 +90,24 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn is-active" data-lang="pl" aria-pressed="true" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+      </div>
+      <a href="#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    </div>
     <nav class="main-nav" id="main-nav">
-      <a href="#oferta">Oferta</a>
-      <a href="#grafik">Grafik</a>
-      <a href="#o-mnie">O mnie</a>
+      <a href="#oferta" data-i18n="nav-oferta">Oferta</a>
+      <a href="#grafik" data-i18n="nav-grafik">Grafik</a>
+      <a href="#o-mnie" data-i18n="nav-omnie">O mnie</a>
       <a href="#khaled" class="nav-alp">ALP</a>
-      <a href="#cennik">Cennik</a>
-      <a href="#opinie">Opinie</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#cennik" data-i18n="nav-cennik">Cennik</a>
+      <a href="#opinie" data-i18n="nav-opinie">Opinie</a>
+      <a href="#galeria" data-i18n="nav-galeria">Galeria</a>
+      <a href="#kontakt" data-i18n="nav-kontakt">Kontakt</a>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav" data-i18n-attr="aria-label:nav-toggle-label">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -111,13 +117,13 @@
 
   <section id="hero" class="hero">
     <div class="container hero-inner">
-      <p class="hero-kicker">Warszawa · Wawer i okolice</p>
-      <h1>Wróć pewnie za kierownicę — jazdy doszkalające dla kierowców z prawem jazdy</h1>
-      <p class="hero-lead">
+      <p class="hero-kicker" data-i18n="hero-kicker">Warszawa · Wawer i okolice</p>
+      <h1 data-i18n="hero-h1">Wróć pewnie za kierownicę — jazdy doszkalające dla kierowców z prawem jazdy</h1>
+      <p class="hero-lead" data-i18n="hero-lead">
         Odświeżenie umiejętności po przerwie, przygotowanie do egzaminu na konkretnych trasach WORD
         oraz jazdy indywidualne dopasowane do Twoich potrzeb.
       </p>
-      <a href="#grafik" class="btn btn-primary">Zobacz wolne terminy</a>
+      <a href="#grafik" class="btn btn-primary" data-i18n="hero-cta">Zobacz wolne terminy</a>
     </div>
   </section>
 
@@ -125,8 +131,8 @@
 
   <section id="oferta" class="section">
     <div class="container">
-      <h2 class="section-title reveal">Oferta</h2>
-      <p class="section-lead reveal">Trzy sposoby, żeby poczuć się pewnie na drodze.</p>
+      <h2 class="section-title reveal" data-i18n="oferta-title">Oferta</h2>
+      <p class="section-lead reveal" data-i18n="oferta-lead">Trzy sposoby, żeby poczuć się pewnie na drodze.</p>
 
       <div class="offer-grid">
 
@@ -136,8 +142,8 @@
             <circle cx="16" cy="16" r="4"/>
             <path d="M16 12V4M12.6 18 5.8 22M19.4 18l6.8 4"/>
           </svg>
-          <h3>Powrót za kierownicę</h3>
-          <p>
+          <h3 data-i18n="oferta-1-h">Powrót za kierownicę</h3>
+          <p data-i18n="oferta-1-p">
             Dla osób, które mają prawo jazdy, ale od dawna nie prowadziły. Spokojne tempo,
             oswojenie z autem, ruchem miejskim i aktualnymi przepisami — bez stresu i oceniania.
           </p>
@@ -150,12 +156,12 @@
             <path d="M16 20.4v.2"/>
             <path d="M16 24v4"/>
           </svg>
-          <h3>Przygotowanie do egzaminu WORD</h3>
-          <p>
+          <h3 data-i18n="oferta-2-h">Przygotowanie do egzaminu WORD</h3>
+          <p data-i18n="oferta-2-p">
             Jazda po realnych trasach egzaminacyjnych, żeby dzień egzaminu nie był pierwszym razem,
             gdy je widzisz.
           </p>
-          <ul class="route-badges" aria-label="Trasy egzaminacyjne WORD">
+          <ul class="route-badges" aria-label="Trasy egzaminacyjne WORD" data-i18n-attr="aria-label:oferta-2-badges-label">
             <li class="route-badge">Odlewnicza</li>
             <li class="route-badge">Bemowo</li>
             <li class="route-badge">Grójec</li>
@@ -168,8 +174,8 @@
             <rect x="4.5" y="4.5" width="23" height="23" rx="4"/>
             <path d="M12.5 23V9.5h5a4 4 0 0 1 0 8h-5"/>
           </svg>
-          <h3>Jazdy indywidualne</h3>
-          <p>
+          <h3 data-i18n="oferta-3-h">Jazdy indywidualne</h3>
+          <p data-i18n="oferta-3-p">
             Parkowanie równoległe i prostopadłe, trasa szybkiego ruchu, jazda nocna, jazda w trudnych
             warunkach — program ułożony pod to, czego akurat potrzebujesz.
           </p>
@@ -178,11 +184,11 @@
       </div>
 
       <div class="offer-alp-note reveal">
-        <p>
+        <p data-i18n="oferta-alp-note">
           Zajęcia prowadzimy też w języku angielskim i arabskim — te lekcje prowadzi
           instruktor Khaled w ramach ALP.
         </p>
-        <a href="#khaled" class="btn btn-secondary">Zobacz ofertę ALP ↓</a>
+        <a href="#khaled" class="btn btn-secondary" data-i18n="oferta-alp-btn">Zobacz ofertę ALP ↓</a>
       </div>
     </div>
   </section>
@@ -191,48 +197,48 @@
 
   <section id="grafik" class="section">
     <div class="container">
-      <h2 class="section-title reveal">Grafik</h2>
-      <p class="section-lead reveal">
+      <h2 class="section-title reveal" data-i18n="grafik-title">Grafik</h2>
+      <p class="section-lead reveal" data-i18n="grafik-lead">
         Wolne terminy na najbliższe tygodnie. Wybierz długość jazdy, a potem kliknij godzinę,
         która Ci pasuje.
       </p>
 
-      <p class="umow-note reveal">
+      <p class="umow-note reveal" data-i18n="grafik-umow-note">
         W okolicach Wawra zazwyczaj się umawiamy, ale jeśli dojazd Ci nie pasuje, wystarczy napisać
         i uzgodnić inne miejsce. Napisz lub zadzwoń, żeby ustalić termin i szczegóły – im dłużej
         zwlekasz, tym dłużej stres czeka na „kiedyś” :P
       </p>
 
       <div class="grafik reveal" id="grafik-widget">
-        <div class="grafik-dlugosci" id="grafik-dlugosci" role="group" aria-label="Długość jazdy">
+        <div class="grafik-dlugosci" id="grafik-dlugosci" role="group" aria-label="Długość jazdy" data-i18n-attr="aria-label:grafik-dlugosc-label">
           <button type="button" class="dlugosc-btn is-active" data-dlugosc="2">
-            2 godziny <span class="dlugosc-cena">320 zł</span>
+            <span data-i18n="dlugosc-2h">2 godziny</span> <span class="dlugosc-cena">320 zł</span>
           </button>
           <button type="button" class="dlugosc-btn" data-dlugosc="3">
-            3 godziny <span class="dlugosc-cena">480 zł</span>
+            <span data-i18n="dlugosc-3h">3 godziny</span> <span class="dlugosc-cena">480 zł</span>
           </button>
           <button type="button" class="dlugosc-btn" data-dlugosc="4">
-            4 godziny <span class="dlugosc-cena">640 zł</span>
+            <span data-i18n="dlugosc-4h">4 godziny</span> <span class="dlugosc-cena">640 zł</span>
           </button>
         </div>
 
-        <p class="grafik-komunikat" id="grafik-komunikat">Wczytywanie wolnych terminów…</p>
+        <p class="grafik-komunikat" id="grafik-komunikat" data-i18n="grafik-wczytywanie">Wczytywanie wolnych terminów…</p>
 
         <!-- Kalendarz w dwóch częściach, jak w Calendesk: u góry przewijany
              pasek dni do wyboru, pod spodem godziny WYBRANEGO dnia. -->
         <div class="grafik-kalendarz" id="grafik-kalendarz" hidden>
           <div class="dni-pasek-wrap">
-            <button type="button" class="dni-strzalka dni-strzalka-lewo" id="dni-lewo" aria-label="Wcześniejsze dni">‹</button>
-            <div class="dni-pasek" id="dni-pasek" role="group" aria-label="Wybierz dzień"></div>
-            <button type="button" class="dni-strzalka dni-strzalka-prawo" id="dni-prawo" aria-label="Kolejne dni">›</button>
+            <button type="button" class="dni-strzalka dni-strzalka-lewo" id="dni-lewo" aria-label="Wcześniejsze dni" data-i18n-attr="aria-label:dni-lewo-label">‹</button>
+            <div class="dni-pasek" id="dni-pasek" role="group" aria-label="Wybierz dzień" data-i18n-attr="aria-label:dni-pasek-label"></div>
+            <button type="button" class="dni-strzalka dni-strzalka-prawo" id="dni-prawo" aria-label="Kolejne dni" data-i18n-attr="aria-label:dni-prawo-label">›</button>
           </div>
           <div class="godziny-panel" id="godziny-panel"></div>
         </div>
       </div>
 
       <div class="contact-cta reveal">
-        <a href="tel:+48690360164" class="btn btn-primary">Zadzwoń: 690 360 164</a>
-        <a href="mailto:MichaelRabti@gmail.com" class="btn btn-secondary">Napisz e-mail</a>
+        <a href="tel:+48690360164" class="btn btn-primary" data-i18n="grafik-call-btn">Zadzwoń: 690 360 164</a>
+        <a href="mailto:MichaelRabti@gmail.com" class="btn btn-secondary" data-i18n="grafik-email-btn">Napisz e-mail</a>
       </div>
     </div>
   </section>
@@ -241,9 +247,9 @@
 
   <section id="o-mnie" class="section section-alt">
     <div class="container about-container">
-      <h2 class="section-title reveal">O mnie</h2>
+      <h2 class="section-title reveal" data-i18n="omnie-title">O mnie</h2>
 
-      <p class="about-intro reveal">
+      <p class="about-intro reveal" data-i18n="omnie-intro-1">
         Cześć, nazywam się Michael. Prowadzę pojazdy od 18. roku życia — mój ojciec również był
         instruktorem nauki jazdy, więc wychowałem się niejako „za kierownicą”. Przed rozpoczęciem
         pracy jako instruktor zdobyłem szerokie doświadczenie za kółkiem różnych pojazdów: taksówek,
@@ -252,15 +258,15 @@
         2026 roku poszerzyłem swoje uprawnienia i doświadczenie również o jazdę motocyklem.
       </p>
 
-      <p class="about-intro reveal">
+      <p class="about-intro reveal" data-i18n="omnie-intro-2">
         Od niemal dwóch lat pracuję jako instruktor nauki jazdy kategorii B. Bardzo dobrze znam
         trasy egzaminacyjne na placach Odlewnicza, Bemowo i Grójec, natomiast trasy w Garwolinie
         poznaję obecnie na bieżąco.
       </p>
 
       <div class="about-block reveal">
-        <h3>Uczę tak, żebyś rozumiał zasady, a nie tylko je powtarzał</h3>
-        <p>
+        <h3 data-i18n="omnie-b1-h">Uczę tak, żebyś rozumiał zasady, a nie tylko je powtarzał</h3>
+        <p data-i18n="omnie-b1-p">
           Staram się przekazywać wszystkie zasady i techniki egzaminacyjne tak, jak jest w ustawach
           i załącznikach do ustaw, abyście rozumieli nie tylko jak zdać egzamin, ale też dokładnie,
           na co egzaminator zwraca uwagę w procesie oceniania waszej jazdy – byście dokładnie
@@ -272,40 +278,40 @@
       </div>
 
       <div class="about-block reveal">
-        <h3>Trasy egzaminacyjne</h3>
-        <p>
+        <h3 data-i18n="omnie-b2-h">Trasy egzaminacyjne</h3>
+        <p data-i18n="omnie-b2-p">
           Trasy egzaminacyjne znam bardzo dobrze, szczególnie na Odlewniczej – kursanci czasem jadą
           dokładnie tą samą trasą, co jeździli ze mną, i robią manewry dokładnie w tym samym
           miejscu. Potem Bemowo i Grójec, a na końcu Garwolin – tam miałem okazję najmniej jeździć.
         </p>
 
-        <ul class="routes-list" aria-label="Znajomość tras egzaminacyjnych">
+        <ul class="routes-list" aria-label="Znajomość tras egzaminacyjnych" data-i18n-attr="aria-label:omnie-routes-label">
           <li class="route-row">
             <span class="route-name">Odlewnicza</span>
             <span class="route-bar"><span class="route-bar-fill" style="width:100%"></span></span>
-            <span class="route-level">znam najlepiej</span>
+            <span class="route-level" data-i18n="omnie-route-1">znam najlepiej</span>
           </li>
           <li class="route-row">
             <span class="route-name">Bemowo</span>
             <span class="route-bar"><span class="route-bar-fill" style="width:80%"></span></span>
-            <span class="route-level">znam bardzo dobrze</span>
+            <span class="route-level" data-i18n="omnie-route-2">znam bardzo dobrze</span>
           </li>
           <li class="route-row">
             <span class="route-name">Grójec</span>
             <span class="route-bar"><span class="route-bar-fill" style="width:62%"></span></span>
-            <span class="route-level">znam dobrze</span>
+            <span class="route-level" data-i18n="omnie-route-3">znam dobrze</span>
           </li>
           <li class="route-row">
             <span class="route-name">Garwolin</span>
             <span class="route-bar"><span class="route-bar-fill" style="width:35%"></span></span>
-            <span class="route-level">poznaję</span>
+            <span class="route-level" data-i18n="omnie-route-4">poznaję</span>
           </li>
         </ul>
       </div>
 
       <div class="about-block reveal">
-        <h3>Wracasz za kierownicę po przerwie?</h3>
-        <p>
+        <h3 data-i18n="omnie-b3-h">Wracasz za kierownicę po przerwie?</h3>
+        <p data-i18n="omnie-b3-p">
           Jeśli masz już prawo jazdy, ale długo nie siadałeś za kierownicą – nie musisz mieć żadnego
           egzaminu na horyzoncie, żeby ze mną poćwiczyć. Wielu moich kursantów wraca do jazdy po
           latach przerwy – po urodzeniu dziecka, po zmianie miasta, po prostu z braku okazji do
@@ -318,8 +324,8 @@
       </div>
 
       <div class="about-block reveal">
-        <h3>Atmosfera na jazdach</h3>
-        <p>
+        <h3 data-i18n="omnie-b4-h">Atmosfera na jazdach</h3>
+        <p data-i18n="omnie-b4-p">
           U mnie jazda przebiega w bardzo przyjaznej, koleżeńskiej atmosferze, ale z zachowaniem
           profesjonalizmu co do samego szkolenia. Nie lubię chamstwa, więc na siłę nie jestem miły –
           staram się być autentyczny w swoim zachowaniu. Mam doświadczenie w pracy w Babskiej
@@ -329,11 +335,11 @@
           nawet forma psychoterapii, bo mogą się wygadać, jak już mi zaufają.
         </p>
         <p class="about-link-row">
-          <a href="#opinie" class="about-link">Zobacz opinie kursantów ↓</a>
+          <a href="#opinie" class="about-link" data-i18n="omnie-reviews-link">Zobacz opinie kursantów ↓</a>
         </p>
       </div>
 
-      <blockquote class="about-closing reveal">
+      <blockquote class="about-closing reveal" data-i18n="omnie-closing">
         Pozdrawiam wszystkich moich kursantów – tych, co już zdali, tych przed egzaminem i tych,
         którzy po prostu przyszli się doszkolić. Mam nadzieję, że będą mieli długą, bezpieczną drogę
         za kółkiem.
@@ -381,35 +387,35 @@
 
   <section id="cennik" class="section">
     <div class="container">
-      <h2 class="section-title reveal">Cennik</h2>
-      <p class="section-lead reveal">Jedna stawka godzinowa, bez ukrytych kosztów.</p>
+      <h2 class="section-title reveal" data-i18n="cennik-title">Cennik</h2>
+      <p class="section-lead reveal" data-i18n="cennik-lead">Jedna stawka godzinowa, bez ukrytych kosztów.</p>
 
       <div class="price-grid">
         <div class="price-card price-card-rate reveal">
           <span class="price-value">160 zł</span>
-          <span class="price-unit">za godzinę</span>
+          <span class="price-unit" data-i18n="cennik-za-godzine">za godzinę</span>
         </div>
         <div class="price-card reveal">
-          <span class="price-duration">2 godziny</span>
+          <span class="price-duration" data-i18n="dlugosc-2h">2 godziny</span>
           <span class="price-value">320 zł</span>
         </div>
         <div class="price-card reveal">
-          <span class="price-duration">3 godziny</span>
+          <span class="price-duration" data-i18n="dlugosc-3h">3 godziny</span>
           <span class="price-value">480 zł</span>
         </div>
         <div class="price-card reveal">
-          <span class="price-duration">4 godziny</span>
+          <span class="price-duration" data-i18n="dlugosc-4h">4 godziny</span>
           <span class="price-value">640 zł</span>
         </div>
         <div class="price-card price-card-pakiet reveal">
-          <span class="price-package-badge">Pakiet</span>
-          <span class="price-duration">10 godzin</span>
+          <span class="price-package-badge" data-i18n="cennik-pakiet-badge">Pakiet</span>
+          <span class="price-duration" data-i18n="cennik-pakiet-godzin">10 godzin</span>
           <span class="price-value">1500 zł</span>
-          <span class="price-package-note">150 zł/h — 10 zł taniej za godzinę</span>
+          <span class="price-package-note" data-i18n="cennik-pakiet-note">150 zł/h — 10 zł taniej za godzinę</span>
         </div>
       </div>
 
-      <p class="price-note reveal">
+      <p class="price-note reveal" data-i18n="cennik-note">
         Jedna jazda trwa minimum 2, maksimum 4 godziny — pakiet 10-godzinny rozkłada się na kilka
         spotkań, do uzgodnienia przy kontakcie.
       </p>
@@ -422,55 +428,57 @@
     <div class="container">
       <div class="reviews-head reveal">
         <div>
-          <h2 class="section-title">Opinie</h2>
-          <p class="section-lead">
+          <h2 class="section-title" data-i18n="opinie-title">Opinie</h2>
+          <p class="section-lead" data-i18n="opinie-lead">
             Prawdziwe opinie kursantów — prosto z wizytówki Google i wiadomości po zdanych egzaminach.
           </p>
         </div>
         <p class="rating-badge">
           <span class="rating-value">4,9</span>
           <span class="rating-stars" aria-hidden="true">★★★★★</span>
-          <span class="rating-label">w Google</span>
+          <span class="rating-label" data-i18n="opinie-w-google">w Google</span>
         </p>
       </div>
 
-      <div class="reviews-filters reveal" role="group" aria-label="Filtruj opinie">
-        <button type="button" class="filter-btn is-active" data-filter="all">Wszystkie</button>
+      <div class="reviews-filters reveal" role="group" aria-label="Filtruj opinie" data-i18n-attr="aria-label:opinie-filtruj-label">
+        <button type="button" class="filter-btn is-active" data-filter="all" data-i18n="opinie-filtr-wszystkie">Wszystkie</button>
         <button type="button" class="filter-btn" data-filter="google">Google</button>
         <button type="button" class="filter-btn" data-filter="messenger">Messenger</button>
       </div>
 
+      <p class="reviews-lang-note" data-i18n="opinie-jezyk-nota"></p>
+
       <div class="reviews-grid" id="reviews-grid" data-lightbox-group="opinie">
 
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" data-caption="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą">
-          <img src="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" alt="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" data-caption="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą" data-i18n-attr="data-caption:rev-g01">
+          <img src="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" alt="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą" loading="lazy" data-i18n-attr="alt:rev-g01">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" data-caption="Opinia Google od kursanta Roberta — 5 gwiazdek za profesjonalizm i podejście do kursanta">
-          <img src="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" alt="Opinia Google od kursanta Roberta — 5 gwiazdek za profesjonalizm i podejście do kursanta" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" data-caption="Opinia Google od kursanta Roberta — 5 gwiazdek za profesjonalizm i podejście do kursanta" data-i18n-attr="data-caption:rev-g02">
+          <img src="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" alt="Opinia Google od kursanta Roberta — 5 gwiazdek za profesjonalizm i podejście do kursanta" loading="lazy" data-i18n-attr="alt:rev-g02">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" data-caption="Opinia Google od Andrzeja — powrót do jazdy po 8 latach przerwy i zdany egzamin za pierwszym podejściem">
-          <img src="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" alt="Opinia Google od Andrzeja — powrót do jazdy po 8 latach przerwy i zdany egzamin za pierwszym podejściem" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" data-caption="Opinia Google od Andrzeja — powrót do jazdy po 8 latach przerwy i zdany egzamin za pierwszym podejściem" data-i18n-attr="data-caption:rev-g03">
+          <img src="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" alt="Opinia Google od Andrzeja — powrót do jazdy po 8 latach przerwy i zdany egzamin za pierwszym podejściem" loading="lazy" data-i18n-attr="alt:rev-g03">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" data-caption="Opinia Google od Roberta — zdany egzamin po trzech jazdach doszkalających">
-          <img src="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" alt="Opinia Google od Roberta — zdany egzamin po trzech jazdach doszkalających" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" data-caption="Opinia Google od Roberta — zdany egzamin po trzech jazdach doszkalających" data-i18n-attr="data-caption:rev-g04">
+          <img src="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" alt="Opinia Google od Roberta — zdany egzamin po trzech jazdach doszkalających" loading="lazy" data-i18n-attr="alt:rev-g04">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" data-caption="Opinia Google — egzamin zdany bez żadnego błędu">
-          <img src="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" alt="Opinia Google — egzamin zdany bez żadnego błędu" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" data-caption="Opinia Google — egzamin zdany bez żadnego błędu" data-i18n-attr="data-caption:rev-g05">
+          <img src="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" alt="Opinia Google — egzamin zdany bez żadnego błędu" loading="lazy" data-i18n-attr="alt:rev-g05">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" data-caption="Opinia Google od Pawła — wymagający, ale cierpliwy instruktor">
-          <img src="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" alt="Opinia Google od Pawła — wymagający, ale cierpliwy instruktor" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" data-caption="Opinia Google od Pawła — wymagający, ale cierpliwy instruktor" data-i18n-attr="data-caption:rev-g06">
+          <img src="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" alt="Opinia Google od Pawła — wymagający, ale cierpliwy instruktor" loading="lazy" data-i18n-attr="alt:rev-g06">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" data-caption="Opinia Google od Weroniki — jazdy doszkalające po długiej przerwie w prowadzeniu">
-          <img src="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" alt="Opinia Google od Weroniki — jazdy doszkalające po długiej przerwie w prowadzeniu" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" data-caption="Opinia Google od Weroniki — jazdy doszkalające po długiej przerwie w prowadzeniu" data-i18n-attr="data-caption:rev-g07">
+          <img src="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" alt="Opinia Google od Weroniki — jazdy doszkalające po długiej przerwie w prowadzeniu" loading="lazy" data-i18n-attr="alt:rev-g07">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" data-caption="Opinia Google — najlepszy instruktor, ocena 5 gwiazdek">
-          <img src="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" alt="Opinia Google — najlepszy instruktor, ocena 5 gwiazdek" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" data-caption="Opinia Google — najlepszy instruktor, ocena 5 gwiazdek" data-i18n-attr="data-caption:rev-g08">
+          <img src="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" alt="Opinia Google — najlepszy instruktor, ocena 5 gwiazdek" loading="lazy" data-i18n-attr="alt:rev-g08">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" data-caption="Opinia Google — zdany egzamin po wcześniejszych nieudanych podejściach">
-          <img src="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" alt="Opinia Google — zdany egzamin po wcześniejszych nieudanych podejściach" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" data-caption="Opinia Google — zdany egzamin po wcześniejszych nieudanych podejściach" data-i18n-attr="data-caption:rev-g09">
+          <img src="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" alt="Opinia Google — zdany egzamin po wcześniejszych nieudanych podejściach" loading="lazy" data-i18n-attr="alt:rev-g09">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" data-caption="Opinia Google od Zosi — egzamin zdany bezbłędnie">
-          <img src="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" alt="Opinia Google od Zosi — egzamin zdany bezbłędnie" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" data-caption="Opinia Google od Zosi — egzamin zdany bezbłędnie" data-i18n-attr="data-caption:rev-g10">
+          <img src="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" alt="Opinia Google od Zosi — egzamin zdany bezbłędnie" loading="lazy" data-i18n-attr="alt:rev-g10">
         </button>
         <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-11-alex-tyler-en-khalid-skrocona.webp" data-caption="Google review in English — patient instructor, passed the driving exam">
           <img src="img/opinie/opinia-google-11-alex-tyler-en-khalid-skrocona.webp" alt="Google review in English — patient instructor, passed the driving exam" loading="lazy">
@@ -481,65 +489,68 @@
         <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-13-masudur-rahman-en-khalid.webp" data-caption="Google review in English — passed theory and practical exam on the first attempt">
           <img src="img/opinie/opinia-google-13-masudur-rahman-en-khalid.webp" alt="Google review in English — passed theory and practical exam on the first attempt" loading="lazy">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" data-caption="Opinia Google po arabsku — nauka jazdy z instruktorem mówiącym po arabsku">
-          <img src="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" alt="Opinia Google po arabsku — nauka jazdy z instruktorem mówiącym po arabsku" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" data-caption="Opinia Google po arabsku — nauka jazdy z instruktorem mówiącym po arabsku" data-i18n-attr="data-caption:rev-g14">
+          <img src="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" alt="Opinia Google po arabsku — nauka jazdy z instruktorem mówiącym po arabsku" loading="lazy" data-i18n-attr="alt:rev-g14">
         </button>
-        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" data-caption="Opinia Google po arabsku — profesjonalne podejście i nauka bez stresu">
-          <img src="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" alt="Opinia Google po arabsku — profesjonalne podejście i nauka bez stresu" loading="lazy">
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" data-caption="Opinia Google po arabsku — profesjonalne podejście i nauka bez stresu" data-i18n-attr="data-caption:rev-g15">
+          <img src="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" alt="Opinia Google po arabsku — profesjonalne podejście i nauka bez stresu" loading="lazy" data-i18n-attr="alt:rev-g15">
         </button>
 
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" data-caption="Wiadomość od kursanta — zdany egzamin w Garwolinie za pierwszym razem">
-          <img src="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" alt="Wiadomość od kursanta — zdany egzamin w Garwolinie za pierwszym razem" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" data-caption="Wiadomość od kursanta — zdany egzamin w Garwolinie za pierwszym razem" data-i18n-attr="data-caption:rev-m01">
+          <img src="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" alt="Wiadomość od kursanta — zdany egzamin w Garwolinie za pierwszym razem" loading="lazy" data-i18n-attr="alt:rev-m01">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Mai — zdany egzamin, karta egzaminacyjna">
-          <img src="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" alt="Wiadomość od kursantki Mai — zdany egzamin, karta egzaminacyjna" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Mai — zdany egzamin, karta egzaminacyjna" data-i18n-attr="data-caption:rev-m02">
+          <img src="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" alt="Wiadomość od kursantki Mai — zdany egzamin, karta egzaminacyjna" loading="lazy" data-i18n-attr="alt:rev-m02">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Jana — zdany egzamin praktyczny">
-          <img src="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" alt="Wiadomość od kursanta Jana — zdany egzamin praktyczny" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Jana — zdany egzamin praktyczny" data-i18n-attr="data-caption:rev-m03">
+          <img src="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" alt="Wiadomość od kursanta Jana — zdany egzamin praktyczny" loading="lazy" data-i18n-attr="alt:rev-m03">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" data-caption="Wiadomość od kursantki — zdany egzamin na Odlewniczej">
-          <img src="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" alt="Wiadomość od kursantki — zdany egzamin na Odlewniczej" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" data-caption="Wiadomość od kursantki — zdany egzamin na Odlewniczej" data-i18n-attr="data-caption:rev-m04">
+          <img src="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" alt="Wiadomość od kursantki — zdany egzamin na Odlewniczej" loading="lazy" data-i18n-attr="alt:rev-m04">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Oliwii — egzamin zdany niemal bezbłędnie">
-          <img src="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" alt="Wiadomość od kursantki Oliwii — egzamin zdany niemal bezbłędnie" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Oliwii — egzamin zdany niemal bezbłędnie" data-i18n-attr="data-caption:rev-m05">
+          <img src="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" alt="Wiadomość od kursantki Oliwii — egzamin zdany niemal bezbłędnie" loading="lazy" data-i18n-attr="alt:rev-m05">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Andrzeja — zdany egzamin praktyczny">
-          <img src="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" alt="Wiadomość od kursanta Andrzeja — zdany egzamin praktyczny" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Andrzeja — zdany egzamin praktyczny" data-i18n-attr="data-caption:rev-m06">
+          <img src="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" alt="Wiadomość od kursanta Andrzeja — zdany egzamin praktyczny" loading="lazy" data-i18n-attr="alt:rev-m06">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" data-caption="Wiadomość od kursantki — zdany egzamin dzięki wytrwałości">
-          <img src="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" alt="Wiadomość od kursantki — zdany egzamin dzięki wytrwałości" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" data-caption="Wiadomość od kursantki — zdany egzamin dzięki wytrwałości" data-i18n-attr="data-caption:rev-m07">
+          <img src="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" alt="Wiadomość od kursantki — zdany egzamin dzięki wytrwałości" loading="lazy" data-i18n-attr="alt:rev-m07">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" data-caption="Wiadomość od kursantki Sylwii — zdane przy pierwszym podejściu na Odlewniczej">
-          <img src="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" alt="Wiadomość od kursantki Sylwii — zdane przy pierwszym podejściu na Odlewniczej" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" data-caption="Wiadomość od kursantki Sylwii — zdane przy pierwszym podejściu na Odlewniczej" data-i18n-attr="data-caption:rev-m08">
+          <img src="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" alt="Wiadomość od kursantki Sylwii — zdane przy pierwszym podejściu na Odlewniczej" loading="lazy" data-i18n-attr="alt:rev-m08">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Julii — zdany egzamin">
-          <img src="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" alt="Wiadomość od kursantki Julii — zdany egzamin" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Julii — zdany egzamin" data-i18n-attr="data-caption:rev-m09">
+          <img src="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" alt="Wiadomość od kursantki Julii — zdany egzamin" loading="lazy" data-i18n-attr="alt:rev-m09">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Marty — zdany egzamin z jednym błędem">
-          <img src="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" alt="Wiadomość od kursantki Marty — zdany egzamin z jednym błędem" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" data-caption="Wiadomość od kursantki Marty — zdany egzamin z jednym błędem" data-i18n-attr="data-caption:rev-m10">
+          <img src="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" alt="Wiadomość od kursantki Marty — zdany egzamin z jednym błędem" loading="lazy" data-i18n-attr="alt:rev-m10">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Antoniego — słowa uznania od egzaminatora dla instruktora">
-          <img src="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" alt="Wiadomość od kursanta Antoniego — słowa uznania od egzaminatora dla instruktora" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Antoniego — słowa uznania od egzaminatora dla instruktora" data-i18n-attr="data-caption:rev-m11">
+          <img src="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" alt="Wiadomość od kursanta Antoniego — słowa uznania od egzaminatora dla instruktora" loading="lazy" data-i18n-attr="alt:rev-m11">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" data-caption="Wiadomość od kursantki — zdane za pierwszym razem, bez stresu na egzaminie">
-          <img src="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" alt="Wiadomość od kursantki — zdane za pierwszym razem, bez stresu na egzaminie" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" data-caption="Wiadomość od kursantki — zdane za pierwszym razem, bez stresu na egzaminie" data-i18n-attr="data-caption:rev-m12">
+          <img src="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" alt="Wiadomość od kursantki — zdane za pierwszym razem, bez stresu na egzaminie" loading="lazy" data-i18n-attr="alt:rev-m12">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Konrada — pochwała egzaminatora za dobre przygotowanie">
-          <img src="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" alt="Wiadomość od kursanta Konrada — pochwała egzaminatora za dobre przygotowanie" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" data-caption="Wiadomość od kursanta Konrada — pochwała egzaminatora za dobre przygotowanie" data-i18n-attr="data-caption:rev-m13">
+          <img src="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" alt="Wiadomość od kursanta Konrada — pochwała egzaminatora za dobre przygotowanie" loading="lazy" data-i18n-attr="alt:rev-m13">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" data-caption="Wiadomość od kursanta Pawła — zdany egzamin za pierwszym razem">
-          <img src="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" alt="Wiadomość od kursanta Pawła — zdany egzamin za pierwszym razem" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" data-caption="Wiadomość od kursanta Pawła — zdany egzamin za pierwszym razem" data-i18n-attr="data-caption:rev-m14">
+          <img src="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" alt="Wiadomość od kursanta Pawła — zdany egzamin za pierwszym razem" loading="lazy" data-i18n-attr="alt:rev-m14">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" data-caption="Wiadomość od kursanta Bartka — zdany egzamin w ulewnym deszczu">
-          <img src="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" alt="Wiadomość od kursanta Bartka — zdany egzamin w ulewnym deszczu" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" data-caption="Wiadomość od kursanta Bartka — zdany egzamin w ulewnym deszczu" data-i18n-attr="data-caption:rev-m15">
+          <img src="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" alt="Wiadomość od kursanta Bartka — zdany egzamin w ulewnym deszczu" loading="lazy" data-i18n-attr="alt:rev-m15">
         </button>
-        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" data-caption="Opinia kursanta z okresu pracy instruktora w Babskiej Autoszkole">
-          <img src="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" alt="Opinia kursanta z okresu pracy instruktora w Babskiej Autoszkole" loading="lazy">
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" data-caption="Opinia kursanta z okresu pracy instruktora w Babskiej Autoszkole" data-i18n-attr="data-caption:rev-m16">
+          <img src="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" alt="Opinia kursanta z okresu pracy instruktora w Babskiej Autoszkole" loading="lazy" data-i18n-attr="alt:rev-m16">
         </button>
 
       </div>
 
       <div class="reviews-more">
+        <!-- Bez data-i18n: tekst tego przycisku (z dopisaną liczbą) generuje
+             dynamicznie main.js w renderReviews() — musi być językowo
+             świadomy tam, inaczej i18n.js nadpisałby liczbę w nawiasie. -->
         <button type="button" class="btn btn-secondary" id="reviews-more-btn">Pokaż więcej opinii</button>
       </div>
     </div>
@@ -549,8 +560,8 @@
 
   <section id="galeria" class="section">
     <div class="container">
-      <h2 class="section-title reveal">Galeria</h2>
-      <p class="section-lead reveal">
+      <h2 class="section-title reveal" data-i18n="galeria-title">Galeria</h2>
+      <p class="section-lead reveal" data-i18n="galeria-lead">
         Kursanci, którzy wyrazili zgodę na publikację zdjęcia, oraz nagrania z placu manewrowego.
       </p>
 
@@ -559,8 +570,8 @@
         <button type="button" class="gallery-item is-video" data-type="video"
                 data-full="video/jazda-po-luku-cwiczenie-manewrowe.mp4"
                 data-poster="img/video-poster/jazda-po-luku-poster.webp"
-                data-caption="Ćwiczenie jazdy po łuku na placu manewrowym">
-          <img src="img/video-poster/jazda-po-luku-poster.webp" alt="Ćwiczenie jazdy po łuku na placu manewrowym — nagranie" loading="lazy">
+                data-caption="Ćwiczenie jazdy po łuku na placu manewrowym" data-i18n-attr="data-caption:gal-v1">
+          <img src="img/video-poster/jazda-po-luku-poster.webp" alt="Ćwiczenie jazdy po łuku na placu manewrowym — nagranie" loading="lazy" data-i18n-attr="alt:gal-v1-alt">
           <span class="play-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
           </span>
@@ -569,8 +580,8 @@
         <button type="button" class="gallery-item is-video" data-type="video"
                 data-full="video/cwiczenia-manewrowe-plac-jazdy-doszkalajace.mp4"
                 data-poster="img/video-poster/cwiczenia-manewrowe-poster.webp"
-                data-caption="Ćwiczenia manewrowe podczas jazdy doszkalającej">
-          <img src="img/video-poster/cwiczenia-manewrowe-poster.webp" alt="Ćwiczenia manewrowe podczas jazdy doszkalającej — nagranie" loading="lazy">
+                data-caption="Ćwiczenia manewrowe podczas jazdy doszkalającej" data-i18n-attr="data-caption:gal-v2">
+          <img src="img/video-poster/cwiczenia-manewrowe-poster.webp" alt="Ćwiczenia manewrowe podczas jazdy doszkalającej — nagranie" loading="lazy" data-i18n-attr="alt:gal-v2-alt">
           <span class="play-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
           </span>
@@ -579,78 +590,78 @@
         <button type="button" class="gallery-item is-video" data-type="video"
                 data-full="video/opinia-kursanta-jazdy-doszkalajace-warszawa.mp4"
                 data-poster="img/video-poster/opinia-kursanta-poster.webp"
-                data-caption="Opinia kursanta o jazdach doszkalających w Warszawie">
-          <img src="img/video-poster/opinia-kursanta-poster.webp" alt="Samochód nauki jazdy z podświetlaną tabliczką L wieczorem — nagranie z opinią kursanta" loading="lazy">
+                data-caption="Opinia kursanta o jazdach doszkalających w Warszawie" data-i18n-attr="data-caption:gal-v3">
+          <img src="img/video-poster/opinia-kursanta-poster.webp" alt="Samochód nauki jazdy z podświetlaną tabliczką L wieczorem — nagranie z opinią kursanta" loading="lazy" data-i18n-attr="alt:gal-v3-alt">
           <span class="play-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
           </span>
         </button>
 
-        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" data-caption="Instruktor z kursantką podczas jazdy doszkalającej kat. B w Warszawie">
-          <img src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="Instruktor z kursantką podczas jazdy doszkalającej kat. B w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" data-caption="Instruktor z kursantką podczas jazdy doszkalającej kat. B w Warszawie" data-i18n-attr="data-caption:gal-01">
+          <img src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="Instruktor z kursantką podczas jazdy doszkalającej kat. B w Warszawie" loading="lazy" data-i18n-attr="alt:gal-01">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" data-caption="Zadowolona kursantka po jeździe doszkalającej w Warszawie Wawer">
-          <img src="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" alt="Zadowolona kursantka po jeździe doszkalającej w Warszawie Wawer" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" data-caption="Zadowolona kursantka po jeździe doszkalającej w Warszawie Wawer" data-i18n-attr="data-caption:gal-02">
+          <img src="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" alt="Zadowolona kursantka po jeździe doszkalającej w Warszawie Wawer" loading="lazy" data-i18n-attr="alt:gal-02">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-odlewnicza.webp" data-caption="Zdany egzamin na prawo jazdy na trasie WORD Odlewnicza">
-          <img src="img/galeria/zdany-egzamin-word-odlewnicza.webp" alt="Zdany egzamin na prawo jazdy na trasie WORD Odlewnicza" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-odlewnicza.webp" data-caption="Zdany egzamin na prawo jazdy na trasie WORD Odlewnicza" data-i18n-attr="data-caption:gal-03">
+          <img src="img/galeria/zdany-egzamin-word-odlewnicza.webp" alt="Zdany egzamin na prawo jazdy na trasie WORD Odlewnicza" loading="lazy" data-i18n-attr="alt:gal-03">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-bemowo.webp" data-caption="Zdany egzamin na prawo jazdy na trasie WORD Bemowo">
-          <img src="img/galeria/zdany-egzamin-word-bemowo.webp" alt="Zdany egzamin na prawo jazdy na trasie WORD Bemowo" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-bemowo.webp" data-caption="Zdany egzamin na prawo jazdy na trasie WORD Bemowo" data-i18n-attr="data-caption:gal-04">
+          <img src="img/galeria/zdany-egzamin-word-bemowo.webp" alt="Zdany egzamin na prawo jazdy na trasie WORD Bemowo" loading="lazy" data-i18n-attr="alt:gal-04">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/kursant-po-jezdzie.webp" data-caption="Instruktor i kursant po udanej jeździe doszkalającej">
-          <img src="img/galeria/kursant-po-jezdzie.webp" alt="Instruktor i kursant po udanej jeździe doszkalającej" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/kursant-po-jezdzie.webp" data-caption="Instruktor i kursant po udanej jeździe doszkalającej" data-i18n-attr="data-caption:gal-05">
+          <img src="img/galeria/kursant-po-jezdzie.webp" alt="Instruktor i kursant po udanej jeździe doszkalającej" loading="lazy" data-i18n-attr="alt:gal-05">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" data-caption="Zadowoleni kursanci szkoły jazdy w Warszawie Wawer">
-          <img src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="Zadowoleni kursanci szkoły jazdy w Warszawie Wawer" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" data-caption="Zadowoleni kursanci szkoły jazdy w Warszawie Wawer" data-i18n-attr="data-caption:gal-06">
+          <img src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="Zadowoleni kursanci szkoły jazdy w Warszawie Wawer" loading="lazy" data-i18n-attr="alt:gal-06">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-nauki-jazdy-warszawa.webp" data-caption="Instruktor nauki jazdy w Warszawie z kursantem">
-          <img src="img/galeria/instruktor-nauki-jazdy-warszawa.webp" alt="Instruktor nauki jazdy w Warszawie z kursantem" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-nauki-jazdy-warszawa.webp" data-caption="Instruktor nauki jazdy w Warszawie z kursantem" data-i18n-attr="data-caption:gal-07">
+          <img src="img/galeria/instruktor-nauki-jazdy-warszawa.webp" alt="Instruktor nauki jazdy w Warszawie z kursantem" loading="lazy" data-i18n-attr="alt:gal-07">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" data-caption="Jazda doszkalająca przed egzaminem na prawo jazdy w Warszawie">
-          <img src="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" alt="Jazda doszkalająca przed egzaminem na prawo jazdy w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" data-caption="Jazda doszkalająca przed egzaminem na prawo jazdy w Warszawie" data-i18n-attr="data-caption:gal-08">
+          <img src="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" alt="Jazda doszkalająca przed egzaminem na prawo jazdy w Warszawie" loading="lazy" data-i18n-attr="alt:gal-08">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-bezstresowo.webp" data-caption="Bezstresowa nauka jazdy z instruktorem w Warszawie">
-          <img src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="Bezstresowa nauka jazdy z instruktorem w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-bezstresowo.webp" data-caption="Bezstresowa nauka jazdy z instruktorem w Warszawie" data-i18n-attr="data-caption:gal-09">
+          <img src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="Bezstresowa nauka jazdy z instruktorem w Warszawie" loading="lazy" data-i18n-attr="alt:gal-09">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" data-caption="Kursant z zaliczonym arkuszem jazdy kat. B">
-          <img src="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" alt="Kursant z zaliczonym arkuszem jazdy kat. B" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" data-caption="Kursant z zaliczonym arkuszem jazdy kat. B" data-i18n-attr="data-caption:gal-10">
+          <img src="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" alt="Kursant z zaliczonym arkuszem jazdy kat. B" loading="lazy" data-i18n-attr="alt:gal-10">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" data-caption="Doszkalanie po latach przerwy w jeździe w Warszawie">
-          <img src="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" alt="Doszkalanie po latach przerwy w jeździe w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" data-caption="Doszkalanie po latach przerwy w jeździe w Warszawie" data-i18n-attr="data-caption:gal-11">
+          <img src="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" alt="Doszkalanie po latach przerwy w jeździe w Warszawie" loading="lazy" data-i18n-attr="alt:gal-11">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" data-caption="Instruktor jazdy doszkalającej przy samochodzie w Warszawie">
-          <img src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="Instruktor jazdy doszkalającej przy samochodzie w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" data-caption="Instruktor jazdy doszkalającej przy samochodzie w Warszawie" data-i18n-attr="data-caption:gal-12">
+          <img src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="Instruktor jazdy doszkalającej przy samochodzie w Warszawie" loading="lazy" data-i18n-attr="alt:gal-12">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/jazda-probna-przed-egzaminem-word.webp" data-caption="Jazda próbna przed egzaminem WORD">
-          <img src="img/galeria/jazda-probna-przed-egzaminem-word.webp" alt="Jazda próbna przed egzaminem WORD" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/jazda-probna-przed-egzaminem-word.webp" data-caption="Jazda próbna przed egzaminem WORD" data-i18n-attr="data-caption:gal-13">
+          <img src="img/galeria/jazda-probna-przed-egzaminem-word.webp" alt="Jazda próbna przed egzaminem WORD" loading="lazy" data-i18n-attr="alt:gal-13">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" data-caption="Nauka jazdy doszkalającej kat. B w Warszawie">
-          <img src="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" alt="Nauka jazdy doszkalającej kat. B w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" data-caption="Nauka jazdy doszkalającej kat. B w Warszawie" data-i18n-attr="data-caption:gal-14">
+          <img src="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" alt="Nauka jazdy doszkalającej kat. B w Warszawie" loading="lazy" data-i18n-attr="alt:gal-14">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" data-caption="Samochód do nauki jazdy doszkalającej w Warszawie">
-          <img src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="Samochód do nauki jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" data-caption="Samochód do nauki jazdy doszkalającej w Warszawie" data-i18n-attr="data-caption:gal-15">
+          <img src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="Samochód do nauki jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-15">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" data-caption="Przygotowanie do egzaminu na trasie WORD Bemowo">
-          <img src="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" alt="Przygotowanie do egzaminu na trasie WORD Bemowo" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" data-caption="Przygotowanie do egzaminu na trasie WORD Bemowo" data-i18n-attr="data-caption:gal-16">
+          <img src="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" alt="Przygotowanie do egzaminu na trasie WORD Bemowo" loading="lazy" data-i18n-attr="alt:gal-16">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" data-caption="Przygotowanie do egzaminu na trasie WORD Odlewnicza w Warszawie">
-          <img src="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" alt="Przygotowanie do egzaminu na trasie WORD Odlewnicza w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" data-caption="Przygotowanie do egzaminu na trasie WORD Odlewnicza w Warszawie" data-i18n-attr="data-caption:gal-17">
+          <img src="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" alt="Przygotowanie do egzaminu na trasie WORD Odlewnicza w Warszawie" loading="lazy" data-i18n-attr="alt:gal-17">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" data-caption="Wnętrze samochodu do nauki jazdy doszkalającej w Warszawie">
-          <img src="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" alt="Wnętrze samochodu do nauki jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" data-caption="Wnętrze samochodu do nauki jazdy doszkalającej w Warszawie" data-i18n-attr="data-caption:gal-18">
+          <img src="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" alt="Wnętrze samochodu do nauki jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-18">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" data-caption="Zadowoleni kursanci jazdy doszkalającej w Warszawie">
-          <img src="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" alt="Zadowoleni kursanci jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" data-caption="Zadowoleni kursanci jazdy doszkalającej w Warszawie" data-i18n-attr="data-caption:gal-19">
+          <img src="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" alt="Zadowoleni kursanci jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-19">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" data-caption="Jazda doszkalająca dla kobiet w Warszawie">
-          <img src="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" alt="Kursantka z instruktorem w samochodzie podczas jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" data-caption="Jazda doszkalająca dla kobiet w Warszawie" data-i18n-attr="data-caption:gal-20">
+          <img src="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" alt="Kursantka z instruktorem w samochodzie podczas jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-20-alt">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" data-caption="Instruktor i kursant podczas jazdy doszkalającej w Warszawie">
-          <img src="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" alt="Instruktor i kursant w samochodzie podczas jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" data-caption="Instruktor i kursant podczas jazdy doszkalającej w Warszawie" data-i18n-attr="data-caption:gal-21">
+          <img src="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" alt="Instruktor i kursant w samochodzie podczas jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-21-alt">
         </button>
-        <button type="button" class="gallery-item" data-full="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" data-caption="Zadowolony kursant po jeździe doszkalającej w Warszawie">
-          <img src="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" alt="Kursant pokazuje kciuk w górę po zajęciach jazdy doszkalającej w Warszawie" loading="lazy">
+        <button type="button" class="gallery-item" data-full="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" data-caption="Zadowolony kursant po jeździe doszkalającej w Warszawie" data-i18n-attr="data-caption:gal-22">
+          <img src="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" alt="Kursant pokazuje kciuk w górę po zajęciach jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-22-alt">
         </button>
 
       </div>
@@ -661,13 +672,13 @@
 
   <section id="kontakt" class="section section-alt">
     <div class="container">
-      <h2 class="section-title reveal">Kontakt</h2>
+      <h2 class="section-title reveal" data-i18n="kontakt-title">Kontakt</h2>
       <div class="contact-grid reveal">
         <div>
-          <p><strong>Instruktor:</strong> Michael</p>
-          <p><strong>Telefon:</strong> <a href="tel:+48690360164">690 360 164</a></p>
+          <p><strong data-i18n="kontakt-instruktor-label">Instruktor:</strong> Michael</p>
+          <p><strong data-i18n="kontakt-telefon-label">Telefon:</strong> <a href="tel:+48690360164">690 360 164</a></p>
           <p><strong>E-mail:</strong> <a href="mailto:MichaelRabti@gmail.com">MichaelRabti@gmail.com</a></p>
-          <p><strong>Obszar działania:</strong> Wawer i okolice Warszawy — dojazd do innych dzielnic po ustaleniu.</p>
+          <p><strong data-i18n="kontakt-obszar-label">Obszar działania:</strong> <span data-i18n="kontakt-obszar-tekst">Wawer i okolice Warszawy — dojazd do innych dzielnic po ustaleniu.</span></p>
         </div>
         <div lang="en">
           <p><strong>Instructor:</strong> Khaled (ALP Driving School)</p>
@@ -683,28 +694,28 @@
 
 <footer class="site-footer" id="site-footer">
   <div class="container footer-inner">
-    <p>&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <p data-i18n="footer-prawa">&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
     <nav class="footer-dokumenty" aria-label="Dokumenty">
-      <a href="regulamin.html">Regulamin</a>
-      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="regulamin.html" data-i18n="footer-regulamin">Regulamin</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Polityka prywatności</a>
     </nav>
-    <p class="footer-area">Jazdy doszkalające Warszawa · Wawer</p>
+    <p class="footer-area" data-i18n="footer-area">Jazdy doszkalające Warszawa · Wawer</p>
   </div>
 </footer>
 
 <!-- Pływający przycisk kontaktu — pokazuje się po przewinięciu poza Hero -->
-<a href="tel:+48690360164" class="call-fab" id="call-fab" aria-label="Zadzwoń do instruktora: 690 360 164">
+<a href="tel:+48690360164" class="call-fab" id="call-fab" aria-label="Zadzwoń do instruktora: 690 360 164" data-i18n-attr="aria-label:fab-label">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
   </svg>
-  <span class="call-fab-text">Zadzwoń</span>
+  <span class="call-fab-text" data-i18n="fab-text">Zadzwoń</span>
   <span class="call-fab-number">690 360 164</span>
 </a>
 
 <!-- Panel wybranego terminu — treść wypełnia grafik.js, zależnie od trybu -->
 <div class="termin-panel" id="termin-panel" role="dialog" aria-modal="true" aria-labelledby="termin-tytul" hidden>
   <div class="termin-box">
-    <button type="button" class="termin-zamknij" id="termin-zamknij" aria-label="Zamknij">&times;</button>
+    <button type="button" class="termin-zamknij" id="termin-zamknij" aria-label="Zamknij" data-i18n-attr="aria-label:zamknij-label">&times;</button>
     <h3 class="termin-tytul" id="termin-tytul">Wybrany termin</h3>
     <p class="termin-podsumowanie" id="termin-podsumowanie"></p>
     <div id="termin-tresc"></div>
@@ -712,16 +723,18 @@
 </div>
 
 <!-- Lightbox — wspólny dla galerii i opinii -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd" hidden>
-  <button type="button" class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Zamknij podgląd">&times;</button>
-  <button type="button" class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Poprzedni">&#8249;</button>
-  <button type="button" class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Następny">&#8250;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd" hidden data-i18n-attr="aria-label:lightbox-label">
+  <button type="button" class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Zamknij podgląd" data-i18n-attr="aria-label:lightbox-close-label">&times;</button>
+  <button type="button" class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Poprzedni" data-i18n-attr="aria-label:lightbox-prev-label">&#8249;</button>
+  <button type="button" class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Następny" data-i18n-attr="aria-label:lightbox-next-label">&#8250;</button>
   <figure class="lightbox-figure">
     <div class="lightbox-media" id="lightbox-media"></div>
     <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
   </figure>
 </div>
 
+<script src="js/i18n-data-index.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 <script src="js/grafik.js"></script>
 </body>

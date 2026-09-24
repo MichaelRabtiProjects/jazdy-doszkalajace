@@ -15,46 +15,54 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
-    <a class="header-link" href="index.html#grafik">Grafik</a>
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn is-active" data-lang="pl" aria-pressed="true" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+      </div>
+      <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    </div>
+    <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
   </div>
 </header>
 
 <main class="section">
   <div class="container dokument dokument-skrot">
-    <h1 class="section-title">Polityka prywatności</h1>
-    <p class="dokument-wersja">Wersja z dnia <strong>24.09.2026</strong> &middot; obowiązuje od 24.09.2026</p>
+    <h1 class="section-title" data-i18n="tytul">Polityka prywatności</h1>
+    <p class="dokument-wersja"><span data-i18n="wersja-z-dnia">Wersja z dnia</span> <strong>24.09.2026</strong> &middot; <span data-i18n="obowiazuje-od">obowiązuje od</span> 24.09.2026</p>
 
     <ol class="dokument-lista-skrot">
-      <li><strong>Administrator:</strong> <strong>Michael Rabti</strong>, e-mail <strong>MichaelRabti@gmail.com</strong>, tel. 690&nbsp;360&nbsp;164.</li>
-      <li><strong>Jakie dane i kiedy:</strong> imię, telefon i/lub e-mail — tylko gdy sam się odezwiesz (telefon, SMS, WhatsApp, e-mail). Sama strona i grafik nie zbierają żadnych danych.</li>
-      <li><strong>Do czego:</strong> ustalenie i realizacja jazdy doszkalającej.</li>
-      <li><strong>Komu przekazuję:</strong>
+      <li data-i18n="p1"><strong>Administrator:</strong> <strong>Michael Rabti</strong>, e-mail <strong>MichaelRabti@gmail.com</strong>, tel. 690&nbsp;360&nbsp;164.</li>
+      <li data-i18n="p2"><strong>Jakie dane i kiedy:</strong> imię, telefon i/lub e-mail — tylko gdy sam się odezwiesz (telefon, SMS, WhatsApp, e-mail). Sama strona i grafik nie zbierają żadnych danych.</li>
+      <li data-i18n="p3"><strong>Do czego:</strong> ustalenie i realizacja jazdy doszkalającej.</li>
+      <li data-i18n="p4"><strong>Komu przekazuję:</strong>
         <ul>
           <li>Cloudflare — hosting strony i panelu,</li>
           <li>Google Fonts — wczytanie czcionek (Twój adres IP trafia do Google),</li>
           <li>WhatsApp / Meta — tylko jeśli sam wybierzesz ten kanał kontaktu.</li>
         </ul>
       </li>
-      <li><strong>Jak długo:</strong> 180 dni od terminu jazdy, potem dane usuwam.</li>
-      <li><strong>Twoje prawa:</strong> dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie danych, sprzeciw, skarga do UODO (<span class="dokument-mono">uodo.gov.pl</span>). Kontakt: <strong>MichaelRabti@gmail.com</strong> lub 690&nbsp;360&nbsp;164.</li>
-      <li><strong>Cookies:</strong> brak trackerów i analityki — jedyny plik cookie to sesja panelu administracyjnego (nie dotyczy osób odwiedzających stronę).</li>
+      <li data-i18n="p5"><strong>Jak długo:</strong> 180 dni od terminu jazdy, potem dane usuwam.</li>
+      <li data-i18n="p6"><strong>Twoje prawa:</strong> dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie danych, sprzeciw, skarga do UODO (<span class="dokument-mono">uodo.gov.pl</span>). Kontakt: <strong>MichaelRabti@gmail.com</strong> lub 690&nbsp;360&nbsp;164.</li>
+      <li data-i18n="p7"><strong>Cookies:</strong> brak trackerów i analityki — jedyny plik cookie to sesja panelu administracyjnego (nie dotyczy osób odwiedzających stronę).</li>
     </ol>
 
-    <p class="dokument-powrot"><a href="index.html">&larr; Wróć na stronę główną</a></p>
+    <p class="dokument-powrot"><a href="index.html" data-i18n="powrot">&larr; Wróć na stronę główną</a></p>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <p data-i18n="footer-prawa">&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
     <nav class="footer-dokumenty" aria-label="Dokumenty">
-      <a href="regulamin.html">Regulamin</a>
-      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="regulamin.html" data-i18n="footer-regulamin">Regulamin</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Polityka prywatności</a>
     </nav>
-    <p class="footer-area">Jazdy doszkalające Warszawa &middot; Wawer</p>
+    <p class="footer-area" data-i18n="footer-area">Jazdy doszkalające Warszawa &middot; Wawer</p>
   </div>
 </footer>
 
+<script src="js/i18n-data-polityka.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>

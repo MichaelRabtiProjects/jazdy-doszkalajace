@@ -155,8 +155,14 @@
     if (moreBtn) {
       var hasMore = !reviewsState.expanded && matching.length > REVIEWS_STEP;
       moreBtn.hidden = !hasMore;
-      moreBtn.textContent =
-        'Pokaż więcej opinii (' + Math.max(matching.length - REVIEWS_STEP, 0) + ')';
+      var pozostalo = Math.max(matching.length - REVIEWS_STEP, 0);
+      // Tekst ma liczbę w środku, więc nie może iść przez generyczny
+      // mechanizm data-i18n (patrz komentarz przy przycisku w index.html) —
+      // sprawdzamy język wprost, tak jak grafik.js.
+      var angielski = typeof window.jdJezyk === 'function' && window.jdJezyk() === 'en';
+      moreBtn.textContent = angielski
+        ? 'Show more reviews (' + pozostalo + ')'
+        : 'Pokaż więcej opinii (' + pozostalo + ')';
     }
   }
 
@@ -180,6 +186,11 @@
         renderReviews();
       });
     }
+
+    // Przycisk "Pokaż więcej" ma tekst z liczbą w środku (patrz wyżej) —
+    // trzeba go przerysować ręcznie przy zmianie języka, generyczny
+    // mechanizm data-i18n tego nie obejmuje.
+    document.addEventListener('jd:jezyk', renderReviews);
   }
 
   /* ======================================================================

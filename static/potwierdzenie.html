@@ -15,36 +15,48 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn is-active" data-lang="pl" aria-pressed="true" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+      </div>
+      <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    </div>
     <!-- Świadomie bez klasy .main-nav: to menu zwija się na telefonie i wymaga
          przycisku hamburgera, którego ta podstrona nie ma. -->
-    <a class="header-link" href="index.html#grafik">Grafik</a>
+    <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
   </div>
 </header>
 
 <main class="section">
   <div class="container potwierdzenie-container">
-    <h1 class="section-title">Potwierdzenie rezerwacji</h1>
+    <h1 class="section-title" data-i18n="tytul">Potwierdzenie rezerwacji</h1>
     <div id="potwierdzenie-tresc">
-      <p class="grafik-komunikat">Sprawdzamy status rezerwacji…</p>
+      <!-- Treść nadpisuje js/potwierdzenie.js — ten skrypt NIE jest jeszcze
+           dwujęzyczny (patrz komentarz w tym pliku), więc po przełączeniu
+           na angielski ten start tekst zostanie przetłumaczony, ale to,
+           co wstawi potwierdzenie.js po odpowiedzi z API, zostanie po polsku. -->
+      <p class="grafik-komunikat" data-i18n="sprawdzamy">Sprawdzamy status rezerwacji…</p>
     </div>
     <p class="potwierdzenie-powrot">
-      <a href="index.html">&larr; Wróć na stronę główną</a>
+      <a href="index.html" data-i18n="powrot">&larr; Wróć na stronę główną</a>
     </p>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <p data-i18n="footer-prawa">&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
     <nav class="footer-dokumenty" aria-label="Dokumenty">
-      <a href="regulamin.html">Regulamin</a>
-      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="regulamin.html" data-i18n="footer-regulamin">Regulamin</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Polityka prywatności</a>
     </nav>
-    <p class="footer-area">Jazdy doszkalające Warszawa · Wawer</p>
+    <p class="footer-area" data-i18n="footer-area">Jazdy doszkalające Warszawa · Wawer</p>
   </div>
 </footer>
 
+<script src="js/i18n-data-potwierdzenie.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/potwierdzenie.js"></script>
 </body>
 </html>

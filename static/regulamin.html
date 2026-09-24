@@ -15,152 +15,160 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
-    <a class="header-link" href="index.html#grafik">Grafik</a>
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn is-active" data-lang="pl" aria-pressed="true" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+      </div>
+      <a href="index.html#hero" class="logo">Jazdy Doszkalające<span class="logo-accent">.</span></a>
+    </div>
+    <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
   </div>
 </header>
 
 <main class="section">
   <div class="container dokument dokument-skrot">
-    <h1 class="section-title">Regulamin usług</h1>
-    <p class="dokument-wersja">Wersja z dnia <strong>24.09.2026</strong> &middot; obowiązuje od 24.09.2026</p>
+    <h1 class="section-title" data-i18n="tytul">Regulamin usług</h1>
+    <p class="dokument-wersja"><span data-i18n="wersja-z-dnia">Wersja z dnia</span> <strong>24.09.2026</strong> &middot; <span data-i18n="obowiazuje-od">obowiązuje od</span> 24.09.2026</p>
 
-    <nav class="dokument-spis" aria-label="Spis treści">
-      <h2>Spis treści</h2>
+    <nav class="dokument-spis" aria-label="Spis treści" data-i18n-attr="aria-label:spis-label">
+      <h2 data-i18n="spis-tresci">Spis treści</h2>
       <ol>
-        <li><a href="#par-1">Usługodawca</a></li>
-        <li><a href="#par-2">Zakres usług</a></li>
-        <li><a href="#par-3">Rezerwacja terminu</a></li>
-        <li><a href="#par-4">Płatności</a></li>
-        <li><a href="#par-5">Zadatek i odwołanie terminu</a></li>
-        <li><a href="#par-6">Prawo odstąpienia od umowy (14 dni)</a></li>
-        <li><a href="#par-7">Reklamacje</a></li>
-        <li><a href="#par-8">Pozasądowe rozwiązywanie sporów</a></li>
-        <li><a href="#par-9">Postanowienia końcowe</a></li>
+        <li><a href="#par-1" data-i18n="spis-1">Usługodawca</a></li>
+        <li><a href="#par-2" data-i18n="spis-2">Zakres usług</a></li>
+        <li><a href="#par-3" data-i18n="spis-3">Rezerwacja terminu</a></li>
+        <li><a href="#par-4" data-i18n="spis-4">Płatności</a></li>
+        <li><a href="#par-5" data-i18n="spis-5">Zadatek i odwołanie terminu</a></li>
+        <li><a href="#par-6" data-i18n="spis-6">Prawo odstąpienia od umowy (14 dni)</a></li>
+        <li><a href="#par-7" data-i18n="spis-7">Reklamacje</a></li>
+        <li><a href="#par-8" data-i18n="spis-8">Pozasądowe rozwiązywanie sporów</a></li>
+        <li><a href="#par-9" data-i18n="spis-9">Postanowienia końcowe</a></li>
       </ol>
     </nav>
 
     <section id="par-1" class="dokument-sekcja">
-      <h2>&sect;&nbsp;1. Usługodawca</h2>
+      <h2 data-i18n="par1-h">&sect;&nbsp;1. Usługodawca</h2>
       <ol>
-        <li>Regulamin dotyczy jazd doszkalających i ustalania terminów przez stronę <span class="dokument-mono">jazdy-doszkalajace.pages.dev</span>.</li>
-        <li>Usługodawca: <strong>Michael Rabti</strong>, <strong>[ADRES KORESPONDENCYJNY]</strong>, <strong>MichaelRabti@gmail.com</strong>, tel. 690&nbsp;360&nbsp;164.</li>
-        <li>Działalność nierejestrowana (bez NIP, REGON, wpisu do CEIDG). Rachunek — na żądanie.</li>
-        <li>Wobec konsumentów stosuje się ustawę o prawach konsumenta i Kodeks cywilny (umowy zawierane na odległość).</li>
-        <li>Klient — osoba zamawiająca jazdę. Konsument — klient poza działalnością gospodarczą lub zawodową.</li>
+        <li data-i18n="par1-1">Regulamin dotyczy jazd doszkalających i ustalania terminów przez stronę <span class="dokument-mono">jazdy-doszkalajace.pages.dev</span>.</li>
+        <li data-i18n="par1-2">Usługodawca: <strong>Michael Rabti</strong>, <strong>[ADRES KORESPONDENCYJNY]</strong>, <strong>MichaelRabti@gmail.com</strong>, tel. 690&nbsp;360&nbsp;164.</li>
+        <li data-i18n="par1-3">Działalność nierejestrowana (bez NIP, REGON, wpisu do CEIDG). Rachunek — na żądanie.</li>
+        <li data-i18n="par1-4">Wobec konsumentów stosuje się ustawę o prawach konsumenta i Kodeks cywilny (umowy zawierane na odległość).</li>
+        <li data-i18n="par1-5">Klient — osoba zamawiająca jazdę. Konsument — klient poza działalnością gospodarczą lub zawodową.</li>
       </ol>
     </section>
 
     <section id="par-2" class="dokument-sekcja">
-      <h2>&sect;&nbsp;2. Zakres usług</h2>
+      <h2 data-i18n="par2-h">&sect;&nbsp;2. Zakres usług</h2>
       <ol>
-        <li>Jazdy doszkalające kat. B dla osób z prawem jazdy — nie kurs ani szkolenie ośrodka, bez zaświadczeń.</li>
-        <li>Czas jazdy: <strong>2–4 h</strong>. Cena: <strong>160 zł/h</strong> (320 / 480 / 640 zł).</li>
-        <li>Miejsce: Warszawa, głównie Wawer — dokładne miejsce ustalane przy kontakcie.</li>
-        <li>Pojazd: <strong>[POJAZD]</strong>.</li>
-        <li>Wymagane ważne prawo jazdy kat. B, okazane przed jazdą.</li>
-        <li>Usługodawca może odmówić lub przerwać jazdę przy: braku prawa jazdy, alkoholu/środkach odurzających, rażącym naruszeniu zasad bezpieczeństwa — jazda liczy się wtedy jako niedoszła z winy Klienta (&sect;&nbsp;5 ust.&nbsp;4).</li>
-        <li>Klient przestrzega przepisów ruchu i poleceń Usługodawcy.</li>
+        <li data-i18n="par2-1">Jazdy doszkalające kat. B dla osób z prawem jazdy — nie kurs ani szkolenie ośrodka, bez zaświadczeń.</li>
+        <li data-i18n="par2-2">Czas jazdy: <strong>2–4 h</strong>. Cena: <strong>160 zł/h</strong> (320 / 480 / 640 zł).</li>
+        <li data-i18n="par2-3">Miejsce: Warszawa, głównie Wawer — dokładne miejsce ustalane przy kontakcie.</li>
+        <li data-i18n="par2-4">Pojazd: <strong>[POJAZD]</strong>.</li>
+        <li data-i18n="par2-5">Wymagane ważne prawo jazdy kat. B, okazane przed jazdą.</li>
+        <li data-i18n="par2-6">Usługodawca może odmówić lub przerwać jazdę przy: braku prawa jazdy, alkoholu/środkach odurzających, rażącym naruszeniu zasad bezpieczeństwa — jazda liczy się wtedy jako niedoszła z winy Klienta (&sect;&nbsp;5 ust.&nbsp;4).</li>
+        <li data-i18n="par2-7">Klient przestrzega przepisów ruchu i poleceń Usługodawcy.</li>
       </ol>
     </section>
 
     <section id="par-3" class="dokument-sekcja">
-      <h2>&sect;&nbsp;3. Rezerwacja terminu</h2>
+      <h2 data-i18n="par3-h">&sect;&nbsp;3. Rezerwacja terminu</h2>
       <ol>
-        <li>Grafik na stronie pokazuje wolne terminy na kilka tygodni naprzód.</li>
-        <li>Strona ma charakter informacyjny — bez formularza rezerwacji i płatności online.</li>
-        <li>Kontakt: telefon, SMS, WhatsApp albo e-mail — wiadomość ma już wpisaną datę, godzinę i długość jazdy.</li>
-        <li><strong>Umowa zostaje zawarta z chwilą potwierdzenia terminu przez Usługodawcę</strong> — dopiero wtedy termin znika z grafiku. Zawarcie na odległość daje Klientowi-konsumentowi prawo odstąpienia (&sect;&nbsp;6).</li>
-        <li>Do potwierdzenia termin pozostaje wolny i może go zająć ktoś inny.</li>
-        <li>Usługodawca może odmówić potwierdzenia (termin już zajęty, niemożliwe miejsce jazdy).</li>
+        <li data-i18n="par3-1">Grafik na stronie pokazuje wolne terminy na kilka tygodni naprzód.</li>
+        <li data-i18n="par3-2">Strona ma charakter informacyjny — bez formularza rezerwacji i płatności online.</li>
+        <li data-i18n="par3-3">Kontakt: telefon, SMS, WhatsApp albo e-mail — wiadomość ma już wpisaną datę, godzinę i długość jazdy.</li>
+        <li data-i18n="par3-4"><strong>Umowa zostaje zawarta z chwilą potwierdzenia terminu przez Usługodawcę</strong> — dopiero wtedy termin znika z grafiku. Zawarcie na odległość daje Klientowi-konsumentowi prawo odstąpienia (&sect;&nbsp;6).</li>
+        <li data-i18n="par3-5">Do potwierdzenia termin pozostaje wolny i może go zająć ktoś inny.</li>
+        <li data-i18n="par3-6">Usługodawca może odmówić potwierdzenia (termin już zajęty, niemożliwe miejsce jazdy).</li>
       </ol>
     </section>
 
     <section id="par-4" class="dokument-sekcja">
-      <h2>&sect;&nbsp;4. Płatności</h2>
+      <h2 data-i18n="par4-h">&sect;&nbsp;4. Płatności</h2>
       <ol>
-        <li>Zadatek: <strong>80 zł</strong> (aktualna kwota widoczna w grafiku).</li>
-        <li>Płatny <strong>BLIK-iem na 690&nbsp;360&nbsp;164</strong> po ustaleniu terminu; na życzenie Klienta — zwykły przelew.</li>
-        <li>Reszta ceny — <strong>gotówką po jeździe</strong>.</li>
-        <li>Brak płatności online i bramki płatniczej na stronie — dane karty ani logowania do banku nigdzie nie są podawane.</li>
-        <li>Ceny brutto, w złotych polskich.</li>
+        <li data-i18n="par4-1">Zadatek: <strong>80 zł</strong> (aktualna kwota widoczna w grafiku).</li>
+        <li data-i18n="par4-2">Płatny <strong>BLIK-iem na 690&nbsp;360&nbsp;164</strong> po ustaleniu terminu; na życzenie Klienta — zwykły przelew.</li>
+        <li data-i18n="par4-3">Reszta ceny — <strong>gotówką po jeździe</strong>.</li>
+        <li data-i18n="par4-4">Brak płatności online i bramki płatniczej na stronie — dane karty ani logowania do banku nigdzie nie są podawane.</li>
+        <li data-i18n="par4-5">Ceny brutto, w złotych polskich.</li>
       </ol>
     </section>
 
     <section id="par-5" class="dokument-sekcja">
-      <h2>&sect;&nbsp;5. Zadatek i odwołanie terminu</h2>
-      <p class="dokument-uwaga">Z zastrzeżeniem &sect;&nbsp;6 — dopóki przysługuje prawo odstąpienia, zadatek wraca w całości.</p>
+      <h2 data-i18n="par5-h">&sect;&nbsp;5. Zadatek i odwołanie terminu</h2>
+      <p class="dokument-uwaga" data-i18n="par5-uwaga">Z zastrzeżeniem &sect;&nbsp;6 — dopóki przysługuje prawo odstąpienia, zadatek wraca w całości.</p>
       <ol>
-        <li>Wpłata to zadatek w rozumieniu art.&nbsp;394 Kodeksu cywilnego.</li>
-        <li>Bezpłatne odwołanie lub przełożenie — do <strong>24 h</strong> przed jazdą (zadatek na nowy termin albo zwrot).</li>
-        <li>Odwołanie: telefon 690&nbsp;360&nbsp;164, SMS, WhatsApp albo <strong>MichaelRabti@gmail.com</strong>.</li>
-        <li>Odwołanie później niż 24 h przed jazdą lub niestawienie się — zadatek może przepaść.</li>
-        <li>Spóźnienie liczy się do czasu jazdy; ponad 30 minut bez kontaktu = niestawienie się.</li>
-        <li>Jazda nieodbyta z winy Usługodawcy — nowy termin albo zwrot zadatku (art.&nbsp;394&nbsp;&sect;&nbsp;1 k.c.: możliwe żądanie podwójnej kwoty).</li>
-        <li>Jazda nieodbyta z przyczyn niezależnych od obu stron — zwrot zadatku w całości (art.&nbsp;394&nbsp;&sect;&nbsp;3 k.c.).</li>
-        <li>Zwrot zadatku: do 14 dni, BLIK-iem lub przelewem, bez kosztów dla Klienta.</li>
+        <li data-i18n="par5-1">Wpłata to zadatek w rozumieniu art.&nbsp;394 Kodeksu cywilnego.</li>
+        <li data-i18n="par5-2">Bezpłatne odwołanie lub przełożenie — do <strong>24 h</strong> przed jazdą (zadatek na nowy termin albo zwrot).</li>
+        <li data-i18n="par5-3">Odwołanie: telefon 690&nbsp;360&nbsp;164, SMS, WhatsApp albo <strong>MichaelRabti@gmail.com</strong>.</li>
+        <li data-i18n="par5-4">Odwołanie później niż 24 h przed jazdą lub niestawienie się — zadatek może przepaść.</li>
+        <li data-i18n="par5-5">Spóźnienie liczy się do czasu jazdy; ponad 30 minut bez kontaktu = niestawienie się.</li>
+        <li data-i18n="par5-6">Jazda nieodbyta z winy Usługodawcy — nowy termin albo zwrot zadatku (art.&nbsp;394&nbsp;&sect;&nbsp;1 k.c.: możliwe żądanie podwójnej kwoty).</li>
+        <li data-i18n="par5-7">Jazda nieodbyta z przyczyn niezależnych od obu stron — zwrot zadatku w całości (art.&nbsp;394&nbsp;&sect;&nbsp;3 k.c.).</li>
+        <li data-i18n="par5-8">Zwrot zadatku: do 14 dni, BLIK-iem lub przelewem, bez kosztów dla Klienta.</li>
       </ol>
     </section>
 
     <section id="par-6" class="dokument-sekcja">
-      <h2>&sect;&nbsp;6. Prawo odstąpienia od umowy (14 dni)</h2>
+      <h2 data-i18n="par6-h">&sect;&nbsp;6. Prawo odstąpienia od umowy (14 dni)</h2>
       <ol>
-        <li>Konsumentowi przysługuje prawo odstąpienia od umowy zawartej na odległość w terminie <strong>14 dni, bez podania przyczyny i bez kosztów</strong> — z zastrzeżeniem ust.&nbsp;6 i&nbsp;7 (art.&nbsp;27 ustawy o prawach konsumenta).</li>
-        <li>Termin liczy się <strong>od dnia zawarcia umowy</strong>, czyli od potwierdzenia terminu jazdy przez Usługodawcę.</li>
-        <li>Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem — e-mailem na <strong>MichaelRabti@gmail.com</strong>, telefonicznie (690&nbsp;360&nbsp;164) albo pisemnie na adres z &sect;&nbsp;1. Wystarczy dowolna, jednoznaczna forma.</li>
-        <li>Skuteczne odstąpienie oznacza, że umowa jest niezawarta. Usługodawca <strong>zwraca zadatek w ciągu 14 dni</strong> od otrzymania oświadczenia, tym samym kanałem płatności.</li>
-        <li>Jeżeli termin jazdy przypada <strong>przed upływem 14 dni</strong> od zawarcia umowy, wykonanie usługi zaczyna się przed końcem terminu na odstąpienie tylko na <strong>wyraźne żądanie Klienta</strong> — samo umówienie się na taki, wcześniejszy termin jest takim żądaniem. Usługodawca przypomina o skutkach opisanych w ust.&nbsp;6 i&nbsp;7 przy potwierdzaniu terminu.</li>
-        <li><strong>Prawo odstąpienia wygasa z chwilą pełnego wykonania usługi</strong>, czyli po odbyciu zarezerwowanej jazdy (art.&nbsp;38 ust.&nbsp;1 pkt&nbsp;1 ustawy o prawach konsumenta). Po odbytej jeździe odstąpienie nie jest już możliwe.</li>
-        <li>Jeżeli Klient odstąpi od umowy <strong>w trakcie</strong> jazdy, płaci za świadczenie spełnione do chwili odstąpienia — proporcjonalnie do zakresu wykonanej usługi (art.&nbsp;35 ustawy o prawach konsumenta).</li>
-        <li><strong>Dopóki jazda się nie odbyła, skuteczne odstąpienie oznacza zwrot całego zadatku</strong> — także wtedy, gdy Klient odwołał termin później niż 24 godziny przed jazdą albo się na nią nie stawił. Zasady z &sect;&nbsp;5 (przepadek zadatku) stosuje się dopiero wtedy, gdy prawo odstąpienia wygasło (po 14 dniach od zawarcia umowy albo po odbytej jeździe) albo gdy Klient z niego nie skorzystał.</li>
-        <li>Prawo odstąpienia opisane w tym paragrafie przysługuje konsumentom oraz osobom fizycznym zawierającym umowę bezpośrednio związaną z ich działalnością gospodarczą, gdy umowa nie ma dla nich charakteru zawodowego.</li>
-        <li>Wzór oświadczenia o odstąpieniu dostępny na żądanie: <strong>MichaelRabti@gmail.com</strong>.</li>
+        <li data-i18n="par6-1">Konsumentowi przysługuje prawo odstąpienia od umowy zawartej na odległość w terminie <strong>14 dni, bez podania przyczyny i bez kosztów</strong> — z zastrzeżeniem ust.&nbsp;6 i&nbsp;7 (art.&nbsp;27 ustawy o prawach konsumenta).</li>
+        <li data-i18n="par6-2">Termin liczy się <strong>od dnia zawarcia umowy</strong>, czyli od potwierdzenia terminu jazdy przez Usługodawcę.</li>
+        <li data-i18n="par6-3">Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem — e-mailem na <strong>MichaelRabti@gmail.com</strong>, telefonicznie (690&nbsp;360&nbsp;164) albo pisemnie na adres z &sect;&nbsp;1. Wystarczy dowolna, jednoznaczna forma.</li>
+        <li data-i18n="par6-4">Skuteczne odstąpienie oznacza, że umowa jest niezawarta. Usługodawca <strong>zwraca zadatek w ciągu 14 dni</strong> od otrzymania oświadczenia, tym samym kanałem płatności.</li>
+        <li data-i18n="par6-5">Jeżeli termin jazdy przypada <strong>przed upływem 14 dni</strong> od zawarcia umowy, wykonanie usługi zaczyna się przed końcem terminu na odstąpienie tylko na <strong>wyraźne żądanie Klienta</strong> — samo umówienie się na taki, wcześniejszy termin jest takim żądaniem. Usługodawca przypomina o skutkach opisanych w ust.&nbsp;6 i&nbsp;7 przy potwierdzaniu terminu.</li>
+        <li data-i18n="par6-6"><strong>Prawo odstąpienia wygasa z chwilą pełnego wykonania usługi</strong>, czyli po odbyciu zarezerwowanej jazdy (art.&nbsp;38 ust.&nbsp;1 pkt&nbsp;1 ustawy o prawach konsumenta). Po odbytej jeździe odstąpienie nie jest już możliwe.</li>
+        <li data-i18n="par6-7">Jeżeli Klient odstąpi od umowy <strong>w trakcie</strong> jazdy, płaci za świadczenie spełnione do chwili odstąpienia — proporcjonalnie do zakresu wykonanej usługi (art.&nbsp;35 ustawy o prawach konsumenta).</li>
+        <li data-i18n="par6-8"><strong>Dopóki jazda się nie odbyła, skuteczne odstąpienie oznacza zwrot całego zadatku</strong> — także wtedy, gdy Klient odwołał termin później niż 24 godziny przed jazdą albo się na nią nie stawił. Zasady z &sect;&nbsp;5 (przepadek zadatku) stosuje się dopiero wtedy, gdy prawo odstąpienia wygasło (po 14 dniach od zawarcia umowy albo po odbytej jeździe) albo gdy Klient z niego nie skorzystał.</li>
+        <li data-i18n="par6-9">Prawo odstąpienia opisane w tym paragrafie przysługuje konsumentom oraz osobom fizycznym zawierającym umowę bezpośrednio związaną z ich działalnością gospodarczą, gdy umowa nie ma dla nich charakteru zawodowego.</li>
+        <li data-i18n="par6-10">Wzór oświadczenia o odstąpieniu dostępny na żądanie: <strong>MichaelRabti@gmail.com</strong>.</li>
       </ol>
     </section>
 
     <section id="par-7" class="dokument-sekcja">
-      <h2>&sect;&nbsp;7. Reklamacje</h2>
+      <h2 data-i18n="par7-h">&sect;&nbsp;7. Reklamacje</h2>
       <ol>
-        <li>Reklamacje: e-mail <strong>MichaelRabti@gmail.com</strong> lub telefon 690&nbsp;360&nbsp;164.</li>
-        <li>Warto podać datę i godzinę jazdy oraz opis sprawy (nieobowiązkowe).</li>
-        <li>Odpowiedź w ciągu <strong>14 dni</strong>, tym samym kanałem.</li>
-        <li>Usługodawca odpowiada za zgodność usługi z umową na zasadach ogólnych.</li>
+        <li data-i18n="par7-1">Reklamacje: e-mail <strong>MichaelRabti@gmail.com</strong> lub telefon 690&nbsp;360&nbsp;164.</li>
+        <li data-i18n="par7-2">Warto podać datę i godzinę jazdy oraz opis sprawy (nieobowiązkowe).</li>
+        <li data-i18n="par7-3">Odpowiedź w ciągu <strong>14 dni</strong>, tym samym kanałem.</li>
+        <li data-i18n="par7-4">Usługodawca odpowiada za zgodność usługi z umową na zasadach ogólnych.</li>
       </ol>
     </section>
 
     <section id="par-8" class="dokument-sekcja">
-      <h2>&sect;&nbsp;8. Pozasądowe rozwiązywanie sporów</h2>
+      <h2 data-i18n="par8-h">&sect;&nbsp;8. Pozasądowe rozwiązywanie sporów</h2>
       <ol>
-        <li>Dobrowolne, pozasądowe drogi: powiatowy/miejski rzecznik konsumentów; wojewódzki inspektorat Inspekcji Handlowej (mediacja, sąd polubowny); infolinia i strony UOKiK (<span class="dokument-mono">uokik.gov.pl</span>, <span class="dokument-mono">polubowne.uokik.gov.pl</span>).</li>
-        <li>Możliwe też dochodzenie roszczeń przed sądem powszechnym.</li>
+        <li data-i18n="par8-1">Dobrowolne, pozasądowe drogi: powiatowy/miejski rzecznik konsumentów; wojewódzki inspektorat Inspekcji Handlowej (mediacja, sąd polubowny); infolinia i strony UOKiK (<span class="dokument-mono">uokik.gov.pl</span>, <span class="dokument-mono">polubowne.uokik.gov.pl</span>).</li>
+        <li data-i18n="par8-2">Możliwe też dochodzenie roszczeń przed sądem powszechnym.</li>
       </ol>
     </section>
 
     <section id="par-9" class="dokument-sekcja">
-      <h2>&sect;&nbsp;9. Postanowienia końcowe</h2>
+      <h2 data-i18n="par9-h">&sect;&nbsp;9. Postanowienia końcowe</h2>
       <ol>
-        <li>W sprawach nieuregulowanych — Kodeks cywilny i ustawa o prawach konsumenta.</li>
-        <li>Żadne postanowienie nie ogranicza praw konsumenta wynikających z przepisów — w razie sprzeczności obowiązują przepisy.</li>
-        <li>Ochrona danych osobowych — patrz <a href="polityka-prywatnosci.html">Polityka prywatności</a>.</li>
-        <li>Zmiany Regulaminu obowiązują od publikacji nowej wersji; do terminów potwierdzonych wcześniej stosuje się wersja obowiązująca w chwili potwierdzenia (poprzednie wersje — na żądanie).</li>
-        <li>Regulamin w niniejszym brzmieniu obowiązuje od <strong>24.09.2026</strong>.</li>
+        <li data-i18n="par9-1">W sprawach nieuregulowanych — Kodeks cywilny i ustawa o prawach konsumenta.</li>
+        <li data-i18n="par9-2">Żadne postanowienie nie ogranicza praw konsumenta wynikających z przepisów — w razie sprzeczności obowiązują przepisy.</li>
+        <li data-i18n="par9-3">Ochrona danych osobowych — patrz <a href="polityka-prywatnosci.html">Polityka prywatności</a>.</li>
+        <li data-i18n="par9-4">Zmiany Regulaminu obowiązują od publikacji nowej wersji; do terminów potwierdzonych wcześniej stosuje się wersja obowiązująca w chwili potwierdzenia (poprzednie wersje — na żądanie).</li>
+        <li data-i18n="par9-5">Regulamin w niniejszym brzmieniu obowiązuje od <strong>24.09.2026</strong>.</li>
       </ol>
     </section>
 
-    <p class="dokument-powrot"><a href="index.html">&larr; Wróć na stronę główną</a></p>
+    <p class="dokument-powrot"><a href="index.html" data-i18n="powrot">&larr; Wróć na stronę główną</a></p>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <p data-i18n="footer-prawa">&copy; 2026 Jazdy Doszkalające. Wszystkie prawa zastrzeżone.</p>
     <nav class="footer-dokumenty" aria-label="Dokumenty">
-      <a href="regulamin.html">Regulamin</a>
-      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="regulamin.html" data-i18n="footer-regulamin">Regulamin</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Polityka prywatności</a>
     </nav>
-    <p class="footer-area">Jazdy doszkalające Warszawa &middot; Wawer</p>
+    <p class="footer-area" data-i18n="footer-area">Jazdy doszkalające Warszawa &middot; Wawer</p>
   </div>
 </footer>
 
+<script src="js/i18n-data-regulamin.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>

@@ -16,6 +16,62 @@
   var TELEFON_WA = '48690360164';
   var EMAIL = 'michaelrabti@gmail.com';
 
+  /* ------------------------------------------------------------------ */
+  /* Dwujęzyczność — cała treść tej sekcji jest generowana w JS (dni,     */
+  /* godziny, panel kontaktowy), więc nie da się jej przetłumaczyć przez */
+  /* zwykłe data-i18n z i18n.js. Sprawdzamy język tak samo jak reszta    */
+  /* strony (window.jdJezyk z i18n.js), żeby przełącznik w nagłówku      */
+  /* obejmował też grafik.                                               */
+  /* ------------------------------------------------------------------ */
+
+  function jezyk() {
+    return typeof window.jdJezyk === 'function' ? window.jdJezyk() : 'pl';
+  }
+
+  var TXT = {
+    grafikNiedostepny: { pl: 'Grafik jest chwilowo niedostępny.', en: 'The schedule is temporarily unavailable.' },
+    zadzwonPrefiks: { pl: 'Zadzwoń: ', en: 'Call: ' },
+    labelZamkniete: { pl: ', zamknięte, napisz e-mail, SMS lub WhatsApp', en: ', closed — send an e-mail, SMS or WhatsApp message' },
+    labelBrakTerminow: { pl: ', brak terminów', en: ', no available times' },
+    labelWolneTerminy: { pl: ', wolne terminy', en: ', available times' },
+    kontaktZachetaTekst: {
+      pl: 'O terminy pytaj e-mailem, SMS-em lub przez WhatsApp — odpiszę, jak tylko będę mógł. ' +
+        'Telefonicznie tylko w ostateczności, bo mogę akurat prowadzić jazdę.',
+      en: 'For availability, message me by e-mail, SMS or WhatsApp — I’ll reply as soon as I can. ' +
+        'Phone only as a last resort, since I might be teaching a lesson.',
+    },
+    przyciskEmail: { pl: 'E-mail', en: 'E-mail' },
+    przyciskSms: { pl: 'SMS', en: 'SMS' },
+    przyciskWhatsapp: { pl: 'WhatsApp', en: 'WhatsApp' },
+    przyciskTelefon: { pl: 'Telefon', en: 'Phone' },
+    brakTerminow: { pl: 'brak terminów', en: 'no available times' },
+    terminAriaLabel: { pl: 'Termin ', en: 'Time slot ' },
+    terminAriaO: { pl: ' o ', en: ' at ' },
+    terminWolny: { pl: 'Ten termin jest wolny', en: 'This time is available' },
+    kontaktIntro: {
+      pl: 'Odezwij się dowolnym kanałem — termin potwierdzę od ręki. Data i godzina są już wpisane w wiadomości.',
+      en: 'Reach out through any channel — I’ll confirm the time right away. The date and time are already filled in.',
+    },
+    zadzwon: { pl: 'Zadzwoń', en: 'Call' },
+    zadatekBlik: {
+      pl: 'Zadatek BLIK-iem na nr ',
+      en: 'Deposit via BLIK (Polish mobile payment) to ',
+    },
+    zadatekPrzelew: {
+      pl: ' — na życzenie możliwy zwykły przelew',
+      en: ' — a bank transfer is available on request',
+    },
+    resztaGotowka: { pl: 'Reszta gotówką po jeździe', en: 'The rest in cash after the lesson' },
+    terminDrobne: {
+      pl: 'Termin rezerwuję po kontakcie — dopiero wtedy znika z grafiku. Zadatek potwierdza rezerwację.',
+      en: 'I’ll lock in the time once we’re in touch — that’s when it disappears from the schedule. The deposit confirms the booking.',
+    },
+  };
+
+  function t(klucz) {
+    return TXT[klucz][jezyk()] || TXT[klucz].pl;
+  }
+
   var widget = document.getElementById('grafik-widget');
   if (!widget) return;
 
@@ -66,9 +122,26 @@
     return godzinaTekst(start) + '–' + godzinaTekst(start + dlugosc);
   }
 
-  function tekstOpisu(data, godzina, dlugosc, nazwaDnia) {
+  /* Backend (lib/czas.js) zwraca nazwę dnia zawsze po polsku — tłumaczymy
+     ją tutaj, po stronie klienta, zamiast prosić API o wersję językową. */
+  var DNI_EN = {
+    niedziela: 'Sunday',
+    poniedziałek: 'Monday',
+    wtorek: 'Tuesday',
+    środa: 'Wednesday',
+    czwartek: 'Thursday',
+    piątek: 'Friday',
+    sobota: 'Saturday',
+  };
+
+  /** Pełna nazwa dnia w bieżącym języku strony (do nagłówków i podsumowań). */
+  function nazwaDnia(nazwaPL) {
+    return jezyk() === 'en' ? DNI_EN[nazwaPL] || nazwaPL : nazwaPL;
+  }
+
+  function tekstOpisu(data, godzina, dlugosc, nazwaDniaPL) {
     return (
-      nazwaDnia + ' ' + krotkaData(data) + ', ' + zakresGodzin(godzina, dlugosc) +
+      nazwaDnia(nazwaDniaPL) + ' ' + krotkaData(data) + ', ' + zakresGodzin(godzina, dlugosc) +
       ' (' + dlugosc + ' h)'
     );
   }
@@ -82,7 +155,7 @@
     elKomunikat.className = 'grafik-komunikat grafik-komunikat-blad';
     elKomunikat.innerHTML =
       tekst +
-      ' <a class="grafik-link-tel" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a>';
+      ' <a class="grafik-link-tel" href="tel:' + TELEFON + '">' + t('zadzwonPrefiks') + TELEFON_ZAPIS + '</a>';
     elKalendarz.hidden = true;
   }
 
@@ -100,7 +173,7 @@
       .catch(function () {
         // Backend może jeszcze nie być wdrożony — strona ma wtedy nadal
         // działać i kierować do kontaktu telefonicznego.
-        pokazBlad('Grafik jest chwilowo niedostępny.');
+        pokazBlad(t('grafikNiedostepny'));
       });
   }
 
@@ -128,7 +201,7 @@
     return slot.dlugosci.indexOf(stan.dlugosc) !== -1;
   }
 
-  var SKROTY_DNI = {
+  var SKROTY_DNI_PL = {
     niedziela: 'Nd',
     poniedziałek: 'Pon',
     wtorek: 'Wt',
@@ -138,8 +211,19 @@
     sobota: 'Sob',
   };
 
-  function skrotDnia(nazwa) {
-    return SKROTY_DNI[nazwa] || nazwa.slice(0, 2);
+  var SKROTY_DNI_EN = {
+    niedziela: 'Sun',
+    poniedziałek: 'Mon',
+    wtorek: 'Tue',
+    środa: 'Wed',
+    czwartek: 'Thu',
+    piątek: 'Fri',
+    sobota: 'Sat',
+  };
+
+  function skrotDnia(nazwaPL) {
+    var mapa = jezyk() === 'en' ? SKROTY_DNI_EN : SKROTY_DNI_PL;
+    return mapa[nazwaPL] || nazwaPL.slice(0, 2);
   }
 
   /** Pierwszy dzień z wolnymi godzinami dla aktualnej długości — domyślny wybór. */
@@ -163,8 +247,9 @@
       elKalendarz.hidden = true;
       elKomunikat.hidden = false;
       elKomunikat.className = 'grafik-komunikat';
-      elKomunikat.textContent =
-        'Brak wolnych terminów na ' + stan.dlugosc + ' h w najbliższych tygodniach — spróbuj krótszej jazdy albo zadzwoń.';
+      elKomunikat.textContent = jezyk() === 'en'
+        ? 'No available times for ' + stan.dlugosc + ' h in the coming weeks — try a shorter lesson or give us a call.'
+        : 'Brak wolnych terminów na ' + stan.dlugosc + ' h w najbliższych tygodniach — spróbuj krótszej jazdy albo zadzwoń.';
       return;
     }
 
@@ -204,10 +289,10 @@
       chip.setAttribute('aria-pressed', i === stan.wybranyIdx ? 'true' : 'false');
       chip.setAttribute(
         'aria-label',
-        dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) +
-          (zamkniety ? ', zamknięte, napisz e-mail, SMS lub WhatsApp'
-            : pelny ? ', brak terminów'
-            : ', wolne terminy')
+        nazwaDnia(dzien.nazwa_dnia) + ' ' + krotkaData(dzien.data) +
+          (zamkniety ? t('labelZamkniete')
+            : pelny ? t('labelBrakTerminow')
+            : t('labelWolneTerminy'))
       );
       chip.innerHTML =
         '<span class="dzien-chip-nazwa" aria-hidden="true">' + skrotDnia(dzien.nazwa_dnia) + '</span>' +
@@ -236,7 +321,7 @@
     var head = document.createElement('header');
     head.className = 'dzien-naglowek';
     head.innerHTML =
-      '<span class="dzien-nazwa">' + dzien.nazwa_dnia + '</span>' +
+      '<span class="dzien-nazwa">' + nazwaDnia(dzien.nazwa_dnia) + '</span>' +
       '<span class="dzien-data">' + krotkaData(dzien.data) + '</span>';
     karta.appendChild(head);
 
@@ -244,36 +329,38 @@
       // Dzień poza szablonem — zachęcamy do kontaktu, ale telefon jest tu
       // ostatnią opcją: w te dni Michael może akurat prowadzić inną jazdę
       // i nie odebrać. E-mail/SMS/WhatsApp przeczyta, jak tylko będzie mógł.
-      var opis = dzien.nazwa_dnia + ' ' + krotkaData(dzien.data);
-      var tresc = 'Dzień dobry, chciałbym zapytać o możliwy termin jazdy doszkalającej w ' + opis + '.';
+      var angielski = jezyk() === 'en';
+      var opis = nazwaDnia(dzien.nazwa_dnia) + ' ' + krotkaData(dzien.data);
+      var tresc = angielski
+        ? 'Hello, I’d like to ask about a possible time for a refresher driving lesson on ' + opis + '.'
+        : 'Dzień dobry, chciałbym zapytać o możliwy termin jazdy doszkalającej w ' + opis + '.';
+      var temat = angielski ? 'Question about a time: ' + opis : 'Pytanie o termin: ' + opis;
       var mail =
         'mailto:' + EMAIL +
-        '?subject=' + encodeURIComponent('Pytanie o termin: ' + opis) +
+        '?subject=' + encodeURIComponent(temat) +
         '&body=' + encodeURIComponent(tresc);
       var sms = 'sms:' + TELEFON + '?body=' + encodeURIComponent(tresc);
       var whatsapp = 'https://wa.me/' + TELEFON_WA + '?text=' + encodeURIComponent(tresc);
 
       var kontakt = document.createElement('p');
       kontakt.className = 'dzien-brak';
-      kontakt.textContent =
-        'O terminy pytaj e-mailem, SMS-em lub przez WhatsApp — odpiszę, jak tylko będę mógł. ' +
-        'Telefonicznie tylko w ostateczności, bo mogę akurat prowadzić jazdę.';
+      kontakt.textContent = t('kontaktZachetaTekst');
       karta.appendChild(kontakt);
 
       var akcje = document.createElement('div');
       akcje.className = 'termin-akcje termin-akcje-kanaly';
       akcje.innerHTML =
-        '<a class="btn btn-secondary" href="' + mail + '">E-mail</a>' +
-        '<a class="btn btn-secondary" href="' + sms + '">SMS</a>' +
-        '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>' +
-        '<a class="btn btn-secondary" href="tel:' + TELEFON + '">Telefon</a>';
+        '<a class="btn btn-secondary" href="' + mail + '">' + t('przyciskEmail') + '</a>' +
+        '<a class="btn btn-secondary" href="' + sms + '">' + t('przyciskSms') + '</a>' +
+        '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">' + t('przyciskWhatsapp') + '</a>' +
+        '<a class="btn btn-secondary" href="tel:' + TELEFON + '">' + t('przyciskTelefon') + '</a>';
       karta.appendChild(akcje);
     } else if (pasujace.length === 0) {
       // Dzień otwarty, ale w pełni zajęty — inny komunikat niż wyżej,
       // bo tu telefon nic nie zmieni, po prostu nie ma wolnego terminu.
       var brak = document.createElement('p');
       brak.className = 'dzien-brak';
-      brak.textContent = 'brak terminów';
+      brak.textContent = t('brakTerminow');
       karta.appendChild(brak);
     } else {
       var lista = document.createElement('div');
@@ -285,7 +372,8 @@
         btn.textContent = godzinaTekst(slot.godzina);
         btn.setAttribute(
           'aria-label',
-          'Termin ' + dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) + ' o ' + godzinaTekst(slot.godzina)
+          t('terminAriaLabel') + nazwaDnia(dzien.nazwa_dnia) + ' ' + krotkaData(dzien.data) +
+            t('terminAriaO') + godzinaTekst(slot.godzina)
         );
         btn.addEventListener('click', function () {
           otworzPanel(dzien, slot.godzina, btn);
@@ -360,7 +448,7 @@
       panelTresc.innerHTML = formularzHtml();
       podepnijFormularz();
     } else {
-      panelTytul.textContent = 'Ten termin jest wolny';
+      panelTytul.textContent = t('terminWolny');
       panelTresc.innerHTML = trybKontaktowyHtml(opis);
     }
 
@@ -393,10 +481,11 @@
   /* --- Panel kontaktowy (jedyny tryb publiczny) --------------------- */
 
   function trybKontaktowyHtml(opis) {
-    var tresc =
-      'Dzień dobry, chciałbym zarezerwować jazdę doszkalającą: ' + opis +
-      '. Proszę o potwierdzenie terminu.';
-    var temat = 'Rezerwacja jazdy doszkalającej: ' + opis;
+    var angielski = jezyk() === 'en';
+    var tresc = angielski
+      ? 'Hello, I’d like to book a refresher driving lesson: ' + opis + '. Please confirm the time.'
+      : 'Dzień dobry, chciałbym zarezerwować jazdę doszkalającą: ' + opis + '. Proszę o potwierdzenie terminu.';
+    var temat = angielski ? 'Booking request: ' + opis : 'Rezerwacja jazdy doszkalającej: ' + opis;
 
     // Parametr ?body= obsługują dziś zarówno Android, jak i iOS
     var sms = 'sms:' + TELEFON + '?body=' + encodeURIComponent(tresc);
@@ -412,20 +501,18 @@
     var doZaplaty = stan.dlugosc * stan.dane.stawka_godzinowa - zadatek;
 
     return (
-      '<p class="termin-info">Odezwij się dowolnym kanałem — termin potwierdzę od ręki. ' +
-      'Data i godzina są już wpisane w wiadomości.</p>' +
+      '<p class="termin-info">' + t('kontaktIntro') + '</p>' +
       '<div class="termin-akcje termin-akcje-kanaly">' +
-      '<a class="btn btn-primary" href="tel:' + TELEFON + '">Zadzwoń</a>' +
-      '<a class="btn btn-secondary" href="' + sms + '">SMS</a>' +
-      '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>' +
-      '<a class="btn btn-secondary" href="' + mail + '">E-mail</a>' +
+      '<a class="btn btn-primary" href="tel:' + TELEFON + '">' + t('zadzwon') + '</a>' +
+      '<a class="btn btn-secondary" href="' + sms + '">' + t('przyciskSms') + '</a>' +
+      '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">' + t('przyciskWhatsapp') + '</a>' +
+      '<a class="btn btn-secondary" href="' + mail + '">' + t('przyciskEmail') + '</a>' +
       '</div>' +
       '<div class="termin-kwoty">' +
-      '<p><span>Zadatek BLIK-iem na nr ' + TELEFON_ZAPIS + '</span><strong>' + zadatek + ' zł</strong></p>' +
-      '<p><span>Reszta gotówką po jeździe</span><strong>' + doZaplaty + ' zł</strong></p>' +
+      '<p><span>' + t('zadatekBlik') + TELEFON_ZAPIS + (angielski ? t('zadatekPrzelew') : '') + '</span><strong>' + zadatek + ' zł</strong></p>' +
+      '<p><span>' + t('resztaGotowka') + '</span><strong>' + doZaplaty + ' zł</strong></p>' +
       '</div>' +
-      '<p class="termin-drobne">Termin rezerwuję po kontakcie — dopiero wtedy znika z grafiku. ' +
-      'Zadatek potwierdza rezerwację.</p>'
+      '<p class="termin-drobne">' + t('terminDrobne') + '</p>'
     );
   }
 
@@ -435,6 +522,10 @@
   /* Poniższy kod jest nieosiągalny — /api/dostepnosc zawsze zwraca      */
   /* platnosci_online = false, a /api/rezerwacja odpowiada 403.          */
   /* Zostaje na wypadek powrotu do płatności online (tag autopay-wersja).*/
+  /* ŚWIADOMIE NIE dwujęzyczny (napisy zostają na sztywno po polsku) —    */
+  /* skoro kod się nie wykonuje, tłumaczenie go byłoby pracą na darmo.    */
+  /* Jeśli płatności online kiedyś wrócą, dopisać tu t()/jezyk() tak jak  */
+  /* w reszcie pliku, zanim ta gałąź znów zacznie się wyświetlać.         */
   /* ------------------------------------------------------------------ */
 
   function formularzHtml() {
@@ -580,6 +671,15 @@
     krok();
     stan.odliczanie = setInterval(krok, 1000);
   }
+
+  // Przy zmianie języka trzeba przerysować pasek dni i panel godzin ręcznie —
+  // to treść generowana w JS, poza zasięgiem generycznego i18n.js. Modala
+  // wyboru terminu nie trzeba tu obsługiwać: kiedy jest otwarty, i tak
+  // zasłania nagłówek z przełącznikiem języka (z-index), więc nie da się
+  // go w tym momencie kliknąć.
+  document.addEventListener('jd:jezyk', function () {
+    if (stan.dane) rysuj();
+  });
 
   wczytaj();
 })();

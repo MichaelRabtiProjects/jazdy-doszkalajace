@@ -131,6 +131,59 @@ section[id] {
   color: var(--amber);
 }
 
+/* Grupa: przełącznik języka + logo, razem w lewym rogu nagłówka.
+   Bez tego opakowania dodanie czwartego elementu do .header-inner
+   (które ma justify-content: space-between) rozjechałoby odstępy
+   między WSZYSTKIMI elementami, nie tylko dodałoby nowy po lewej. */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Przełącznik języka — dwie flagi obok siebie, zawsze widoczny w rogu
+   nagłówka (nagłówek jest position: sticky, więc to też "lewy górny róg"
+   przy każdym przewinięciu, nie tylko na starcie strony). */
+.lang-switch {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  background: var(--asphalt-2);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  /* Nieaktywny język jest widoczny, ale wyraźnie przygaszony — to i tak
+     tylko dwie flagi, nie trzeba ich dodatkowo podpisywać. */
+  opacity: 0.45;
+  filter: grayscale(40%);
+  transition: opacity 0.15s ease, filter 0.15s ease, background 0.15s ease;
+}
+
+.lang-btn:hover {
+  opacity: 0.8;
+}
+
+.lang-btn.is-active {
+  opacity: 1;
+  filter: none;
+  background: var(--asphalt);
+  box-shadow: inset 0 0 0 1.5px var(--amber-dark);
+}
+
 .main-nav {
   display: flex;
   gap: 24px;
@@ -1243,6 +1296,19 @@ body.panel-open {
   margin-bottom: 24px;
 }
 
+/* Notka "zrzuty są po polsku" — po polsku pusta (patrz data-i18n w HTML,
+   tekst jest tylko w słowniku angielskim), więc :empty ją usuwa z układu
+   zamiast zostawiać pusty akapit. */
+.reviews-lang-note {
+  margin: -12px 0 24px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.reviews-lang-note:empty {
+  display: none;
+}
+
 .filter-btn {
   font-family: var(--font-body);
   font-size: 0.9rem;
@@ -1847,6 +1913,24 @@ body.lightbox-open {
 @media (max-width: 720px) {
   .nav-toggle {
     display: flex;
+  }
+
+  /* Węższy telefon: mniej miejsca w nagłówku obok logo i hamburgera,
+     więc przełącznik języka trochę się kurczy zamiast zawijać wiersz
+     (flex bez wrap by po prostu wypchnął hamburger poza ekran). */
+  .lang-switch {
+    gap: 2px;
+    padding: 2px;
+  }
+
+  .lang-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+  }
+
+  .header-left {
+    gap: 8px;
   }
 
   .main-nav {
