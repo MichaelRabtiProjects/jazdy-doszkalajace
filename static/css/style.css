@@ -1650,16 +1650,9 @@ body.lightbox-open {
   max-width: 760px;
 }
 
-.dokument-wersja,
-.dokument-lead {
+.dokument-wersja {
   color: var(--ink-soft);
   margin: -16px 0 28px;
-}
-
-.dokument-lead {
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin-top: 0;
 }
 
 .dokument-spis {
@@ -1724,6 +1717,50 @@ body.lightbox-open {
 }
 
 .dokument-sekcja a {
+  color: var(--amber-dark);
+  font-weight: 600;
+}
+
+/* Skrócone dokumenty (Regulamin, Polityka prywatności) — punkty zamiast
+   akapitów, więc też ciaśniejsze odstępy: to ma się dać przeczytać
+   szybko, nie tylko krócej napisać. */
+.dokument-skrot .dokument-sekcja {
+  margin-bottom: 26px;
+}
+
+.dokument-skrot .dokument-sekcja h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+}
+
+.dokument-skrot .dokument-sekcja li {
+  margin-bottom: 7px;
+}
+
+/* Polityka prywatności: jedna płaska lista, po jednym punkcie na akapit
+   oryginalnego dokumentu — celowo bez osobnych sekcji i spisu treści,
+   ma się zmieścić na jednym ekranie telefonu. */
+.dokument-lista-skrot {
+  padding-left: 22px;
+  margin: 0 0 32px;
+}
+
+.dokument-lista-skrot > li {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.dokument-lista-skrot ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.dokument-lista-skrot ul li {
+  margin-bottom: 4px;
+}
+
+.dokument-lista-skrot a {
   color: var(--amber-dark);
   font-weight: 600;
 }
