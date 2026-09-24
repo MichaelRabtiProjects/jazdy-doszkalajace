@@ -56,10 +56,10 @@ window.I18N = {
 
   'par5-h': '§ 5. Deposit and cancelling a booking',
   'par5-uwaga': 'Subject to § 6 — as long as the right of withdrawal still applies, the deposit is refunded in full.',
-  'par5-1': 'The amount paid is a <em>zadatek</em> (earnest money) within the meaning of Art.&nbsp;394 of the Polish Civil Code — a stronger form of deposit than an ordinary advance payment, with the consequences described below.',
+  'par5-1': 'The amount paid is a <em>zadatek</em> — a term from Art.&nbsp;394 of the Polish Civil Code that means something stronger than the everyday English word “deposit”. <strong>It is not a refundable security deposit</strong>: if the Customer cancels late or simply doesn’t show up, the Provider may keep the entire zadatek, with nothing refunded — see point (4) below.',
   'par5-2': 'Free cancellation or rescheduling up to <strong>24 h</strong> before the lesson (deposit carried over to a new time or refunded).',
   'par5-3': 'To cancel: call 690&nbsp;360&nbsp;164, or send an SMS, WhatsApp message or e-mail to <strong>MichaelRabti@gmail.com</strong>.',
-  'par5-4': 'Cancelling less than 24 h before the lesson, or not showing up, may mean the deposit is forfeited.',
+  'par5-4': 'Cancelling less than 24 h before the lesson, or not showing up, may mean the deposit is forfeited in full — none of it refunded.',
   'par5-5': 'Time spent waiting counts towards the lesson; more than 30 minutes without contact counts as a no-show.',
   'par5-6': 'If the lesson doesn’t happen due to the Provider’s fault — a new time is offered or the deposit is refunded (under Art.&nbsp;394&nbsp;§&nbsp;1 of the Civil Code the Customer may instead demand double the deposit amount).',
   'par5-7': 'If the lesson doesn’t happen for reasons outside either party’s control — the deposit is refunded in full (Art.&nbsp;394&nbsp;§&nbsp;3 of the Civil Code).',
