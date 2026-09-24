@@ -152,6 +152,14 @@ section[id] {
   color: var(--amber);
 }
 
+/* Link do sekcji ALP — celowo wyróżniony ciemnym złotem na stałe, nie
+   dopiero po najechaniu, jak reszta menu. To osobna oferta (instruktor
+   Khaled, zajęcia po angielsku i arabsku), więc ma się odróżniać z listy. */
+.main-nav a.nav-alp {
+  color: var(--amber-dark);
+  font-weight: 700;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -350,6 +358,32 @@ section[id] {
   transform: translateY(-4px);
   border-color: var(--amber);
   box-shadow: 0 10px 24px rgba(27, 29, 33, 0.10);
+}
+
+/* Zapowiedź sekcji ALP pod kartami oferty — ten sam akcent co karty
+   (bursztynowy pasek), ale w poziomie, bo to jedno zdanie i przycisk,
+   nie kolejna karta w siatce. */
+.offer-alp-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber-dark);
+  border-radius: 6px;
+}
+
+.offer-alp-note p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.offer-alp-note .btn {
+  flex-shrink: 0;
 }
 
 .offer-icon {
@@ -608,8 +642,8 @@ section[id] {
    Wcześniej było tu opacity: 0.75, ale na beżowym tle sekcji przygaszona
    biel robiła się prawie taka sama jak beż karty dnia zamkniętego — a to
    mają być dwa różne komunikaty. Bez przezroczystości różnica jest czytelna.
-   Tekst też się różni: tu "brak terminów" (telefon nic nie zmieni), przy
-   dniu zamkniętym niżej — zachęta do kontaktu telefonicznego. */
+   Tekst też się różni: tu "brak terminów" (kontakt nic nie zmieni), przy
+   dniu zamkniętym niżej — zachęta do napisania (e-mail/SMS/WhatsApp). */
 .dzien-pusty {
   border-left-color: var(--line);
 }

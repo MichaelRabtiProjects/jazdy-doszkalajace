@@ -193,7 +193,7 @@
 
       // Kolor kropki i tła chipa odróżnia trzy stany dnia — tak samo jak
       // kolor karty w panelu godzin niżej. Opis dla czytników ekranu
-      // rozróżnia to samo: zamknięty dzień proponuje telefon, zajęty dzień
+      // rozróżnia to samo: zamknięty dzień proponuje kontakt, zajęty dzień
       // mówi wprost, że nie ma wolnych godzin (patrz rysujGodziny).
       var chip = document.createElement('button');
       chip.type = 'button';
@@ -205,7 +205,7 @@
       chip.setAttribute(
         'aria-label',
         dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) +
-          (zamkniety ? ', zamknięte, prosimy o kontakt telefoniczny'
+          (zamkniety ? ', zamknięte, napisz e-mail, SMS lub WhatsApp'
             : pelny ? ', brak terminów'
             : ', wolne terminy')
       );
@@ -241,15 +241,33 @@
     karta.appendChild(head);
 
     if (nieaktywny) {
-      // Dzień poza szablonem (wt/czw/sob/nd) — zamiast samego "brak
-      // terminów" zachęcamy wprost do kontaktu telefonicznego, bo w te dni
-      // nie ma żadnych godzin do pokazania i to jedyna droga dalej.
+      // Dzień poza szablonem — zachęcamy do kontaktu, ale telefon jest tu
+      // ostatnią opcją: w te dni Michael może akurat prowadzić inną jazdę
+      // i nie odebrać. E-mail/SMS/WhatsApp przeczyta, jak tylko będzie mógł.
+      var opis = dzien.nazwa_dnia + ' ' + krotkaData(dzien.data);
+      var tresc = 'Dzień dobry, chciałbym zapytać o możliwy termin jazdy doszkalającej w ' + opis + '.';
+      var mail =
+        'mailto:' + EMAIL +
+        '?subject=' + encodeURIComponent('Pytanie o termin: ' + opis) +
+        '&body=' + encodeURIComponent(tresc);
+      var sms = 'sms:' + TELEFON + '?body=' + encodeURIComponent(tresc);
+      var whatsapp = 'https://wa.me/' + TELEFON_WA + '?text=' + encodeURIComponent(tresc);
+
       var kontakt = document.createElement('p');
       kontakt.className = 'dzien-brak';
-      kontakt.innerHTML =
-        'O terminy prosimy o kontakt telefoniczny. ' +
-        '<a class="grafik-link-tel" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a>';
+      kontakt.textContent =
+        'O terminy pytaj e-mailem, SMS-em lub przez WhatsApp — odpiszę, jak tylko będę mógł. ' +
+        'Telefonicznie tylko w ostateczności, bo mogę akurat prowadzić jazdę.';
       karta.appendChild(kontakt);
+
+      var akcje = document.createElement('div');
+      akcje.className = 'termin-akcje termin-akcje-kanaly';
+      akcje.innerHTML =
+        '<a class="btn btn-secondary" href="' + mail + '">E-mail</a>' +
+        '<a class="btn btn-secondary" href="' + sms + '">SMS</a>' +
+        '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>' +
+        '<a class="btn btn-secondary" href="tel:' + TELEFON + '">Telefon</a>';
+      karta.appendChild(akcje);
     } else if (pasujace.length === 0) {
       // Dzień otwarty, ale w pełni zajęty — inny komunikat niż wyżej,
       // bo tu telefon nic nie zmieni, po prostu nie ma wolnego terminu.
