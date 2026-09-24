@@ -192,9 +192,9 @@
       var pelny = !zamkniety && pasujace.length === 0;
 
       // Kolor kropki i tła chipa odróżnia trzy stany dnia — tak samo jak
-      // kolor karty w panelu godzin niżej. Tekst przy obu "pustych"
-      // stanach jest już identyczny (patrz rysujGodziny), więc tu w opisie
-      // dla czytników ekranu też nie rozróżniamy powodu, tylko fakt.
+      // kolor karty w panelu godzin niżej. Opis dla czytników ekranu
+      // rozróżnia to samo: zamknięty dzień proponuje telefon, zajęty dzień
+      // mówi wprost, że nie ma wolnych godzin (patrz rysujGodziny).
       var chip = document.createElement('button');
       chip.type = 'button';
       chip.className =
@@ -205,7 +205,9 @@
       chip.setAttribute(
         'aria-label',
         dzien.nazwa_dnia + ' ' + krotkaData(dzien.data) +
-          (pasujace.length === 0 ? ', brak terminów' : ', wolne terminy')
+          (zamkniety ? ', zamknięte, prosimy o kontakt telefoniczny'
+            : pelny ? ', brak terminów'
+            : ', wolne terminy')
       );
       chip.innerHTML =
         '<span class="dzien-chip-nazwa" aria-hidden="true">' + skrotDnia(dzien.nazwa_dnia) + '</span>' +
@@ -238,11 +240,19 @@
       '<span class="dzien-data">' + krotkaData(dzien.data) + '</span>';
     karta.appendChild(head);
 
-    if (pasujace.length === 0) {
-      // Jeden i ten sam napis, niezależnie od tego, czy dzień jest zamknięty,
-      // czy po prostu w pełni zajęty — różnicę widać po kolorze karty
-      // (biała = było otwarte i się zapełniło, beżowa = tu się nie pracuje),
-      // nie po słowach.
+    if (nieaktywny) {
+      // Dzień poza szablonem (wt/czw/sob/nd) — zamiast samego "brak
+      // terminów" zachęcamy wprost do kontaktu telefonicznego, bo w te dni
+      // nie ma żadnych godzin do pokazania i to jedyna droga dalej.
+      var kontakt = document.createElement('p');
+      kontakt.className = 'dzien-brak';
+      kontakt.innerHTML =
+        'O terminy prosimy o kontakt telefoniczny. ' +
+        '<a class="grafik-link-tel" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a>';
+      karta.appendChild(kontakt);
+    } else if (pasujace.length === 0) {
+      // Dzień otwarty, ale w pełni zajęty — inny komunikat niż wyżej,
+      // bo tu telefon nic nie zmieni, po prostu nie ma wolnego terminu.
       var brak = document.createElement('p');
       brak.className = 'dzien-brak';
       brak.textContent = 'brak terminów';

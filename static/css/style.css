@@ -222,6 +222,19 @@ section[id] {
   margin-bottom: 14px;
 }
 
+/* Ten sam pomysł co .hero-kicker (mała etykieta nad nagłówkiem), ale do
+   użycia na jasnym tle sekcji — var(--amber) na białym/beżowym tle miałby
+   za mało kontrastu, więc tu var(--amber-dark), tak jak przy linkach. */
+.section-kicker {
+  display: block;
+  font-weight: 700;
+  color: var(--amber-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 20px;
@@ -595,8 +608,8 @@ section[id] {
    Wcześniej było tu opacity: 0.75, ale na beżowym tle sekcji przygaszona
    biel robiła się prawie taka sama jak beż karty dnia zamkniętego — a to
    mają być dwa różne komunikaty. Bez przezroczystości różnica jest czytelna.
-   Tekst przy obu jest teraz identyczny ("brak terminów") — tylko kolor
-   karty niżej odróżnia "było otwarte i się zapełniło" od "tu nie pracuję". */
+   Tekst też się różni: tu "brak terminów" (telefon nic nie zmieni), przy
+   dniu zamkniętym niżej — zachęta do kontaktu telefonicznego. */
 .dzien-pusty {
   border-left-color: var(--line);
 }
@@ -613,17 +626,6 @@ section[id] {
 .dzien-nieaktywny .dzien-nazwa {
   color: var(--ink-soft);
   font-weight: 600;
-}
-
-/* Notka o weekendach — informacja, nie ostrzeżenie: bez ramki, bez tła,
-   sam cienki pasek z boku. */
-.grafik-nota {
-  margin: 0 0 18px;
-  padding-left: 12px;
-  border-left: 3px solid var(--amber);
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.5;
 }
 
 .dzien-naglowek {
@@ -1489,6 +1491,12 @@ body.lightbox-open {
 /* ==========================================================================
    Kontakt
    ========================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+}
+
 .contact-grid p {
   margin: 0 0 10px;
 }
