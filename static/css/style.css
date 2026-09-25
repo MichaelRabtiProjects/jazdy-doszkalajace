@@ -1919,17 +1919,6 @@ body.lightbox-open {
   transform: translateY(-2px);
 }
 
-.messenger-fab {
-  bottom: calc(16px + 2 * (52px + 14px) + env(safe-area-inset-bottom, 0px));
-  background: #0084ff; /* oficjalny kolor marki Messenger */
-  color: #ffffff;
-}
-
-.messenger-fab:hover {
-  background: #006fd6;
-  transform: translateY(-2px);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .js-fab,
   .offer-card,
@@ -2586,4 +2575,45 @@ body.lightbox-open {
 
 .hero-trust strong {
   color: var(--white);
+}
+
+/* ==========================================================================
+   MODERNIZACJA 5 — pływające przyciski: dwa małe koła z samą ikoną
+   Nadpisuje wcześniejsze pigułki z tekstem. Podpis tylko w aria-label
+   i title. Na telefonie main.js chowa je, gdy na ekranie jest grafik,
+   żeby nie zasłaniały godzin ani strzałek paska dni.
+   ========================================================================== */
+.js-fab {
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(27, 29, 33, 0.28);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s,
+    background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.js-fab svg {
+  width: 22px;
+  height: 22px;
+}
+
+.js-fab:hover {
+  box-shadow: 0 10px 22px rgba(27, 29, 33, 0.34);
+}
+
+.js-fab:focus-visible {
+  outline: 3px solid var(--asphalt);
+  outline-offset: 3px;
+}
+
+/* Od dołu: telefon (bursztyn), nad nim WhatsApp — 48 px + 12 px odstępu. */
+.call-fab {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+.whatsapp-fab {
+  bottom: calc(16px + 48px + 12px + env(safe-area-inset-bottom, 0px));
 }

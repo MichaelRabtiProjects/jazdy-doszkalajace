@@ -116,12 +116,31 @@
   if (fabs.length && hero && 'IntersectionObserver' in window) {
     var heroVisible = true;
     var footerVisible = false;
+    var grafikVisible = false;
+    // Na wąskim ekranie przyciski wchodziłyby na godziny w grafiku —
+    // tam je chowamy. Na desktopie jest dość miejsca po prawej.
+    var waskiEkran = window.matchMedia('(max-width: 720px)');
 
     var updateFabs = function () {
+      var zaslania = grafikVisible && waskiEkran.matches;
       fabs.forEach(function (fab) {
-        fab.classList.toggle('is-visible', !heroVisible && !footerVisible);
+        fab.classList.toggle('is-visible', !heroVisible && !footerVisible && !zaslania);
       });
     };
+
+    var grafikWidget = document.getElementById('grafik-widget');
+    if (grafikWidget) {
+      new IntersectionObserver(
+        function (entries) {
+          grafikVisible = entries[0].isIntersecting;
+          updateFabs();
+        },
+        { threshold: 0 }
+      ).observe(grafikWidget);
+    }
+    if (waskiEkran.addEventListener) {
+      waskiEkran.addEventListener('change', updateFabs);
+    }
 
     new IntersectionObserver(
       function (entries) {

@@ -283,12 +283,8 @@ window.I18N = {
   'footer-area': 'Refresher driving lessons Warsaw · Wawer',
 
   /* --- Pływający przycisk / Floating button --- */
-  'fab-label': 'Call the instructor: 690 360 164',
-  'fab-text': 'Call',
-  'whatsapp-fab-label': 'Message the instructor on WhatsApp',
-  'whatsapp-fab-text': 'Message',
-  'messenger-fab-label': 'Message the instructor on Messenger',
-  'messenger-fab-text': 'Message',
+  'fab-label': 'Call',
+  'whatsapp-fab-label': 'Message on WhatsApp',
 
   /* --- Panel terminu / lightbox --- */
   'zamknij-label': 'Close',
