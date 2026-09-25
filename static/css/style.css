@@ -1714,22 +1714,6 @@ body.lightbox-open {
   border-top-color: var(--asphalt-2);
 }
 
-.miejsce-ikona {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--paper-alt);
-  color: var(--amber-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.miejsce-ikona svg {
-  width: 24px;
-  height: 24px;
-}
-
 .miejsce-nazwa {
   font-size: 1.15rem;
   line-height: 1.25;
@@ -1747,20 +1731,83 @@ body.lightbox-open {
   color: var(--amber-dark);
 }
 
-.miejsce-akcje {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  /* Przyciski zawsze na dole karty, nawet gdy nazwy mają różną długość */
+/* Mapka: statyczny obrazek z własnego serwera (narzedzia/generuj-mapki.mjs),
+   wycentrowany co do piksela na współrzędnych miejsca — dlatego pinezka
+   może stać po prostu na środku. Cała mapka jest linkiem do Map Google. */
+.miejsce-mapa {
+  position: relative;
+  display: block;
+  /* Mapki zawsze na dole karty, równo w jednej linii, nawet gdy nazwy
+     mają różną długość */
   margin-top: auto;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 16 / 9;
+  background: var(--paper-alt);
 }
 
-.miejsce-akcje .btn {
-  flex: 1 1 auto;
-  text-align: center;
-  padding: 10px 14px;
-  min-height: 44px;
-  font-size: 0.9rem;
+.miejsce-mapa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.miejsce-mapa:hover img {
+  transform: scale(1.04);
+}
+
+.miejsce-mapa:focus-visible {
+  outline: 2px solid var(--amber-dark);
+  outline-offset: 2px;
+}
+
+/* Czubek pinezki dokładnie w środku mapki */
+.miejsce-pin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 28px;
+  height: 37px;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 2px 2px rgba(27, 29, 33, 0.35));
+  pointer-events: none;
+}
+
+.miejsce-pin svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.miejsce-mapa-chip {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(27, 29, 33, 0.82);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.miejsce-mapa:hover .miejsce-mapa-chip {
+  background: var(--asphalt);
+  color: var(--amber);
+}
+
+/* Podpis wymagany przez licencję OpenStreetMap */
+.miejsca-atrybucja {
+  margin: 6px 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.miejsca-atrybucja a {
+  color: inherit;
 }
 
 /* Średni ekran: 2 karty naraz */
