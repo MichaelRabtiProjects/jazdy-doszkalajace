@@ -2545,3 +2545,45 @@ body.lightbox-open {
     animation: none;
   }
 }
+
+/* ==========================================================================
+   MODERNIZACJA 4 — pasek zaufania w hero
+   Tylko dane, które już są na stronie: ocena z sekcji Opinie, kategoria
+   i obszar. Jedna linia (na wąskim telefonie łagodnie się zawija).
+   ========================================================================== */
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: #d8d8d4;
+}
+
+.hero-trust li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hero-trust svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--amber);
+}
+
+.hero-trust a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-trust a:hover {
+  color: var(--white);
+}
+
+.hero-trust strong {
+  color: var(--white);
+}

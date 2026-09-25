@@ -20,6 +20,10 @@ window.I18N = {
   'hero-lead':
     'Brush up your skills after a break, prepare for your exam on the exact WORD routes, or book ' +
     'an individual lesson built around what you need.',
+  'hero-trust-label': 'Key facts',
+  'hero-trust-google': 'on Google',
+  'hero-trust-kat': 'Category B instructor',
+  'hero-trust-teren': 'Wawer and the surrounding area',
   'hero-cta': 'See available times',
 
   /* --- Oferta / Offer --- */
