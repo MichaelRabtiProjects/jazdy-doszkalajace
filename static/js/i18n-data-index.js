@@ -15,7 +15,7 @@ window.I18N = {
   'nav-toggle-label': 'Open menu',
 
   /* --- Hero --- */
-  'hero-kicker': 'Warsaw · Wawer and the surrounding area',
+  'hero-kicker': 'Warsaw · Wawer, Mokotów and the surrounding area',
   'hero-h1': 'Get back behind the wheel with confidence — refresher driving lessons for licensed drivers',
   'hero-lead':
     'Brush up your skills after a break, prepare for your exam on the exact WORD routes, or book ' +
@@ -23,7 +23,7 @@ window.I18N = {
   'hero-trust-label': 'Key facts',
   'hero-trust-google': 'on Google',
   'hero-trust-kat': 'Category B instructor',
-  'hero-trust-teren': 'Wawer and the surrounding area',
+  'hero-trust-teren': 'Wawer, Mokotów and the surrounding area',
   'hero-cta': 'See available times',
 
   /* --- Oferta / Offer --- */
@@ -244,7 +244,7 @@ window.I18N = {
   'kontakt-instruktor-label': 'Instructor:',
   'kontakt-telefon-label': 'Phone:',
   'kontakt-obszar-label': 'Service area:',
-  'kontakt-obszar-tekst': 'Wawer and the surrounding Warsaw area — other districts by arrangement.',
+  'kontakt-obszar-tekst': 'Wawer, Mokotów and the surrounding Warsaw area — other districts by arrangement.',
 
   /* --- Miejsca spotkań / Meeting points --- */
   'miejsca-1-tytul':
