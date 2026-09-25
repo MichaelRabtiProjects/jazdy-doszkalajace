@@ -37,6 +37,18 @@ window.I18N = {
   'oferta-3-p':
     'Parallel and perpendicular parking, fast-traffic roads, night driving, difficult conditions — ' +
     'a programme built around whatever you need right now.',
+  /* Własna, początkująca oferta Michaela po angielsku — celowo osobny
+     zestaw kluczy od oferta-alp-* (Khaled) tuż niżej. Nie łączyć treści.
+     UWAGA: link do #khaled jest wpisany na sztywno w tej wartości (nie
+     jako osobny data-i18n na <a> w HTML-u) — data-i18n na elemencie
+     zagnieżdżonym w innym data-i18n nigdy się nie wykona, bo rodzic
+     i tak nadpisuje cały swój innerHTML. Ta sama zasada co w polityce
+     prywatności (patrz i18n-data-polityka.js, punkt p4). */
+  'oferta-en-note':
+    'I also run refresher driving lessons in English, at the same price as in Polish. This is my ' +
+    'start in teaching in a foreign language, so I treat it as a shared experience — if you’re ' +
+    'looking for someone with years of practice in English, also check out ' +
+    '<a href="#khaled">Instructor Khaled’s offer</a>.',
   'oferta-alp-note':
     'Lessons are also available in English and Arabic — taught by instructor Khaled as part of ALP.',
   'oferta-alp-btn': 'See the ALP offer ↓',
@@ -106,6 +118,14 @@ window.I18N = {
     'happy with how I taught them. I try to keep things friendly, because we do spend a good few hours – ' +
     'sometimes dozens of them – behind the wheel together, talking about more than just driving – for some ' +
     'people it even turns into a bit of therapy, once they trust me enough to open up.',
+  /* Własna, początkująca oferta Michaela po angielsku — patrz uwaga przy
+     oferta-en-note wyżej (osobne od sekcji Khaleda). */
+  'omnie-en-h': 'I also teach in English',
+  'omnie-en-p':
+    'I’ve recently started running refresher lessons in English too. I’m right at the beginning ' +
+    'of this, so don’t expect perfect fluency from me — I see it as a shared experience with the ' +
+    'student. If you’d like to practise the language along the way, with no pressure and no ' +
+    'judgement, you’re welcome to book.',
   'omnie-reviews-link': 'See student reviews ↓',
   'omnie-closing':
     'Best wishes to all my students – those who’ve already passed, those still preparing for their exam, ' +
@@ -122,6 +142,9 @@ window.I18N = {
      podmienić w obu miejscach. */
   'cennik-stali':
     'Regular students pay less — [KWOTA] zł/h below the prices above. Details once we’re working together regularly.',
+  'cennik-en':
+    'Same prices in English (this applies to lessons with me — for lessons with Instructor Khaled ' +
+    'in English/Arabic, pricing is individual, see his section).',
   'cennik-note':
     'A single lesson is 2 to 4 hours — the 10-hour package is split across several sessions, arranged ' +
     'when you get in touch.',
@@ -218,7 +241,7 @@ window.I18N = {
   'miejsca-1-label': 'Main meeting points',
   'miejsca-2-tytul':
     'Additional spots — I sometimes come here at no extra cost if I happen to be in the area, but this ' +
-    'needs to be agreed by phone in advance.',
+    'needs to be agreed in advance — WhatsApp, SMS or a phone call.',
   'miejsca-2-label': 'Additional spots',
   'miejsca-2-nota':
     'The first lesson booked in advance at one of these spots carries a surcharge of 15 zł per hour — ' +
@@ -251,6 +274,8 @@ window.I18N = {
   /* --- Pływający przycisk / Floating button --- */
   'fab-label': 'Call the instructor: 690 360 164',
   'fab-text': 'Call',
+  'whatsapp-fab-label': 'Message the instructor on WhatsApp',
+  'whatsapp-fab-text': 'Message',
 
   /* --- Panel terminu / lightbox --- */
   'zamknij-label': 'Close',

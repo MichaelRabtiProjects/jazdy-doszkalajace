@@ -84,26 +84,28 @@
   }
 
   /* ======================================================================
-     Pływający przycisk "Zadzwoń"
-     Pokazuje się po przewinięciu poza Hero i chowa nad stopką, żeby jej
-     nie zasłaniać.
+     Pływające przyciski kontaktu (Zadzwoń, WhatsApp — .js-fab)
+     Pokazują się po przewinięciu poza Hero i chowają nad stopką, żeby
+     jej nie zasłaniać. Wspólna logika dla wszystkich .js-fab na stronie.
      ====================================================================== */
-  var fab = document.getElementById('call-fab');
+  var fabs = Array.prototype.slice.call(document.querySelectorAll('.js-fab'));
   var hero = document.getElementById('hero');
   var footer = document.getElementById('site-footer');
 
-  if (fab && hero && 'IntersectionObserver' in window) {
+  if (fabs.length && hero && 'IntersectionObserver' in window) {
     var heroVisible = true;
     var footerVisible = false;
 
-    var updateFab = function () {
-      fab.classList.toggle('is-visible', !heroVisible && !footerVisible);
+    var updateFabs = function () {
+      fabs.forEach(function (fab) {
+        fab.classList.toggle('is-visible', !heroVisible && !footerVisible);
+      });
     };
 
     new IntersectionObserver(
       function (entries) {
         heroVisible = entries[0].isIntersecting;
-        updateFab();
+        updateFabs();
       },
       { threshold: 0.15 }
     ).observe(hero);
@@ -112,13 +114,15 @@
       new IntersectionObserver(
         function (entries) {
           footerVisible = entries[0].isIntersecting;
-          updateFab();
+          updateFabs();
         },
         { threshold: 0.05 }
       ).observe(footer);
     }
-  } else if (fab) {
-    fab.classList.add('is-visible');
+  } else {
+    fabs.forEach(function (fab) {
+      fab.classList.add('is-visible');
+    });
   }
 
   /* ======================================================================

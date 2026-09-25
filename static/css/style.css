@@ -416,6 +416,24 @@ section[id] {
 /* Zapowiedź sekcji ALP pod kartami oferty — ten sam akcent co karty
    (bursztynowy pasek), ale w poziomie, bo to jedno zdanie i przycisk,
    nie kolejna karta w siatce. */
+/* Zwykły, cichy akapit — celowo bez ramki karty i bez przycisku, inaczej
+   niż .offer-alp-note niżej. To ma brzmieć jak szczera informacja
+   o początkującym poziomie, nie jak kolejna promowana oferta. */
+.offer-en-note {
+  margin-top: 24px;
+}
+
+.offer-en-note p {
+  max-width: 640px;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.offer-en-note a {
+  color: var(--amber-dark);
+  font-weight: 600;
+}
+
 .offer-alp-note {
   display: flex;
   flex-wrap: wrap;
@@ -1843,10 +1861,12 @@ body.lightbox-open {
 /* ==========================================================================
    Pływający przycisk "Zadzwoń"
    ========================================================================== */
-.call-fab {
+/* Baza wspólna dla obu pływających przycisków (.js-fab) — widoczność
+   (klasa is-visible) steruje nimi razem z main.js. Kolor, ikona i pozycja
+   "bottom" (żeby się nie nakładały) są już specyficzne dla każdego. */
+.js-fab {
   position: fixed;
   right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: 60;
   display: inline-flex;
   align-items: center;
@@ -1854,8 +1874,6 @@ body.lightbox-open {
   min-height: 52px;
   padding: 12px 20px;
   border-radius: 999px;
-  background: var(--amber);
-  color: var(--asphalt);
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
@@ -1865,21 +1883,27 @@ body.lightbox-open {
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, background 0.15s ease;
 }
 
-.call-fab.is-visible {
+.js-fab.is-visible {
   opacity: 1;
   visibility: visible;
   transform: none;
 }
 
-.call-fab:hover {
-  background: var(--amber-dark);
-  transform: translateY(-2px);
-}
-
-.call-fab svg {
+.js-fab svg {
   width: 22px;
   height: 22px;
   flex-shrink: 0;
+}
+
+.call-fab {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--amber);
+  color: var(--asphalt);
+}
+
+.call-fab:hover {
+  background: var(--amber-dark);
+  transform: translateY(-2px);
 }
 
 .call-fab-number {
@@ -1891,13 +1915,28 @@ body.lightbox-open {
     display: inline;
   }
 
-  .call-fab-text::after {
+  /* Zawężone do .call-fab — .whatsapp-fab współdzieli klasę .call-fab-text
+     (sam styl tekstu), ale nie ma numeru obok, więc nie ma czego zapowiadać
+     dwukropkiem. */
+  .call-fab .call-fab-text::after {
     content: ":";
   }
 }
 
+/* WhatsApp nad przyciskiem telefonu: 52px jego wysokości + 14px odstępu */
+.whatsapp-fab {
+  bottom: calc(16px + 52px + 14px + env(safe-area-inset-bottom, 0px));
+  background: #25d366; /* oficjalny kolor marki WhatsApp — jedyne miejsce na stronie, gdzie świadomie odstępujemy od palety strony, żeby przycisk był rozpoznawalny na pierwszy rzut oka */
+  color: #ffffff;
+}
+
+.whatsapp-fab:hover {
+  background: #1fb855;
+  transform: translateY(-2px);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .call-fab,
+  .js-fab,
   .offer-card,
   .price-card,
   .gallery-item,

@@ -33,11 +33,12 @@ window.I18N = {
   'par2-h': '§ 2. Scope of services',
   'par2-1': 'Category B refresher driving lessons for people who already hold a licence — not a driving course and not training by a licensed driving school; no certificates are issued.',
   'par2-2': 'Lesson length: <strong>2–4 h</strong>. Price: <strong>160 zł/h</strong> (320 / 480 / 640 zł).',
-  'par2-3': 'Location: Warsaw, mainly the Wawer district — the exact meeting point is agreed when you get in touch.',
-  'par2-4': 'Vehicle: <strong>[VEHICLE]</strong>.',
-  'par2-5': 'A valid category B driving licence is required and must be shown before the lesson.',
-  'par2-6': 'The Provider may refuse to start or may stop a lesson if the Customer: has no valid licence, is under the influence of alcohol or drugs, or seriously breaches safety rules — in which case the lesson counts as not taking place through the Customer’s fault (§&nbsp;5(4)).',
-  'par2-7': 'The Customer must follow traffic law and the Provider’s instructions.',
+  'par2-3': 'For the first lesson taking place at one of the additional pick-up spots listed on the website (outside the main meeting points in Wawer), <strong>15 zł per hour</strong> is added to the price — the Provider has to drive there from Wawer and back again afterwards. For further lessons at the same spot, pricing is agreed individually.',
+  'par2-4': 'Location: Warsaw, mainly the Wawer district — the exact meeting point is agreed when you get in touch.',
+  'par2-5': 'Vehicle: <strong>[VEHICLE]</strong>.',
+  'par2-6': 'A valid category B driving licence is required and must be shown before the lesson.',
+  'par2-7': 'The Provider may refuse to start or may stop a lesson if the Customer: has no valid licence, is under the influence of alcohol or drugs, or seriously breaches safety rules — in which case the lesson counts as not taking place through the Customer’s fault (§&nbsp;5(4)).',
+  'par2-8': 'The Customer must follow traffic law and the Provider’s instructions.',
 
   'par3-h': '§ 3. Booking a time slot',
   'par3-1': 'The schedule on the website shows available times a few weeks ahead.',
@@ -92,7 +93,7 @@ window.I18N = {
   'par9-2': 'No provision of these Terms limits a consumer’s statutory rights — in case of conflict, the law prevails.',
   'par9-3': 'For how personal data is handled, see the <a href="polityka-prywatnosci.html">Privacy Policy</a>.',
   'par9-4': 'Changes to these Terms take effect on publication of the new version; a time slot confirmed earlier is governed by the version in force at the time it was confirmed (earlier versions available on request).',
-  'par9-5': 'These Terms, in this wording, are in effect from <strong>24 September 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
+  'par9-5': 'These Terms, in this wording, are in effect from <strong>25 September 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
 
   'powrot': '← Back to the homepage',
 
