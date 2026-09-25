@@ -33,7 +33,15 @@
      Każdy element animuje się tylko raz. Przy włączonej w systemie opcji
      ograniczenia animacji pokazujemy wszystko od razu.
      ====================================================================== */
+  // Karty cennika i galerii też wjeżdżają — dopisujemy klasę tutaj,
+  // żeby nie powtarzać jej w HTML przy każdej z kilkudziesięciu kart.
+  document.querySelectorAll('.price-grid > *, .gallery-grid > *').forEach(function (el) {
+    el.classList.add('reveal');
+  });
+
   var revealEls = document.querySelectorAll('.reveal');
+  var STAGGER_MS = 70;
+  var STAGGER_MAX = 5;
 
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealEls.forEach(function (el) {
@@ -42,9 +50,22 @@
   } else {
     var revealObserver = new IntersectionObserver(
       function (entries) {
+        // Elementy, które weszły na ekran w tej samej chwili (np. rząd
+        // kart), pojawiają się po kolei co 70 ms — stąd licznik partii.
+        var wPartii = 0;
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
+            var krok = Math.min(wPartii, STAGGER_MAX);
+            entry.target.style.transitionDelay = krok * STAGGER_MS + 'ms';
+            wPartii++;
             entry.target.classList.add('is-visible');
+            // Po wjeździe zdejmujemy klasy i opóźnienie — inaczej karta
+            // zostałaby z przejściem "reveal" i spóźnionym efektem hover.
+            var el = entry.target;
+            setTimeout(function () {
+              el.classList.remove('reveal', 'is-visible');
+              el.style.transitionDelay = '';
+            }, 400 + krok * STAGGER_MS + 50);
             revealObserver.unobserve(entry.target);
           }
         });

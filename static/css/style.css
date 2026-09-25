@@ -2502,3 +2502,46 @@ body.lightbox-open {
 .section-dark .gallery-item {
   border-color: rgba(255, 255, 255, 0.08);
 }
+
+/* ==========================================================================
+   MODERNIZACJA 3 — ruch przy przewijaniu
+   Krótsze (400 ms) i miękkie wejście, przesunięcie 14 px. Kolejność
+   w rzędzie (stagger co 70 ms) ustawia main.js przez transition-delay.
+   ========================================================================== */
+.js-reveal .reveal {
+  transform: translateY(14px);
+  transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* Hero: tekst i przycisk pojawiają się po załadowaniu, jeden po drugim.
+   Animacja CSS, nie IntersectionObserver — hero i tak jest od razu na ekranie. */
+@keyframes hero-wjazd {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-inner > * {
+  animation: hero-wjazd 0.4s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.hero-inner > :nth-child(2) { animation-delay: 80ms; }
+.hero-inner > :nth-child(3) { animation-delay: 160ms; }
+.hero-inner > :nth-child(4) { animation-delay: 240ms; }
+.hero-inner > :nth-child(5) { animation-delay: 320ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    transform: none;
+    transition: none;
+  }
+
+  .hero-inner > * {
+    animation: none;
+  }
+}
