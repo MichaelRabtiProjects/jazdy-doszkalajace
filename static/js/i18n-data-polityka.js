@@ -9,11 +9,12 @@ window.I18N = {
   'obowiazuje-od': 'in effect from',
 
   'p1': '<strong>Data controller:</strong> <strong>Michael Rabti</strong>, e-mail <strong>MichaelRabti@gmail.com</strong>, phone 690&nbsp;360&nbsp;164.',
-  'p2': '<strong>What data, and when:</strong> name, phone and/or e-mail address — only once you get in touch yourself (by phone, SMS, WhatsApp or e-mail). The website and schedule themselves collect no data at all.',
-  'p3': '<strong>What it’s used for:</strong> arranging and carrying out your refresher driving lesson.',
+  'p2': '<strong>What data, and when:</strong> first and last name, phone and e-mail address — when you send the booking form next to the schedule or get in touch yourself (by phone, SMS, WhatsApp or e-mail).',
+  'p3': '<strong>What it’s used for:</strong> booking, arranging and carrying out your refresher driving lesson and contacting you about it (legal basis: Art.&nbsp;6(1)(b) GDPR — steps prior to entering into a contract and performing it).',
   'p4': '<strong>Who I share it with:</strong>' +
     '<ul>' +
     '<li>Cloudflare — hosting for the website and the admin panel,</li>' +
+    '<li>Brevo (Sendinblue SAS, France) — sending booking confirmation e-mails,</li>' +
     '<li>Google Fonts — loading typefaces (your IP address is sent to Google),</li>' +
     '<li>WhatsApp / Meta — only if you choose that contact channel yourself.</li>' +
     '</ul>',

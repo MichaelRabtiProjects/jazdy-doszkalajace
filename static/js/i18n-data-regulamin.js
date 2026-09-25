@@ -42,11 +42,11 @@ window.I18N = {
 
   'par3-h': '§ 3. Booking a time slot',
   'par3-1': 'The schedule on the website shows available times a few weeks ahead.',
-  'par3-2': 'The website is informational only — there is no booking form and no online payment.',
-  'par3-3': 'Contact by phone, SMS, WhatsApp or e-mail — the message is pre-filled with the date, time and length of the lesson.',
-  'par3-4': '<strong>The contract is formed once the Provider confirms the time slot</strong> — only then does it disappear from the schedule. Because the contract is formed at a distance, a Customer who is a consumer has a right of withdrawal (§&nbsp;6).',
-  'par3-5': 'Until confirmed, the time slot remains open and may be taken by someone else.',
-  'par3-6': 'The Provider may decline to confirm a time (e.g. it has just been taken, or the location isn’t feasible).',
+  'par3-2': 'You can make a provisional booking using the form next to the schedule (first and last name, phone, e-mail) or by getting in touch by phone, SMS, WhatsApp or e-mail. There is no online payment on the website.',
+  'par3-3': 'Once the form is sent, the time is provisionally reserved — it shows in the schedule as “provisional booking”, and the Customer receives an e-mail confirming the request was received.',
+  'par3-4': '<strong>The contract is formed once the Provider confirms the time slot</strong> (by e-mail, text message or phone) — a provisional booking on its own does not form the contract. Because the contract is formed at a distance, a Customer who is a consumer has a right of withdrawal (§&nbsp;6).',
+  'par3-5': 'Until it is confirmed or declined, a provisional booking blocks the time for other people.',
+  'par3-6': 'The Provider may decline to confirm a booking (e.g. the location isn’t feasible) — any deposit paid for such a booking is refunded in full within 14 days.',
 
   'par4-h': '§ 4. Payments',
   'par4-1': 'Deposit: <strong>80 zł</strong> (the current amount is shown on the schedule).',

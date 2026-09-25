@@ -61,7 +61,7 @@ window.I18N = {
   /* --- Grafik / Schedule --- */
   'grafik-kicker': 'Available slots',
   'grafik-title': 'Schedule',
-  'grafik-lead': 'Available times for the coming weeks. Pick a lesson length, then click the time that suits you.',
+  'grafik-lead': 'Available times for the coming weeks. Pick a lesson length, click the time that suits you and send a short form — the time will be provisionally reserved for you straight away.',
   'grafik-umow-note':
     'We usually meet around Wawer, but if the commute doesn’t suit you, just message me and we’ll ' +
     'agree on another spot. Message or call to arrange a time and details – the longer you put it off, ' +

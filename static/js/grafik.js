@@ -1,11 +1,11 @@
-/* Grafik wolnych terminów.
+/* Grafik wolnych terminów + formularz wstępnej rezerwacji.
 
-   Grafik jest informacyjny: pokazuje wolne godziny i kieruje do bezpośredniego
-   kontaktu. Rezerwację wprowadza instruktor ręcznie z panelu.
+   Kursant wybiera dzień i godzinę, wpisuje imię i nazwisko, telefon
+   i e-mail. Termin od razu zajmuje się jako "wstępna rezerwacja — czeka na
+   potwierdzenie", a instruktor potwierdza go albo odrzuca w panelu (/admin).
+   Zamiast formularza można nadal napisać SMS / WhatsApp / e-mail.
 
-   Kod trybu B (formularz rezerwacji online) jest zaparkowany — zostaje
-   w pliku, ale backend zawsze zwraca platnosci_online = false, więc nigdy
-   się nie wyświetli. Szczegóły: lib/ustawienia.js, tag `autopay-wersja`. */
+   Wersja z płatnością online (Autopay) jest zachowana w tagu `autopay-wersja`. */
 
 (function () {
   'use strict';
@@ -47,11 +47,6 @@
     brakTerminow: { pl: 'brak terminów', en: 'no available times' },
     terminAriaLabel: { pl: 'Termin ', en: 'Time slot ' },
     terminAriaO: { pl: ' o ', en: ' at ' },
-    terminWolny: { pl: 'Ten termin jest wolny', en: 'This time is available' },
-    kontaktIntro: {
-      pl: 'Odezwij się dowolnym kanałem — termin potwierdzę od ręki. Data i godzina są już wpisane w wiadomości.',
-      en: 'Reach out through any channel — I’ll confirm the time right away. The date and time are already filled in.',
-    },
     zadzwon: { pl: 'Zadzwoń', en: 'Call' },
     zadatekBlik: {
       pl: 'Zadatek BLIK-iem na nr ',
@@ -63,8 +58,75 @@
     },
     resztaGotowka: { pl: 'Reszta gotówką po jeździe', en: 'The rest in cash after the lesson' },
     terminDrobne: {
-      pl: 'Termin rezerwuję po kontakcie — dopiero wtedy znika z grafiku. Zadatek potwierdza rezerwację.',
-      en: 'I’ll lock in the time once we’re in touch — that’s when it disappears from the schedule. The deposit confirms the booking.',
+      pl: 'Po wysłaniu formularza termin jest wstępnie zarezerwowany dla Ciebie. Potwierdzę go albo odezwę się, żeby ustalić szczegóły. Zadatek potwierdza rezerwację.',
+      en: 'Once you send the form, the time is provisionally reserved for you. I’ll confirm it or get in touch to sort out the details. The deposit confirms the booking.',
+    },
+
+    /* --- Wstępne rezerwacje w grafiku --- */
+    wstepnaEtykieta: { pl: 'wstępna rezerwacja', en: 'provisional' },
+    wstepnaLegenda: {
+      pl: 'Wstępna rezerwacja — czeka na potwierdzenie instruktora.',
+      en: 'Provisional booking — waiting for the instructor to confirm.',
+    },
+    wstepnaAria: {
+      pl: ': wstępna rezerwacja, czeka na potwierdzenie',
+      en: ': provisional booking, waiting for confirmation',
+    },
+
+    /* --- Formularz --- */
+    formTytul: { pl: 'Zarezerwuj ten termin', en: 'Book this time' },
+    formImie: { pl: 'Imię i nazwisko', en: 'First and last name' },
+    formTelefon: { pl: 'Telefon', en: 'Phone' },
+    formEmail: { pl: 'E-mail', en: 'E-mail' },
+    formZgoda: {
+      pl: 'Akceptuję <a href="regulamin.html" target="_blank" rel="noopener">Regulamin</a> ' +
+        'i <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Politykę prywatności</a>.',
+      en: 'I accept the <a href="regulamin.html" target="_blank" rel="noopener">Terms of Service</a> ' +
+        'and the <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Privacy Policy</a>.',
+    },
+    formWyslij: { pl: 'Wyślij wstępną rezerwację', en: 'Send provisional booking' },
+    formWysylanie: { pl: 'Wysyłanie…', en: 'Sending…' },
+    formBrakZgody: {
+      pl: 'Zaakceptuj Regulamin i Politykę prywatności.',
+      en: 'Please accept the Terms of Service and Privacy Policy.',
+    },
+    formBrakPolaczenia: {
+      pl: 'Brak połączenia z serwerem. Spróbuj ponownie albo napisz SMS / WhatsApp.',
+      en: 'Couldn’t reach the server. Please try again or send an SMS / WhatsApp message.',
+    },
+    formBladOgolny: {
+      pl: 'Nie udało się wysłać rezerwacji. Spróbuj ponownie.',
+      en: 'The booking couldn’t be sent. Please try again.',
+    },
+    alternatywa: { pl: 'Wolisz napisać albo zadzwonić?', en: 'Prefer to message or call?' },
+
+    /* --- Po wysłaniu --- */
+    sukcesTytul: { pl: 'Rezerwacja wstępna przyjęta', en: 'Provisional booking received' },
+    sukcesTekst: {
+      pl: 'Termin jest wstępnie zarezerwowany dla Ciebie — czekaj na potwierdzenie lub kontakt od instruktora.',
+      en: 'The time is provisionally reserved for you — please wait for confirmation or for the instructor to contact you.',
+    },
+    sukcesEmail: {
+      pl: 'Szczegóły wysłałem na adres ',
+      en: 'I’ve sent the details to ',
+    },
+    sukcesEmailSpam: {
+      pl: ' — jeśli maila nie ma, zajrzyj do folderu spam.',
+      en: ' — if you can’t see the e-mail, check your spam folder.',
+    },
+    sukcesBezEmaila: {
+      pl: 'Zapisz kod rezerwacji — potwierdzę termin SMS-em albo telefonicznie.',
+      en: 'Please note your booking code — I’ll confirm the time by text or phone.',
+    },
+    kodLabel: { pl: 'Kod rezerwacji', en: 'Booking code' },
+    zadatekKrok: {
+      pl: 'Zadatek możesz wysłać BLIK-iem na numer 690 360 164 — w tytule wpisz kod rezerwacji. Po wysłaniu kliknij przycisk poniżej.',
+      en: 'You can send the deposit via BLIK (Polish mobile payment) to 690 360 164 — put the booking code in the title; a bank transfer is available on request. Once sent, click the button below.',
+    },
+    przyciskZadatek: { pl: 'Zadatek wysłany', en: 'Deposit sent' },
+    zadatekDzieki: {
+      pl: 'Dziękuję! Sprawdzę wpłatę i dam znać.',
+      en: 'Thank you! I’ll check the payment and let you know.',
     },
   };
 
@@ -97,7 +159,6 @@
     wybranyIdx: null,
     wybrany: null,
     ostatnioKlikniety: null,
-    odliczanie: null,
   };
 
   /* ------------------------------------------------------------------ */
@@ -310,6 +371,8 @@
     var dzien = stan.dane.dni[stan.wybranyIdx];
     var pasujace = dzien.sloty.filter(dlugoscPasuje);
     var nieaktywny = dzien.aktywny === false;
+    // Starsza wersja API (przed wdrożeniem formularza) nie zwraca tego pola
+    var wstepne = dzien.wstepne || [];
 
     elPanelGodzin.innerHTML = '';
 
@@ -355,7 +418,7 @@
         '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">' + t('przyciskWhatsapp') + '</a>' +
         '<a class="btn btn-secondary" href="tel:' + TELEFON + '">' + t('przyciskTelefon') + '</a>';
       karta.appendChild(akcje);
-    } else if (pasujace.length === 0) {
+    } else if (pasujace.length === 0 && wstepne.length === 0) {
       // Dzień otwarty, ale w pełni zajęty — inny komunikat niż wyżej,
       // bo tu telefon nic nie zmieni, po prostu nie ma wolnego terminu.
       var brak = document.createElement('p');
@@ -365,7 +428,33 @@
     } else {
       var lista = document.createElement('div');
       lista.className = 'dzien-godziny';
-      pasujace.forEach(function (slot) {
+
+      // Wolne godziny i wstępne rezerwacje w jednej siatce, po kolei według
+      // godziny — kursant od razu widzi, że np. 14:00 "już ktoś wziął".
+      var elementy = pasujace.map(function (slot) {
+        return { godzina: slot.godzina, slot: slot };
+      }).concat(wstepne.map(function (w) {
+        return { godzina: w.godzina_start, wstepna: w };
+      })).sort(function (a, b) {
+        return a.godzina - b.godzina;
+      });
+
+      elementy.forEach(function (el) {
+        if (el.wstepna) {
+          var zajety = document.createElement('div');
+          zajety.className = 'godzina-wstepna';
+          zajety.setAttribute('role', 'note');
+          zajety.setAttribute(
+            'aria-label',
+            zakresGodzin(el.wstepna.godzina_start, el.wstepna.godzina_koniec - el.wstepna.godzina_start) + t('wstepnaAria')
+          );
+          zajety.innerHTML =
+            '<span class="godzina-wstepna-czas" aria-hidden="true">' + godzinaTekst(el.wstepna.godzina_start) + '</span>' +
+            '<span class="godzina-wstepna-opis" aria-hidden="true">' + t('wstepnaEtykieta') + '</span>';
+          lista.appendChild(zajety);
+          return;
+        }
+        var slot = el.slot;
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'godzina-btn';
@@ -390,6 +479,13 @@
         lista.appendChild(btn);
       });
       karta.appendChild(lista);
+
+      if (wstepne.length) {
+        var legenda = document.createElement('p');
+        legenda.className = 'godzina-wstepna-legenda';
+        legenda.textContent = t('wstepnaLegenda');
+        karta.appendChild(legenda);
+      }
     }
 
     elPanelGodzin.appendChild(karta);
@@ -450,16 +546,9 @@
 
     var opis = tekstOpisu(dzien.data, godzina, stan.dlugosc, dzien.nazwa_dnia);
     panelPodsumowanie.textContent = opis;
-
-    // Gałąź zaparkowana: backend zawsze zwraca platnosci_online = false
-    if (stan.dane.platnosci_online) {
-      panelTytul.textContent = 'Rezerwacja terminu';
-      panelTresc.innerHTML = formularzHtml();
-      podepnijFormularz();
-    } else {
-      panelTytul.textContent = t('terminWolny');
-      panelTresc.innerHTML = trybKontaktowyHtml(opis);
-    }
+    panelTytul.textContent = t('formTytul');
+    panelTresc.innerHTML = formularzHtml() + alternatywaHtml(opis);
+    podepnijFormularz();
 
     panel.hidden = false;
     document.body.classList.add('panel-open');
@@ -470,11 +559,9 @@
     panel.hidden = true;
     document.body.classList.remove('panel-open');
     panelTresc.innerHTML = '';
-    if (stan.odliczanie) {
-      clearInterval(stan.odliczanie);
-      stan.odliczanie = null;
+    if (stan.ostatnioKlikniety && document.body.contains(stan.ostatnioKlikniety)) {
+      stan.ostatnioKlikniety.focus();
     }
-    if (stan.ostatnioKlikniety) stan.ostatnioKlikniety.focus();
   }
 
   panelZamknij.addEventListener('click', zamknijPanel);
@@ -487,9 +574,51 @@
     if (!panel.hidden && e.key === 'Escape') zamknijPanel();
   });
 
-  /* --- Panel kontaktowy (jedyny tryb publiczny) --------------------- */
+  /* --- Treść panelu --------------------------------------------------- */
 
-  function trybKontaktowyHtml(opis) {
+  function kwotyHtml() {
+    // Kwoty bierzemy z ustawień w bazie, a nie z kodu — zadatek zmienia się
+    // z panelu i nie może wymagać wdrożenia strony na nowo.
+    var zadatek = stan.dane.kwota_zadatku;
+    var doZaplaty = stan.dlugosc * stan.dane.stawka_godzinowa - zadatek;
+    return (
+      '<div class="termin-kwoty">' +
+      '<p><span>' + t('zadatekBlik') + TELEFON_ZAPIS + (jezyk() === 'en' ? t('zadatekPrzelew') : '') +
+      '</span><strong>' + zadatek + ' zł</strong></p>' +
+      '<p><span>' + t('resztaGotowka') + '</span><strong>' + doZaplaty + ' zł</strong></p>' +
+      '</div>'
+    );
+  }
+
+  function formularzHtml() {
+    return (
+      kwotyHtml() +
+      '<form id="termin-form" class="termin-form" novalidate>' +
+      '<label for="rez-imie">' + t('formImie') + '</label>' +
+      '<input id="rez-imie" name="imie" type="text" required minlength="3" maxlength="80" autocomplete="name">' +
+      '<label for="rez-telefon">' + t('formTelefon') + '</label>' +
+      '<input id="rez-telefon" name="telefon" type="tel" required maxlength="25" autocomplete="tel" inputmode="tel">' +
+      '<label for="rez-email">' + t('formEmail') + '</label>' +
+      '<input id="rez-email" name="email" type="email" required maxlength="120" autocomplete="email">' +
+      // Pułapka na boty: człowiek tego pola nie widzi (ani czytnik ekranu),
+      // automat wypełniający wszystko jak leci — tak, i serwer go odrzuci.
+      '<div class="termin-pulapka" aria-hidden="true">' +
+      '<label for="rez-strona">Strona www</label>' +
+      '<input id="rez-strona" name="strona" type="text" tabindex="-1" autocomplete="off">' +
+      '</div>' +
+      '<label class="termin-zgoda">' +
+      '<input type="checkbox" id="rez-zgoda" required>' +
+      '<span>' + t('formZgoda') + '</span>' +
+      '</label>' +
+      '<p class="termin-blad" id="rez-blad" role="alert" hidden></p>' +
+      '<button type="submit" class="btn btn-primary">' + t('formWyslij') + '</button>' +
+      '<p class="termin-drobne">' + t('terminDrobne') + '</p>' +
+      '</form>'
+    );
+  }
+
+  /** Dotychczasowe kanały kontaktu — zostają jako druga droga pod formularzem. */
+  function alternatywaHtml(opis) {
     var angielski = jezyk() === 'en';
     var tresc = angielski
       ? 'Hello, I’d like to book a refresher driving lesson: ' + opis + '. Please confirm the time.'
@@ -504,100 +633,48 @@
       '?subject=' + encodeURIComponent(temat) +
       '&body=' + encodeURIComponent(tresc);
 
-    // Kwoty bierzemy z ustawień w bazie, a nie z kodu — zadatek zmienia się
-    // z panelu i nie może wymagać wdrożenia strony na nowo.
-    var zadatek = stan.dane.kwota_zadatku;
-    var doZaplaty = stan.dlugosc * stan.dane.stawka_godzinowa - zadatek;
-
     return (
-      '<p class="termin-info">' + t('kontaktIntro') + '</p>' +
+      '<div class="termin-alternatywa">' +
+      '<p class="termin-alternatywa-tytul">' + t('alternatywa') + '</p>' +
       '<div class="termin-akcje termin-akcje-kanaly">' +
-      '<a class="btn btn-primary" href="tel:' + TELEFON + '">' + t('zadzwon') + '</a>' +
       '<a class="btn btn-secondary" href="' + sms + '">' + t('przyciskSms') + '</a>' +
       '<a class="btn btn-secondary" href="' + whatsapp + '" target="_blank" rel="noopener">' + t('przyciskWhatsapp') + '</a>' +
       '<a class="btn btn-secondary" href="' + mail + '">' + t('przyciskEmail') + '</a>' +
+      '<a class="btn btn-secondary" href="tel:' + TELEFON + '">' + t('zadzwon') + '</a>' +
       '</div>' +
-      '<div class="termin-kwoty">' +
-      '<p><span>' + t('zadatekBlik') + TELEFON_ZAPIS + (angielski ? t('zadatekPrzelew') : '') + '</span><strong>' + zadatek + ' zł</strong></p>' +
-      '<p><span>' + t('resztaGotowka') + '</span><strong>' + doZaplaty + ' zł</strong></p>' +
-      '</div>' +
-      '<p class="termin-drobne">' + t('terminDrobne') + '</p>'
-    );
-  }
-
-  /* ------------------------------------------------------------------ */
-  /* ZAPARKOWANE: rezerwacja online + płatność zadatku                   */
-  /*                                                                     */
-  /* Poniższy kod jest nieosiągalny — /api/dostepnosc zawsze zwraca      */
-  /* platnosci_online = false, a /api/rezerwacja odpowiada 403.          */
-  /* Zostaje na wypadek powrotu do płatności online (tag autopay-wersja).*/
-  /* ŚWIADOMIE NIE dwujęzyczny (napisy zostają na sztywno po polsku) —    */
-  /* skoro kod się nie wykonuje, tłumaczenie go byłoby pracą na darmo.    */
-  /* Jeśli płatności online kiedyś wrócą, dopisać tu t()/jezyk() tak jak  */
-  /* w reszcie pliku, zanim ta gałąź znów zacznie się wyświetlać.         */
-  /* ------------------------------------------------------------------ */
-
-  function formularzHtml() {
-    var zadatek = stan.dane.kwota_zadatku;
-    var doZaplaty = stan.dlugosc * stan.dane.stawka_godzinowa - zadatek;
-
-    return (
-      '<div class="termin-kwoty">' +
-      '<p><span>Zadatek online</span><strong>' + zadatek + ' zł</strong></p>' +
-      '<p><span>Reszta gotówką na miejscu</span><strong>' + doZaplaty + ' zł</strong></p>' +
-      '</div>' +
-      '<form id="termin-form" class="termin-form" novalidate>' +
-      '<label for="rez-imie">Imię i nazwisko</label>' +
-      '<input id="rez-imie" name="imie" type="text" required minlength="2" autocomplete="name">' +
-      '<label for="rez-telefon">Telefon</label>' +
-      '<input id="rez-telefon" name="telefon" type="tel" required autocomplete="tel">' +
-      '<label for="rez-email">E-mail</label>' +
-      '<input id="rez-email" name="email" type="email" required autocomplete="email">' +
-      '<label class="termin-zgoda">' +
-      '<input type="checkbox" id="rez-zgoda" required>' +
-      '<span>Rozumiem, że jeśli nie stawię się na jazdę albo odwołam ją później niż ' +
-      '24 godziny przed terminem, zadatek może nie podlegać zwrotowi ' +
-      '(&sect;&nbsp;5 i &sect;&nbsp;6 Regulaminu).</span>' +
-      '</label>' +
-      '<label class="termin-zgoda">' +
-      '<input type="checkbox" id="rez-zgoda-regulamin" required>' +
-      '<span>Zapoznałem się z <a href="regulamin.html" target="_blank" rel="noopener">Regulaminem</a> ' +
-      'i <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">Polityką prywatności</a> ' +
-      'i akceptuję je.</span>' +
-      '</label>' +
-      '<p class="termin-blad" id="rez-blad" hidden></p>' +
-      '<button type="submit" class="btn btn-primary">Rezerwuję i płacę zadatek</button>' +
-      '<p class="termin-platnosc">Zadatek zapłacisz <strong>BLIK-iem, szybkim przelewem ' +
-      'lub kartą</strong> na stronie operatora płatności <strong>Autopay&nbsp;S.A.</strong> ' +
-      'Dane Twojej karty i logowania do banku podajesz bezpośrednio operatorowi — ' +
-      'nie trafiają one do instruktora.</p>' +
-      '</form>'
+      '</div>'
     );
   }
 
   function podepnijFormularz() {
     var form = document.getElementById('termin-form');
     var blad = document.getElementById('rez-blad');
+    var przycisk = form.querySelector('button[type="submit"]');
+
+    function pole(id) {
+      return document.getElementById(id).value;
+    }
+
+    function pokazBladFormularza(tekst) {
+      blad.textContent = tekst;
+      blad.hidden = false;
+      przycisk.disabled = false;
+      przycisk.textContent = t('formWyslij');
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       blad.hidden = true;
 
+      // Pola sprawdza dokładnie serwer (i odpowiada w języku strony);
+      // tutaj tylko to, czego nie ma sensu wysyłać.
       if (!document.getElementById('rez-zgoda').checked) {
-        blad.textContent = 'Potwierdź, że rozumiesz zasady dotyczące zadatku.';
-        blad.hidden = false;
+        pokazBladFormularza(t('formBrakZgody'));
         return;
       }
 
-      if (!document.getElementById('rez-zgoda-regulamin').checked) {
-        blad.textContent = 'Zaakceptuj Regulamin i Politykę prywatności.';
-        blad.hidden = false;
-        return;
-      }
-
-      var przycisk = form.querySelector('button[type="submit"]');
       przycisk.disabled = true;
-      przycisk.textContent = 'Rezerwuję…';
+      przycisk.textContent = t('formWysylanie');
 
       fetch('/api/rezerwacja', {
         method: 'POST',
@@ -606,11 +683,12 @@
           data: stan.wybrany.dzien.data,
           godzina_start: stan.wybrany.godzina,
           dlugosc: stan.dlugosc,
-          imie: form.imie.value,
-          telefon: form.telefon.value,
-          email: form.email.value,
-          zgoda_zadatek: true,
+          imie: pole('rez-imie'),
+          telefon: pole('rez-telefon'),
+          email: pole('rez-email'),
+          strona: pole('rez-strona'),
           zgoda_regulamin: true,
+          jezyk: jezyk(),
         }),
       })
         .then(function (r) {
@@ -620,65 +698,67 @@
         })
         .then(function (wynik) {
           if (!wynik.ok) {
-            blad.textContent = wynik.body.blad || 'Nie udało się zarezerwować terminu.';
-            blad.hidden = false;
-            przycisk.disabled = false;
-            przycisk.textContent = 'Rezerwuję i płacę zadatek';
+            pokazBladFormularza(wynik.body.blad || t('formBladOgolny'));
             // Termin mógł właśnie zniknąć — odświeżamy grafik pod spodem
-            if (wynik.body.kod === 'TERMIN_ZAJETY') wczytaj();
+            if (wynik.body.kod === 'TERMIN_ZAJETY' || wynik.body.kod === 'ZAMKNIETE') wczytaj();
             return;
           }
-
-          // Etap 3 doda tu adres płatności Autopay. Dopóki go nie ma,
-          // pokazujemy kod rezerwacji i odliczanie blokady.
-          if (wynik.body.platnosc_url) {
-            window.location.href = wynik.body.platnosc_url;
-          } else {
-            pokazBlokade(wynik.body);
-          }
+          pokazSukces(wynik.body, pole('rez-email').trim());
+          wczytaj();
         })
         .catch(function () {
-          blad.textContent = 'Brak połączenia z serwerem. Spróbuj ponownie.';
-          blad.hidden = false;
-          przycisk.disabled = false;
-          przycisk.textContent = 'Rezerwuję i płacę zadatek';
+          pokazBladFormularza(t('formBrakPolaczenia'));
         });
     });
   }
 
-  function pokazBlokade(rez) {
-    panelTytul.textContent = 'Termin zablokowany dla Ciebie';
+  /** Ekran po wysłaniu formularza: kod, zadatek i przycisk "Zadatek wysłany". */
+  function pokazSukces(rez, email) {
+    var info = rez.email_wyslany
+      ? '<p class="termin-info">' + t('sukcesEmail') + '<strong class="termin-email"></strong>' + t('sukcesEmailSpam') + '</p>'
+      : '<p class="termin-info">' + t('sukcesBezEmaila') + '</p>';
+
+    panelTytul.textContent = t('sukcesTytul');
     panelTresc.innerHTML =
-      '<p class="termin-info">Kod rezerwacji: <strong class="termin-kod">' + rez.kod_rezerwacji + '</strong></p>' +
-      '<p class="termin-info">Zadatek do zapłaty: <strong>' + rez.kwota_zadatku + ' zł</strong>, ' +
-      'reszta (' + rez.do_zaplaty_na_miejscu + ' zł) gotówką na miejscu.</p>' +
-      '<p class="termin-odliczanie">Termin trzymamy jeszcze <strong id="termin-zegar">15:00</strong></p>' +
-      '<p class="termin-drobne">Płatności online są w trakcie uruchamiania — zadzwoń, żeby potwierdzić rezerwację.</p>' +
-      '<div class="termin-akcje"><a class="btn btn-primary" href="tel:' + TELEFON + '">Zadzwoń: ' + TELEFON_ZAPIS + '</a></div>';
+      '<p class="termin-sukces">' + t('sukcesTekst') + '</p>' +
+      '<p class="termin-info">' + t('kodLabel') + ': <strong class="termin-kod">' + rez.kod_rezerwacji + '</strong></p>' +
+      info +
+      '<div class="termin-kwoty">' +
+      '<p><span>' + t('zadatekBlik') + TELEFON_ZAPIS + '</span><strong>' + rez.kwota_zadatku + ' zł</strong></p>' +
+      '<p><span>' + t('resztaGotowka') + '</span><strong>' + rez.do_zaplaty_na_miejscu + ' zł</strong></p>' +
+      '</div>' +
+      '<p class="termin-drobne">' + t('zadatekKrok') + '</p>' +
+      '<div class="termin-akcje"><button type="button" class="btn btn-primary" id="rez-zadatek">' + t('przyciskZadatek') + '</button></div>' +
+      '<p class="termin-blad" id="rez-zadatek-blad" role="alert" hidden></p>';
 
-    uruchomOdliczanie(new Date(rez.wygasa_o).getTime());
-    wczytaj();
-  }
+    // Adres e-mail wstawiamy przez textContent, nie przez HTML — to tekst
+    // wpisany przez użytkownika.
+    var elEmail = panelTresc.querySelector('.termin-email');
+    if (elEmail) elEmail.textContent = email;
 
-  function uruchomOdliczanie(koniec) {
-    var zegar = document.getElementById('termin-zegar');
-    if (!zegar) return;
+    var btn = document.getElementById('rez-zadatek');
+    var bladZadatku = document.getElementById('rez-zadatek-blad');
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
+      bladZadatku.hidden = true;
+      fetch('/api/zadatek', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: rez.token }),
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          var akcje = btn.parentNode;
+          akcje.innerHTML = '<p class="termin-sukces">' + t('zadatekDzieki') + '</p>';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          bladZadatku.textContent = t('formBrakPolaczenia');
+          bladZadatku.hidden = false;
+        });
+    });
 
-    function krok() {
-      var zostalo = koniec - Date.now();
-      if (zostalo <= 0) {
-        zegar.textContent = 'czas minął';
-        clearInterval(stan.odliczanie);
-        stan.odliczanie = null;
-        return;
-      }
-      var min = Math.floor(zostalo / 60000);
-      var sek = Math.floor((zostalo % 60000) / 1000);
-      zegar.textContent = min + ':' + dwieCyfry(sek);
-    }
-
-    krok();
-    stan.odliczanie = setInterval(krok, 1000);
+    panelZamknij.focus();
   }
 
   // Przy zmianie języka trzeba przerysować pasek dni i panel godzin ręcznie —

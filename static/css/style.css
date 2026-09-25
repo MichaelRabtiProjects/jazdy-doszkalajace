@@ -953,11 +953,20 @@ section[id] {
   font-weight: 600;
 }
 
-.termin-platnosc {
-  margin: 14px 0 0;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
+.termin-form input:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 1px;
+  border-color: var(--amber-dark);
+}
+
+/* Pułapka na boty — poza ekranem, a nie display:none, bo część botów
+   pomija pola ukryte w ten oczywisty sposób. */
+.termin-pulapka {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .termin-form .btn {
@@ -976,13 +985,83 @@ section[id] {
   letter-spacing: 0.04em;
 }
 
-.termin-odliczanie {
-  margin: 14px 0 0;
+/* Komunikat "rezerwacja wstępna przyjęta" / "dziękuję za zadatek" */
+.termin-sukces {
+  margin: 0 0 14px;
   padding: 10px 14px;
   background: var(--white);
   border: 1px solid var(--line);
   border-left: 4px solid var(--amber);
   border-radius: 6px;
+  font-weight: 600;
+}
+
+.termin-akcje .termin-sukces {
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+.termin-email {
+  word-break: break-all;
+}
+
+/* Kanały kontaktu pod formularzem — druga, spokojniejsza droga */
+.termin-alternatywa {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+
+.termin-alternatywa-tytul {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.termin-alternatywa .termin-akcje {
+  margin-top: 10px;
+}
+
+.termin-alternatywa .btn {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+
+/* Wstępna rezerwacja w siatce godzin — ta sama pigułka co wolna godzina,
+   ale przygaszona, z przerywaną ramką i bez możliwości kliknięcia. */
+.godzina-wstepna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 4px 6px;
+  border-radius: 999px;
+  border: 1px dashed var(--ink-soft);
+  background: var(--paper-alt);
+  color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.15;
+  cursor: default;
+}
+
+.godzina-wstepna-czas {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: line-through;
+}
+
+.godzina-wstepna-opis {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.godzina-wstepna-legenda {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
 body.panel-open {
