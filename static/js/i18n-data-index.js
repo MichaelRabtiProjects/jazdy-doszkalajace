@@ -23,6 +23,7 @@ window.I18N = {
   'hero-cta': 'See available times',
 
   /* --- Oferta / Offer --- */
+  'oferta-kicker': 'Refresher lessons',
   'oferta-title': 'Offer',
   'oferta-lead': 'Three ways to feel confident on the road.',
   'oferta-1-h': 'Back behind the wheel',
@@ -54,6 +55,7 @@ window.I18N = {
   'oferta-alp-btn': 'See the ALP offer ↓',
 
   /* --- Grafik / Schedule --- */
+  'grafik-kicker': 'Available slots',
   'grafik-title': 'Schedule',
   'grafik-lead': 'Available times for the coming weeks. Pick a lesson length, then click the time that suits you.',
   'grafik-umow-note':
@@ -72,6 +74,7 @@ window.I18N = {
   'dlugosc-4h': '4 hours',
 
   /* --- O mnie / About me --- */
+  'omnie-kicker': 'Category B instructor',
   'omnie-title': 'About me',
   'omnie-intro-1':
     'Hi, I’m Michael. I’ve been driving since I was 18 – my father was also a driving instructor, ' +
@@ -132,6 +135,7 @@ window.I18N = {
     'and those who simply came to brush up their skills. I hope you all have a long, safe road ahead.',
 
   /* --- Cennik / Pricing --- */
+  'cennik-kicker': 'Clear pricing',
   'cennik-title': 'Pricing',
   'cennik-lead': 'One hourly rate, no hidden costs.',
   'cennik-za-godzine': 'per hour',
@@ -150,6 +154,7 @@ window.I18N = {
     'when you get in touch.',
 
   /* --- Opinie / Reviews --- */
+  'opinie-kicker': 'Google reviews',
   'opinie-title': 'Reviews',
   'opinie-lead': 'Real student reviews — straight from the Google listing and messages after passed exams.',
   'opinie-w-google': 'on Google',
@@ -192,6 +197,7 @@ window.I18N = {
   'rev-m16': 'Student review from the time the instructor worked at Babska Autoszkoła',
 
   /* --- Galeria / Gallery --- */
+  'galeria-kicker': 'Photos & videos',
   'galeria-title': 'Gallery',
   'galeria-lead': 'Students who agreed to have their photo published, plus footage from the manoeuvring yard.',
 
@@ -229,6 +235,7 @@ window.I18N = {
   'gal-22-alt': 'Student giving a thumbs up after a refresher driving lesson in Warsaw',
 
   /* --- Kontakt / Contact --- */
+  'kontakt-kicker': 'Book a lesson',
   'kontakt-title': 'Contact',
   'kontakt-instruktor-label': 'Instructor:',
   'kontakt-telefon-label': 'Phone:',

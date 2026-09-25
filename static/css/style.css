@@ -2425,3 +2425,80 @@ body.lightbox-open {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   MODERNIZACJA 2 — rytm sekcji
+   Trzy tła na zmianę: beż (domyślny .section), biel (.section-white)
+   i ciemny asfalt jak w hero (.section-dark). Kolejność w HTML dobrana
+   tak, żeby dwie sąsiednie sekcje nigdy nie miały tego samego tła.
+   ========================================================================== */
+.section {
+  padding: 88px 0;
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 64px 0;
+  }
+}
+
+.section-white {
+  background: var(--white);
+}
+
+.section-dark {
+  background: linear-gradient(180deg, var(--asphalt) 0%, var(--asphalt-2) 100%);
+  color: var(--white);
+}
+
+/* Mocniejszy nagłówek: większy, ciaśniejszy, z krótką bursztynową
+   kreską pod spodem — nawiązanie do pasa na jezdni. */
+.section-title {
+  font-size: clamp(2rem, 4.6vw, 2.8rem);
+  letter-spacing: 0.005em;
+  margin-bottom: 18px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 4px;
+  margin-top: 12px;
+  border-radius: 2px;
+  background: var(--amber);
+}
+
+.section-kicker {
+  margin-bottom: 8px;
+}
+
+/* ---- Treść na ciemnym tle --------------------------------------------- */
+.section-dark .section-kicker {
+  color: var(--amber);
+}
+
+.section-dark .section-lead,
+.section-dark .about-intro,
+.section-dark .umow-note {
+  color: #d8d8d4;
+}
+
+.section-dark .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.section-dark .btn-secondary:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--asphalt);
+}
+
+.section-dark a:not(.btn) {
+  color: var(--amber);
+}
+
+.section-dark .gallery-item {
+  border-color: rgba(255, 255, 255, 0.08);
+}
