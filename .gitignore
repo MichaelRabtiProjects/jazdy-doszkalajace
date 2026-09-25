@@ -9,3 +9,6 @@ server/data/
 # z panelu.
 wrangler.toml
 .wrangler/
+
+# Sekrety do testów lokalnych (hasło panelu, klucz Brevo) - nigdy w repo
+.dev.vars
