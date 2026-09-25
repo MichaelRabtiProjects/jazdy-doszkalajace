@@ -1768,10 +1768,15 @@ body.lightbox-open {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 28px;
-  height: 37px;
+  width: 30px;
+  height: 30px;
+  /* Grot pinezki (nie środek obrazka SVG) ma stać dokładnie na współrzędnych —
+     stąd -100% w pionie: SVG ma teraz kwadratowy viewBox 24×24, a sam
+     kształt pinezki jest w nim przesunięty tak, żeby grot wypadał
+     dokładnie na dolnej krawędzi. Cień "naziemny" jest już częścią SVG,
+     więc tu zostaje tylko lekki cień samej bryłki, nie podwójny efekt. */
   transform: translate(-50%, -100%);
-  filter: drop-shadow(0 2px 2px rgba(27, 29, 33, 0.35));
+  filter: drop-shadow(0 1px 1px rgba(27, 29, 33, 0.25));
   pointer-events: none;
 }
 

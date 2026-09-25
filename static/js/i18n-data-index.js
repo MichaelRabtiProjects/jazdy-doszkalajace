@@ -229,8 +229,8 @@ window.I18N = {
   'miejsce-status-bezplatne': 'Free of charge',
   'miejsce-status-warunkowe': 'To be agreed by phone',
   'miejsce-otworz': 'Open in Google Maps',
-  'mapy-atrybucja': 'Maps:',
-  'mapy-osm': 'OpenStreetMap contributors',
+  'mapy-atrybucja': 'Satellite imagery:',
+  'mapy-osm': 'Esri, Maxar, Earthstar Geographics',
   // Nazwy własne zostają jak są; tłumaczymy tylko opisowe dopiski
   'm1-1': 'Będzińska / K&amp;M Park',
   'm1-2': 'Zerzeń / DoubleTree by Hilton',

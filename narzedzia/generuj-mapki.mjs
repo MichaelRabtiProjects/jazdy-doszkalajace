@@ -1,4 +1,5 @@
-/* Generuje małe, statyczne mapki miejsc spotkań do static/img/mapy/.
+/* Generuje małe, statyczne mapki SATELITARNE miejsc spotkań do
+   static/img/mapy/.
 
    Dlaczego statyczne obrazki, a nie osadzona mapa (iframe):
    osadzona mapa ładuje skrypty i cookies zewnętrznej firmy u KAŻDEGO
@@ -8,10 +9,12 @@
    w obrazek — rysuje ją CSS dokładnie na środku, a obrazek jest
    wycentrowany co do piksela na współrzędnych.
 
-   Źródło: kafelki OpenStreetMap. Licencja wymaga podpisu
-   "© autorzy OpenStreetMap" przy mapach — jest pod każdym slajderem.
-   Zasady korzystania z kafelków OSM zakazują masowego pobierania;
-   ten skrypt bierze 9 kafelków na miejsce, raz, z przerwami, i trzyma
+   Źródło: zdjęcia satelitarne Esri World Imagery (Esri/Maxar/Earthstar
+   Geographics — darmowy, publiczny serwis kafelków). Licencja wymaga
+   podpisu przy mapach — jest pod każdym slajderem. UWAGA: Esri numeruje
+   kafelki w kolejności z/y/x, OpenStreetMap (poprzednie źródło tego
+   skryptu) w kolejności z/x/y — to nie pomyłka w kodzie niżej.
+   Ten skrypt bierze 9 kafelków na miejsce, raz, z przerwami, i trzyma
    je w pamięci podręcznej — przy ponownym uruchomieniu nic nie pobiera.
 
    Uruchomienie (z katalogu projektu):
@@ -26,7 +29,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 
-const ZOOM = 16; // poziom ulic — widać okoliczne drogi, ale nie całą dzielnicę
+const ZOOM = 17; // satelita korzysta z bliższego przybliżenia niż mapa uliczna — budynki są czytelne
 const KAFEL = 256;
 const SZER = 480; // wyświetlane ~300 px szerokości, więc jest zapas na ekrany HiDPI
 const WYS = 270; // 16:9
@@ -46,7 +49,7 @@ const MIEJSCA = [
 ];
 
 const WYJSCIE = join('static', 'img', 'mapy');
-const CACHE = join(tmpdir(), 'jd-kafelki-osm');
+const CACHE = join(tmpdir(), 'jd-kafelki-esri-sat');
 const USER_AGENT = 'jazdy-doszkalajace static map build (https://jazdy-doszkalajace.pages.dev)';
 
 mkdirSync(WYJSCIE, { recursive: true });
@@ -64,14 +67,15 @@ function doKafla(lat, lng) {
 }
 
 async function pobierzKafel(x, y) {
-  const plik = join(CACHE, `${ZOOM}-${x}-${y}.png`);
+  const plik = join(CACHE, `${ZOOM}-${x}-${y}.jpg`);
   if (existsSync(plik)) return plik;
-  const r = await fetch(`https://tile.openstreetmap.org/${ZOOM}/${x}/${y}.png`, {
+  // Esri: /tile/{z}/{y}/{x} — odwrotna kolejność niż w typowych kaflach OSM
+  const r = await fetch(`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${ZOOM}/${y}/${x}`, {
     headers: { 'User-Agent': USER_AGENT },
   });
-  if (!r.ok) throw new Error(`Kafel ${ZOOM}/${x}/${y}: HTTP ${r.status}`);
+  if (!r.ok) throw new Error(`Kafel ${ZOOM}/${y}/${x}: HTTP ${r.status}`);
   writeFileSync(plik, Buffer.from(await r.arrayBuffer()));
-  await czekaj(300); // grzecznie wobec serwerów OSM
+  await czekaj(300); // grzecznie wobec serwera kafelków
   return plik;
 }
 
