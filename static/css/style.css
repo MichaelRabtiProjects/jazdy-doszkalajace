@@ -2273,3 +2273,155 @@ body.lightbox-open {
     padding-bottom: calc(28px + 72px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* ==========================================================================
+   MODERNIZACJA 1 — głębia zamiast płaskości
+   Wspólne zaokrąglenie i miękki, dwuwarstwowy cień dla wszystkich kart.
+   Cień jest zbudowany wyłącznie z przezroczystego --asphalt (27,29,33),
+   więc nie wprowadza nowego koloru. Całość celowo w jednym bloku na
+   końcu arkusza: cofnięcie tego punktu = usunięcie tego bloku.
+   ========================================================================== */
+:root {
+  --radius-karta: 14px;
+  --cien-karta: 0 1px 2px rgba(27, 29, 33, 0.05), 0 4px 14px rgba(27, 29, 33, 0.06);
+  --cien-karta-hover: 0 2px 4px rgba(27, 29, 33, 0.06), 0 14px 30px rgba(27, 29, 33, 0.13);
+  --ruch: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.offer-card,
+.price-card,
+.review-item,
+.gallery-item,
+.miejsce-karta,
+.dzien {
+  border-radius: var(--radius-karta);
+  box-shadow: var(--cien-karta);
+  transition: transform var(--ruch), box-shadow var(--ruch), border-color var(--ruch);
+}
+
+/* Unoszenie tylko tam, gdzie jest prawdziwa mysz — na telefonie "hover"
+   przykleja się po dotknięciu i karta zostawałaby uniesiona. */
+@media (hover: hover) {
+  .offer-card:hover,
+  .price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--cien-karta-hover);
+  }
+
+  .review-item:hover,
+  .gallery-item:hover,
+  .miejsce-karta:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--cien-karta-hover);
+  }
+}
+
+/* Karty w slajderze mają cień niżej — zapas, żeby nie był ucięty. */
+.slajder-tor {
+  padding: 6px 4px 18px;
+}
+
+.miejsce-mapa {
+  border-radius: 10px;
+}
+
+/* ---- Przyciski: płynna zmiana koloru i cienia ------------------------- */
+.btn {
+  border-radius: 10px;
+  transition: transform var(--ruch), background var(--ruch), color var(--ruch),
+    box-shadow var(--ruch), border-color var(--ruch);
+}
+
+.btn-primary {
+  box-shadow: 0 4px 14px rgba(245, 163, 0, 0.28);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 22px rgba(245, 163, 0, 0.38);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.rating-badge {
+  border-radius: 12px;
+}
+
+/* ---- Grafik: pasek dni ------------------------------------------------ */
+.dni-pasek {
+  padding: 4px 4px 12px;
+}
+
+.dzien-chip {
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(27, 29, 33, 0.05);
+  transition: border-color var(--ruch), background var(--ruch),
+    box-shadow var(--ruch), transform var(--ruch);
+}
+
+@media (hover: hover) {
+  .dzien-chip:hover:not(.is-wybrany) {
+    transform: translateY(-2px);
+    box-shadow: var(--cien-karta);
+  }
+}
+
+/* Wybrany dzień: poza ciemnym tłem także bursztynowa obwódka i cień —
+   od razu widać, który dzień jest otwarty w panelu poniżej. */
+.dzien-chip.is-wybrany {
+  box-shadow: 0 0 0 2px var(--amber), 0 8px 18px rgba(27, 29, 33, 0.22);
+  transform: translateY(-2px);
+}
+
+/* ---- Grafik: godziny jako pigułki ------------------------------------- */
+.godzina-btn {
+  border-radius: 999px;
+  transition: background var(--ruch), color var(--ruch), border-color var(--ruch),
+    box-shadow var(--ruch), transform var(--ruch);
+}
+
+.godzina-btn:hover {
+  background: var(--amber);
+  border-color: var(--amber);
+  box-shadow: 0 6px 14px rgba(245, 163, 0, 0.35);
+}
+
+.godzina-btn:focus-visible {
+  outline: 3px solid var(--asphalt);
+  outline-offset: 2px;
+}
+
+/* Ostatnio kliknięta godzina — pełny bursztyn na ciemnym obrysie. */
+.godzina-btn.is-wybrana {
+  background: var(--amber);
+  border-color: var(--asphalt);
+  box-shadow: 0 0 0 1px var(--asphalt), 0 6px 14px rgba(245, 163, 0, 0.35);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-card,
+  .price-card,
+  .review-item,
+  .gallery-item,
+  .miejsce-karta,
+  .dzien,
+  .dzien-chip,
+  .godzina-btn,
+  .btn {
+    transition: none;
+  }
+
+  .offer-card:hover,
+  .price-card:hover,
+  .review-item:hover,
+  .gallery-item:hover,
+  .miejsce-karta:hover,
+  .dzien-chip:hover,
+  .dzien-chip.is-wybrany,
+  .godzina-btn:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+}

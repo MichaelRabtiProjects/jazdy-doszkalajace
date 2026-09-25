@@ -375,7 +375,16 @@
           t('terminAriaLabel') + nazwaDnia(dzien.nazwa_dnia) + ' ' + krotkaData(dzien.data) +
             t('terminAriaO') + godzinaTekst(slot.godzina)
         );
+        btn.setAttribute('aria-pressed', 'false');
         btn.addEventListener('click', function () {
+          // Po zamknięciu panelu kursant widzi, którą godzinę ostatnio
+          // oglądał — wyróżnienie zostaje tylko na jednej pigułce.
+          lista.querySelectorAll('.godzina-btn.is-wybrana').forEach(function (b) {
+            b.classList.remove('is-wybrana');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('is-wybrana');
+          btn.setAttribute('aria-pressed', 'true');
           otworzPanel(dzien, slot.godzina, btn);
         });
         lista.appendChild(btn);
