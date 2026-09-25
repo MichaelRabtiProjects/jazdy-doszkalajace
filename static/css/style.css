@@ -1601,6 +1601,193 @@ body.lightbox-open {
   margin: 0 0 10px;
 }
 
+/* Tekst tylko dla czytników ekranu — np. nazwa miejsca dopisana do
+   przycisku "Pokaż na mapie", żeby 9 takich samych linków dało się
+   odróżnić bez patrzenia na kartę. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Miejsca spotkań — dwa slajdery z jednego komponentu (js/slajder.js)
+   ========================================================================== */
+.miejsca {
+  margin-top: 44px;
+}
+
+.miejsca-tytul {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  max-width: 760px;
+  margin: 0 0 18px;
+}
+
+.miejsca-nota {
+  max-width: 760px;
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.slajder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slajder-tor {
+  --karta-gap: 16px;
+  display: flex;
+  gap: var(--karta-gap);
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* Pasek przewijania ukryty — na telefonie przewija się palcem, na
+     desktopie strzałkami. Zapas u dołu, żeby cień kart nie był ucięty. */
+  scrollbar-width: none;
+  padding: 4px 2px 10px;
+}
+
+.slajder-tor::-webkit-scrollbar {
+  display: none;
+}
+
+.slajder-tor:focus-visible {
+  outline: 2px solid var(--amber-dark);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.slajder-strzalka {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--asphalt);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease;
+}
+
+.slajder-strzalka:hover:not(:disabled) {
+  border-color: var(--amber-dark);
+}
+
+.slajder-strzalka:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Szerokość karty = ile kart widać naraz. Desktop: 3. */
+.miejsce-karta {
+  flex: 0 0 calc((100% - 2 * var(--karta-gap)) / 3);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--amber);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Miejsca warunkowe — ciemniejszy, spokojniejszy akcent niż bezpłatne,
+   żeby na pierwszy rzut oka było widać, że to druga kategoria. */
+.miejsce-warunkowe {
+  border-top-color: var(--asphalt-2);
+}
+
+.miejsce-ikona {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--paper-alt);
+  color: var(--amber-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.miejsce-ikona svg {
+  width: 24px;
+  height: 24px;
+}
+
+.miejsce-nazwa {
+  font-size: 1.15rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.miejsce-status {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f7a45;
+}
+
+.miejsce-warunkowe .miejsce-status {
+  color: var(--amber-dark);
+}
+
+.miejsce-akcje {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* Przyciski zawsze na dole karty, nawet gdy nazwy mają różną długość */
+  margin-top: auto;
+}
+
+.miejsce-akcje .btn {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 10px 14px;
+  min-height: 44px;
+  font-size: 0.9rem;
+}
+
+/* Średni ekran: 2 karty naraz */
+@media (max-width: 900px) {
+  .miejsce-karta {
+    flex-basis: calc((100% - var(--karta-gap)) / 2);
+  }
+}
+
+/* Telefon: jedna karta + wystający brzeg następnej (sygnał, że można
+   przesunąć palcem); strzałki znikają — gest wystarczy. */
+@media (max-width: 560px) {
+  .miejsce-karta {
+    flex-basis: 84%;
+  }
+
+  .slajder-strzalka {
+    display: none !important;
+  }
+}
+
+/* Notka o zniżce dla stałych klientów — ten sam styl co reszta
+   drobnego druku pod cennikiem, tylko bliżej poprzedniej notki. */
+.price-note-stali {
+  margin-top: 8px;
+}
+
 /* ==========================================================================
    Pływający przycisk "Zadzwoń"
    ========================================================================== */

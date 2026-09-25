@@ -419,6 +419,14 @@
         Jedna jazda trwa minimum 2, maksimum 4 godziny — pakiet 10-godzinny rozkłada się na kilka
         spotkań, do uzgodnienia przy kontakcie.
       </p>
+
+      <!-- [KWOTA] to celowy placeholder do decyzji właściciela (10–20 zł).
+           Ten sam znacznik jest w js/i18n-data-index.js (wersja angielska) —
+           przy wpisywaniu kwoty trzeba podmienić w OBU miejscach. -->
+      <p class="price-note price-note-stali reveal" data-i18n="cennik-stali">
+        Stali klienci płacą mniej — [KWOTA] zł/h niżej niż w cenniku powyżej. Szczegóły przy stałej
+        współpracy.
+      </p>
     </div>
   </section>
 
@@ -687,6 +695,112 @@
           <p><strong>Languages:</strong> English, Arabic, Polish.</p>
         </div>
       </div>
+
+      <!-- Miejsca spotkań: dwa slajdery z tego samego komponentu (js/slajder.js).
+           Karty to zwykłe linki do Map Google, BEZ osadzonej mapy (iframe) —
+           osadzona mapa ładowałaby skrypty i cookies Google u każdego
+           odwiedzającego, a Polityka prywatności obiecuje brak trackerów. -->
+      <div class="miejsca reveal">
+        <h3 class="miejsca-tytul" data-i18n="miejsca-1-tytul">Główne miejsca spotkań — dojazd bezpłatny, niezależnie od dnia tygodnia. Inne miejsce można dogadać telefonicznie.</h3>
+        <div class="slajder" data-slajder>
+          <button type="button" class="slajder-strzalka" data-slajder-prev aria-label="Poprzednie miejsca" data-i18n-attr="aria-label:slajder-prev">‹</button>
+          <div class="slajder-tor" data-slajder-tor tabindex="0" role="group" aria-label="Główne miejsca spotkań" data-i18n-attr="aria-label:miejsca-1-label">
+            <article class="miejsce-karta miejsce-bezplatne">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m1-1">Będzińska / K&amp;M Park</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Dojazd bezpłatny</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.18149683839272,21.190286834215232" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Będzińska / K&amp;M Park</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.18149683839272,21.190286834215232" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Będzińska / K&amp;M Park</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-bezplatne">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m1-2">Zerzeń / DoubleTree by Hilton</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Dojazd bezpłatny</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.185637864370754,21.142463683183966" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Zerzeń / DoubleTree by Hilton</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185637864370754,21.142463683183966" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Zerzeń / DoubleTree by Hilton</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-bezplatne">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m1-3">Ferio Wawer</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Dojazd bezpłatny</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.20643961512142,21.16806456403142" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Ferio Wawer</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.20643961512142,21.16806456403142" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Ferio Wawer</span></a>
+              </div>
+            </article>
+          </div>
+          <button type="button" class="slajder-strzalka" data-slajder-next aria-label="Następne miejsca" data-i18n-attr="aria-label:slajder-next">›</button>
+        </div>
+      </div>
+
+      <div class="miejsca reveal">
+        <h3 class="miejsca-tytul" data-i18n="miejsca-2-tytul">Dodatkowe miejsca — czasem dojeżdżam tu bez dopłaty, jeśli akurat jestem w okolicy, ale to trzeba wcześniej dogadać telefonicznie.</h3>
+        <div class="slajder" data-slajder>
+          <button type="button" class="slajder-strzalka" data-slajder-prev aria-label="Poprzednie miejsca" data-i18n-attr="aria-label:slajder-prev">‹</button>
+          <div class="slajder-tor" data-slajder-tor tabindex="0" role="group" aria-label="Dodatkowe miejsca" data-i18n-attr="aria-label:miejsca-2-label">
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-1">Bricoman Warszawa Wilanów</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.15297185146504,21.093351761354374" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Bricoman Warszawa Wilanów</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.15297185146504,21.093351761354374" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Bricoman Warszawa Wilanów</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-2">Auchan Puławska 427</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.141826658341266,21.02387121970856" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Auchan Puławska 427</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141826658341266,21.02387121970856" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Auchan Puławska 427</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-3">Stacja Shell koło Galerii Mokotów</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.17777456510009,21.006682123623765" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Stacja Shell koło Galerii Mokotów</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.17777456510009,21.006682123623765" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Stacja Shell koło Galerii Mokotów</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-4">Parking Cynamonowa 4 (koło dealera Mazdy)</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.1489457,21.055811" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Parking Cynamonowa 4 (koło dealera Mazdy)</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.1489457,21.055811" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Parking Cynamonowa 4 (koło dealera Mazdy)</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-5">Łopuszańska 22</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.19257846238642,20.95163280598338" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: Łopuszańska 22</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.19257846238642,20.95163280598338" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: Łopuszańska 22</span></a>
+              </div>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <div class="miejsce-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></div>
+              <h4 class="miejsce-nazwa" data-i18n="m2-6">al. Niepodległości 213 — parking pod Biblioteką Narodową</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">Do uzgodnienia telefonicznie</p>
+              <div class="miejsce-akcje">
+                <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&amp;query=52.21431110095896,21.005091288313384" target="_blank" rel="noopener"><span data-i18n="miejsce-pokaz">Pokaż na mapie</span><span class="visually-hidden">: al. Niepodległości 213 — parking pod Biblioteką Narodową</span></a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.21431110095896,21.005091288313384" target="_blank" rel="noopener"><span data-i18n="miejsce-nawiguj">Nawiguj</span><span class="visually-hidden">: al. Niepodległości 213 — parking pod Biblioteką Narodową</span></a>
+              </div>
+            </article>
+          </div>
+          <button type="button" class="slajder-strzalka" data-slajder-next aria-label="Następne miejsca" data-i18n-attr="aria-label:slajder-next">›</button>
+        </div>
+        <p class="miejsca-nota" data-i18n="miejsca-2-nota">Pierwsza jazda umówiona z wyprzedzeniem w jedno z tych miejsc wiąże się z dopłatą 15 zł do każdej godziny — muszę dojechać z Wawra i po jeździe tam wrócić. Przy kolejnych jazdach w tym samym miejscu cenę ustalamy indywidualnie.</p>
+      </div>
     </div>
   </section>
 
@@ -736,6 +850,7 @@
 <script src="js/i18n-data-index.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
+<script src="js/slajder.js"></script>
 <script src="js/grafik.js"></script>
 </body>
 </html>

@@ -118,6 +118,10 @@ window.I18N = {
   'cennik-pakiet-badge': 'Package',
   'cennik-pakiet-godzin': '10 hours',
   'cennik-pakiet-note': '150 zł/h — 10 zł cheaper per hour',
+  /* [KWOTA] — ten sam placeholder co w index.html; wpisując kwotę,
+     podmienić w obu miejscach. */
+  'cennik-stali':
+    'Regular students pay less — [KWOTA] zł/h below the prices above. Details once we’re working together regularly.',
   'cennik-note':
     'A single lesson is 2 to 4 hours — the 10-hour package is split across several sessions, arranged ' +
     'when you get in touch.',
@@ -207,6 +211,35 @@ window.I18N = {
   'kontakt-telefon-label': 'Phone:',
   'kontakt-obszar-label': 'Service area:',
   'kontakt-obszar-tekst': 'Wawer and the surrounding Warsaw area — other districts by arrangement.',
+
+  /* --- Miejsca spotkań / Meeting points --- */
+  'miejsca-1-tytul':
+    'Main meeting points — free of charge, any day of the week. Another spot can be arranged by phone.',
+  'miejsca-1-label': 'Main meeting points',
+  'miejsca-2-tytul':
+    'Additional spots — I sometimes come here at no extra cost if I happen to be in the area, but this ' +
+    'needs to be agreed by phone in advance.',
+  'miejsca-2-label': 'Additional spots',
+  'miejsca-2-nota':
+    'The first lesson booked in advance at one of these spots carries a surcharge of 15 zł per hour — ' +
+    'I have to drive over from Wawer and back again afterwards. For further lessons at the same spot, the ' +
+    'price is agreed individually.',
+  'slajder-prev': 'Previous spots',
+  'slajder-next': 'Next spots',
+  'miejsce-status-bezplatne': 'Free of charge',
+  'miejsce-status-warunkowe': 'To be agreed by phone',
+  'miejsce-pokaz': 'Show on map',
+  'miejsce-nawiguj': 'Directions',
+  // Nazwy własne zostają jak są; tłumaczymy tylko opisowe dopiski
+  'm1-1': 'Będzińska / K&amp;M Park',
+  'm1-2': 'Zerzeń / DoubleTree by Hilton',
+  'm1-3': 'Ferio Wawer',
+  'm2-1': 'Bricoman Warszawa Wilanów',
+  'm2-2': 'Auchan Puławska 427',
+  'm2-3': 'Shell station near Galeria Mokotów',
+  'm2-4': 'Car park at Cynamonowa 4 (by the Mazda dealer)',
+  'm2-5': 'Łopuszańska 22',
+  'm2-6': 'al. Niepodległości 213 — car park by the National Library',
 
   /* --- Stopka / Footer --- */
   'footer-prawa': '© 2026 Jazdy Doszkalające. All rights reserved.',
