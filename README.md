@@ -3,6 +3,62 @@
 Strona-wizytówka z systemem rezerwacji terminów online dla jednoosobowej działalności
 instruktora nauki jazdy (jazdy doszkalające, Warszawa Wawer).
 
+## Wersja na Cloudflare Pages (aktualna)
+
+Działająca strona to `static/` (HTML/CSS/JS) + `functions/` (API jako Pages
+Functions) + baza D1 (`migrations/`). Folder `server/` poniżej to starsza,
+osobna wersja na Node.js — nieużywana.
+
+Jak to działa:
+
+1. Kursant klika godzinę w grafiku i wysyła formularz (imię i nazwisko,
+   telefon, e-mail). Termin od razu pokazuje się jako „wstępna rezerwacja”.
+2. Instruktor dostaje e-mail, kursant — e-mail „rezerwacja wstępna przyjęta”
+   z linkiem do strony `/potwierdzenie?t=…` i przyciskiem „Zadatek wysłany”.
+3. W panelu `/admin` instruktor potwierdza albo odrzuca rezerwację, zaznacza
+   otrzymany zadatek i edytuje grafik (klik w godzinę = otwórz/zamknij).
+
+### Konfiguracja w panelu Cloudflare (raz)
+
+Pages → projekt → **Settings → Variables and Secrets** (typ **Secret**):
+
+| Zmienna | Co to jest |
+|---|---|
+| `ADMIN_HASLO` | hasło do panelu `/admin` (długie, np. 4–5 losowych słów) |
+| `BREVO_API_KEY` | klucz API z Brevo — bez niego maile się nie wysyłają |
+| `EMAIL_INSTRUKTORA` | opcjonalnie; domyślnie `MichaelRabti@gmail.com` |
+
+Pages → projekt → **Settings → Bindings → D1 database**: nazwa zmiennej
+`DB`, baza `jazdy-doszkalajace-db`. Bazę tworzy się raz i wgrywa do niej
+migracje po kolei:
+
+```powershell
+npx wrangler d1 create jazdy-doszkalajace-db
+npx wrangler d1 execute jazdy-doszkalajace-db --remote --file migrations/0001_init.sql
+# ... i tak samo 0002 → 0007, po kolei
+```
+
+**Brevo (e-maile):** załóż darmowe konto na brevo.com → *Senders, Domains &
+Dedicated IPs → Senders* → dodaj i potwierdź `MichaelRabti@gmail.com` →
+*SMTP & API → API Keys* → wygeneruj klucz i wklej go jako `BREVO_API_KEY`.
+Limit darmowy: 300 maili dziennie. Bez własnej domeny część maili może
+trafiać do spamu — kursant dostaje w formularzu podpowiedź, żeby tam zajrzał.
+
+### Testy lokalne
+
+```powershell
+npx wrangler pages dev --port 8788 --local
+```
+
+Hasło do panelu lokalnie bierze się z pliku `.dev.vars` (jest w `.gitignore`):
+
+```
+ADMIN_HASLO=test-lokalny-123
+```
+
+Bez `BREVO_API_KEY` maile nie są wysyłane, tylko wypisywane w konsoli
+serwera — tak da się sprawdzić ich treść bez konta w Brevo.
+
 ## Stack
 
 - Frontend: czysty HTML/CSS/JS (bez frameworka, bez bundlera)

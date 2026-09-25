@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /potwierdzenie
 
 Sitemap: https://jazdy-doszkalajace.pages.dev/sitemap.xml

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel | Jazdy Doszkalające</title>
+<!-- Panel nie może trafić do wyszukiwarek -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1b1d21">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Panel<span class="logo-accent">.</span></a>
+    <button type="button" class="admin-wyloguj" id="wyloguj" hidden>Wyloguj</button>
+  </div>
+</header>
+
+<main class="container admin-main">
+
+  <!-- Logowanie -->
+  <section id="widok-logowanie" class="admin-logowanie" hidden>
+    <h1>Zaloguj się</h1>
+    <form id="form-logowanie">
+      <label for="haslo">Hasło</label>
+      <input id="haslo" name="haslo" type="password" autocomplete="current-password" required>
+      <p class="admin-blad" id="blad-logowania" role="alert" hidden></p>
+      <button type="submit" class="btn btn-primary">Zaloguj</button>
+      <p class="admin-drobne">Na tym urządzeniu zostaniesz zalogowany na 30 dni.</p>
+    </form>
+  </section>
+
+  <!-- Panel -->
+  <section id="widok-panel" hidden>
+    <nav class="admin-zakladki" role="tablist" aria-label="Sekcje panelu">
+      <button type="button" role="tab" class="admin-zakladka is-active" data-zakladka="rezerwacje" aria-selected="true">
+        Rezerwacje <span class="admin-licznik" id="licznik-wstepnych" hidden></span>
+      </button>
+      <button type="button" role="tab" class="admin-zakladka" data-zakladka="grafik" aria-selected="false">Grafik</button>
+      <button type="button" role="tab" class="admin-zakladka" data-zakladka="ustawienia" aria-selected="false">Ustawienia</button>
+    </nav>
+
+    <p class="admin-komunikat" id="komunikat" role="status" hidden></p>
+
+    <!-- Rezerwacje -->
+    <div class="admin-panel" id="panel-rezerwacje" role="tabpanel">
+      <div class="admin-pasek">
+        <button type="button" class="btn btn-secondary" id="pokaz-dodaj">+ Dodaj rezerwację</button>
+        <button type="button" class="btn btn-secondary" id="odswiez">Odśwież</button>
+      </div>
+
+      <form class="admin-karta admin-dodaj" id="form-dodaj" hidden>
+        <h2>Nowa rezerwacja (od razu potwierdzona)</h2>
+        <div class="admin-siatka">
+          <label>Data <input type="date" name="data" required></label>
+          <label>Godzina
+            <select name="godzina_start" required></select>
+          </label>
+          <label>Długość
+            <select name="dlugosc">
+              <option value="1">1 h</option>
+              <option value="2" selected>2 h</option>
+              <option value="3">3 h</option>
+              <option value="4">4 h</option>
+            </select>
+          </label>
+        </div>
+        <label>Imię i nazwisko <input type="text" name="imie" required maxlength="80" autocomplete="off"></label>
+        <label>Telefon <input type="tel" name="telefon" required maxlength="25" autocomplete="off"></label>
+        <label>E-mail (opcjonalnie) <input type="email" name="email" maxlength="120" autocomplete="off"></label>
+        <label>Notatka (widzisz tylko Ty) <input type="text" name="notatka" maxlength="500" autocomplete="off"></label>
+        <label class="admin-check"><input type="checkbox" name="powiadom" checked> Wyślij kursantowi e-mail z potwierdzeniem (jeśli podano e-mail)</label>
+        <p class="admin-blad" id="blad-dodaj" role="alert" hidden></p>
+        <div class="admin-pasek">
+          <button type="submit" class="btn btn-primary">Zapisz</button>
+          <button type="button" class="btn btn-secondary" id="anuluj-dodaj">Anuluj</button>
+        </div>
+      </form>
+
+      <h2 class="admin-naglowek">Do potwierdzenia</h2>
+      <div id="lista-wstepne" class="admin-lista"></div>
+
+      <h2 class="admin-naglowek">Nadchodzące jazdy</h2>
+      <div id="lista-nadchodzace" class="admin-lista"></div>
+
+      <details class="admin-historia">
+        <summary>Historia i odrzucone</summary>
+        <div id="lista-historia" class="admin-lista"></div>
+      </details>
+    </div>
+
+    <!-- Grafik -->
+    <div class="admin-panel" id="panel-grafik" role="tabpanel" hidden>
+      <p class="admin-drobne">
+        Kliknij godzinę, żeby ją otworzyć albo zamknąć. Zmiany od razu widać na stronie.
+        Grafik dla kursantów obejmuje tylko najbliższe tygodnie (patrz Ustawienia) — tutaj możesz planować dalej.
+      </p>
+      <ul class="admin-legenda" aria-label="Legenda">
+        <li><span class="h h-otwarta"></span> otwarta</li>
+        <li><span class="h h-zamknieta"></span> zamknięta</li>
+        <li><span class="h h-wstepna"></span> wstępna rezerwacja</li>
+        <li><span class="h h-zajeta"></span> potwierdzona jazda</li>
+      </ul>
+      <div id="grafik-dni"></div>
+    </div>
+
+    <!-- Ustawienia -->
+    <div class="admin-panel" id="panel-ustawienia" role="tabpanel" hidden>
+      <form class="admin-karta" id="form-szablon">
+        <h2>Stałe godziny pracy</h2>
+        <p class="admin-drobne">Tak wygląda każdy tydzień, dopóki nie zmienisz konkretnego dnia w zakładce Grafik.</p>
+        <div id="szablon-dni"></div>
+        <p class="admin-blad" id="blad-szablon" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">Zapisz godziny pracy</button>
+      </form>
+
+      <form class="admin-karta" id="form-ustawienia">
+        <h2>Zadatek i grafik</h2>
+        <div class="admin-siatka">
+          <label>Zadatek (zł) <input type="number" name="kwota_zadatku" min="1" max="1000" step="1" required></label>
+          <label>Grafik na stronie
+            <select name="horyzont_tygodni">
+              <option value="1">1 tydzień naprzód</option>
+              <option value="2">2 tygodnie naprzód</option>
+              <option value="3">3 tygodnie naprzód</option>
+            </select>
+          </label>
+        </div>
+        <p class="admin-blad" id="blad-ustawienia" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
