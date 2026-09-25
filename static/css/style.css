@@ -1859,9 +1859,9 @@ body.lightbox-open {
 }
 
 /* ==========================================================================
-   Pływający przycisk "Zadzwoń"
+   Pływające przyciski kontaktu
    ========================================================================== */
-/* Baza wspólna dla obu pływających przycisków (.js-fab) — widoczność
+/* Baza wspólna dla trzech pływających przycisków (.js-fab) — widoczność
    (klasa is-visible) steruje nimi razem z main.js. Kolor, ikona i pozycja
    "bottom" (żeby się nie nakładały) są już specyficzne dla każdego. */
 .js-fab {
@@ -1890,11 +1890,13 @@ body.lightbox-open {
 }
 
 .js-fab svg {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 
+/* Kolejność od dołu: Zadzwoń (16px), WhatsApp (+52+14), Messenger (+52+14
+   jeszcze raz) — każdy kolejny o wysokość przycisku plus odstęp wyżej. */
 .call-fab {
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   background: var(--amber);
@@ -1906,32 +1908,25 @@ body.lightbox-open {
   transform: translateY(-2px);
 }
 
-.call-fab-number {
-  display: none;
-}
-
-@media (min-width: 721px) {
-  .call-fab-number {
-    display: inline;
-  }
-
-  /* Zawężone do .call-fab — .whatsapp-fab współdzieli klasę .call-fab-text
-     (sam styl tekstu), ale nie ma numeru obok, więc nie ma czego zapowiadać
-     dwukropkiem. */
-  .call-fab .call-fab-text::after {
-    content: ":";
-  }
-}
-
-/* WhatsApp nad przyciskiem telefonu: 52px jego wysokości + 14px odstępu */
 .whatsapp-fab {
   bottom: calc(16px + 52px + 14px + env(safe-area-inset-bottom, 0px));
-  background: #25d366; /* oficjalny kolor marki WhatsApp — jedyne miejsce na stronie, gdzie świadomie odstępujemy od palety strony, żeby przycisk był rozpoznawalny na pierwszy rzut oka */
+  background: #25d366; /* oficjalny kolor marki WhatsApp — jedno z dwóch świadomych odejść od palety strony (patrz Messenger niżej), żeby przycisk był rozpoznawalny na pierwszy rzut oka */
   color: #ffffff;
 }
 
 .whatsapp-fab:hover {
   background: #1fb855;
+  transform: translateY(-2px);
+}
+
+.messenger-fab {
+  bottom: calc(16px + 2 * (52px + 14px) + env(safe-area-inset-bottom, 0px));
+  background: #0084ff; /* oficjalny kolor marki Messenger */
+  color: #ffffff;
+}
+
+.messenger-fab:hover {
+  background: #006fd6;
   transform: translateY(-2px);
 }
 

@@ -276,6 +276,8 @@ window.I18N = {
   'fab-text': 'Call',
   'whatsapp-fab-label': 'Message the instructor on WhatsApp',
   'whatsapp-fab-text': 'Message',
+  'messenger-fab-label': 'Message the instructor on Messenger',
+  'messenger-fab-text': 'Message',
 
   /* --- Panel terminu / lightbox --- */
   'zamknij-label': 'Close',
