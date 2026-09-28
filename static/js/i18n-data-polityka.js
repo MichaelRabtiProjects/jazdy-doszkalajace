@@ -14,7 +14,7 @@ window.I18N = {
   'p4': '<strong>Who I share it with:</strong>' +
     '<ul>' +
     '<li>Cloudflare — hosting for the website and the admin panel,</li>' +
-    '<li>Brevo (Sendinblue SAS, France) — sending booking confirmation e-mails,</li>' +
+    '<li>Brevo (Sendinblue SAS, France) — sending booking confirmation e-mails and text messages, and a reminder the day before the lesson,</li>' +
     '<li>Google Fonts — loading typefaces (your IP address is sent to Google),</li>' +
     '<li>WhatsApp / Meta — only if you choose that contact channel yourself.</li>' +
     '</ul>',

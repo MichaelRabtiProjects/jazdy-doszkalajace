@@ -1,0 +1,24 @@
+// Konfiguracja Workera z przypomnieniami (NIE strony — strona ma ustawienia
+// w panelu Cloudflare Pages). Wdrożenie: npx wrangler deploy (z tego folderu).
+// Klucz Brevo ustawia się osobno: npx wrangler secret put BREVO_API_KEY
+{
+  "name": "jazdy-przypomnienia",
+  "main": "index.js",
+  "compatibility_date": "2026-09-21",
+  "workers_dev": false,
+  "triggers": {
+    "crons": ["0 16 * * *", "0 17 * * *"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "jazdy-doszkalajace-db",
+      "database_id": "d5d35a98-acb7-419e-829e-cc8b66f3730b"
+    }
+  ],
+  "vars": {
+    "ADRES_STRONY": "https://jazdy-doszkalajace.pages.dev",
+    // "tak" = wysyłaj też SMS (płatne kredyty w Brevo); inaczej tylko e-mail
+    "SMS_WLACZONE": "nie"
+  }
+}

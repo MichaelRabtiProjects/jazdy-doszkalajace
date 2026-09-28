@@ -36,7 +36,7 @@ export async function onRequestGet({ request, env }) {
       .prepare(
         `SELECT id, data, start_min, koniec_min, miejsce, doplata_h, imie, telefon, email, kod_rezerwacji,
                 kwota_zadatku, status, jezyk, zrodlo, utworzono_o, potwierdzono_o,
-                zadatek_zgloszony_o, zadatek_otrzymany_o, notatka
+                zadatek_zgloszony_o, zadatek_otrzymany_o, przypomnienie_o, notatka
          FROM rezerwacje WHERE data >= ?
          ORDER BY data, start_min`
       )

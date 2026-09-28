@@ -226,6 +226,7 @@
     var znaczki = ['<span class="znaczek">' + esc(r.kod_rezerwacji) + '</span>'];
     if (r.zrodlo === 'panel') znaczki.push('<span class="znaczek">wpisana ręcznie</span>');
     if (r.jezyk === 'en') znaczki.push('<span class="znaczek">EN</span>');
+    if (r.przypomnienie_o) znaczki.push('<span class="znaczek">przypomnienie wysłane ' + esc(kiedy(r.przypomnienie_o)) + '</span>');
     if (r.status === 'odrzucona') znaczki.push('<span class="znaczek znaczek-szary">odrzucona</span>');
     if (r.status === 'anulowane') znaczki.push('<span class="znaczek znaczek-szary">odwołana</span>');
 
@@ -397,6 +398,29 @@
       .catch(function (err) {
         przycisk.disabled = false;
         komunikat(err.message, true);
+      });
+  });
+
+  // Przypomnienia wysyła automat codziennie o 18:00 — ten przycisk robi to
+  // od razu (np. gdy jazdę na jutro potwierdzasz już po 18:00).
+  $('przypomnij-teraz').addEventListener('click', function () {
+    if (!window.confirm('Wysłać teraz przypomnienia o jutrzejszych jazdach?\n\nDostaną je tylko potwierdzone jazdy z zaznaczonym zadatkiem, które jeszcze nie miały przypomnienia.')) return;
+    var btn = $('przypomnij-teraz');
+    btn.disabled = true;
+    api('/api/admin/przypomnienia', {})
+      .then(function (w) {
+        komunikat(
+          w.jazd === 0
+            ? 'Brak jutrzejszych jazd do przypomnienia (potwierdzonych, z zadatkiem, bez wysłanego przypomnienia).'
+            : 'Jutrzejsze jazdy: ' + w.jazd + '. Wysłane e-maile: ' + w.maile + ', SMS-y: ' + w.smsy + '.'
+        );
+        return wczytajRezerwacje();
+      })
+      .catch(function (err) {
+        komunikat(err.message, true);
+      })
+      .then(function () {
+        btn.disabled = false;
       });
   });
 
