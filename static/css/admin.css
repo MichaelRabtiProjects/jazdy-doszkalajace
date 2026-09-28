@@ -544,3 +544,56 @@ body.admin {
     transition: none;
   }
 }
+
+/* ---- Miejsce, edycja jazdy, czasy dojazdu ----------------------------- */
+.rez-miejsce {
+  font-size: 0.95rem;
+  margin: 2px 0;
+}
+
+.rez-edycja {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+.admin input[type='time'] {
+  font: inherit;
+  font-size: 1rem;
+  padding: 10px 12px;
+  min-height: 44px;
+  border: 1px solid #cfccc0;
+  border-radius: 10px;
+  background: var(--white);
+  width: 100%;
+}
+
+.dojazdy-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.92rem;
+}
+
+.dojazdy-tabela th {
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  padding: 4px 6px;
+}
+
+.dojazdy-tabela td {
+  padding: 5px 6px;
+  border-top: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.dojazdy-tabela td:first-child {
+  white-space: normal;
+}
+
+.dojazdy-tabela input[type='number'] {
+  width: 70px;
+  min-height: 38px;
+  padding: 6px 8px;
+}

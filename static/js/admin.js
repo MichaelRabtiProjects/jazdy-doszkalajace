@@ -14,7 +14,7 @@
   var TYDZIEN = [1, 2, 3, 4, 5, 6, 0];
   var ZAJMUJACE = ['wstepna', 'potwierdzona', 'oczekuje', 'oplacone'];
 
-  var stan = { dzisiaj: null, rezerwacje: [], grafik: null, zakladka: 'rezerwacje' };
+  var stan = { dzisiaj: null, rezerwacje: [], miejsca: [], grafik: null, zakladka: 'rezerwacje' };
 
   var $ = function (id) {
     return document.getElementById(id);
@@ -47,8 +47,33 @@
     return SKROTY[dzienTyg(data)] + ' ' + cz[2] + '.' + cz[1];
   }
 
+  /** 805 → '13:25' */
+  function godz(minuty) {
+    return dwie(Math.floor(minuty / 60)) + ':' + dwie(minuty % 60);
+  }
+
+  /** '13:25' → 805 */
+  function minuty(tekst) {
+    var cz = String(tekst).split(':');
+    return Number(cz[0]) * 60 + Number(cz[1]);
+  }
+
+  function nazwaMiejsca(id) {
+    for (var i = 0; i < stan.miejsca.length; i++) if (stan.miejsca[i].id === id) return stan.miejsca[i].nazwa;
+    return 'miejsce do ustalenia';
+  }
+
+  function opcjeMiejsc(wybrane, zPustym) {
+    var html = zPustym ? '<option value="">— do ustalenia —</option>' : '';
+    stan.miejsca.forEach(function (m) {
+      html += '<option value="' + esc(m.id) + '"' + (m.id === wybrane ? ' selected' : '') + '>' +
+        esc(m.nazwa) + (m.wawer ? ' (Wawer)' : '') + '</option>';
+    });
+    return html;
+  }
+
   function zakres(r) {
-    return dwie(r.godzina_start) + ':00–' + dwie(r.godzina_koniec) + ':00';
+    return godz(r.start_min) + '–' + godz(r.koniec_min);
   }
 
   /** Data i godzina z ISO / SQLite ('2026-09-25 17:03:11') po polsku. */
@@ -183,6 +208,11 @@
       .then(function (dane) {
         stan.dzisiaj = dane.dzisiaj;
         stan.rezerwacje = dane.rezerwacje;
+        stan.miejsca = dane.miejsca || [];
+        document.querySelectorAll('.sel-miejsce').forEach(function (s) {
+          var w = s.value;
+          s.innerHTML = opcjeMiejsc(w, true);
+        });
         rysujRezerwacje();
       })
       .catch(function (err) {
@@ -192,7 +222,7 @@
 
   function kartaRezerwacji(r, typ) {
     var tel = String(r.telefon).replace(/[^\d+]/g, '');
-    var dl = r.godzina_koniec - r.godzina_start;
+    var dl = (r.koniec_min - r.start_min) / 60;
     var znaczki = ['<span class="znaczek">' + esc(r.kod_rezerwacji) + '</span>'];
     if (r.zrodlo === 'panel') znaczki.push('<span class="znaczek">wpisana ręcznie</span>');
     if (r.jezyk === 'en') znaczki.push('<span class="znaczek">EN</span>');
@@ -215,6 +245,7 @@
       akcje +=
         '<button type="button" class="btn btn-secondary" data-akcja="zadatek">' +
         (r.zadatek_otrzymany_o ? 'Cofnij „zadatek otrzymany”' : 'Zadatek otrzymany') + '</button>' +
+        '<button type="button" class="btn btn-secondary" data-akcja="edytuj">Zmień godzinę / miejsce</button>' +
         '<button type="button" class="btn btn-secondary" data-akcja="notatka">Notatka</button>';
       if (typ !== 'wstepna') akcje += '<button type="button" class="btn btn-secondary btn-ostrozny" data-akcja="anuluj">Odwołaj</button>';
     } else {
@@ -225,6 +256,8 @@
       '<article class="admin-karta rez rez-' + esc(r.status) + '" data-id="' + r.id + '">' +
       '<div class="rez-termin"><strong>' + esc(krotko(r.data)) + '</strong> ' + zakres(r) +
       ' <span class="rez-dl">' + dl + ' h</span></div>' +
+      '<div class="rez-miejsce">' + esc(nazwaMiejsca(r.miejsce)) + ' · <strong>' + (160 + (r.doplata_h || 0)) + ' zł/h</strong>' +
+      (r.doplata_h ? ' <span class="znaczek">+' + r.doplata_h + ' zł/h dojazd</span>' : '') + '</div>' +
       '<div class="rez-osoba">' + esc(r.imie) + '</div>' +
       '<div class="rez-kontakt"><a href="tel:' + esc(tel) + '">' + esc(r.telefon) + '</a>' +
       (r.email ? ' · <a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a>' : '') + '</div>' +
@@ -236,7 +269,32 @@
         ? '<label class="admin-check"><input type="checkbox" class="rez-powiadom" checked> Wyślij kursantowi e-mail</label>'
         : '') +
       '<div class="rez-akcje">' + akcje + '</div>' +
+      (aktywna ? formularzEdycji(r) : '') +
       '</article>'
+    );
+  }
+
+  /** Ukryty formularz ręcznej zmiany godziny / długości / miejsca / dopłaty. */
+  function formularzEdycji(r) {
+    var dl = (r.koniec_min - r.start_min) / 60;
+    var opcjeDl = '';
+    for (var h = 1; h <= 4; h++) opcjeDl += '<option value="' + h + '"' + (h === dl ? ' selected' : '') + '>' + h + ' h</option>';
+    return (
+      '<div class="rez-edycja" hidden>' +
+      '<div class="admin-siatka">' +
+      '<label>Start <input type="time" class="ed-start" step="300" value="' + godz(r.start_min) + '"></label>' +
+      '<label>Długość <select class="ed-dlugosc">' + opcjeDl + '</select></label>' +
+      '<label>Miejsce <select class="ed-miejsce">' + opcjeMiejsc(r.miejsce, true) + '</select></label>' +
+      '<label>Dopłata <select class="ed-doplata">' +
+      '<option value="0"' + (!r.doplata_h ? ' selected' : '') + '>brak (160 zł/h)</option>' +
+      '<option value="15"' + (r.doplata_h ? ' selected' : '') + '>+15 zł/h (175 zł/h)</option>' +
+      '</select></label>' +
+      '</div>' +
+      '<p class="admin-drobne">Możesz ustawić dowolną godzinę, także z krótszym buforem niż wyliczył grafik — pilnuję tylko, żeby jazdy na siebie nie nachodziły. Kursant nie dostaje automatycznej wiadomości o zmianie.</p>' +
+      '<div class="rez-akcje">' +
+      '<button type="button" class="btn btn-primary" data-akcja="zapisz-edycje">Zapisz zmianę</button>' +
+      '<button type="button" class="btn btn-secondary" data-akcja="anuluj-edycje">Anuluj</button>' +
+      '</div></div>'
     );
   }
 
@@ -284,6 +342,13 @@
     if (!r) return;
     var akcja = przycisk.dataset.akcja;
     var opis = krotko(r.data) + ' ' + zakres(r) + ' — ' + r.imie;
+    var edycja = karta.querySelector('.rez-edycja');
+
+    // Formularz edycji otwieramy i zamykamy bez rozmowy z serwerem
+    if (akcja === 'edytuj' || akcja === 'anuluj-edycje') {
+      edycja.hidden = akcja === 'anuluj-edycje';
+      return;
+    }
     var dane = { akcja: akcja, id: r.id };
     var potwierdzenie = null;
 
@@ -297,6 +362,12 @@
       potwierdzenie = 'Trwale usunąć dane tej rezerwacji?\n' + opis + '\n\nTego nie da się cofnąć.';
     } else if (akcja === 'zadatek') {
       dane.otrzymany = !r.zadatek_otrzymany_o;
+    } else if (akcja === 'zapisz-edycje') {
+      dane.akcja = 'edytuj';
+      dane.start = minuty(edycja.querySelector('.ed-start').value);
+      dane.dlugosc = Number(edycja.querySelector('.ed-dlugosc').value);
+      dane.miejsce = edycja.querySelector('.ed-miejsce').value;
+      dane.doplata_h = Number(edycja.querySelector('.ed-doplata').value);
     } else if (akcja === 'notatka') {
       var nowa = window.prompt('Notatka (widzisz ją tylko Ty):', r.notatka || '');
       if (nowa === null) return;
@@ -314,6 +385,7 @@
           usun: 'Dane usunięte.',
           zadatek: dane.otrzymany ? 'Zaznaczono: zadatek otrzymany.' : 'Cofnięto „zadatek otrzymany”.',
           notatka: 'Notatka zapisana.',
+          'zapisz-edycje': 'Zmiana zapisana — grafik na stronie przeliczył się od nowa.',
         };
         var tekst = teksty[akcja];
         if (wynik.email_wyslany === true) tekst += ' Kursant dostał e-mail.';
@@ -336,17 +408,6 @@
 
   /* ---- Ręczne dodawanie ------------------------------------------------ */
 
-  (function () {
-    var select = $('form-dodaj').elements.godzina_start;
-    for (var g = 6; g <= 21; g++) {
-      var o = document.createElement('option');
-      o.value = g;
-      o.textContent = dwie(g) + ':00';
-      if (g === 10) o.selected = true;
-      select.appendChild(o);
-    }
-  })();
-
   $('pokaz-dodaj').addEventListener('click', function () {
     var f = $('form-dodaj');
     f.hidden = false;
@@ -368,8 +429,10 @@
     api('/api/admin/rezerwacje', {
       akcja: 'dodaj',
       data: f.elements.data.value,
-      godzina_start: Number(f.elements.godzina_start.value),
+      start: minuty(f.elements.start.value),
       dlugosc: Number(f.elements.dlugosc.value),
+      miejsce: f.elements.miejsce.value,
+      doplata_h: Number(f.elements.doplata_h.value),
       imie: f.elements.imie.value,
       telefon: f.elements.telefon.value,
       email: f.elements.email.value,
@@ -401,6 +464,7 @@
         stan.grafik = dane;
         rysujGrafik();
         rysujUstawienia();
+        rysujDojazdy();
       })
       .catch(function (err) {
         komunikat(err.message, true);
@@ -435,7 +499,8 @@
         '<div class="g-godziny">';
       dzien.godziny.forEach(function (h) {
         var tytul = h.rezerwacja
-          ? (h.rezerwacja.status === 'wstepna' ? 'Wstępna: ' : 'Jazda: ') + h.rezerwacja.imie
+          ? (h.rezerwacja.status === 'wstepna' ? 'Wstępna: ' : 'Jazda: ') + h.rezerwacja.imie + ' ' +
+            godz(h.rezerwacja.start) + '–' + godz(h.rezerwacja.koniec) + ', ' + nazwaMiejsca(h.rezerwacja.miejsce)
           : h.otwarta && !dzien.zablokowany ? 'Otwarta — kliknij, żeby zamknąć' : 'Zamknięta — kliknij, żeby otworzyć';
         html +=
           '<button type="button" class="h ' + klasaGodziny(h, dzien) + '" data-godzina="' + h.godzina + '"' +
@@ -566,6 +631,53 @@
       })
       .catch(function (err) {
         pokazBlad('blad-szablon', err.message);
+      });
+  });
+
+  /* ---- Czasy dojazdu ---------------------------------------------------- */
+
+  function rysujDojazdy() {
+    var sel = $('dojazd-z');
+    var z = sel.value || (stan.grafik.miejsca[0] && stan.grafik.miejsca[0].id);
+    if (!stan.miejsca.length) stan.miejsca = stan.grafik.miejsca;
+    sel.innerHTML = opcjeMiejsc(z, false);
+    var html = '';
+    stan.grafik.dojazdy.forEach(function (p) {
+      if (p.z !== z) return;
+      html +=
+        '<tr data-do="' + esc(p.do_miejsca) + '">' +
+        '<td>' + esc(nazwaMiejsca(p.do_miejsca)) + '</td>' +
+        '<td><input type="number" class="dj-n" min="0" max="30" step="5" value="' + p.normalnie + '" aria-label="Normalnie, minuty"> min</td>' +
+        '<td><input type="number" class="dj-s" min="0" max="30" step="5" value="' + p.szczyt + '" aria-label="W szczycie, minuty"> min</td>' +
+        '</tr>';
+    });
+    $('dojazdy-wiersze').innerHTML = html;
+  }
+
+  $('dojazd-z').addEventListener('change', rysujDojazdy);
+
+  $('form-dojazdy').addEventListener('submit', function (e) {
+    e.preventDefault();
+    pokazBlad('blad-dojazdy', '');
+    var z = $('dojazd-z').value;
+    var obie = $('dojazd-obie').checked;
+    var pary = [];
+    var blad = '';
+    document.querySelectorAll('#dojazdy-wiersze tr').forEach(function (w) {
+      var n = Number(w.querySelector('.dj-n').value);
+      var s = Number(w.querySelector('.dj-s').value);
+      if (!Number.isInteger(n) || !Number.isInteger(s) || n < 0 || s < 0 || n > 30 || s > 30) blad = 'Czas dojazdu: od 0 do 30 minut.';
+      pary.push({ z: z, do_miejsca: w.dataset.do, normalnie: n, szczyt: s });
+      if (obie) pary.push({ z: w.dataset.do, do_miejsca: z, normalnie: n, szczyt: s });
+    });
+    if (blad) return pokazBlad('blad-dojazdy', blad);
+    api('/api/admin/grafik', { akcja: 'dojazdy', pary: pary })
+      .then(function () {
+        komunikat('Czasy dojazdu zapisane — grafik przelicza się od razu.');
+        return wczytajGrafik();
+      })
+      .catch(function (err) {
+        pokazBlad('blad-dojazdy', err.message);
       });
   });
 

@@ -56,15 +56,24 @@
         <h2>Nowa rezerwacja (od razu potwierdzona)</h2>
         <div class="admin-siatka">
           <label>Data <input type="date" name="data" required></label>
-          <label>Godzina
-            <select name="godzina_start" required></select>
-          </label>
+          <label>Godzina <input type="time" name="start" step="300" value="10:00" required></label>
           <label>Długość
             <select name="dlugosc">
               <option value="1">1 h</option>
               <option value="2" selected>2 h</option>
               <option value="3">3 h</option>
               <option value="4">4 h</option>
+            </select>
+          </label>
+        </div>
+        <div class="admin-siatka">
+          <label>Miejsce spotkania
+            <select name="miejsce" class="sel-miejsce"><option value="">— do ustalenia —</option></select>
+          </label>
+          <label>Dopłata za dojazd
+            <select name="doplata_h">
+              <option value="0">brak (160 zł/h)</option>
+              <option value="15">+15 zł/h (175 zł/h)</option>
             </select>
           </label>
         </div>
@@ -115,6 +124,22 @@
         <div id="szablon-dni"></div>
         <p class="admin-blad" id="blad-szablon" role="alert" hidden></p>
         <button type="submit" class="btn btn-primary">Zapisz godziny pracy</button>
+      </form>
+
+      <form class="admin-karta" id="form-dojazdy">
+        <h2>Czasy dojazdu między miejscami</h2>
+        <p class="admin-drobne">
+          Ile minut potrzebujesz na przejazd z jednego miejsca do drugiego — normalnie i w szczycie (15:00–18:00).
+          Na tej podstawie grafik wylicza, od której godziny kolejny kursant może zacząć jazdę. Najwyżej 30 min.
+        </p>
+        <label>Z miejsca <select id="dojazd-z" class="sel-miejsce-wszystkie"></select></label>
+        <table class="dojazdy-tabela">
+          <thead><tr><th>Do miejsca</th><th>Normalnie</th><th>Szczyt</th></tr></thead>
+          <tbody id="dojazdy-wiersze"></tbody>
+        </table>
+        <label class="admin-check"><input type="checkbox" id="dojazd-obie" checked> Ustaw te same czasy w drugą stronę</label>
+        <p class="admin-blad" id="blad-dojazdy" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">Zapisz czasy dojazdu</button>
       </form>
 
       <form class="admin-karta" id="form-ustawienia">
