@@ -26,7 +26,7 @@
     kod: { pl: 'Kod rezerwacji', en: 'Booking code' },
     status: { pl: 'Status', en: 'Status' },
     zadatek: { pl: 'Zadatek (BLIK na 690 360 164)', en: 'Deposit (BLIK to 690 360 164)' },
-    reszta: { pl: 'Reszta po jeździe', en: 'The rest after the lesson' },
+    reszta: { pl: 'Reszta — przed lub po jeździe', en: 'The rest — before or after the lesson' },
     wstepna: {
       pl: 'Wstępna rezerwacja — czekaj na potwierdzenie lub kontakt od instruktora',
       en: 'Provisional booking — please wait for confirmation or for the instructor to contact you',

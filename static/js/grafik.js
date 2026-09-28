@@ -56,7 +56,7 @@
       pl: ' — na życzenie możliwy zwykły przelew',
       en: ' — a bank transfer is available on request',
     },
-    resztaGotowka: { pl: 'Reszta po jeździe', en: 'The rest after the lesson' },
+    resztaGotowka: { pl: 'Reszta — przed lub po jeździe', en: 'The rest — before or after the lesson' },
     terminDrobne: {
       pl: 'Po wysłaniu formularza termin jest wstępnie zarezerwowany dla Ciebie. Potwierdzę go albo odezwę się, żeby ustalić szczegóły. Zadatek potwierdza rezerwację.',
       en: 'Once you send the form, the time is provisionally reserved for you. I’ll confirm it or get in touch to sort out the details. The deposit confirms the booking.',

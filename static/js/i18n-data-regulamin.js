@@ -51,7 +51,7 @@ window.I18N = {
   'par4-h': '§ 4. Payments',
   'par4-1': 'Deposit: <strong>80 zł</strong> (the current amount is shown on the schedule).',
   'par4-2': 'Paid <strong>via BLIK to 690&nbsp;360&nbsp;164</strong> (BLIK is a Polish mobile payment method) once the time is agreed; a regular bank transfer is available on request.',
-  'par4-3': 'The remaining balance is paid <strong>after the lesson</strong>.',
+  'par4-3': 'The remaining balance is paid <strong>before or after the lesson</strong>.',
   'par4-4': 'No online payments or payment gateway on the website — card details or banking logins are never entered anywhere on it.',
   'par4-5': 'Prices are gross prices in Polish złoty.',
 

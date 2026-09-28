@@ -2699,8 +2699,18 @@ body.lightbox-open {
 
 /* Poprawka: na wąskim ekranie plakietka "4,9 w Google" zawija się pod
    nagłówek i zostaje za nisko (na desktopie obok tekstu jest OK, więc to
-   tylko dla telefonu). Redukujemy odstęp o kilka pikseli. */
+   tylko dla telefonu). Same marginesy nie wystarczyły — .reviews-head ma
+   też "gap" między elementami flex (liczy się jako odstęp między wierszami
+   po zawinięciu), a .section-lead ma swój margines pod spodem. */
 @media (max-width: 600px) {
+  .reviews-head {
+    row-gap: 4px;
+  }
+
+  .reviews-head .section-lead {
+    margin-bottom: 4px;
+  }
+
   .rating-badge {
     margin-top: 0;
   }
