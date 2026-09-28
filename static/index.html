@@ -83,9 +83,11 @@
   Pierwsze zdjęcie w przesuwającym się tle hero jest pierwszą rzeczą, jaką
   widać na stronie (LCP) — preload przyspiesza jego wczytanie. Kolejne
   zdjęcia karuzeli wczytują się zwykłym <img> bez preload, mają na to czas
-  (pierwsza zmiana dopiero po kilku sekundach).
+  (pierwsza zmiana dopiero po kilku sekundach). Atrybut media: od 1200px
+  szerokości karuzeli w hero już nie ma (patrz style.css), więc na dużych
+  ekranach to zdjęcie w ogóle się nie pobiera.
 -->
-<link rel="preload" as="image" href="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp">
+<link rel="preload" as="image" href="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" media="(max-width: 1199px)">
 
 <!--
   Włącza animacje pojawiania się sekcji tylko wtedy, gdy JavaScript działa.
@@ -128,14 +130,17 @@
     <!-- Przesuwające się zdjęcia w tle (te same pliki co w Galerii niżej —
          przeglądarka pobiera je raz i używa z pamięci podręcznej w obu
          miejscach). Czysto dekoracyjne, więc aria-hidden i puste alt —
-         treść hero niesie tekst obok. -->
+         treść hero niesie tekst obok. Od 1200px szerokości ekranu karuzela
+         jest ukryta (style.css) — zdjęcia 2-6 mają loading="lazy", więc
+         przeglądarka na dużym ekranie w ogóle ich nie pobiera (zawsze
+         pobiera tylko pierwsze, zanim zdąży poznać szerokość ekranu). -->
     <div class="hero-slajdy" aria-hidden="true">
       <img class="hero-slajd" src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="" fetchpriority="high">
-      <img class="hero-slajd" src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="">
-      <img class="hero-slajd" src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="">
-      <img class="hero-slajd" src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="">
-      <img class="hero-slajd" src="img/galeria/kursant-po-jezdzie.webp" alt="">
-      <img class="hero-slajd" src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="">
+      <img class="hero-slajd" src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/kursant-po-jezdzie.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="" loading="lazy">
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="container hero-inner">

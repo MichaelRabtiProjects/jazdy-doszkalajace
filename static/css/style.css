@@ -244,19 +244,16 @@ section[id] {
   padding: 90px 0 100px;
 }
 
-/* Zdjęcia są pionowe (881×1176), a sekcja na szerokim ekranie jest bardzo
-   szeroka i niska — "cover" na całą sekcję dopasowywałby się do szerokości
-   i pionowo kadrował do wąskiego, mocno przybliżonego paska (tak jak przy
-   pojedynczym zdjęciu wcześniej). Dlatego panel ze zdjęciami ma własny,
-   pionowy kształt (aspect-ratio 3/4) przyklejony do prawego górnego rogu,
-   z limitem wysokości — na dużych ekranach nie rośnie w nieskończoność. */
+/* Karuzela wypełnia całą sekcję jako tło (tekst stoi na gradiencie nad
+   nią). Tylko do 1199px szerokości ekranu — od 1200px w górę jest jej
+   całkiem pusto, tak jak było przed dodaniem zdjęć (patrz media query
+   niżej): unika to problemu z pionowymi zdjęciami (881×1176) w bardzo
+   szerokiej, niskiej sekcji na dużym ekranie, gdzie i tak dobrze nie
+   wyglądały. */
 .hero-slajdy {
   position: absolute;
-  top: 0;
-  right: 0;
+  inset: 0;
   z-index: 0;
-  height: min(100%, 580px);
-  aspect-ratio: 3 / 4;
   overflow: hidden;
 }
 
@@ -266,6 +263,7 @@ section[id] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 30%;
   opacity: 0;
   /* 6 zdjęć, 24 s na pełny cykl = 4 s na zdjęcie. Każde ma tę samą
      "pulsującą" animację (hero-fade), tylko przesuniętą opóźnieniem
@@ -281,10 +279,12 @@ section[id] {
 .hero-slajd:nth-child(5) { animation-delay: 16s; }
 .hero-slajd:nth-child(6) { animation-delay: 20s; }
 
+/* Przenikanie (fade in/out) trwa 1,2 s w każdą stronę — 2x dłużej niż na
+   początku. Reszta 4-sekundowego "slotu" zdjęcia to pełna widoczność. */
 @keyframes hero-fade {
   0%, 100% { opacity: 0; }
-  2.5% { opacity: 1; }
-  14.17% { opacity: 1; }
+  5% { opacity: 1; }
+  11.67% { opacity: 1; }
   16.67% { opacity: 0; }
 }
 
@@ -300,15 +300,28 @@ section[id] {
   }
 }
 
-/* Przyciemnienie zdjęć gradientem od lewej (tam, gdzie stoi tekst) tak,
+/* Przyciemnienie zdjęć gradientem od góry (tekst stoi na dole sekcji) tak,
    żeby nagłówek i przyciski zostały czytelne niezależnie od tego, które
-   akurat zdjęcie się przewija — trochę mocniej niż przy jednym zdjęciu. */
+   akurat zdjęcie się przewija. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, rgba(27, 29, 33, 0.96) 0%, rgba(27, 29, 33, 0.88) 45%, rgba(27, 29, 33, 0.66) 100%);
+  background: linear-gradient(180deg, rgba(27, 29, 33, 0.78), rgba(27, 29, 33, 0.92));
   pointer-events: none;
+}
+
+/* Od 1200px szerokości ekranu w górę: całkiem pusto, bez zdjęć — tak jak
+   było, zanim je dodaliśmy. Sam ciemny gradient sekcji. */
+@media (min-width: 1200px) {
+  .hero-slajdy,
+  .hero-scrim {
+    display: none;
+  }
+
+  .hero {
+    background: linear-gradient(180deg, var(--asphalt) 0%, var(--asphalt-2) 100%);
+  }
 }
 
 .hero::before {
@@ -2478,25 +2491,6 @@ body.lightbox-open {
 
   .hero {
     padding: 60px 0 70px;
-  }
-
-  /* Węższy ekran: nie ma miejsca obok tekstu na osobny panel ze zdjęciem —
-     karuzela wypełnia całą sekcję jako tło, tekst stoi na pionowym
-     gradiencie (ciemniej u dołu, gdzie jest treść). */
-  .hero-slajdy {
-    inset: 0;
-    top: 0;
-    right: 0;
-    height: 100%;
-    aspect-ratio: auto;
-  }
-
-  .hero-slajd {
-    object-position: 50% 30%;
-  }
-
-  .hero-scrim {
-    background: linear-gradient(180deg, rgba(27, 29, 33, 0.78), rgba(27, 29, 33, 0.92));
   }
 
   .route-row {
