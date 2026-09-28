@@ -2696,3 +2696,12 @@ body.lightbox-open {
 .whatsapp-fab {
   bottom: calc(16px + 48px + 12px + env(safe-area-inset-bottom, 0px));
 }
+
+/* Poprawka: na wąskim ekranie plakietka "4,9 w Google" zawija się pod
+   nagłówek i zostaje za nisko (na desktopie obok tekstu jest OK, więc to
+   tylko dla telefonu). Redukujemy odstęp o kilka pikseli. */
+@media (max-width: 600px) {
+  .rating-badge {
+    margin-top: 0;
+  }
+}

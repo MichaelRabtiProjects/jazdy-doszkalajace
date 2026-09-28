@@ -146,10 +146,8 @@ window.I18N = {
   'cennik-pakiet-badge': 'Package',
   'cennik-pakiet-godzin': '10 hours',
   'cennik-pakiet-note': '150 zł/h — 10 zł cheaper per hour',
-  /* [KWOTA] — ten sam placeholder co w index.html; wpisując kwotę,
-     podmienić w obu miejscach. */
   'cennik-stali':
-    'Regular students pay less — [KWOTA] zł/h below the prices above. Details once we’re working together regularly.',
+    'Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.',
   'cennik-en':
     'Same prices in English (this applies to lessons with me — for lessons with Instructor Khaled ' +
     'in English/Arabic, pricing is individual, see his section).',
