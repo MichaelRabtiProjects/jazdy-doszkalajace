@@ -51,12 +51,12 @@ window.I18N = {
   'par4-h': '§ 4. Payments',
   'par4-1': 'Deposit: <strong>80 zł</strong> (the current amount is shown on the schedule).',
   'par4-2': 'Paid <strong>via BLIK to 690&nbsp;360&nbsp;164</strong> (BLIK is a Polish mobile payment method) once the time is agreed; a regular bank transfer is available on request.',
-  'par4-3': 'The remaining balance is paid <strong>in cash after the lesson</strong>.',
+  'par4-3': 'The remaining balance is paid <strong>after the lesson</strong>.',
   'par4-4': 'No online payments or payment gateway on the website — card details or banking logins are never entered anywhere on it.',
   'par4-5': 'Prices are gross prices in Polish złoty.',
 
   'par5-h': '§ 5. Deposit and cancelling a booking',
-  'par5-uwaga': 'Subject to § 6 — as long as the right of withdrawal still applies, the deposit is refunded in full.',
+  'par5-uwaga': 'Cancelling less than 24 h before the lesson, or not showing up, means the deposit is forfeited in full.',
   'par5-1': 'The amount paid is a <em>zadatek</em> — a term from Art.&nbsp;394 of the Polish Civil Code that means something stronger than the everyday English word “deposit”. <strong>It is not a refundable security deposit</strong>: if the Customer cancels late or simply doesn’t show up, the Provider may keep the entire zadatek, with nothing refunded — see point (4) below.',
   'par5-2': 'Free cancellation or rescheduling up to <strong>24 h</strong> before the lesson (deposit carried over to a new time or refunded).',
   'par5-3': 'To cancel: call 690&nbsp;360&nbsp;164, or send an SMS, WhatsApp message or e-mail to <strong>MichaelRabti@gmail.com</strong>.',
@@ -74,7 +74,6 @@ window.I18N = {
   'par6-5': 'If the booked lesson falls <strong>before the 14-day period ends</strong>, performance starting before that period ends requires the Customer’s <strong>express request</strong> — simply asking for such an earlier time counts as that request. The Provider will remind the Customer of the consequences described in points (6) and (7) when confirming the time.',
   'par6-6': '<strong>The right of withdrawal ends once the service has been fully performed</strong>, i.e. once the booked lesson has taken place (Art.&nbsp;38(1)(1) of the Consumer Rights Act). Withdrawal is no longer possible after the lesson.',
   'par6-7': 'If the Customer withdraws <strong>during</strong> the lesson, they must pay for the part already provided, in proportion to what was delivered (Art.&nbsp;35 of the Consumer Rights Act).',
-  'par6-8': '<strong>As long as the lesson hasn’t taken place yet, a valid withdrawal means the whole deposit is refunded</strong> — even if the Customer cancelled less than 24 hours beforehand or didn’t show up. The forfeiture rules in § 5 only apply once the right of withdrawal has expired (14 days after the contract was formed, or after the lesson took place) or once the Customer has not exercised it.',
   'par6-9': 'This right of withdrawal is available to consumers and to sole traders entering into a contract directly related to their business where the contract isn’t of a professional nature for them.',
   'par6-10': 'A template withdrawal statement is available on request: <strong>MichaelRabti@gmail.com</strong>.',
 
@@ -93,7 +92,7 @@ window.I18N = {
   'par9-2': 'No provision of these Terms limits a consumer’s statutory rights — in case of conflict, the law prevails.',
   'par9-3': 'For how personal data is handled, see the <a href="polityka-prywatnosci.html">Privacy Policy</a>.',
   'par9-4': 'Changes to these Terms take effect on publication of the new version; a time slot confirmed earlier is governed by the version in force at the time it was confirmed (earlier versions available on request).',
-  'par9-5': 'These Terms, in this wording, are in effect from <strong>25 September 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
+  'par9-5': 'These Terms, in this wording, are in effect from <strong>28 September 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
 
   'powrot': '← Back to the homepage',
 
