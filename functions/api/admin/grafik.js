@@ -10,6 +10,7 @@
  *   dzien      { data, zamkniety }         zamyka / otwiera cały dzień
  *   szablon    { dni: [{ dzien_tygodnia, godzina_start, godzina_koniec }] }
  *   ustawienia { kwota_zadatku, horyzont_tygodni }
+ *   dojazdy    { pary: [{ z, do_miejsca, normalnie, szczyt }] }  czasy dojazdu (min)
  *
  * Panel myśli w kategoriach "ta godzina ma być otwarta albo zamknięta",
  * a baza przechowuje szablon + wyjątki. Tłumaczenie jednego na drugie
@@ -17,6 +18,7 @@
  */
 
 import { otwarteGodziny, ZYWE_STATUSY } from '../../../lib/dostepnosc.js';
+import { MIEJSCA, miejsce as znajdzMiejsce, domyslnyDojazd } from '../../../lib/miejsca.js';
 import { dataPL, dzienTygodnia, zakresDat, nazwaDnia } from '../../../lib/czas.js';
 import { wczytajUstawienia, zapiszUstawienie, kwotaZadatku, horyzontTygodni } from '../../../lib/ustawienia.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
@@ -34,17 +36,18 @@ export async function onRequestGet({ env }) {
     const koniec = daty[daty.length - 1];
     const zywe = ZYWE_STATUSY.map(() => '?').join(', ');
 
-    const [szablon, wyjatki, rezerwacje, ustawienia] = await Promise.all([
+    const [szablon, wyjatki, rezerwacje, ustawienia, dojazdy] = await Promise.all([
       db.prepare('SELECT dzien_tygodnia, godzina_start, godzina_koniec FROM szablon_tygodniowy ORDER BY dzien_tygodnia, godzina_start').all(),
       db.prepare('SELECT data, typ, godzina_start, godzina_koniec FROM wyjatki WHERE data BETWEEN ? AND ?').bind(dzisiaj, koniec).all(),
       db
         .prepare(
-          `SELECT id, data, godzina_start, godzina_koniec, imie, status FROM rezerwacje
+          `SELECT id, data, start_min, koniec_min, miejsce, imie, status FROM rezerwacje
            WHERE data BETWEEN ? AND ? AND status IN (${zywe})`
         )
         .bind(dzisiaj, koniec, ...ZYWE_STATUSY)
         .all(),
       wczytajUstawienia(db),
+      db.prepare('SELECT z, do_miejsca, normalnie, szczyt FROM dojazdy').all(),
     ]);
 
     const dni = daty.map((data) => {
@@ -56,11 +59,14 @@ export async function onRequestGet({ env }) {
 
       const godziny = [];
       for (let g = PIERWSZA_GODZINA; g <= OSTATNIA_GODZINA; g++) {
-        const rez = rezDnia.find((r) => g >= r.godzina_start && g < r.godzina_koniec);
+        // Godzina jest zajęta, jeśli jakakolwiek jazda nachodzi na [g:00, g+1:00)
+        const rez = rezDnia.find((r) => r.start_min < (g + 1) * 60 && r.koniec_min > g * 60);
         godziny.push({
           godzina: g,
           otwarta: otwarte.has(g),
-          rezerwacja: rez ? { id: rez.id, imie: rez.imie, status: rez.status, poczatek: rez.godzina_start === g } : null,
+          rezerwacja: rez
+            ? { id: rez.id, imie: rez.imie, status: rez.status, poczatek: Math.floor(rez.start_min / 60) === g, start: rez.start_min, koniec: rez.koniec_min, miejsce: rez.miejsce }
+            : null,
         });
       }
       return { data, nazwa_dnia: nazwaDnia(data), aktywny, zablokowany: zablokowanyDzien, godziny };
@@ -70,6 +76,14 @@ export async function onRequestGet({ env }) {
       dzisiaj,
       dni,
       szablon: szablon.results,
+      miejsca: MIEJSCA.map((m) => ({ id: m.id, nazwa: m.nazwa, wawer: m.wawer })),
+      // Pełna tabela: brakujące pary uzupełniamy wartościami domyślnymi
+      dojazdy: MIEJSCA.flatMap((a) =>
+        MIEJSCA.filter((b) => b.id !== a.id).map((b) => {
+          const w = dojazdy.results.find((r) => r.z === a.id && r.do_miejsca === b.id);
+          return w || { z: a.id, do_miejsca: b.id, ...domyslnyDojazd(a.id, b.id) };
+        })
+      ),
       ustawienia: {
         kwota_zadatku: kwotaZadatku(ustawienia),
         horyzont_tygodni: horyzontTygodni(ustawienia),
@@ -196,6 +210,28 @@ export async function onRequestPost({ request, env }) {
         if (!Number.isInteger(tygodnie) || tygodnie < 1 || tygodnie > 3) return blad('Grafik: od 1 do 3 tygodni naprzód.', 400);
         await zapiszUstawienie(db, 'kwota_zadatku', kwota);
         await zapiszUstawienie(db, 'horyzont_tygodni', tygodnie);
+        break;
+      }
+      case 'dojazdy': {
+        const pary = Array.isArray(dane.pary) ? dane.pary : null;
+        if (!pary || pary.length === 0 || pary.length > 200) return blad('Brak czasów dojazdu.', 400);
+        for (const p of pary) {
+          const ok =
+            znajdzMiejsce(p.z) && znajdzMiejsce(p.do_miejsca) && p.z !== p.do_miejsca &&
+            Number.isInteger(p.normalnie) && Number.isInteger(p.szczyt) &&
+            p.normalnie >= 0 && p.normalnie <= 30 && p.szczyt >= 0 && p.szczyt <= 30;
+          if (!ok) return blad('Czas dojazdu: liczba minut od 0 do 30.', 400);
+        }
+        await db.batch(
+          pary.map((p) =>
+            db
+              .prepare(
+                `INSERT INTO dojazdy (z, do_miejsca, normalnie, szczyt) VALUES (?, ?, ?, ?)
+                 ON CONFLICT (z, do_miejsca) DO UPDATE SET normalnie = excluded.normalnie, szczyt = excluded.szczyt`
+              )
+              .bind(p.z, p.do_miejsca, p.normalnie, p.szczyt)
+          )
+        );
         break;
       }
       default:

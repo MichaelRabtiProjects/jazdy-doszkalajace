@@ -1,18 +1,20 @@
 /**
- * GET /api/dostepnosc
+ * GET /api/dostepnosc?miejsce=ID
  *
- * Zwraca wolne terminy w horyzoncie (maks. 3 tygodnie) wraz z flagą trybu
- * płatności. Przy okazji wygasza blokady starsze niż 15 minut — Pages
- * Functions nie mają cronów, więc sprzątanie dzieje się przy odczycie.
+ * Wolne terminy w horyzoncie (maks. 3 tygodnie) dla wybranego miejsca
+ * spotkania — z buforami na dojazd i dopłatą za dojazd. Bez parametru
+ * `miejsce` terminy są liczone bez buforów i bez ceny (grafik pokazuje
+ * wtedy tylko prośbę o wybór miejsca). Zawsze zwraca też listę miejsc.
  */
 
 import { policzDostepnosc } from '../../lib/dostepnosc.js';
 import { json, blad, wymagajBazy } from '../../lib/http.js';
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ request, env }) {
   try {
     const db = wymagajBazy(env);
-    const dane = await policzDostepnosc(db);
+    const miejsce = new URL(request.url).searchParams.get('miejsce') || null;
+    const dane = await policzDostepnosc(db, miejsce);
     return json(dane);
   } catch (err) {
     console.error('Błąd /api/dostepnosc:', err);

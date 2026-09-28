@@ -9,10 +9,15 @@
  *   zadatek    { id, otrzymany } zaznacza / odznacza wpłatę zadatku
  *   notatka    { id, notatka }   notatka widoczna tylko w panelu
  *   usun       { id }            trwałe usunięcie (np. prośba o usunięcie danych)
- *   dodaj      { data, godzina_start, dlugosc, imie, telefon, email?, notatka?, powiadom }
+ *   edytuj     { id, start?, dlugosc?, miejsce?, doplata_h? }  ręczna zmiana
+ *              (np. krótszy bufor na dojazd po rozmowie z kursantem)
+ *   dodaj      { data, start, dlugosc, miejsce?, doplata_h?, imie, telefon, email?, notatka?, powiadom }
+ *
+ * Godziny w minutach od północy (start: 805 = 13:25).
  */
 
-import { utworzZPanelu, zwolnijTermin, usunStareDane, BladRezerwacji } from '../../../lib/rezerwacje.js';
+import { utworzZPanelu, edytujZPanelu, zwolnijTermin, usunStareDane, BladRezerwacji } from '../../../lib/rezerwacje.js';
+import { MIEJSCA } from '../../../lib/miejsca.js';
 import { wyslijEmail } from '../../../lib/email.js';
 import { mailPotwierdzonaDoKursanta, mailOdrzuconaDoKursanta } from '../../../lib/maile.js';
 import { dataPL, dodajDni } from '../../../lib/czas.js';
@@ -29,15 +34,16 @@ export async function onRequestGet({ request, env }) {
     const od = wszystkie ? '0000-00-00' : dodajDni(dataPL(), -14);
     const { results } = await db
       .prepare(
-        `SELECT id, data, godzina_start, godzina_koniec, imie, telefon, email, kod_rezerwacji,
+        `SELECT id, data, start_min, koniec_min, miejsce, doplata_h, imie, telefon, email, kod_rezerwacji,
                 kwota_zadatku, status, jezyk, zrodlo, utworzono_o, potwierdzono_o,
                 zadatek_zgloszony_o, zadatek_otrzymany_o, notatka
          FROM rezerwacje WHERE data >= ?
-         ORDER BY data, godzina_start`
+         ORDER BY data, start_min`
       )
       .bind(od)
       .all();
-    return json({ dzisiaj: dataPL(), rezerwacje: results });
+    const miejsca = MIEJSCA.map((m) => ({ id: m.id, nazwa: m.nazwa, wawer: m.wawer }));
+    return json({ dzisiaj: dataPL(), rezerwacje: results, miejsca });
   } catch (err) {
     console.error('Błąd GET /api/admin/rezerwacje:', err);
     return blad('Nie udało się wczytać rezerwacji.', 500);
@@ -110,10 +116,16 @@ export async function onRequestPost({ request, env }) {
       case 'usun': {
         // Trwałe usunięcie — np. na prośbę kursanta o usunięcie danych (RODO).
         const r = await pobierz(db, dane.id);
-        await db.batch([
-          db.prepare('DELETE FROM rezerwacje_godziny WHERE rezerwacja_id = ?').bind(r.id),
-          db.prepare('DELETE FROM rezerwacje WHERE id = ?').bind(r.id),
-        ]);
+        await db.prepare('DELETE FROM rezerwacje WHERE id = ?').bind(r.id).run();
+        break;
+      }
+      case 'edytuj': {
+        const r = await pobierz(db, dane.id);
+        const zmiany = {};
+        for (const k of ['start', 'dlugosc', 'miejsce', 'doplata_h']) {
+          if (dane[k] !== undefined) zmiany[k] = dane[k];
+        }
+        await edytujZPanelu(db, r.id, zmiany);
         break;
       }
       case 'dodaj': {
