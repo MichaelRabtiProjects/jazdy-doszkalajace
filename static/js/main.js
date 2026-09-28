@@ -210,7 +210,7 @@
   var lbPrev = document.getElementById('lightbox-prev');
   var lbNext = document.getElementById('lightbox-next');
 
-  var lb = { items: [], index: 0, opener: null };
+  var lb = { items: [], index: 0, opener: null, pokazPodpis: true };
 
   function itemFromEl(el) {
     return {
@@ -254,17 +254,22 @@
       lbMedia.appendChild(img);
     }
 
-    lbCaption.textContent = item.caption;
+    // W galerii podpis pod zdjęciem jest zbędny (i psuje kompozycję) —
+    // treść zdjęcia mówi sama za siebie. W opiniach zostaje: to zrzuty
+    // z Google/Messengera i podpis pomaga zorientować się w treści.
+    lbCaption.hidden = !lb.pokazPodpis;
+    lbCaption.textContent = lb.pokazPodpis ? item.caption : '';
 
     var multiple = lb.items.length > 1;
     lbPrev.hidden = !multiple;
     lbNext.hidden = !multiple;
   }
 
-  function openLightbox(els, startEl) {
+  function openLightbox(els, startEl, pokazPodpis) {
     lb.items = els.map(itemFromEl);
     lb.index = Math.max(els.indexOf(startEl), 0);
     lb.opener = startEl;
+    lb.pokazPodpis = pokazPodpis;
 
     lightbox.hidden = false;
     document.body.classList.add('lightbox-open');
@@ -291,7 +296,7 @@
       group.addEventListener('click', function (event) {
         var trigger = event.target.closest('[data-full]');
         if (!trigger || !group.contains(trigger)) return;
-        openLightbox(groupItems(group), trigger);
+        openLightbox(groupItems(group), trigger, group.dataset.lightboxGroup !== 'galeria');
       });
     });
 
