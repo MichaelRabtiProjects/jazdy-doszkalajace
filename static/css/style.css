@@ -240,10 +240,15 @@ section[id] {
   position: relative;
   overflow: hidden;
   /* Zdjęcie instruktora jako tło, przyciemnione gradientem od lewej (tam,
-     gdzie stoi tekst) tak, żeby nagłówek i przyciski zostały czytelne. */
+     gdzie stoi tekst) tak, żeby nagłówek i przyciski zostały czytelne.
+     Zdjęcie jest pionowe (881×1176), a sekcja na szerokim ekranie jest
+     bardzo szeroka i niska — "cover" dopasowywałby się do szerokości
+     i pionowo kadrował do wąskiego, mocno przybliżonego paska. Zamiast
+     tego dopasowanie do WYSOKOŚCI sekcji (auto 100%): zdjęcie zawsze
+     mieści się w całości w pionie, przycięte tylko po bokach. */
   background:
     linear-gradient(90deg, rgba(27, 29, 33, 0.94) 0%, rgba(27, 29, 33, 0.82) 45%, rgba(27, 29, 33, 0.55) 100%),
-    url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") 70% 35% / cover no-repeat,
+    url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") right 20% / auto 100% no-repeat,
     var(--asphalt);
   color: var(--white);
   padding: 90px 0 100px;
