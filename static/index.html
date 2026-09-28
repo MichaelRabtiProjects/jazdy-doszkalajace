@@ -80,6 +80,13 @@
 <link rel="stylesheet" href="css/style.css">
 
 <!--
+  Tło hero (zdjęcie instruktora) jest tłem CSS, więc przeglądarka domyślnie
+  odkrywa je dopiero po wczytaniu style.css. Preload przyspiesza to zdjęcie —
+  ono jest pierwszą rzeczą, jaką widać na stronie (LCP).
+-->
+<link rel="preload" as="image" href="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp">
+
+<!--
   Włącza animacje pojawiania się sekcji tylko wtedy, gdy JavaScript działa.
   Bez tego przy wyłączonym JS treść z klasą "reveal" zostałaby niewidoczna
   na zawsze. Skrypt jest tutaj (a nie w main.js na końcu strony), żeby klasa

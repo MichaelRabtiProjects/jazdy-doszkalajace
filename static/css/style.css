@@ -239,7 +239,12 @@ section[id] {
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--asphalt) 0%, var(--asphalt-2) 100%);
+  /* Zdjęcie instruktora jako tło, przyciemnione gradientem od lewej (tam,
+     gdzie stoi tekst) tak, żeby nagłówek i przyciski zostały czytelne. */
+  background:
+    linear-gradient(90deg, rgba(27, 29, 33, 0.94) 0%, rgba(27, 29, 33, 0.82) 45%, rgba(27, 29, 33, 0.55) 100%),
+    url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") 70% 35% / cover no-repeat,
+    var(--asphalt);
   color: var(--white);
   padding: 90px 0 100px;
 }
@@ -2409,6 +2414,11 @@ body.lightbox-open {
 
   .hero {
     padding: 60px 0 70px;
+    /* Węższy ekran: kadr pionowy, tekst czytelny na jednolitym ciemnym tle */
+    background:
+      linear-gradient(180deg, rgba(27, 29, 33, 0.78), rgba(27, 29, 33, 0.92)),
+      url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") 50% 30% / cover no-repeat,
+      var(--asphalt);
   }
 
   .route-row {
