@@ -1431,15 +1431,143 @@ body.panel-open {
   color: var(--white);
 }
 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* Opinie i galeria: jeden poziomy, płynący pasek (static/js/pasek-auto.js).
+   Wygląd kart bez zmian — zmienia się tylko układ: zamiast siatki rząd. */
+.pasek-auto {
+  position: relative;
+}
+
+.reviews-grid,
+.gallery-grid {
+  display: flex;
   gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  /* Zapas na unoszenie karty i jej cień */
+  padding: 4px 2px 14px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.reviews-grid::-webkit-scrollbar,
+.gallery-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews-grid.is-przeciagany,
+.gallery-grid.is-przeciagany {
+  cursor: grabbing;
+}
+
+.reviews-grid img,
+.gallery-grid img {
+  -webkit-user-drag: none;
+}
+
+/* Powrót na początek: krótkie wygaszenie zamiast skoku */
+.reviews-grid,
+.gallery-grid {
+  transition: opacity 0.35s ease;
+}
+
+.is-zanika {
+  opacity: 0;
+}
+
+/* Szerokość karty = ile widać naraz. Desktop: ok. 3,5 opinii, 4,5 zdjęcia —
+   wystający brzeg następnej karty pokazuje, że jest ich więcej. */
+.review-item {
+  flex: 0 0 calc((100% - 3 * 16px) / 3.4);
+}
+
+.gallery-item {
+  flex: 0 0 calc((100% - 4 * 16px) / 4.4);
+}
+
+@media (max-width: 980px) {
+  .review-item {
+    flex-basis: calc((100% - 16px) / 2.3);
+  }
+
+  .gallery-item {
+    flex-basis: calc((100% - 2 * 16px) / 2.6);
+  }
+}
+
+@media (max-width: 720px) {
+  .reviews-grid,
+  .gallery-grid {
+    gap: 12px;
+    /* Pasek sięga do krawędzi ekranu, ale pierwsza karta równa się z tekstem */
+    margin: 0 -20px;
+    padding: 4px 20px 14px;
+  }
+
+  .review-item {
+    flex-basis: 72%;
+  }
+
+  .gallery-item {
+    flex-basis: 78%;
+  }
+}
+
+/* Strzałki — tylko pod myszką (na dotyku wystarczy palec) */
+.pasek-strzalka {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  margin-top: -29px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--asphalt);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(27, 29, 33, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, border-color 0.15s ease;
+}
+
+.pasek-strzalka-lewo {
+  left: -8px;
+}
+
+.pasek-strzalka-prawo {
+  right: -8px;
+}
+
+.pasek-strzalka:hover {
+  border-color: var(--amber-dark);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pasek-auto:hover .pasek-strzalka,
+  .pasek-strzalka:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Z klawiatury strzałki muszą być widoczne także bez myszy */
+.pasek-strzalka:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  outline: 2px solid var(--amber-dark);
+  outline-offset: 2px;
 }
 
 .review-item {
   display: block;
-  width: 100%;
   padding: 0;
   margin: 0;
   background: var(--white);
@@ -1464,24 +1592,12 @@ body.panel-open {
   object-position: top center;
 }
 
-.reviews-more {
-  margin-top: 24px;
-  text-align: center;
-}
-
 /* ==========================================================================
    Galeria — zdjęcia i filmy w jednej siatce
    ========================================================================== */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-}
-
 .gallery-item {
   position: relative;
   display: block;
-  width: 100%;
   padding: 0;
   margin: 0;
   aspect-ratio: 4 / 3;
@@ -2245,12 +2361,6 @@ body.lightbox-open {
 /* ==========================================================================
    Responsywność
    ========================================================================== */
-@media (max-width: 980px) {
-  .reviews-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 720px) {
   .nav-toggle {
     display: flex;
@@ -2299,10 +2409,6 @@ body.lightbox-open {
 
   .hero {
     padding: 60px 0 70px;
-  }
-
-  .reviews-grid {
-    grid-template-columns: 1fr;
   }
 
   .route-row {
@@ -2732,66 +2838,6 @@ body.lightbox-open {
 .review-item img {
   object-fit: contain;
   object-position: center;
-}
-
-/* Telefon: zamiast długiej kolumny — poziomy pasek przewijany palcem.
-   Kolejna karta wystaje zza prawej krawędzi, więc widać, że jest więcej. */
-@media (max-width: 720px) {
-  .reviews-grid,
-  .gallery-grid {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    /* Pasek sięga do krawędzi ekranu, ale pierwsza karta równa się z tekstem */
-    margin: 0 -20px;
-    padding: 4px 20px 14px;
-    scroll-padding: 0 20px;
-  }
-
-  .reviews-grid::-webkit-scrollbar,
-  .gallery-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .reviews-grid {
-    grid-auto-columns: 72%;
-  }
-
-  .gallery-grid {
-    grid-auto-columns: 78%;
-  }
-
-  .review-item,
-  .gallery-item {
-    scroll-snap-align: start;
-  }
-
-  /* Na telefonie w pasku są wszystkie opinie, więc "Pokaż więcej" zbędne */
-  .reviews-more {
-    display: none;
-  }
-}
-
-.pasek-podpowiedz {
-  display: none;
-}
-
-@media (max-width: 720px) {
-  .pasek-podpowiedz {
-    display: block;
-    margin: 0 0 10px;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
-
-  .section-dark .pasek-podpowiedz {
-    color: #d8d8d4;
-  }
 }
 
 /* ==========================================================================

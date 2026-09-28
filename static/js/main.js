@@ -166,79 +166,36 @@
   }
 
   /* ======================================================================
-     Opinie — filtry (Wszystkie / Google / Messenger) i "Pokaż więcej"
+     Opinie — filtry (Wszystkie / Google / Messenger)
      ====================================================================== */
-  var REVIEWS_STEP = 9;
-
   var reviewsGrid = document.getElementById('reviews-grid');
-  var moreBtn = document.getElementById('reviews-more-btn');
   var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
   var reviewItems = reviewsGrid
     ? Array.prototype.slice.call(reviewsGrid.querySelectorAll('.review-item'))
     : [];
 
-  var reviewsState = { filter: 'all', expanded: false };
-  // Na telefonie opinie są w poziomym pasku (style.css) — tam pokazujemy
-  // od razu wszystkie, bez przycisku "Pokaż więcej".
-  var opiniePasek = window.matchMedia('(max-width: 720px)');
-
-  function matchingReviews() {
-    return reviewItems.filter(function (item) {
-      return reviewsState.filter === 'all' || item.dataset.source === reviewsState.filter;
-    });
-  }
+  // Opinie są w jednym płynącym pasku (pasek-auto.js) — filtr tylko
+  // chowa te, które nie pasują; wszystkie pasujące są od razu w pasku.
+  var reviewsState = { filter: 'all' };
 
   function renderReviews() {
-    var matching = matchingReviews();
-
     reviewItems.forEach(function (item) {
-      item.hidden = true;
+      item.hidden = reviewsState.filter !== 'all' && item.dataset.source !== reviewsState.filter;
     });
-
-    matching.forEach(function (item, i) {
-      item.hidden = !reviewsState.expanded && !opiniePasek.matches && i >= REVIEWS_STEP;
-    });
-
-    if (moreBtn) {
-      var hasMore = !reviewsState.expanded && matching.length > REVIEWS_STEP;
-      moreBtn.hidden = !hasMore;
-      var pozostalo = Math.max(matching.length - REVIEWS_STEP, 0);
-      // Tekst ma liczbę w środku, więc nie może iść przez generyczny
-      // mechanizm data-i18n (patrz komentarz przy przycisku w index.html) —
-      // sprawdzamy język wprost, tak jak grafik.js.
-      var angielski = typeof window.jdJezyk === 'function' && window.jdJezyk() === 'en';
-      moreBtn.textContent = angielski
-        ? 'Show more reviews (' + pozostalo + ')'
-        : 'Pokaż więcej opinii (' + pozostalo + ')';
-    }
+    // Pasek wraca na początek i przelicza swoją długość
+    reviewsGrid.dispatchEvent(new CustomEvent('jd:pasek-zmiana'));
   }
 
   if (reviewItems.length) {
-    renderReviews();
-
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
         reviewsState.filter = btn.dataset.filter;
-        reviewsState.expanded = false;
         filterBtns.forEach(function (b) {
           b.classList.toggle('is-active', b === btn);
         });
         renderReviews();
       });
     });
-
-    if (moreBtn) {
-      moreBtn.addEventListener('click', function () {
-        reviewsState.expanded = true;
-        renderReviews();
-      });
-    }
-
-    // Przycisk "Pokaż więcej" ma tekst z liczbą w środku (patrz wyżej) —
-    // trzeba go przerysować ręcznie przy zmianie języka, generyczny
-    // mechanizm data-i18n tego nie obejmuje.
-    document.addEventListener('jd:jezyk', renderReviews);
-    if (opiniePasek.addEventListener) opiniePasek.addEventListener('change', renderReviews);
   }
 
   /* ======================================================================

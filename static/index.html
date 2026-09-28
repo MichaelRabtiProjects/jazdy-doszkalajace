@@ -528,8 +528,9 @@
 
       <p class="reviews-lang-note" data-i18n="opinie-jezyk-nota"></p>
 
-      <p class="pasek-podpowiedz" data-i18n="pasek-podpowiedz-opinie">Przesuń palcem w bok, żeby zobaczyć kolejne opinie →</p>
-      <div class="reviews-grid" id="reviews-grid" data-lightbox-group="opinie">
+      <div class="pasek-auto" data-pasek-auto>
+        <button type="button" class="pasek-strzalka pasek-strzalka-lewo" data-pasek-prev aria-label="Poprzednie opinie" data-i18n-attr="aria-label:pasek-opinie-prev">‹</button>
+      <div class="reviews-grid" id="reviews-grid" data-lightbox-group="opinie" data-pasek-tor>
 
         <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" data-caption="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą" data-i18n-attr="data-caption:rev-g01">
           <img src="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" alt="Opinia Google od kursantki Kingi — 5 gwiazdek za przygotowanie do egzaminu i pewność za kierownicą" loading="lazy" data-i18n-attr="alt:rev-g01">
@@ -627,12 +628,7 @@
         </button>
 
       </div>
-
-      <div class="reviews-more">
-        <!-- Bez data-i18n: tekst tego przycisku (z dopisaną liczbą) generuje
-             dynamicznie main.js w renderReviews() — musi być językowo
-             świadomy tam, inaczej i18n.js nadpisałby liczbę w nawiasie. -->
-        <button type="button" class="btn btn-secondary" id="reviews-more-btn">Pokaż więcej opinii</button>
+        <button type="button" class="pasek-strzalka pasek-strzalka-prawo" data-pasek-next aria-label="Następne opinie" data-i18n-attr="aria-label:pasek-opinie-next">›</button>
       </div>
     </div>
   </section>
@@ -647,8 +643,9 @@
         Kursanci, którzy wyrazili zgodę na publikację zdjęcia, oraz nagrania z placu manewrowego.
       </p>
 
-      <p class="pasek-podpowiedz" data-i18n="pasek-podpowiedz-galeria">Przesuń palcem w bok, żeby zobaczyć kolejne zdjęcia i filmy →</p>
-      <div class="gallery-grid" data-lightbox-group="galeria">
+      <div class="pasek-auto" data-pasek-auto>
+        <button type="button" class="pasek-strzalka pasek-strzalka-lewo" data-pasek-prev aria-label="Poprzednie zdjęcia i filmy" data-i18n-attr="aria-label:pasek-galeria-prev">‹</button>
+      <div class="gallery-grid" data-lightbox-group="galeria" data-pasek-tor>
 
         <button type="button" class="gallery-item is-video" data-type="video"
                 data-full="video/jazda-po-luku-cwiczenie-manewrowe.mp4"
@@ -747,6 +744,8 @@
           <img src="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" alt="Kursant pokazuje kciuk w górę po zajęciach jazdy doszkalającej w Warszawie" loading="lazy" data-i18n-attr="alt:gal-22-alt">
         </button>
 
+      </div>
+        <button type="button" class="pasek-strzalka pasek-strzalka-prawo" data-pasek-next aria-label="Następne zdjęcia i filmy" data-i18n-attr="aria-label:pasek-galeria-next">›</button>
       </div>
     </div>
   </section>
@@ -947,6 +946,7 @@
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 <script src="js/slajder.js"></script>
+<script src="js/pasek-auto.js"></script>
 <script src="js/grafik.js"></script>
 </body>
 </html>
