@@ -35,7 +35,7 @@
   var TXT = {
     grafikNiedostepny: { pl: 'Grafik jest chwilowo niedostępny.', en: 'The schedule is temporarily unavailable.' },
     zadzwonPrefiks: { pl: 'Zadzwoń: ', en: 'Call: ' },
-    labelZamkniete: { pl: ', zamknięte, napisz e-mail, SMS lub WhatsApp', en: ', closed — send an e-mail, SMS or WhatsApp message' },
+    labelZamkniete: { pl: ', brak terminów, napisz e-mail, SMS lub WhatsApp', en: ', no available times — send an e-mail, SMS or WhatsApp message' },
     labelBrakTerminow: { pl: ', brak terminów', en: ', no available times' },
     labelWolneTerminy: { pl: ', wolne terminy', en: ', available times' },
     kontaktZachetaTekst: {
@@ -49,7 +49,6 @@
     przyciskWhatsapp: { pl: 'WhatsApp', en: 'WhatsApp' },
     przyciskTelefon: { pl: 'Telefon', en: 'Phone' },
     brakTerminow: { pl: 'brak terminów', en: 'no available times' },
-    nieczynne: { pl: 'nieczynne', en: 'closed' },
     terminAriaLabel: { pl: 'Termin ', en: 'Time slot ' },
     terminAriaO: { pl: ' o ', en: ' at ' },
     zadzwon: { pl: 'Zadzwoń', en: 'Call' },
@@ -717,7 +716,7 @@
         var link = document.createElement('button');
         link.type = 'button';
         link.className = 'tydzien-pusto tydzien-pusto-link';
-        link.textContent = t('nieczynne');
+        link.textContent = t('brakTerminow');
         link.addEventListener('click', function () {
           stan.widok = 'dzien';
           stan.wybranyIdx = stan.dane.dni.indexOf(dzien);
