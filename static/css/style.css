@@ -2793,3 +2793,225 @@ body.lightbox-open {
     color: #d8d8d4;
   }
 }
+
+/* ==========================================================================
+   Grafik: miejsce spotkania, przełącznik Dzień/Tydzień, widok tygodnia
+   ========================================================================== */
+.grafik-miejsce {
+  margin-bottom: 18px;
+}
+
+.grafik-miejsce-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.grafik-miejsce-select {
+  width: 100%;
+  max-width: 520px;
+  min-height: 48px;
+  padding: 10px 40px 10px 14px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231b1d21' stroke-width='2'/%3E%3C/svg%3E")
+    no-repeat right 14px center;
+  border: 1px solid var(--asphalt);
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.grafik-miejsce-select:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 1px;
+}
+
+.grafik-miejsce-info {
+  margin: 8px 0 0;
+  max-width: 620px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.grafik-widoki {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 18px;
+  background: var(--paper-alt);
+  border-radius: 999px;
+}
+
+.widok-btn {
+  min-height: 40px;
+  padding: 6px 20px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.widok-btn.is-active {
+  background: var(--asphalt);
+  color: var(--white);
+}
+
+.widok-btn:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Godzina z dopłatą za dojazd: ta sama pigułka + mały znacznik "+15 zł" */
+.godzina-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.15;
+}
+
+.godzina-btn-doplata-znacznik {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--amber-dark);
+}
+
+.godzina-btn-doplata.is-wybrana .godzina-btn-doplata-znacznik,
+.godzina-btn-doplata:hover .godzina-btn-doplata-znacznik {
+  color: var(--asphalt);
+}
+
+.grafik-legenda {
+  margin: 12px 0 0;
+  max-width: 720px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---- Widok tygodnia (układ blokowy jak w Calendesku) ---------------- */
+.tydzien-nawigacja {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tydzien-zakres {
+  margin: 0;
+  flex: 1 1 auto;
+  text-align: center;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tydzien-kolumny {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tydzien-kolumna {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--amber);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tydzien-kolumna-zamknieta,
+.tydzien-kolumna-poza {
+  background: var(--paper-alt);
+  border-top-color: var(--line);
+}
+
+.tydzien-kolumna-pelna {
+  border-top-color: var(--line);
+}
+
+.tydzien-kolumna-naglowek {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tydzien-kolumna-nazwa {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+
+.tydzien-kolumna-data {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.tydzien-kolumna-godziny {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 6px 10px;
+}
+
+.tydzien-kolumna-godziny .godzina-btn,
+.tydzien-kolumna-godziny .godzina-wstepna {
+  width: 100%;
+  min-height: 40px;
+  padding: 4px 2px;
+  font-size: 0.88rem;
+}
+
+.tydzien-pusto {
+  display: block;
+  padding: 6px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.tydzien-pusto-link {
+  width: 100%;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Telefon: 7 kolumn się nie zmieści — przesuwamy je palcem w bok,
+   widać ~3 dni naraz (jak w aplikacjach kalendarza). */
+@media (max-width: 720px) {
+  .tydzien-kolumny {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 31%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+
+  .tydzien-kolumny::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tydzien-kolumna {
+    scroll-snap-align: start;
+  }
+}

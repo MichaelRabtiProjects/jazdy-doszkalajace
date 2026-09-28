@@ -67,6 +67,12 @@ window.I18N = {
     'agree on another spot. Message or call to arrange a time and details – the longer you put it off, ' +
     'the longer the stress waits for „someday” :P',
   'grafik-dlugosc-label': 'Lesson length',
+  'grafik-miejsce-label': 'Meeting point',
+  'grafik-widok-label': 'Schedule view',
+  'grafik-widok-dzien': 'Day',
+  'grafik-widok-tydzien': 'Week',
+  'tydzien-lewo-label': 'Previous week',
+  'tydzien-prawo-label': 'Next week',
   'grafik-wczytywanie': 'Loading available times…',
   'dni-lewo-label': 'Earlier days',
   'dni-pasek-label': 'Choose a day',
@@ -255,9 +261,7 @@ window.I18N = {
     'needs to be agreed in advance — WhatsApp, SMS or a phone call.',
   'miejsca-2-label': 'Additional spots',
   'miejsca-2-nota':
-    'The first lesson booked in advance at one of these spots carries a surcharge of 15 zł per hour — ' +
-    'I have to drive over from Wawer and back again afterwards. For further lessons at the same spot, the ' +
-    'price is agreed individually.',
+    'A lesson at one of these points costs 175 zł/h (a 15 zł/h travel surcharge) — unless I’m already nearby that day because I have a lesson at the same or a neighbouring point; then it’s 160 zł/h. The schedule shows the exact price next to every time.',
   'slajder-prev': 'Previous spots',
   'slajder-next': 'Next spots',
   'miejsce-status-bezplatne': 'Free of charge',

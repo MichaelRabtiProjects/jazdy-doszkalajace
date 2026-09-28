@@ -23,6 +23,10 @@
       en: 'The booking couldn’t be loaded. Please refresh the page in a moment.',
     },
     termin: { pl: 'Termin', en: 'Time' },
+    miejsce: { pl: 'Miejsce spotkania', en: 'Meeting point' },
+    miejsceDoUstalenia: { pl: 'do ustalenia', en: 'to be agreed' },
+    cena: { pl: 'Cena za godzinę', en: 'Price per hour' },
+    cenaDojazd: { pl: ' (w tym 15 zł/h za dojazd)', en: ' (incl. 15 zł/h travel surcharge)' },
     kod: { pl: 'Kod rezerwacji', en: 'Booking code' },
     status: { pl: 'Status', en: 'Status' },
     zadatek: { pl: 'Zadatek (BLIK na 690 360 164)', en: 'Deposit (BLIK to 690 360 164)' },
@@ -67,12 +71,22 @@
     return String(n).padStart(2, '0');
   }
 
+  /** 805 → '13:25' */
+  function godz(minuty) {
+    return dwie(Math.floor(minuty / 60)) + ':' + dwie(minuty % 60);
+  }
+
+  function nazwaMiejsca(r) {
+    if (!r.miejsce) return t('miejsceDoUstalenia');
+    return jezyk() === 'en' ? r.miejsce.nazwa_en : r.miejsce.nazwa;
+  }
+
   function opisTerminu(r) {
     var cz = r.data.split('-');
     var dzien = new Date(Date.UTC(+cz[0], +cz[1] - 1, +cz[2])).getUTCDay();
     return (
       DNI[jezyk() === 'en' ? 'en' : 'pl'][dzien] + ' ' + cz[2] + '.' + cz[1] + '.' + cz[0] + ', ' +
-      dwie(r.godzina_start) + ':00–' + dwie(r.godzina_koniec) + ':00 (' + r.dlugosc + ' h)'
+      godz(r.start) + '–' + godz(r.koniec) + ' (' + r.dlugosc + ' h)'
     );
   }
 
@@ -95,10 +109,12 @@
       '<div class="potwierdzenie-karta">' +
       '<dl class="potwierdzenie-dane">' +
       '<dt>' + t('termin') + '</dt><dd>' + opisTerminu(r) + '</dd>' +
+      '<dt>' + t('miejsce') + '</dt><dd>' + nazwaMiejsca(r) + '</dd>' +
       '<dt>' + t('kod') + '</dt><dd><strong class="termin-kod">' + r.kod_rezerwacji + '</strong></dd>' +
       '<dt>' + t('status') + '</dt><dd><strong>' + (TXT[r.status] ? t(r.status) : r.status) + '</strong></dd>' +
       (aktywna
-        ? '<dt>' + t('zadatek') + '</dt><dd>' + r.kwota_zadatku + ' zł</dd>' +
+        ? '<dt>' + t('cena') + '</dt><dd>' + r.cena_za_godzine + ' zł' + (r.doplata_h > 0 ? t('cenaDojazd') : '') + '</dd>' +
+          '<dt>' + t('zadatek') + '</dt><dd>' + r.kwota_zadatku + ' zł</dd>' +
           '<dt>' + t('reszta') + '</dt><dd>' + r.do_zaplaty_na_miejscu + ' zł</dd>'
         : '') +
       '</dl>';

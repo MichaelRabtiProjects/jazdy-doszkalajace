@@ -33,7 +33,7 @@ window.I18N = {
   'par2-h': '§ 2. Scope of services',
   'par2-1': 'Category B refresher driving lessons for people who already hold a licence — not a driving course and not training by a licensed driving school; no certificates are issued.',
   'par2-2': 'Lesson length: <strong>2–4 h</strong>. Price: <strong>160 zł/h</strong> (320 / 480 / 640 zł).',
-  'par2-3': 'For the first lesson taking place at one of the additional pick-up spots listed on the website (outside the main meeting points in Wawer), <strong>15 zł per hour</strong> is added to the price — the Provider has to drive there from Wawer and back again afterwards. For further lessons at the same spot, pricing is agreed individually.',
+  'par2-3': 'Lessons at the Wawer meeting points (Będzińska / K&amp;M Park, Zerzeń / DoubleTree by Hilton, Ferio Wawer) always cost 160&nbsp;zł/h. At the other meeting points listed on the website, <strong>15 zł per hour</strong> is added (175&nbsp;zł/h) — unless, on that day, the Provider has an adjacent lesson at the same meeting point or at one of the two points closest to it; then 160&nbsp;zł/h applies. The price of a given lesson is shown in the schedule before booking and does not change afterwards. Start times in the schedule allow for the Provider’s travel time between meeting points (e.g. 13:25).',
   'par2-4': 'Location: Warsaw, mainly the Wawer district — the exact meeting point is agreed when you get in touch.',
   'par2-5': 'Vehicle: <strong>[VEHICLE]</strong>.',
   'par2-6': 'A valid category B driving licence is required and must be shown before the lesson.',

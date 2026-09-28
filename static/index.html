@@ -251,6 +251,19 @@
           </button>
         </div>
 
+        <!-- Miejsce spotkania — obowiązkowe: od niego zależą godziny (czas
+             mojego dojazdu między jazdami) i cena (dopłata za dojazd). -->
+        <div class="grafik-miejsce">
+          <label class="grafik-miejsce-label" for="grafik-miejsce" data-i18n="grafik-miejsce-label">Miejsce spotkania</label>
+          <select id="grafik-miejsce" class="grafik-miejsce-select"></select>
+          <p class="grafik-miejsce-info" id="grafik-miejsce-info" hidden></p>
+        </div>
+
+        <div class="grafik-widoki" id="grafik-widoki" role="group" aria-label="Widok grafiku" data-i18n-attr="aria-label:grafik-widok-label" hidden>
+          <button type="button" class="widok-btn is-active" data-widok="dzien" aria-pressed="true" data-i18n="grafik-widok-dzien">Dzień</button>
+          <button type="button" class="widok-btn" data-widok="tydzien" aria-pressed="false" data-i18n="grafik-widok-tydzien">Tydzień</button>
+        </div>
+
         <p class="grafik-komunikat" id="grafik-komunikat" data-i18n="grafik-wczytywanie">Wczytywanie wolnych terminów…</p>
 
         <!-- Kalendarz w dwóch częściach, jak w Calendesk: u góry przewijany
@@ -263,6 +276,19 @@
           </div>
           <div class="godziny-panel" id="godziny-panel"></div>
         </div>
+
+        <!-- Widok tygodniowy (jak w Calendesku): 7 kolumn od poniedziałku,
+             w każdej wolne godziny tego dnia. -->
+        <div class="grafik-tydzien" id="grafik-tydzien" hidden>
+          <div class="tydzien-nawigacja">
+            <button type="button" class="dni-strzalka" id="tydzien-lewo" aria-label="Poprzedni tydzień" data-i18n-attr="aria-label:tydzien-lewo-label">‹</button>
+            <p class="tydzien-zakres" id="tydzien-zakres" aria-live="polite"></p>
+            <button type="button" class="dni-strzalka" id="tydzien-prawo" aria-label="Następny tydzień" data-i18n-attr="aria-label:tydzien-prawo-label">›</button>
+          </div>
+          <div class="tydzien-kolumny" id="tydzien-kolumny"></div>
+        </div>
+
+        <p class="grafik-legenda" id="grafik-legenda" hidden></p>
       </div>
 
       <div class="contact-cta reveal">
@@ -860,7 +886,7 @@
           <button type="button" class="slajder-strzalka" data-slajder-next aria-label="Następne miejsca" data-i18n-attr="aria-label:slajder-next">›</button>
         </div>
         <p class="miejsca-atrybucja"><span data-i18n="mapy-atrybucja">Zdjęcia satelitarne:</span> © <a href="https://www.esri.com/en-us/legal/terms/data-attributions" target="_blank" rel="noopener" data-i18n="mapy-osm">Esri, Maxar, Earthstar Geographics</a></p>
-        <p class="miejsca-nota" data-i18n="miejsca-2-nota">Pierwsza jazda umówiona z wyprzedzeniem w jedno z tych miejsc wiąże się z dopłatą 15 zł do każdej godziny — muszę dojechać z Wawra i po jeździe tam wrócić. Przy kolejnych jazdach w tym samym miejscu cenę ustalamy indywidualnie.</p>
+        <p class="miejsca-nota" data-i18n="miejsca-2-nota">Jazda w jednym z tych miejsc kosztuje 175 zł/h (dopłata 15 zł/h za dojazd) — chyba że tego dnia i tak jestem w pobliżu, bo mam jazdę w tym samym albo sąsiednim miejscu; wtedy 160 zł/h. Dokładną cenę grafik pokazuje przy każdej godzinie.</p>
       </div>
     </div>
   </section>
