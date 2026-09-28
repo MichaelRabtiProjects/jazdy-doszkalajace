@@ -200,6 +200,8 @@ window.I18N = {
 
   /* --- Galeria / Gallery --- */
   'galeria-kicker': 'Photos & videos',
+  'pasek-podpowiedz-opinie': 'Swipe sideways to see more reviews →',
+  'pasek-podpowiedz-galeria': 'Swipe sideways to see more photos and videos →',
   'galeria-title': 'Gallery',
   'galeria-lead': 'Students who agreed to have their photo published, plus footage from the manoeuvring yard.',
 

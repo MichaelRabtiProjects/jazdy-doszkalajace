@@ -178,6 +178,9 @@
     : [];
 
   var reviewsState = { filter: 'all', expanded: false };
+  // Na telefonie opinie są w poziomym pasku (style.css) — tam pokazujemy
+  // od razu wszystkie, bez przycisku "Pokaż więcej".
+  var opiniePasek = window.matchMedia('(max-width: 720px)');
 
   function matchingReviews() {
     return reviewItems.filter(function (item) {
@@ -193,7 +196,7 @@
     });
 
     matching.forEach(function (item, i) {
-      item.hidden = !reviewsState.expanded && i >= REVIEWS_STEP;
+      item.hidden = !reviewsState.expanded && !opiniePasek.matches && i >= REVIEWS_STEP;
     });
 
     if (moreBtn) {
@@ -235,6 +238,7 @@
     // trzeba go przerysować ręcznie przy zmianie języka, generyczny
     // mechanizm data-i18n tego nie obejmuje.
     document.addEventListener('jd:jezyk', renderReviews);
+    if (opiniePasek.addEventListener) opiniePasek.addEventListener('change', renderReviews);
   }
 
   /* ======================================================================

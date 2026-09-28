@@ -2715,3 +2715,81 @@ body.lightbox-open {
     margin-top: 0;
   }
 }
+
+/* ==========================================================================
+   Opinie i galeria — cały zrzut zamiast przyciętego, paski na telefonie
+   ========================================================================== */
+
+/* Zrzuty opinii mają proporcje od 3:4 do 2,2:1 — "cover" przycinał boki
+   (ucięte nazwiska, powiększony tekst). "contain" pokazuje cały zrzut;
+   tło karty ma ten sam ciemny kolor co tło zrzutów Google/Messengera,
+   więc puste pasy nad i pod szerokim zrzutem nie są widoczne. */
+.review-item {
+  aspect-ratio: 4 / 5;
+  background: var(--asphalt-2);
+}
+
+.review-item img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Telefon: zamiast długiej kolumny — poziomy pasek przewijany palcem.
+   Kolejna karta wystaje zza prawej krawędzi, więc widać, że jest więcej. */
+@media (max-width: 720px) {
+  .reviews-grid,
+  .gallery-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    /* Pasek sięga do krawędzi ekranu, ale pierwsza karta równa się z tekstem */
+    margin: 0 -20px;
+    padding: 4px 20px 14px;
+    scroll-padding: 0 20px;
+  }
+
+  .reviews-grid::-webkit-scrollbar,
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews-grid {
+    grid-auto-columns: 72%;
+  }
+
+  .gallery-grid {
+    grid-auto-columns: 78%;
+  }
+
+  .review-item,
+  .gallery-item {
+    scroll-snap-align: start;
+  }
+
+  /* Na telefonie w pasku są wszystkie opinie, więc "Pokaż więcej" zbędne */
+  .reviews-more {
+    display: none;
+  }
+}
+
+.pasek-podpowiedz {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .pasek-podpowiedz {
+    display: block;
+    margin: 0 0 10px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .section-dark .pasek-podpowiedz {
+    color: #d8d8d4;
+  }
+}
