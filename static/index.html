@@ -80,9 +80,10 @@
 <link rel="stylesheet" href="css/style.css">
 
 <!--
-  Tło hero (zdjęcie instruktora) jest tłem CSS, więc przeglądarka domyślnie
-  odkrywa je dopiero po wczytaniu style.css. Preload przyspiesza to zdjęcie —
-  ono jest pierwszą rzeczą, jaką widać na stronie (LCP).
+  Pierwsze zdjęcie w przesuwającym się tle hero jest pierwszą rzeczą, jaką
+  widać na stronie (LCP) — preload przyspiesza jego wczytanie. Kolejne
+  zdjęcia karuzeli wczytują się zwykłym <img> bez preload, mają na to czas
+  (pierwsza zmiana dopiero po kilku sekundach).
 -->
 <link rel="preload" as="image" href="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp">
 
@@ -124,6 +125,19 @@
 <main>
 
   <section id="hero" class="hero">
+    <!-- Przesuwające się zdjęcia w tle (te same pliki co w Galerii niżej —
+         przeglądarka pobiera je raz i używa z pamięci podręcznej w obu
+         miejscach). Czysto dekoracyjne, więc aria-hidden i puste alt —
+         treść hero niesie tekst obok. -->
+    <div class="hero-slajdy" aria-hidden="true">
+      <img class="hero-slajd" src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="" fetchpriority="high">
+      <img class="hero-slajd" src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="">
+      <img class="hero-slajd" src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="">
+      <img class="hero-slajd" src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="">
+      <img class="hero-slajd" src="img/galeria/kursant-po-jezdzie.webp" alt="">
+      <img class="hero-slajd" src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="">
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="container hero-inner">
       <p class="hero-kicker" data-i18n="hero-kicker">Warszawa · Wawer, Mokotów i okolice</p>
       <h1 data-i18n="hero-h1">Wróć pewnie za kierownicę — jazdy doszkalające dla kierowców z prawem jazdy</h1>

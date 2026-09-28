@@ -239,27 +239,83 @@ section[id] {
 .hero {
   position: relative;
   overflow: hidden;
-  /* Zdjęcie instruktora jako tło, przyciemnione gradientem od lewej (tam,
-     gdzie stoi tekst) tak, żeby nagłówek i przyciski zostały czytelne.
-     Zdjęcie jest pionowe (881×1176), a sekcja na szerokim ekranie jest
-     bardzo szeroka i niska — "cover" dopasowywałby się do szerokości
-     i pionowo kadrował do wąskiego, mocno przybliżonego paska. Zamiast
-     tego dopasowanie do WYSOKOŚCI sekcji, ale z górnym limitem (min(...,
-     580px)): na bardzo dużych/wysokich ekranach zdjęcie przestaje rosnąć
-     i zostaje kameralnym, oprawionym w gradient prostokątem, a nie
-     ciągnie się na całą wysokość sekcji. */
-  background:
-    linear-gradient(90deg, rgba(27, 29, 33, 0.94) 0%, rgba(27, 29, 33, 0.82) 45%, rgba(27, 29, 33, 0.55) 100%),
-    url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") right 15% / auto min(100%, 580px) no-repeat,
-    var(--asphalt);
+  background: var(--asphalt);
   color: var(--white);
   padding: 90px 0 100px;
+}
+
+/* Zdjęcia są pionowe (881×1176), a sekcja na szerokim ekranie jest bardzo
+   szeroka i niska — "cover" na całą sekcję dopasowywałby się do szerokości
+   i pionowo kadrował do wąskiego, mocno przybliżonego paska (tak jak przy
+   pojedynczym zdjęciu wcześniej). Dlatego panel ze zdjęciami ma własny,
+   pionowy kształt (aspect-ratio 3/4) przyklejony do prawego górnego rogu,
+   z limitem wysokości — na dużych ekranach nie rośnie w nieskończoność. */
+.hero-slajdy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  height: min(100%, 580px);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.hero-slajd {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* 6 zdjęć, 24 s na pełny cykl = 4 s na zdjęcie. Każde ma tę samą
+     "pulsującą" animację (hero-fade), tylko przesuniętą opóźnieniem
+     o kolejne 4 s — stąd zawsze widać dokładnie jedno, z płynnym
+     przenikaniem między nimi. */
+  animation: hero-fade 24s ease-in-out infinite;
+}
+
+.hero-slajd:nth-child(1) { animation-delay: 0s; }
+.hero-slajd:nth-child(2) { animation-delay: 4s; }
+.hero-slajd:nth-child(3) { animation-delay: 8s; }
+.hero-slajd:nth-child(4) { animation-delay: 12s; }
+.hero-slajd:nth-child(5) { animation-delay: 16s; }
+.hero-slajd:nth-child(6) { animation-delay: 20s; }
+
+@keyframes hero-fade {
+  0%, 100% { opacity: 0; }
+  2.5% { opacity: 1; }
+  14.17% { opacity: 1; }
+  16.67% { opacity: 0; }
+}
+
+/* Komu przeszkadza ruch na ekranie — bez animacji, samo pierwsze zdjęcie. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slajd {
+    animation: none;
+    opacity: 0;
+  }
+
+  .hero-slajd:first-child {
+    opacity: 1;
+  }
+}
+
+/* Przyciemnienie zdjęć gradientem od lewej (tam, gdzie stoi tekst) tak,
+   żeby nagłówek i przyciski zostały czytelne niezależnie od tego, które
+   akurat zdjęcie się przewija — trochę mocniej niż przy jednym zdjęciu. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(27, 29, 33, 0.96) 0%, rgba(27, 29, 33, 0.88) 45%, rgba(27, 29, 33, 0.66) 100%);
+  pointer-events: none;
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: radial-gradient(70% 90% at 78% 15%, rgba(245, 163, 0, 0.10), transparent 60%);
   pointer-events: none;
 }
@@ -271,6 +327,7 @@ section[id] {
   right: -15%;
   top: 62%;
   height: 5px;
+  z-index: 1;
   transform: rotate(-11deg);
   background-image: repeating-linear-gradient(
     to right,
@@ -282,7 +339,7 @@ section[id] {
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 720px;
 }
 
@@ -2421,11 +2478,25 @@ body.lightbox-open {
 
   .hero {
     padding: 60px 0 70px;
-    /* Węższy ekran: kadr pionowy, tekst czytelny na jednolitym ciemnym tle */
-    background:
-      linear-gradient(180deg, rgba(27, 29, 33, 0.78), rgba(27, 29, 33, 0.92)),
-      url("../img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp") 50% 30% / cover no-repeat,
-      var(--asphalt);
+  }
+
+  /* Węższy ekran: nie ma miejsca obok tekstu na osobny panel ze zdjęciem —
+     karuzela wypełnia całą sekcję jako tło, tekst stoi na pionowym
+     gradiencie (ciemniej u dołu, gdzie jest treść). */
+  .hero-slajdy {
+    inset: 0;
+    top: 0;
+    right: 0;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .hero-slajd {
+    object-position: 50% 30%;
+  }
+
+  .hero-scrim {
+    background: linear-gradient(180deg, rgba(27, 29, 33, 0.78), rgba(27, 29, 33, 0.92));
   }
 
   .route-row {
