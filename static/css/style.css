@@ -245,7 +245,7 @@ section[id] {
 }
 
 /* Karuzela wypełnia całą sekcję jako tło (tekst stoi na gradiencie nad
-   nią). Tylko do 1199px szerokości ekranu — od 1200px w górę jest jej
+   nią). Tylko do 899px szerokości ekranu — od 900px w górę jest jej
    całkiem pusto, tak jak było przed dodaniem zdjęć (patrz media query
    niżej): unika to problemu z pionowymi zdjęciami (881×1176) w bardzo
    szerokiej, niskiej sekcji na dużym ekranie, gdzie i tak dobrze nie
@@ -265,26 +265,27 @@ section[id] {
   object-fit: cover;
   object-position: 50% 30%;
   opacity: 0;
-  /* 6 zdjęć, 24 s na pełny cykl = 4 s na zdjęcie. Każde ma tę samą
+  /* 6 zdjęć, 30 s na pełny cykl = 5 s na zdjęcie. Każde ma tę samą
      "pulsującą" animację (hero-fade), tylko przesuniętą opóźnieniem
-     o kolejne 4 s — stąd zawsze widać dokładnie jedno, z płynnym
+     o kolejne 5 s — stąd zawsze widać dokładnie jedno, z płynnym
      przenikaniem między nimi. */
-  animation: hero-fade 24s ease-in-out infinite;
+  animation: hero-fade 30s ease-in-out infinite;
 }
 
 .hero-slajd:nth-child(1) { animation-delay: 0s; }
-.hero-slajd:nth-child(2) { animation-delay: 4s; }
-.hero-slajd:nth-child(3) { animation-delay: 8s; }
-.hero-slajd:nth-child(4) { animation-delay: 12s; }
-.hero-slajd:nth-child(5) { animation-delay: 16s; }
-.hero-slajd:nth-child(6) { animation-delay: 20s; }
+.hero-slajd:nth-child(2) { animation-delay: 5s; }
+.hero-slajd:nth-child(3) { animation-delay: 10s; }
+.hero-slajd:nth-child(4) { animation-delay: 15s; }
+.hero-slajd:nth-child(5) { animation-delay: 20s; }
+.hero-slajd:nth-child(6) { animation-delay: 25s; }
 
-/* Przenikanie (fade in/out) trwa 1,2 s w każdą stronę — 2x dłużej niż na
-   początku. Reszta 4-sekundowego "slotu" zdjęcia to pełna widoczność. */
+/* Przenikanie (fade in/out) trwa 1,8 s w każdą stronę — o połowę dłużej
+   niż poprzednio (1,2 s). Reszta 5-sekundowego "slotu" zdjęcia to pełna
+   widoczność. */
 @keyframes hero-fade {
   0%, 100% { opacity: 0; }
-  5% { opacity: 1; }
-  11.67% { opacity: 1; }
+  6% { opacity: 1; }
+  10.67% { opacity: 1; }
   16.67% { opacity: 0; }
 }
 
@@ -311,9 +312,9 @@ section[id] {
   pointer-events: none;
 }
 
-/* Od 1200px szerokości ekranu w górę: całkiem pusto, bez zdjęć — tak jak
+/* Od 900px szerokości ekranu w górę: całkiem pusto, bez zdjęć — tak jak
    było, zanim je dodaliśmy. Sam ciemny gradient sekcji. */
-@media (min-width: 1200px) {
+@media (min-width: 900px) {
   .hero-slajdy,
   .hero-scrim {
     display: none;
