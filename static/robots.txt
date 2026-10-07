@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /potwierdzenie
 
-Sitemap: https://jazdy-doszkalajace.pages.dev/sitemap.xml
+Sitemap: https://lajtelka.pl/sitemap.xml

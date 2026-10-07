@@ -50,7 +50,7 @@ const MIEJSCA = [
 
 const WYJSCIE = join('static', 'img', 'mapy');
 const CACHE = join(tmpdir(), 'jd-kafelki-esri-sat');
-const USER_AGENT = 'jazdy-doszkalajace static map build (https://jazdy-doszkalajace.pages.dev)';
+const USER_AGENT = 'jazdy-doszkalajace static map build (https://lajtelka.pl)';
 
 mkdirSync(WYJSCIE, { recursive: true });
 mkdirSync(CACHE, { recursive: true });
