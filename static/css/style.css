@@ -131,6 +131,11 @@ section[id] {
   color: var(--amber);
 }
 
+/* Litery „L” i „EL” w nazwie LajtELka — wyróżnione kolorem marki. */
+.logo-l {
+  color: var(--amber);
+}
+
 /* Druga część nazwy („LajtELka – Doszkalanie") — lżejsza i mniejsza,
    żeby wzrok najpierw łapał samą markę. Bez łamania wiersza, bo logo
    ma zostać jedną linijką obok hamburgera. */
@@ -1475,7 +1480,8 @@ body.panel-open {
 
 .price-card-kurs .price-package-note {
   color: #8a8c91;
-  font-size: 0.78rem;
+  font-size: 0.7rem;
+  line-height: 1.4;
 }
 
 /* ==========================================================================
