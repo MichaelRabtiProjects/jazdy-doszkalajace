@@ -326,7 +326,7 @@
     var licznik = $('licznik-wstepnych');
     licznik.textContent = wstepne.length;
     licznik.hidden = wstepne.length === 0;
-    document.title = (wstepne.length ? '(' + wstepne.length + ') ' : '') + 'Panel | Jazdy Doszkalające';
+    document.title = (wstepne.length ? '(' + wstepne.length + ') ' : '') + 'Panel | LajtELka';
   }
 
   function znajdz(id) {

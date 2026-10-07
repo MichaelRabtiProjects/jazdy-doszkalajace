@@ -131,6 +131,26 @@ section[id] {
   color: var(--amber);
 }
 
+/* Druga część nazwy („LajtELka – Doszkalanie") — lżejsza i mniejsza,
+   żeby wzrok najpierw łapał samą markę. Bez łamania wiersza, bo logo
+   ma zostać jedną linijką obok hamburgera. */
+.logo {
+  white-space: nowrap;
+}
+
+.logo-sub {
+  font-size: 0.8em;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* Najwęższe telefony (320 px): pełna nazwa dotykała hamburgera. */
+@media (max-width: 360px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+}
+
 /* Grupa: przełącznik języka + logo, razem w lewym rogu nagłówka.
    Bez tego opakowania dodanie czwartego elementu do .header-inner
    (które ma justify-content: space-between) rozjechałoby odstępy

@@ -1,4 +1,4 @@
-# Jazdy Doszkalające — strona internetowa
+# LajtELka – Doszkalanie — strona internetowa
 
 Strona-wizytówka z systemem rezerwacji terminów online dla jednoosobowej działalności
 instruktora nauki jazdy (jazdy doszkalające, Warszawa Wawer).
