@@ -17,7 +17,7 @@
     }
   ],
   "vars": {
-    "ADRES_STRONY": "https://jazdy-doszkalajace.pages.dev",
+    "ADRES_STRONY": "https://lajtelka.pl",
     // "tak" = wysyłaj też SMS (płatne kredyty w Brevo); inaczej tylko e-mail
     "SMS_WLACZONE": "nie"
   }

@@ -24,7 +24,7 @@ window.I18N = {
   'spis-9': 'Final provisions',
 
   'par1-h': '§ 1. Provider',
-  'par1-1': 'These Terms cover refresher driving lessons and the booking of time slots through the website <span class="dokument-mono">jazdy-doszkalajace.pages.dev</span>.',
+  'par1-1': 'These Terms cover refresher driving lessons and the booking of time slots through the website <span class="dokument-mono">lajtelka.pl</span>.',
   'par1-2': 'Provider: <strong>Michael Rabti</strong>, <strong>[CORRESPONDENCE ADDRESS]</strong>, <strong>MichaelRabti@gmail.com</strong>, phone 690&nbsp;360&nbsp;164.',
   'par1-3': 'Unregistered business activity under Polish law (no VAT/tax ID, no company registration number, not listed in the CEIDG business register). A receipt is issued on request.',
   'par1-4': 'The Polish Consumer Rights Act and the Polish Civil Code (distance-contract rules) apply to Customers who are consumers.',
