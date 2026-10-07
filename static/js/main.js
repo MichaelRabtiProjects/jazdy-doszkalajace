@@ -1,4 +1,4 @@
-/* LajtELka – Doszkalanie — cała interaktywność strony.
+/* LajtELka – Jazdy doszkalające — cała interaktywność strony.
    Czysty JavaScript, zero bibliotek. */
 
 (function () {

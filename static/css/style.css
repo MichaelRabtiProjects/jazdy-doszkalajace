@@ -136,7 +136,7 @@ section[id] {
   color: var(--amber);
 }
 
-/* Druga część nazwy („LajtELka – Doszkalanie") — lżejsza i mniejsza,
+/* Druga część nazwy („LajtELka – Jazdy doszkalające") — lżejsza i mniejsza,
    żeby wzrok najpierw łapał samą markę. Bez łamania wiersza, bo logo
    ma zostać jedną linijką obok hamburgera. */
 .logo {
@@ -147,6 +147,15 @@ section[id] {
   font-size: 0.8em;
   font-weight: 500;
   opacity: 0.85;
+}
+
+/* Podpis „Jazdy doszkalające” jest długi: poniżej 980 px dotykał menu,
+   a na telefonie hamburgera. Na tabletach i telefonach zostaje sama marka. */
+@media (max-width: 980px) {
+  .logo-sep,
+  .logo-sub {
+    display: none;
+  }
 }
 
 /* Najwęższe telefony (320 px): pełna nazwa dotykała hamburgera. */

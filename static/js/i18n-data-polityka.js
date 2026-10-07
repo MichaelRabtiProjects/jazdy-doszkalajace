@@ -24,7 +24,7 @@ window.I18N = {
 
   'powrot': '← Back to the homepage',
 
-  'footer-prawa': '© 2026 LajtELka – Doszkalanie. All rights reserved.',
+  'footer-prawa': '© 2026 LajtELka – Jazdy doszkalające. All rights reserved.',
   'footer-regulamin': 'Terms of Service',
   'footer-polityka': 'Privacy Policy',
   'footer-area': 'Refresher driving lessons Warsaw · Wawer',
