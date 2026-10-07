@@ -299,11 +299,12 @@ section[id] {
   object-fit: cover;
   object-position: 50% 30%;
   opacity: 0;
-  /* 6 zdjęć, 30 s na pełny cykl = 5 s na zdjęcie. Każde ma tę samą
+  /* 10 zdjęć, 50 s na pełny cykl = 5 s na zdjęcie. Każde ma tę samą
      "pulsującą" animację (hero-fade), tylko przesuniętą opóźnieniem
      o kolejne 5 s — stąd zawsze widać dokładnie jedno, z płynnym
-     przenikaniem między nimi. */
-  animation: hero-fade 30s ease-in-out infinite;
+     przenikaniem między nimi. Przy dodaniu zdjęcia: wydłużyć cykl
+     o 5 s, dopisać nth-child i przeliczyć procenty w hero-fade. */
+  animation: hero-fade 50s ease-in-out infinite;
 }
 
 .hero-slajd:nth-child(1) { animation-delay: 0s; }
@@ -312,15 +313,18 @@ section[id] {
 .hero-slajd:nth-child(4) { animation-delay: 15s; }
 .hero-slajd:nth-child(5) { animation-delay: 20s; }
 .hero-slajd:nth-child(6) { animation-delay: 25s; }
+.hero-slajd:nth-child(7) { animation-delay: 30s; }
+.hero-slajd:nth-child(8) { animation-delay: 35s; }
+.hero-slajd:nth-child(9) { animation-delay: 40s; }
+.hero-slajd:nth-child(10) { animation-delay: 45s; }
 
-/* Przenikanie (fade in/out) trwa 1,8 s w każdą stronę — o połowę dłużej
-   niż poprzednio (1,2 s). Reszta 5-sekundowego "slotu" zdjęcia to pełna
-   widoczność. */
+/* Przenikanie (fade in/out) trwa 1,8 s w każdą stronę (3,6% z 50 s).
+   Reszta 5-sekundowego "slotu" zdjęcia (10% cyklu) to pełna widoczność. */
 @keyframes hero-fade {
   0%, 100% { opacity: 0; }
-  6% { opacity: 1; }
-  10.67% { opacity: 1; }
-  16.67% { opacity: 0; }
+  3.6% { opacity: 1; }
+  6.4% { opacity: 1; }
+  10% { opacity: 0; }
 }
 
 /* Komu przeszkadza ruch na ekranie — bez animacji, samo pierwsze zdjęcie. */
