@@ -1444,6 +1444,40 @@ body.panel-open {
   font-size: 0.85rem;
 }
 
+/* Kurs kat. B — oferta jeszcze nieaktywna. Wyszarzona kolorami, nie opacity,
+   bo .reveal.is-visible i tak ustawia opacity: 1. Podwójna klasa, żeby wygrać
+   z późniejszymi regułami cienia i unoszenia dla .price-card. */
+.price-card.price-card-kurs {
+  background: var(--paper-alt);
+  border-style: dashed;
+  border-color: #c9c7bf;
+  box-shadow: none;
+}
+
+.price-card.price-card-kurs:hover {
+  transform: none;
+  border-color: #c9c7bf;
+  box-shadow: none;
+}
+
+.price-card-kurs .price-duration,
+.price-card-kurs .price-value {
+  color: #9a9ca1;
+}
+
+.price-kurs-badge {
+  background: #9a9ca1;
+  color: var(--white);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.price-card-kurs .price-package-note {
+  color: #8a8c91;
+  font-size: 0.78rem;
+}
+
 /* ==========================================================================
    Opinie — surowe zrzuty ekranu w jednolitej oprawie
    ========================================================================== */

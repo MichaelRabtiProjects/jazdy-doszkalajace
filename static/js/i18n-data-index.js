@@ -152,6 +152,9 @@ window.I18N = {
   'cennik-pakiet-badge': 'Package',
   'cennik-pakiet-godzin': '10 hours',
   'cennik-pakiet-note': '150 zł/h — 10 zł cheaper per hour',
+  'cennik-kurs-badge': 'In progress',
+  'cennik-kurs-nazwa': 'Category B course',
+  'cennik-kurs-note': 'I also run courses, but at another driving school',
   'cennik-stali':
     'Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.',
   'cennik-en':
