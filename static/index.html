@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" data-wersja-en="/en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,18 @@
   w danych strukturalnych niżej) i dodatkowo w sitemap.xml i robots.txt.
 -->
 <link rel="canonical" href="https://lajtelka.pl/">
+
+<!--
+  Wersja angielska to osobny adres /en (plik en.html generowany z tego pliku
+  przez narzedzia/generuj-en.mjs), żeby Google mógł ją zaindeksować pod
+  angielskie wyszukiwania. Te linki mówią mu, że to ta sama strona w dwóch
+  językach. Kto wcześniej wybrał angielski (localStorage), od razu trafia
+  na /en — skrypt niżej; generator usuwa go z en.html.
+-->
+<link rel="alternate" hreflang="pl" href="https://lajtelka.pl/">
+<link rel="alternate" hreflang="en" href="https://lajtelka.pl/en">
+<link rel="alternate" hreflang="x-default" href="https://lajtelka.pl/">
+<script id="jd-przekierowanie-en">try{if(localStorage.getItem('jd_jezyk')==='en')location.replace('/en'+location.hash)}catch(e){}</script>
 
 <!-- Open Graph / podgląd linku przy udostępnianiu (Facebook, komunikatory, itp.) -->
 <meta property="og:type" content="website">
@@ -197,6 +209,7 @@
             Dla osób, które mają prawo jazdy, ale od dawna nie prowadziły. Spokojne tempo,
             oswojenie z autem, ruchem miejskim i aktualnymi przepisami — bez stresu i oceniania.
           </p>
+          <a class="offer-link" href="jazdy-po-przerwie.html" data-i18n="oferta-1-link">Więcej o jazdach po przerwie →</a>
         </article>
 
         <article class="offer-card reveal">
@@ -782,6 +795,83 @@
 
       </div>
         <button type="button" class="pasek-strzalka pasek-strzalka-prawo" data-pasek-next aria-label="Następne zdjęcia i filmy" data-i18n-attr="aria-label:pasek-galeria-next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <!-- Najczęstsze pytania — odpowiedzi WYŁĄCZNIE z faktów, które już są na
+       stronie i w regulaminie (ceny, miejsca, auto, zadatek, odwołanie).
+       Przy zmianie cennika / regulaminu trzeba poprawić też tutaj
+       (i angielskie odpowiedzi w i18n-data-index.js). Rozwijane <details>
+       działają bez JavaScriptu. -->
+  <section id="faq" class="section section-white">
+    <div class="container faq-container">
+      <p class="section-kicker reveal" data-i18n="faq-kicker">Pytania i odpowiedzi</p>
+      <h2 class="section-title reveal" data-i18n="faq-title">Najczęstsze pytania</h2>
+
+      <div class="faq-lista reveal">
+        <details class="faq-item">
+          <summary data-i18n="faq-1-q">Ile kosztuje jazda doszkalająca?</summary>
+          <div class="faq-odp" data-i18n="faq-1-a">
+            <p>160 zł za godzinę: 2 godziny to 320 zł, 3 godziny – 480 zł, 4 godziny – 640 zł. Pakiet 10 godzin kosztuje 1500 zł (150 zł/h). W dodatkowych miejscach spotkań doliczam 15 zł/h za dojazd — dokładną cenę grafik pokazuje przy każdej godzinie.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-2-q">Ile trwa jedna jazda?</summary>
+          <div class="faq-odp" data-i18n="faq-2-a">
+            <p>Od 2 do 4 godzin. Pakiet 10-godzinny rozkładamy na kilka spotkań — terminy ustalamy przy kontakcie.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-3-q">Czy muszę mieć prawo jazdy?</summary>
+          <div class="faq-odp" data-i18n="faq-3-a">
+            <p>Tak — jazdy doszkalające są dla osób z ważnym prawem jazdy kat. B, które pokazujesz przed jazdą. Nie musisz mieć żadnego egzaminu na horyzoncie: wystarczy, że chcesz odświeżyć umiejętności albo wrócić za kierownicę po przerwie (<a href="jazdy-po-przerwie.html">więcej o jazdach po przerwie</a>).</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-4-q">Gdzie zaczynamy jazdę?</summary>
+          <div class="faq-odp" data-i18n="faq-4-a">
+            <p>Najczęściej w Wawrze. W głównych miejscach spotkań dojazd jest bezpłatny: Będzińska / K&amp;M Park, Zerzeń / DoubleTree by Hilton i Ferio Wawer. Są też dodatkowe miejsca w innych częściach Warszawy (lista w sekcji <a href="#kontakt">Kontakt</a>), a inne miejsce można uzgodnić telefonicznie.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-5-q">Jakim autem jeździmy?</summary>
+          <div class="faq-odp" data-i18n="faq-5-a">
+            <p>Hyundaiem i20.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-6-q">Jak zarezerwować termin?</summary>
+          <div class="faq-odp" data-i18n="faq-6-a">
+            <p>W <a href="#grafik">grafiku</a> wybierz długość jazdy i godzinę, a potem wyślij krótki formularz — termin zostanie wstępnie zarezerwowany, a ja potwierdzam go e-mailem, SMS-em lub telefonicznie. Możesz też po prostu zadzwonić: <a href="tel:+48690360164">690 360 164</a>.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-7-q">Jak wygląda płatność?</summary>
+          <div class="faq-odp" data-i18n="faq-7-a">
+            <p>Po ustaleniu terminu wpłacasz zadatek 80 zł BLIK-iem na numer 690 360 164 (na życzenie zwykłym przelewem), a resztę przed lub po jeździe. Na stronie nie ma płatności online.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-8-q">Czy mogę odwołać albo przełożyć jazdę?</summary>
+          <div class="faq-odp" data-i18n="faq-8-a">
+            <p>Tak, bezpłatnie do 24 godzin przed jazdą — zadatek przechodzi na nowy termin albo go zwracam. Przy późniejszym odwołaniu zadatek może przepaść. Szczegóły w <a href="regulamin.html">regulaminie</a>.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-9-q">Czy prowadzisz jazdy po angielsku?</summary>
+          <div class="faq-odp" data-i18n="faq-9-a">
+            <p>Tak, w tej samej cenie co po polsku — to mój początek w nauczaniu po angielsku. Jeśli szukasz instruktora z wieloletnią praktyką w angielskim lub arabskim, zobacz <a href="#khaled">ofertę Instruktora Khaleda (ALP)</a>.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-10-q">Czy prowadzisz pełny kurs na prawo jazdy kat. B?</summary>
+          <div class="faq-odp" data-i18n="faq-10-a">
+            <p>Kursy też realizuję, ale w innym ośrodku. Zainteresowanych proszę o kontakt. Same jazdy doszkalające to nie kurs ośrodka, więc nie wystawiam do nich zaświadczeń — rachunek na żądanie.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>

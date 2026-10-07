@@ -4,6 +4,17 @@
    Sekcja Khaled (#khaled) jest z założenia zawsze po angielsku — nie ma
    tu dla niej wpisów, bo nie ma czego tłumaczyć. */
 window.I18N = {
+  /* --- Tytuł i opisy dla wyszukiwarek — używa ich narzedzia/generuj-en.mjs
+     przy budowaniu en.html (__tytul także i18n.js) --- */
+  '__tytul': 'Driving Lessons in English, Warsaw (Wawer) – Refresher Lessons | LajtELka',
+  '__opis':
+    'Refresher driving lessons (category B) in Warsaw – Wawer, Mokotów and nearby – also in ' +
+    'English. Get back behind the wheel after a break or practise WORD exam routes. 160 zł/h. ' +
+    'Call: +48 690 360 164.',
+  '__og-opis':
+    'Refresher driving lessons in Warsaw, also in English. Getting back behind the wheel after a ' +
+    'break and WORD exam route practice. 160 zł/h. Call: +48 690 360 164.',
+
   /* --- Nawigacja --- */
   'nav-oferta': 'Offer',
   'nav-grafik': 'Schedule',
@@ -34,6 +45,7 @@ window.I18N = {
   'oferta-1-p':
     'For people who already hold a licence but haven’t driven in a long time. A calm pace, ' +
     'getting used to the car, city traffic and current rules again — no stress, no judgement.',
+  'oferta-1-link': 'More about lessons after a break (in Polish) →',
   'oferta-2-h': 'WORD exam preparation',
   'oferta-2-p':
     'Driving the actual exam routes, so exam day isn’t the first time you see them.',
@@ -284,6 +296,57 @@ window.I18N = {
   'm2-4': 'Car park at Cynamonowa 4 (by the Mazda dealer)',
   'm2-5': 'Łopuszańska 22',
   'm2-6': 'al. Niepodległości 213 — car park by the National Library',
+
+  /* --- Najczęstsze pytania / FAQ --- */
+  'faq-kicker': 'Questions and answers',
+  'faq-title': 'Frequently asked questions',
+  'faq-1-q': 'How much does a refresher lesson cost?',
+  'faq-1-a':
+    '<p>160 zł per hour: 2 hours is 320 zł, 3 hours – 480 zł, 4 hours – 640 zł. A 10-hour package ' +
+    'costs 1500 zł (150 zł/h). At the additional meeting spots I add 15 zł/h for travel — the ' +
+    'schedule shows the exact price next to every time slot.</p>',
+  'faq-2-q': 'How long is one lesson?',
+  'faq-2-a':
+    '<p>Between 2 and 4 hours. The 10-hour package is split across several sessions — we agree the ' +
+    'dates when you get in touch.</p>',
+  'faq-3-q': 'Do I need a driving licence?',
+  'faq-3-a':
+    '<p>Yes — refresher lessons are for people with a valid category B licence, which you show me ' +
+    'before the lesson. You don’t need an exam coming up: it’s enough that you want to brush up ' +
+    'your skills or get back behind the wheel after a break.</p>',
+  'faq-4-q': 'Where do we start the lesson?',
+  'faq-4-a':
+    '<p>Usually in Wawer. At the main meeting spots there’s no travel charge: Będzińska / K&amp;M ' +
+    'Park, Zerzeń / DoubleTree by Hilton and Ferio Wawer. There are also additional spots in other ' +
+    'parts of Warsaw (listed in the <a href="#kontakt">Contact</a> section), and another place can ' +
+    'be agreed by phone.</p>',
+  'faq-5-q': 'What car do we drive?',
+  'faq-5-a': '<p>A Hyundai i20.</p>',
+  'faq-6-q': 'How do I book a lesson?',
+  'faq-6-a':
+    '<p>In the <a href="#grafik">schedule</a>, pick the lesson length and a time, then send a short ' +
+    'form — the slot is provisionally booked, and I confirm it by e-mail, text or phone. You can ' +
+    'also just call: <a href="tel:+48690360164">+48 690 360 164</a>.</p>',
+  'faq-7-q': 'How does payment work?',
+  'faq-7-a':
+    '<p>Once we agree the date, you pay an 80 zł deposit by BLIK to 690 360 164 (or a regular bank ' +
+    'transfer if you prefer), and the rest before or after the lesson. There are no online ' +
+    'payments on the site.</p>',
+  'faq-8-q': 'Can I cancel or reschedule?',
+  'faq-8-a':
+    '<p>Yes, free of charge up to 24 hours before the lesson — the deposit moves to the new date or ' +
+    'I refund it. If you cancel later, the deposit may be forfeited. Details in the ' +
+    '<a href="regulamin.html">Terms of Service</a>.</p>',
+  'faq-9-q': 'Do you teach in English?',
+  'faq-9-a':
+    '<p>Yes, at the same price as in Polish — I’m just starting out teaching in English. If you’re ' +
+    'looking for an instructor with many years of experience in English or Arabic, see ' +
+    '<a href="#khaled">Instructor Khaled’s offer (ALP)</a>.</p>',
+  'faq-10-q': 'Do you run a full category B driving course?',
+  'faq-10-a':
+    '<p>I also run courses, but at another driving school. If you’re interested, please get in ' +
+    'touch. Refresher lessons on their own aren’t a driving-school course, so I don’t issue ' +
+    'certificates for them — a receipt is available on request.</p>',
 
   /* --- Stopka / Footer --- */
   'footer-prawa': '© 2026 LajtELka – Jazdy doszkalające. All rights reserved.',

@@ -111,14 +111,31 @@
     return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'pl';
   };
 
+  // Strona główna ma angielską wersję pod osobnym adresem (/en), żeby Google
+  // mógł ją zaindeksować. Na polskiej stronie głównej <html data-wersja-en>
+  // wskazuje ten adres, a na en.html <html data-wersja-pl> wskazuje polski.
+  // Przycisk drugiego języka przenosi wtedy na tamten adres zamiast podmieniać
+  // tekst w miejscu. Pozostałe podstrony (regulamin itd.) tłumaczą się po
+  // staremu, w miejscu.
+  var adresPl = document.documentElement.getAttribute('data-wersja-pl');
+  var adresEn = document.documentElement.getAttribute('data-wersja-en');
+
+  function przejdz(jezyk, adres) {
+    zapiszJezyk(jezyk);
+    window.location.href = adres + window.location.hash;
+  }
+
   function start() {
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        zastosujJezyk(btn.dataset.lang);
+        var jezyk = btn.dataset.lang;
+        if (adresPl && jezyk === 'pl') return przejdz('pl', adresPl);
+        if (adresEn && jezyk === 'en') return przejdz('en', adresEn);
+        zastosujJezyk(jezyk);
       });
     });
 
-    zastosujJezyk(pobierzZapisanyJezyk());
+    zastosujJezyk(adresPl ? 'en' : adresEn ? 'pl' : pobierzZapisanyJezyk());
   }
 
   if (document.readyState === 'loading') {

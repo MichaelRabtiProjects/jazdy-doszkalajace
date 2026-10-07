@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<!-- PLIK GENEROWANY: node narzedzia/generuj-en.mjs (z index.html i js/i18n-data-index.js) — nie edytuj ręcznie. -->
+<html lang="en" data-wersja-pl="/">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driving Lessons in English, Warsaw (Wawer) – Refresher Lessons | LajtELka</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Refresher driving lessons (category B) in Warsaw – Wawer, Mokotów and nearby – also in English. Get back behind the wheel after a break or practise WORD exam routes. 160 zł/h. Call: +48 690 360 164.">
+
+<!--
+  Adres docelowy strony: https://lajtelka.pl/
+  Występuje w 4 miejscach w tym pliku (canonical, og:url, og:image oraz url
+  w danych strukturalnych niżej) i dodatkowo w sitemap.xml i robots.txt.
+-->
+<link rel="canonical" href="https://lajtelka.pl/en">
+
+<!--
+  Wersja angielska to osobny adres /en (plik en.html generowany z tego pliku
+  przez narzedzia/generuj-en.mjs), żeby Google mógł ją zaindeksować pod
+  angielskie wyszukiwania. Te linki mówią mu, że to ta sama strona w dwóch
+  językach. Kto wcześniej wybrał angielski (localStorage), od razu trafia
+  na /en — skrypt niżej; generator usuwa go z en.html.
+-->
+<link rel="alternate" hreflang="pl" href="https://lajtelka.pl/">
+<link rel="alternate" hreflang="en" href="https://lajtelka.pl/en">
+<link rel="alternate" hreflang="x-default" href="https://lajtelka.pl/">
+
+<!-- Open Graph / podgląd linku przy udostępnianiu (Facebook, komunikatory, itp.) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="LajtELka – Jazdy doszkalające">
+<meta property="og:title" content="Driving Lessons in English, Warsaw (Wawer) – Refresher Lessons | LajtELka">
+<meta property="og:description" content="Refresher driving lessons in Warsaw, also in English. Getting back behind the wheel after a break and WORD exam route practice. 160 zł/h. Call: +48 690 360 164.">
+<meta property="og:url" content="https://lajtelka.pl/en">
+<meta property="og:image" content="https://lajtelka.pl/img/og-image.jpg">
+<meta property="og:image:alt" content="Instruktor z kursantką podczas jazdy doszkalającej w Warszawie">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--
+  Dane strukturalne schema.org (JSON-LD) — "ściągawka" dla wyszukiwarek:
+  mówi wprost Google, że to firma typu szkoła jazdy, jaki ma telefon,
+  obszar działania, ceny i ocenę. Pomaga w wynikach lokalnych i wiąże
+  stronę z wizytówką Google.
+  UWAGA: reviewCount trzeba zaktualizować do faktycznej liczby opinii
+  z wizytówki Google, jeśli się zmieni.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDrivingSchool",
+  "name": "LajtELka – Jazdy doszkalające",
+  "alternateName": "LajtELka",
+  "description": "Refresher driving lessons (category B) in Warsaw – Wawer, Mokotów and nearby – also in English. Get back behind the wheel after a break or practise WORD exam routes. 160 zł/h. Call: +48 690 360 164.",
+  "url": "https://lajtelka.pl/",
+  "telephone": "+48690360164",
+  "email": "MichaelRabti@gmail.com",
+  "image": "https://lajtelka.pl/img/og-image.jpg",
+  "priceRange": "160-640 PLN",
+  "currenciesAccepted": "PLN",
+  "openingHours": "Mo-Su",
+  "areaServed": [
+    { "@type": "City", "name": "Warszawa" },
+    { "@type": "AdministrativeArea", "name": "Wawer" },
+    { "@type": "AdministrativeArea", "name": "Mokotów" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Warszawa",
+    "addressRegion": "mazowieckie",
+    "addressCountry": "PL"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "reviewCount": "23"
+  },
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Jazda doszkalająca kat. B",
+      "priceCurrency": "PLN",
+      "price": "160",
+      "description": "Cena za jedną godzinę jazdy doszkalającej."
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<!--
+  Pierwsze zdjęcie w przesuwającym się tle hero jest pierwszą rzeczą, jaką
+  widać na stronie (LCP) — preload przyspiesza jego wczytanie. Kolejne
+  zdjęcia karuzeli wczytują się zwykłym <img> bez preload, mają na to czas
+  (pierwsza zmiana dopiero po kilku sekundach). Atrybut media: od 900px
+  szerokości karuzeli w hero już nie ma (patrz style.css), więc na dużych
+  ekranach to zdjęcie w ogóle się nie pobiera.
+-->
+<link rel="preload" as="image" href="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" media="(max-width: 899px)">
+
+<!--
+  Włącza animacje pojawiania się sekcji tylko wtedy, gdy JavaScript działa.
+  Bez tego przy wyłączonym JS treść z klasą "reveal" zostałaby niewidoczna
+  na zawsze. Skrypt jest tutaj (a nie w main.js na końcu strony), żeby klasa
+  była ustawiona przed pierwszym malowaniem — inaczej treść mignęłaby.
+-->
+<script>document.documentElement.classList.add('js-reveal');</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn" data-lang="pl" aria-pressed="false" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true" title="English">🇬🇧</button>
+      </div>
+      <a href="#hero" class="logo"><span class="logo-l">L</span>ajt<span class="logo-l">EL</span>ka<span class="logo-accent logo-sep"> – </span><span class="logo-sub">Jazdy doszkalające</span></a>
+    </div>
+    <nav class="main-nav" id="main-nav">
+      <a href="#oferta" data-i18n="nav-oferta">Offer</a>
+      <a href="#grafik" data-i18n="nav-grafik">Schedule</a>
+      <a href="#o-mnie" data-i18n="nav-omnie">About me</a>
+      <a href="#khaled" class="nav-alp">ALP</a>
+      <a href="#cennik" data-i18n="nav-cennik">Pricing</a>
+      <a href="#opinie" data-i18n="nav-opinie">Reviews</a>
+      <a href="#galeria" data-i18n="nav-galeria">Gallery</a>
+      <a href="#kontakt" data-i18n="nav-kontakt">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-i18n-attr="aria-label:nav-toggle-label">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section id="hero" class="hero">
+    <!-- Przesuwające się zdjęcia w tle (te same pliki co w Galerii niżej —
+         przeglądarka pobiera je raz i używa z pamięci podręcznej w obu
+         miejscach). Czysto dekoracyjne, więc aria-hidden i puste alt —
+         treść hero niesie tekst obok. Od 900px szerokości ekranu karuzela
+         jest ukryta (style.css) — zdjęcia 2-6 mają loading="lazy", więc
+         przeglądarka na dużym ekranie w ogóle ich nie pobiera (zawsze
+         pobiera tylko pierwsze, zanim zdąży poznać szerokość ekranu). -->
+    <div class="hero-slajdy" aria-hidden="true">
+      <img class="hero-slajd" src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="" fetchpriority="high">
+      <img class="hero-slajd" src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/kursant-po-jezdzie.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" alt="" loading="lazy">
+      <img class="hero-slajd" src="img/galeria/zdany-egzamin-word-odlewnicza.webp" alt="" loading="lazy">
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="hero-kicker" data-i18n="hero-kicker">Warsaw · Wawer, Mokotów and the surrounding area</p>
+      <h1 data-i18n="hero-h1">Get back behind the wheel with confidence — refresher driving lessons for licensed drivers</h1>
+      <p class="hero-lead" data-i18n="hero-lead">Brush up your skills after a break, prepare for your exam on the exact WORD routes, or book an individual lesson built around what you need.</p>
+      <a href="#grafik" class="btn btn-primary" data-i18n="hero-cta">See available times</a>
+      <ul class="hero-trust" aria-label="Key facts" data-i18n-attr="aria-label:hero-trust-label">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>
+          <a href="#opinie"><strong>4,9</strong> <span data-i18n="hero-trust-google">on Google</span></a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3.3 11h6.2M14.5 11h6.2M12 14.5V21"/></svg>
+          <span data-i18n="hero-trust-kat">Category B instructor</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          <span data-i18n="hero-trust-teren">Wawer, Mokotów and the surrounding area</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="oferta" class="section section-white">
+    <div class="container">
+      <p class="section-kicker reveal" data-i18n="oferta-kicker">Refresher lessons</p>
+      <h2 class="section-title reveal" data-i18n="oferta-title">Offer</h2>
+      <p class="section-lead reveal" data-i18n="oferta-lead">Three ways to feel confident on the road.</p>
+
+      <div class="offer-grid">
+
+        <article class="offer-card reveal">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <circle cx="16" cy="16" r="12"/>
+            <circle cx="16" cy="16" r="4"/>
+            <path d="M16 12V4M12.6 18 5.8 22M19.4 18l6.8 4"/>
+          </svg>
+          <h3 data-i18n="oferta-1-h">Back behind the wheel</h3>
+          <p data-i18n="oferta-1-p">For people who already hold a licence but haven’t driven in a long time. A calm pace, getting used to the car, city traffic and current rules again — no stress, no judgement.</p>
+          <a class="offer-link" href="jazdy-po-przerwie.html" data-i18n="oferta-1-link">More about lessons after a break (in Polish) →</a>
+        </article>
+
+        <article class="offer-card reveal">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 4.5 27.5 24h-23z"/>
+            <path d="M16 12.5v5"/>
+            <path d="M16 20.4v.2"/>
+            <path d="M16 24v4"/>
+          </svg>
+          <h3 data-i18n="oferta-2-h">WORD exam preparation</h3>
+          <p data-i18n="oferta-2-p">Driving the actual exam routes, so exam day isn’t the first time you see them.</p>
+          <ul class="route-badges" aria-label="WORD exam routes" data-i18n-attr="aria-label:oferta-2-badges-label">
+            <li class="route-badge">Odlewnicza</li>
+            <li class="route-badge">Bemowo</li>
+            <li class="route-badge">Grójec</li>
+            <li class="route-badge">Garwolin</li>
+          </ul>
+        </article>
+
+        <article class="offer-card reveal">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4.5" y="4.5" width="23" height="23" rx="4"/>
+            <path d="M12.5 23V9.5h5a4 4 0 0 1 0 8h-5"/>
+          </svg>
+          <h3 data-i18n="oferta-3-h">Individual lessons</h3>
+          <p data-i18n="oferta-3-p">Parallel and perpendicular parking, fast-traffic roads, night driving, difficult conditions — a programme built around whatever you need right now.</p>
+        </article>
+
+      </div>
+
+      <!-- UWAGA: to jest osobna, WŁASNA oferta Michaela (dopiero zaczyna
+           uczyć po angielsku) — świadomie osobny blok od offer-alp-note
+           niżej (Khaled, wieloletnie doświadczenie). Nie łączyć tych treści. -->
+      <div class="offer-en-note reveal">
+        <p data-i18n="oferta-en-note">I also run refresher driving lessons in English, at the same price as in Polish. This is my start in teaching in a foreign language, so I treat it as a shared experience — if you’re looking for someone with years of practice in English, also check out <a href="#khaled">Instructor Khaled’s offer</a>.</p>
+      </div>
+
+      <div class="offer-alp-note reveal">
+        <p data-i18n="oferta-alp-note">Lessons are also available in English and Arabic — taught by instructor Khaled as part of ALP.</p>
+        <a href="#khaled" class="btn btn-secondary" data-i18n="oferta-alp-btn">See the ALP offer ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="grafik" class="section">
+    <div class="container">
+      <p class="section-kicker reveal" data-i18n="grafik-kicker">Available slots</p>
+      <h2 class="section-title reveal" data-i18n="grafik-title">Schedule</h2>
+      <p class="section-lead reveal" data-i18n="grafik-lead">Available times for the coming weeks. Pick a lesson length, click the time that suits you and send a short form — the time will be provisionally reserved for you straight away.</p>
+
+      <p class="umow-note reveal" data-i18n="grafik-umow-note">We usually meet around Wawer, but if the commute doesn’t suit you, just message me and we’ll agree on another spot. Message or call to arrange a time and details – the longer you put it off, the longer the stress waits for „someday” :P</p>
+
+      <div class="grafik reveal" id="grafik-widget">
+        <div class="grafik-dlugosci" id="grafik-dlugosci" role="group" aria-label="Lesson length" data-i18n-attr="aria-label:grafik-dlugosc-label">
+          <button type="button" class="dlugosc-btn is-active" data-dlugosc="2">
+            <span data-i18n="dlugosc-2h">2 hours</span> <span class="dlugosc-cena">320 zł</span>
+          </button>
+          <button type="button" class="dlugosc-btn" data-dlugosc="3">
+            <span data-i18n="dlugosc-3h">3 hours</span> <span class="dlugosc-cena">480 zł</span>
+          </button>
+          <button type="button" class="dlugosc-btn" data-dlugosc="4">
+            <span data-i18n="dlugosc-4h">4 hours</span> <span class="dlugosc-cena">640 zł</span>
+          </button>
+        </div>
+
+        <!-- Miejsce spotkania — obowiązkowe: od niego zależą godziny (czas
+             mojego dojazdu między jazdami) i cena (dopłata za dojazd). -->
+        <div class="grafik-miejsce">
+          <label class="grafik-miejsce-label" for="grafik-miejsce" data-i18n="grafik-miejsce-label">Meeting point</label>
+          <select id="grafik-miejsce" class="grafik-miejsce-select"></select>
+          <p class="grafik-miejsce-info" id="grafik-miejsce-info" hidden></p>
+        </div>
+
+        <div class="grafik-widoki" id="grafik-widoki" role="group" aria-label="Schedule view" data-i18n-attr="aria-label:grafik-widok-label" hidden>
+          <button type="button" class="widok-btn is-active" data-widok="dzien" aria-pressed="true" data-i18n="grafik-widok-dzien">Day</button>
+          <button type="button" class="widok-btn" data-widok="tydzien" aria-pressed="false" data-i18n="grafik-widok-tydzien">Week</button>
+        </div>
+
+        <p class="grafik-komunikat" id="grafik-komunikat" data-i18n="grafik-wczytywanie">Loading available times…</p>
+
+        <!-- Kalendarz w dwóch częściach, jak w Calendesk: u góry przewijany
+             pasek dni do wyboru, pod spodem godziny WYBRANEGO dnia. -->
+        <div class="grafik-kalendarz" id="grafik-kalendarz" hidden>
+          <div class="dni-pasek-wrap">
+            <button type="button" class="dni-strzalka dni-strzalka-lewo" id="dni-lewo" aria-label="Earlier days" data-i18n-attr="aria-label:dni-lewo-label">‹</button>
+            <div class="dni-pasek" id="dni-pasek" role="group" aria-label="Choose a day" data-i18n-attr="aria-label:dni-pasek-label"></div>
+            <button type="button" class="dni-strzalka dni-strzalka-prawo" id="dni-prawo" aria-label="Later days" data-i18n-attr="aria-label:dni-prawo-label">›</button>
+          </div>
+          <div class="godziny-panel" id="godziny-panel"></div>
+        </div>
+
+        <!-- Widok tygodniowy (jak w Calendesku): 7 kolumn od poniedziałku,
+             w każdej wolne godziny tego dnia. -->
+        <div class="grafik-tydzien" id="grafik-tydzien" hidden>
+          <div class="tydzien-nawigacja">
+            <button type="button" class="dni-strzalka" id="tydzien-lewo" aria-label="Previous week" data-i18n-attr="aria-label:tydzien-lewo-label">‹</button>
+            <p class="tydzien-zakres" id="tydzien-zakres" aria-live="polite"></p>
+            <button type="button" class="dni-strzalka" id="tydzien-prawo" aria-label="Next week" data-i18n-attr="aria-label:tydzien-prawo-label">›</button>
+          </div>
+          <div class="tydzien-kolumny" id="tydzien-kolumny"></div>
+        </div>
+
+        <p class="grafik-legenda" id="grafik-legenda" hidden></p>
+      </div>
+
+      <div class="contact-cta reveal">
+        <a href="tel:+48690360164" class="btn btn-primary" data-i18n="grafik-call-btn">Call: 690 360 164</a>
+        <a href="mailto:MichaelRabti@gmail.com" class="btn btn-secondary" data-i18n="grafik-email-btn">Send an e-mail</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="o-mnie" class="section section-white">
+    <div class="container about-container">
+      <p class="section-kicker reveal" data-i18n="omnie-kicker">Category B instructor</p>
+      <h2 class="section-title reveal" data-i18n="omnie-title">About me</h2>
+
+      <p class="about-intro reveal" data-i18n="omnie-intro-1">Hi, I’m Michael. I’ve been driving since I was 18 – my father was also a driving instructor, so in a way I grew up „behind the wheel”. Before becoming an instructor I built up broad experience driving all kinds of vehicles: taxis, box vans, refuse trucks, gritter-snowplows, street sweepers, excavator-loaders, and category C+E trucks – rigid trucks with drawbar trailers and articulated combinations. Since 2026 I’ve also added motorcycle riding to my licences and experience.</p>
+
+      <p class="about-intro reveal" data-i18n="omnie-intro-2">I’ve been working as a category B driving instructor for almost two years. I know the exam routes at Odlewnicza, Bemowo and Grójec very well, and I’m currently getting to know the Garwolin routes as I go.</p>
+
+      <!-- WŁASNA oferta Michaela w j. angielskim — osobna od sekcji Khaleda,
+           patrz uzasadnienie przy offer-en-note w sekcji Oferta. -->
+      <div class="about-block reveal">
+        <h3 data-i18n="omnie-en-h">I also teach in English</h3>
+        <p data-i18n="omnie-en-p">I’ve recently started running refresher lessons in English too. I’m right at the beginning of this, so don’t expect perfect fluency from me — I see it as a shared experience with the student. If you’d like to practise the language along the way, with no pressure and no judgement, you’re welcome to book.</p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="omnie-b1-h">I teach so you understand the rules, not just repeat them</h3>
+        <p data-i18n="omnie-b1-p">I try to explain all the rules and exam techniques exactly as they’re written in the actual laws and their annexes, so you understand not just how to pass the exam, but precisely what the examiner is looking at when assessing your driving – so you know exactly what the exam rules are, what earns a pass, what counts as a minor fault, and what causes an instant fail. I like this angle, because it teaches you a bit from the examiner’s side rather than just as a candidate – you know your rights during the exam.</p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="omnie-b2-h">Exam routes</h3>
+        <p data-i18n="omnie-b2-p">I know the exam routes very well, especially at Odlewnicza – students sometimes take their actual exam on the exact route we practised, doing the manoeuvres in the exact same spots. Then Bemowo and Grójec, and finally Garwolin – the one I’ve had the least chance to drive so far.</p>
+
+        <ul class="routes-list" aria-label="Familiarity with exam routes" data-i18n-attr="aria-label:omnie-routes-label">
+          <li class="route-row">
+            <span class="route-name">Odlewnicza</span>
+            <span class="route-bar"><span class="route-bar-fill" style="width:100%"></span></span>
+            <span class="route-level" data-i18n="omnie-route-1">know best</span>
+          </li>
+          <li class="route-row">
+            <span class="route-name">Bemowo</span>
+            <span class="route-bar"><span class="route-bar-fill" style="width:80%"></span></span>
+            <span class="route-level" data-i18n="omnie-route-2">know very well</span>
+          </li>
+          <li class="route-row">
+            <span class="route-name">Grójec</span>
+            <span class="route-bar"><span class="route-bar-fill" style="width:62%"></span></span>
+            <span class="route-level" data-i18n="omnie-route-3">know well</span>
+          </li>
+          <li class="route-row">
+            <span class="route-name">Garwolin</span>
+            <span class="route-bar"><span class="route-bar-fill" style="width:35%"></span></span>
+            <span class="route-level" data-i18n="omnie-route-4">still getting to know</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="omnie-b3-h">Coming back to driving after a break?</h3>
+        <p data-i18n="omnie-b3-p">If you already hold a licence but haven’t sat behind the wheel in a while – you don’t need an exam on the horizon to practise with me. Many of my students come back to driving after years away – after having a child, moving city, or simply not having had the opportunity – and start out feeling unsure or stressed at the very thought of heading out onto the street. Together we rebuild your confidence at your own pace: from quiet residential streets, through parking and manoeuvres, up to busier traffic if that’s what you need. No judgement, no rush – just real practice to help you feel at ease behind the wheel again.</p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="omnie-b4-h">Atmosphere during lessons</h3>
+        <p data-i18n="omnie-b4-p">With me, lessons run in a friendly, relaxed atmosphere, while staying professional about the actual teaching. I don’t like rudeness, so I’m not artificially nice either – I try to just be myself. I have experience working at Babska Autoszkoła with all kinds of students – the vast majority were happy with how I taught them. I try to keep things friendly, because we do spend a good few hours – sometimes dozens of them – behind the wheel together, talking about more than just driving – for some people it even turns into a bit of therapy, once they trust me enough to open up.</p>
+        <p class="about-link-row">
+          <a href="#opinie" class="about-link" data-i18n="omnie-reviews-link">See student reviews ↓</a>
+        </p>
+      </div>
+
+      <blockquote class="about-closing reveal" data-i18n="omnie-closing">Best wishes to all my students – those who’ve already passed, those still preparing for their exam, and those who simply came to brush up their skills. I hope you all have a long, safe road ahead.</blockquote>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <!--
+    Sekcja po angielsku — wyłącznie fakty z listy ustalonej z klientem:
+    prowadził szkołę jazdy ALP, ponad 20 lat nauczania (Polska i zagranica),
+    uczy po angielsku i arabsku, kontakt tylko SMS/WhatsApp/telefon,
+    wycena indywidualna. Świadomie NIE wspomina o żadnym pokrewieństwie
+    ani nie dopisuje faktów spoza tej listy.
+  -->
+  <section id="khaled" class="section section-dark" lang="en">
+    <div class="container about-container">
+      <p class="section-kicker reveal">ALP Driving School</p>
+      <h2 class="section-title reveal">Instructor Khaled</h2>
+
+      <p class="about-intro reveal">
+        Khaled ran the ALP driving school and has over 20 years of experience teaching drivers,
+        both in Poland and abroad. Lessons are taught in English, Arabic, and Polish.
+      </p>
+
+      <p class="section-lead reveal">
+        Pricing is individual — get in touch to talk through what you need and agree on a rate.
+      </p>
+
+      <p class="umow-note reveal">
+        Khaled doesn't use e-mail or an online form for this — the fastest way to reach him is
+        by SMS, WhatsApp, or a phone call.
+      </p>
+
+      <div class="contact-cta reveal">
+        <a href="tel:+48570971757" class="btn btn-primary">Call</a>
+        <a href="sms:+48570971757" class="btn btn-secondary">SMS</a>
+        <a href="https://wa.me/48570971757" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="cennik" class="section">
+    <div class="container">
+      <p class="section-kicker reveal" data-i18n="cennik-kicker">Clear pricing</p>
+      <h2 class="section-title reveal" data-i18n="cennik-title">Pricing</h2>
+      <p class="section-lead reveal" data-i18n="cennik-lead">One hourly rate, no hidden costs.</p>
+
+      <div class="price-grid">
+        <div class="price-card price-card-rate reveal">
+          <span class="price-value">160 zł</span>
+          <span class="price-unit" data-i18n="cennik-za-godzine">per hour</span>
+        </div>
+        <div class="price-card reveal">
+          <span class="price-duration" data-i18n="dlugosc-2h">2 hours</span>
+          <span class="price-value">320 zł</span>
+        </div>
+        <div class="price-card reveal">
+          <span class="price-duration" data-i18n="dlugosc-3h">3 hours</span>
+          <span class="price-value">480 zł</span>
+        </div>
+        <div class="price-card price-card-kurs reveal">
+          <span class="price-package-badge price-kurs-badge" data-i18n="cennik-kurs-badge">In progress</span>
+          <span class="price-duration" data-i18n="cennik-kurs-nazwa">Category B course</span>
+          <span class="price-value">4990 zł</span>
+          <span class="price-package-note" data-i18n="cennik-kurs-note">I also run courses, but at another driving school. If you’re interested, please get in touch.</span>
+        </div>
+        <div class="price-card price-card-pakiet reveal">
+          <span class="price-package-badge" data-i18n="cennik-pakiet-badge">Package</span>
+          <span class="price-duration" data-i18n="cennik-pakiet-godzin">10 hours</span>
+          <span class="price-value">1500 zł</span>
+          <span class="price-package-note" data-i18n="cennik-pakiet-note">150 zł/h — 10 zł cheaper per hour</span>
+        </div>
+      </div>
+
+      <p class="price-note reveal" data-i18n="cennik-note">A single lesson is 2 to 4 hours — the 10-hour package is split across several sessions, arranged when you get in touch.</p>
+
+      <p class="price-note price-note-stali reveal" data-i18n="cennik-stali">Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.</p>
+
+      <p class="price-note reveal" data-i18n="cennik-en">Same prices in English (this applies to lessons with me — for lessons with Instructor Khaled in English/Arabic, pricing is individual, see his section).</p>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="opinie" class="section section-white">
+    <div class="container">
+      <div class="reviews-head reveal">
+        <div>
+          <p class="section-kicker" data-i18n="opinie-kicker">Google reviews</p>
+          <h2 class="section-title" data-i18n="opinie-title">Reviews</h2>
+          <p class="section-lead" data-i18n="opinie-lead">Real student reviews — straight from the Google listing and messages after passed exams.</p>
+        </div>
+        <p class="rating-badge">
+          <span class="rating-value">4,9</span>
+          <span class="rating-stars" aria-hidden="true">★★★★★</span>
+          <span class="rating-label" data-i18n="opinie-w-google">on Google</span>
+        </p>
+      </div>
+
+      <div class="reviews-filters reveal" role="group" aria-label="Filter reviews" data-i18n-attr="aria-label:opinie-filtruj-label">
+        <button type="button" class="filter-btn is-active" data-filter="all" data-i18n="opinie-filtr-wszystkie">All</button>
+        <button type="button" class="filter-btn" data-filter="google">Google</button>
+        <button type="button" class="filter-btn" data-filter="messenger">Messenger</button>
+      </div>
+
+      <p class="reviews-lang-note" data-i18n="opinie-jezyk-nota">The reviews below are screenshots, shown exactly as they were left — most are in Polish, since that’s the language most students write in. A few are already in English or Arabic.</p>
+
+      <div class="pasek-auto" data-pasek-auto>
+        <button type="button" class="pasek-strzalka pasek-strzalka-lewo" data-pasek-prev aria-label="Previous reviews" data-i18n-attr="aria-label:pasek-opinie-prev">‹</button>
+      <div class="reviews-grid" id="reviews-grid" data-lightbox-group="opinie" data-pasek-tor>
+
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" data-caption="Google review from student Kinga — 5 stars for exam preparation and confidence behind the wheel" data-i18n-attr="data-caption:rev-g01">
+          <img src="img/opinie/opinia-google-01-kinga-sitarek-jazdy-doszkalajace.webp" alt="Google review from student Kinga — 5 stars for exam preparation and confidence behind the wheel" loading="lazy" data-i18n-attr="alt:rev-g01">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" data-caption="Google review from student Robert — 5 stars for professionalism and attitude towards the student" data-i18n-attr="data-caption:rev-g02">
+          <img src="img/opinie/opinia-google-02-robert-warsztocki-jazdy-doszkalajace.webp" alt="Google review from student Robert — 5 stars for professionalism and attitude towards the student" loading="lazy" data-i18n-attr="alt:rev-g02">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" data-caption="Google review from Andrzej — back to driving after an 8-year break, passed the exam on the first try" data-i18n-attr="data-caption:rev-g03">
+          <img src="img/opinie/opinia-google-03-andrzej-biedron-przygotowanie-do-egzaminu.webp" alt="Google review from Andrzej — back to driving after an 8-year break, passed the exam on the first try" loading="lazy" data-i18n-attr="alt:rev-g03">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" data-caption="Google review from Robert — passed the exam after three refresher lessons" data-i18n-attr="data-caption:rev-g04">
+          <img src="img/opinie/opinia-google-04-robert-powrot-za-kierownica.webp" alt="Google review from Robert — passed the exam after three refresher lessons" loading="lazy" data-i18n-attr="alt:rev-g04">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" data-caption="Google review — passed the exam without a single fault" data-i18n-attr="data-caption:rev-g05">
+          <img src="img/opinie/opinia-google-05-majvka-zdany-egzamin-bez-bledu.webp" alt="Google review — passed the exam without a single fault" loading="lazy" data-i18n-attr="alt:rev-g05">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" data-caption="Google review from Paweł — a demanding but patient instructor" data-i18n-attr="data-caption:rev-g06">
+          <img src="img/opinie/opinia-google-06-pawel-lewandowski-jazdy-doszkalajace.webp" alt="Google review from Paweł — a demanding but patient instructor" loading="lazy" data-i18n-attr="alt:rev-g06">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" data-caption="Google review from Weronika — refresher lessons after a long break from driving" data-i18n-attr="data-caption:rev-g07">
+          <img src="img/opinie/opinia-google-07-weronika-powrot-za-kierownica.webp" alt="Google review from Weronika — refresher lessons after a long break from driving" loading="lazy" data-i18n-attr="alt:rev-g07">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" data-caption="Google review — best instructor, 5-star rating" data-i18n-attr="data-caption:rev-g08">
+          <img src="img/opinie/opinia-google-08-grzybek-najlepszy-instruktor.webp" alt="Google review — best instructor, 5-star rating" loading="lazy" data-i18n-attr="alt:rev-g08">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" data-caption="Google review — passed the exam after previous unsuccessful attempts" data-i18n-attr="data-caption:rev-g09">
+          <img src="img/opinie/opinia-google-09-czapus69-trudny-egzamin.webp" alt="Google review — passed the exam after previous unsuccessful attempts" loading="lazy" data-i18n-attr="alt:rev-g09">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" data-caption="Google review from Zosia — passed the exam flawlessly" data-i18n-attr="data-caption:rev-g10">
+          <img src="img/opinie/opinia-google-10-zosia-tym-egzamin-zdany-bezbledny.webp" alt="Google review from Zosia — passed the exam flawlessly" loading="lazy" data-i18n-attr="alt:rev-g10">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-11-alex-tyler-en-khalid-skrocona.webp" data-caption="Google review in English — patient instructor, passed the driving exam">
+          <img src="img/opinie/opinia-google-11-alex-tyler-en-khalid-skrocona.webp" alt="Google review in English — patient instructor, passed the driving exam" loading="lazy">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-12-alex-tyler-en-khalid-pelna.webp" data-caption="Google review in English — recommended for English-speaking learners">
+          <img src="img/opinie/opinia-google-12-alex-tyler-en-khalid-pelna.webp" alt="Google review in English — recommended for English-speaking learners" loading="lazy">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-13-masudur-rahman-en-khalid.webp" data-caption="Google review in English — passed theory and practical exam on the first attempt">
+          <img src="img/opinie/opinia-google-13-masudur-rahman-en-khalid.webp" alt="Google review in English — passed theory and practical exam on the first attempt" loading="lazy">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" data-caption="Google review in Arabic — driving lessons with an Arabic-speaking instructor" data-i18n-attr="data-caption:rev-g14">
+          <img src="img/opinie/opinia-google-14-ghada-kamal-ar-khalid.webp" alt="Google review in Arabic — driving lessons with an Arabic-speaking instructor" loading="lazy" data-i18n-attr="alt:rev-g14">
+        </button>
+        <button type="button" class="review-item" data-source="google" data-full="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" data-caption="Google review in Arabic — professional approach and stress-free learning" data-i18n-attr="data-caption:rev-g15">
+          <img src="img/opinie/opinia-google-15-miko-misho-ar-khalid.webp" alt="Google review in Arabic — professional approach and stress-free learning" loading="lazy" data-i18n-attr="alt:rev-g15">
+        </button>
+
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" data-caption="Message from a student — passed the exam in Garwolin on the first try" data-i18n-attr="data-caption:rev-m01">
+          <img src="img/opinie/opinia-messenger-01-valentyna-vitashynska-egzamin-garwolin.webp" alt="Message from a student — passed the exam in Garwolin on the first try" loading="lazy" data-i18n-attr="alt:rev-m01">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" data-caption="Message from student Maja — passed exam, exam sheet" data-i18n-attr="data-caption:rev-m02">
+          <img src="img/opinie/opinia-messenger-02-maja-suldrzynska-zdany-egzamin.webp" alt="Message from student Maja — passed exam, exam sheet" loading="lazy" data-i18n-attr="alt:rev-m02">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" data-caption="Message from student Jan — passed the practical exam" data-i18n-attr="data-caption:rev-m03">
+          <img src="img/opinie/opinia-messenger-03-jan-luczak-zdany-egzamin.webp" alt="Message from student Jan — passed the practical exam" loading="lazy" data-i18n-attr="alt:rev-m03">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" data-caption="Message from a student — passed the exam at Odlewnicza" data-i18n-attr="data-caption:rev-m04">
+          <img src="img/opinie/opinia-messenger-04-weronika-groszek-egzamin-odlewnicza.webp" alt="Message from a student — passed the exam at Odlewnicza" loading="lazy" data-i18n-attr="alt:rev-m04">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" data-caption="Message from student Oliwia — passed the exam almost flawlessly" data-i18n-attr="data-caption:rev-m05">
+          <img src="img/opinie/opinia-messenger-05-oliwia-sokolowska-zdany-egzamin.webp" alt="Message from student Oliwia — passed the exam almost flawlessly" loading="lazy" data-i18n-attr="alt:rev-m05">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" data-caption="Message from student Andrzej — passed the practical exam" data-i18n-attr="data-caption:rev-m06">
+          <img src="img/opinie/opinia-messenger-06-andrzej-biedron-zdany-egzamin.webp" alt="Message from student Andrzej — passed the practical exam" loading="lazy" data-i18n-attr="alt:rev-m06">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" data-caption="Message from a student — passed the exam through sheer persistence" data-i18n-attr="data-caption:rev-m07">
+          <img src="img/opinie/opinia-messenger-07-wiktoria-halakh-wytrwalosc-siodme-podejscie.webp" alt="Message from a student — passed the exam through sheer persistence" loading="lazy" data-i18n-attr="alt:rev-m07">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" data-caption="Message from student Sylwia — passed on the first attempt at Odlewnicza" data-i18n-attr="data-caption:rev-m08">
+          <img src="img/opinie/opinia-messenger-08-sylwia-figurska-egzamin-odlewnicza.webp" alt="Message from student Sylwia — passed on the first attempt at Odlewnicza" loading="lazy" data-i18n-attr="alt:rev-m08">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" data-caption="Message from student Julia — passed the exam" data-i18n-attr="data-caption:rev-m09">
+          <img src="img/opinie/opinia-messenger-09-julia-zielinska-zdany-egzamin.webp" alt="Message from student Julia — passed the exam" loading="lazy" data-i18n-attr="alt:rev-m09">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" data-caption="Message from student Marta — passed the exam with one fault" data-i18n-attr="data-caption:rev-m10">
+          <img src="img/opinie/opinia-messenger-10-marta-piszka-zdany-egzamin.webp" alt="Message from student Marta — passed the exam with one fault" loading="lazy" data-i18n-attr="alt:rev-m10">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" data-caption="Message from student Antoni — words of praise from the examiner for the instructor" data-i18n-attr="data-caption:rev-m11">
+          <img src="img/opinie/opinia-messenger-11-antoni-iwan-zdany-egzamin.webp" alt="Message from student Antoni — words of praise from the examiner for the instructor" loading="lazy" data-i18n-attr="alt:rev-m11">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" data-caption="Message from a student — passed on the first try, no stress during the exam" data-i18n-attr="data-caption:rev-m12">
+          <img src="img/opinie/opinia-messenger-12-emilia-doss-pierwsze-podejscie.webp" alt="Message from a student — passed on the first try, no stress during the exam" loading="lazy" data-i18n-attr="alt:rev-m12">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" data-caption="Message from student Konrad — the examiner praised his good preparation" data-i18n-attr="data-caption:rev-m13">
+          <img src="img/opinie/opinia-messenger-13-konrad-sowko-zdany-egzamin.webp" alt="Message from student Konrad — the examiner praised his good preparation" loading="lazy" data-i18n-attr="alt:rev-m13">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" data-caption="Message from student Paweł — passed the exam on the first try" data-i18n-attr="data-caption:rev-m14">
+          <img src="img/opinie/opinia-messenger-14-pawel-lewandowski-automobilklub.webp" alt="Message from student Paweł — passed the exam on the first try" loading="lazy" data-i18n-attr="alt:rev-m14">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" data-caption="Message from student Bartek — passed the exam in pouring rain" data-i18n-attr="data-caption:rev-m15">
+          <img src="img/opinie/opinia-messenger-15-bartek-czapinski-zdany-egzamin-w-deszczu.webp" alt="Message from student Bartek — passed the exam in pouring rain" loading="lazy" data-i18n-attr="alt:rev-m15">
+        </button>
+        <button type="button" class="review-item" data-source="messenger" data-full="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" data-caption="Student review from the time the instructor worked at Babska Autoszkoła" data-i18n-attr="data-caption:rev-m16">
+          <img src="img/opinie/opinia-messenger-16-gracjan-lepkowski-babska-auto-szkola.webp" alt="Student review from the time the instructor worked at Babska Autoszkoła" loading="lazy" data-i18n-attr="alt:rev-m16">
+        </button>
+
+      </div>
+        <button type="button" class="pasek-strzalka pasek-strzalka-prawo" data-pasek-next aria-label="Next reviews" data-i18n-attr="aria-label:pasek-opinie-next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="galeria" class="section section-dark">
+    <div class="container">
+      <p class="section-kicker reveal" data-i18n="galeria-kicker">Photos & videos</p>
+      <h2 class="section-title reveal" data-i18n="galeria-title">Gallery</h2>
+      <p class="section-lead reveal" data-i18n="galeria-lead">Students who agreed to have their photo published, plus footage from the manoeuvring yard.</p>
+
+      <div class="pasek-auto" data-pasek-auto>
+        <button type="button" class="pasek-strzalka pasek-strzalka-lewo" data-pasek-prev aria-label="Previous photos and videos" data-i18n-attr="aria-label:pasek-galeria-prev">‹</button>
+      <div class="gallery-grid" data-lightbox-group="galeria" data-pasek-tor>
+
+        <button type="button" class="gallery-item is-video" data-type="video"
+                data-full="video/jazda-po-luku-cwiczenie-manewrowe.mp4"
+                data-poster="img/video-poster/jazda-po-luku-poster.webp"
+                data-caption="Practising driving around a curve on the manoeuvring yard" data-i18n-attr="data-caption:gal-v1">
+          <img src="img/video-poster/jazda-po-luku-poster.webp" alt="Practising driving around a curve on the manoeuvring yard — video" loading="lazy" data-i18n-attr="alt:gal-v1-alt">
+          <span class="play-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item is-video" data-type="video"
+                data-full="video/cwiczenia-manewrowe-plac-jazdy-doszkalajace.mp4"
+                data-poster="img/video-poster/cwiczenia-manewrowe-poster.webp"
+                data-caption="Manoeuvring exercises during a refresher driving lesson" data-i18n-attr="data-caption:gal-v2">
+          <img src="img/video-poster/cwiczenia-manewrowe-poster.webp" alt="Manoeuvring exercises during a refresher driving lesson — video" loading="lazy" data-i18n-attr="alt:gal-v2-alt">
+          <span class="play-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item is-video" data-type="video"
+                data-full="video/opinia-kursanta-jazdy-doszkalajace-warszawa.mp4"
+                data-poster="img/video-poster/opinia-kursanta-poster.webp"
+                data-caption="A student’s review of refresher driving lessons in Warsaw" data-i18n-attr="data-caption:gal-v3">
+          <img src="img/video-poster/opinia-kursanta-poster.webp" alt="A driving-school car with a lit-up L-plate in the evening — video with a student review" loading="lazy" data-i18n-attr="alt:gal-v3-alt">
+          <span class="play-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" data-caption="Instructor with a student during a category B refresher driving lesson in Warsaw" data-i18n-attr="data-caption:gal-01">
+          <img src="img/galeria/jazdy-doszkalajace-kat-b-wawer.webp" alt="Instructor with a student during a category B refresher driving lesson in Warsaw" loading="lazy" data-i18n-attr="alt:gal-01">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" data-caption="A happy student after a refresher driving lesson in Warsaw’s Wawer district" data-i18n-attr="data-caption:gal-02">
+          <img src="img/galeria/nauka-jazdy-warszawa-wawer-zadowolony-kursant.webp" alt="A happy student after a refresher driving lesson in Warsaw’s Wawer district" loading="lazy" data-i18n-attr="alt:gal-02">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-odlewnicza.webp" data-caption="Passed driving exam on the WORD Odlewnicza route" data-i18n-attr="data-caption:gal-03">
+          <img src="img/galeria/zdany-egzamin-word-odlewnicza.webp" alt="Passed driving exam on the WORD Odlewnicza route" loading="lazy" data-i18n-attr="alt:gal-03">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/zdany-egzamin-word-bemowo.webp" data-caption="Passed driving exam on the WORD Bemowo route" data-i18n-attr="data-caption:gal-04">
+          <img src="img/galeria/zdany-egzamin-word-bemowo.webp" alt="Passed driving exam on the WORD Bemowo route" loading="lazy" data-i18n-attr="alt:gal-04">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/kursant-po-jezdzie.webp" data-caption="Instructor and student after a successful refresher driving lesson" data-i18n-attr="data-caption:gal-05">
+          <img src="img/galeria/kursant-po-jezdzie.webp" alt="Instructor and student after a successful refresher driving lesson" loading="lazy" data-i18n-attr="alt:gal-05">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" data-caption="Happy students of the driving school in Warsaw’s Wawer district" data-i18n-attr="data-caption:gal-06">
+          <img src="img/galeria/najlepsza-szkola-jazdy-warszawa-wawer.webp" alt="Happy students of the driving school in Warsaw’s Wawer district" loading="lazy" data-i18n-attr="alt:gal-06">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-nauki-jazdy-warszawa.webp" data-caption="Driving instructor in Warsaw with a student" data-i18n-attr="data-caption:gal-07">
+          <img src="img/galeria/instruktor-nauki-jazdy-warszawa.webp" alt="Driving instructor in Warsaw with a student" loading="lazy" data-i18n-attr="alt:gal-07">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" data-caption="Refresher driving lesson ahead of a driving exam in Warsaw" data-i18n-attr="data-caption:gal-08">
+          <img src="img/galeria/jazdy-przed-egzaminem-warszawa-wawer.webp" alt="Refresher driving lesson ahead of a driving exam in Warsaw" loading="lazy" data-i18n-attr="alt:gal-08">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-bezstresowo.webp" data-caption="Stress-free driving lessons with an instructor in Warsaw" data-i18n-attr="data-caption:gal-09">
+          <img src="img/galeria/nauka-jazdy-bezstresowo.webp" alt="Stress-free driving lessons with an instructor in Warsaw" loading="lazy" data-i18n-attr="alt:gal-09">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" data-caption="Student with a passed category B exam sheet" data-i18n-attr="data-caption:gal-10">
+          <img src="img/galeria/szkola-jazdy-wawer-nauka-kat-b.webp" alt="Student with a passed category B exam sheet" loading="lazy" data-i18n-attr="alt:gal-10">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" data-caption="Refresher lessons after years away from driving, in Warsaw" data-i18n-attr="data-caption:gal-11">
+          <img src="img/galeria/doszkalanie-po-latach-przerwy-warszawa.webp" alt="Refresher lessons after years away from driving, in Warsaw" loading="lazy" data-i18n-attr="alt:gal-11">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" data-caption="Refresher driving instructor by the car in Warsaw" data-i18n-attr="data-caption:gal-12">
+          <img src="img/galeria/instruktor-jazdy-doszkalajacej-warszawa.webp" alt="Refresher driving instructor by the car in Warsaw" loading="lazy" data-i18n-attr="alt:gal-12">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/jazda-probna-przed-egzaminem-word.webp" data-caption="Practice run ahead of the WORD exam" data-i18n-attr="data-caption:gal-13">
+          <img src="img/galeria/jazda-probna-przed-egzaminem-word.webp" alt="Practice run ahead of the WORD exam" loading="lazy" data-i18n-attr="alt:gal-13">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" data-caption="Category B refresher driving lessons in Warsaw" data-i18n-attr="data-caption:gal-14">
+          <img src="img/galeria/nauka-jazdy-doszkalajaca-kat-b-warszawa.webp" alt="Category B refresher driving lessons in Warsaw" loading="lazy" data-i18n-attr="alt:gal-14">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" data-caption="Car used for refresher driving lessons in Warsaw" data-i18n-attr="data-caption:gal-15">
+          <img src="img/galeria/samochod-do-nauki-jazdy-doszkalajacej-warszawa.webp" alt="Car used for refresher driving lessons in Warsaw" loading="lazy" data-i18n-attr="alt:gal-15">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" data-caption="Exam preparation on the WORD Bemowo route" data-i18n-attr="data-caption:gal-16">
+          <img src="img/galeria/trasa-egzaminacyjna-word-bemowo-jazdy-doszkalajace.webp" alt="Exam preparation on the WORD Bemowo route" loading="lazy" data-i18n-attr="alt:gal-16">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" data-caption="Exam preparation on the WORD Odlewnicza route in Warsaw" data-i18n-attr="data-caption:gal-17">
+          <img src="img/galeria/trasa-egzaminacyjna-word-odlewnicza-warszawa.webp" alt="Exam preparation on the WORD Odlewnicza route in Warsaw" loading="lazy" data-i18n-attr="alt:gal-17">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" data-caption="Interior of the refresher-lesson driving car in Warsaw" data-i18n-attr="data-caption:gal-18">
+          <img src="img/galeria/deska-rozdzielcza-auta-nauki-jazdy-warszawa.webp" alt="Interior of the refresher-lesson driving car in Warsaw" loading="lazy" data-i18n-attr="alt:gal-18">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" data-caption="Happy students of refresher driving lessons in Warsaw" data-i18n-attr="data-caption:gal-19">
+          <img src="img/galeria/kursanci-jazdy-doszkalajace-warszawa.webp" alt="Happy students of refresher driving lessons in Warsaw" loading="lazy" data-i18n-attr="alt:gal-19">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" data-caption="Refresher driving lessons for women in Warsaw" data-i18n-attr="data-caption:gal-20">
+          <img src="img/galeria/jazdy-doszkalajace-dla-kobiet-warszawa.webp" alt="Student with the instructor in the car during a refresher driving lesson in Warsaw" loading="lazy" data-i18n-attr="alt:gal-20-alt">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" data-caption="Instructor and student during a refresher driving lesson in Warsaw" data-i18n-attr="data-caption:gal-21">
+          <img src="img/galeria/instruktor-i-kursant-w-samochodzie-warszawa.webp" alt="Instructor and student in the car during a refresher driving lesson in Warsaw" loading="lazy" data-i18n-attr="alt:gal-21-alt">
+        </button>
+        <button type="button" class="gallery-item" data-full="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" data-caption="A happy student after a refresher driving lesson in Warsaw" data-i18n-attr="data-caption:gal-22">
+          <img src="img/galeria/kursant-kciuk-w-gore-po-jezdzie-warszawa.webp" alt="Student giving a thumbs up after a refresher driving lesson in Warsaw" loading="lazy" data-i18n-attr="alt:gal-22-alt">
+        </button>
+
+      </div>
+        <button type="button" class="pasek-strzalka pasek-strzalka-prawo" data-pasek-next aria-label="Next photos and videos" data-i18n-attr="aria-label:pasek-galeria-next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <!-- Najczęstsze pytania — odpowiedzi WYŁĄCZNIE z faktów, które już są na
+       stronie i w regulaminie (ceny, miejsca, auto, zadatek, odwołanie).
+       Przy zmianie cennika / regulaminu trzeba poprawić też tutaj
+       (i angielskie odpowiedzi w i18n-data-index.js). Rozwijane <details>
+       działają bez JavaScriptu. -->
+  <section id="faq" class="section section-white">
+    <div class="container faq-container">
+      <p class="section-kicker reveal" data-i18n="faq-kicker">Questions and answers</p>
+      <h2 class="section-title reveal" data-i18n="faq-title">Frequently asked questions</h2>
+
+      <div class="faq-lista reveal">
+        <details class="faq-item">
+          <summary data-i18n="faq-1-q">How much does a refresher lesson cost?</summary>
+          <div class="faq-odp" data-i18n="faq-1-a"><p>160 zł per hour: 2 hours is 320 zł, 3 hours – 480 zł, 4 hours – 640 zł. A 10-hour package costs 1500 zł (150 zł/h). At the additional meeting spots I add 15 zł/h for travel — the schedule shows the exact price next to every time slot.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-2-q">How long is one lesson?</summary>
+          <div class="faq-odp" data-i18n="faq-2-a"><p>Between 2 and 4 hours. The 10-hour package is split across several sessions — we agree the dates when you get in touch.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-3-q">Do I need a driving licence?</summary>
+          <div class="faq-odp" data-i18n="faq-3-a"><p>Yes — refresher lessons are for people with a valid category B licence, which you show me before the lesson. You don’t need an exam coming up: it’s enough that you want to brush up your skills or get back behind the wheel after a break.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-4-q">Where do we start the lesson?</summary>
+          <div class="faq-odp" data-i18n="faq-4-a"><p>Usually in Wawer. At the main meeting spots there’s no travel charge: Będzińska / K&amp;M Park, Zerzeń / DoubleTree by Hilton and Ferio Wawer. There are also additional spots in other parts of Warsaw (listed in the <a href="#kontakt">Contact</a> section), and another place can be agreed by phone.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-5-q">What car do we drive?</summary>
+          <div class="faq-odp" data-i18n="faq-5-a"><p>A Hyundai i20.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-6-q">How do I book a lesson?</summary>
+          <div class="faq-odp" data-i18n="faq-6-a"><p>In the <a href="#grafik">schedule</a>, pick the lesson length and a time, then send a short form — the slot is provisionally booked, and I confirm it by e-mail, text or phone. You can also just call: <a href="tel:+48690360164">+48 690 360 164</a>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-7-q">How does payment work?</summary>
+          <div class="faq-odp" data-i18n="faq-7-a"><p>Once we agree the date, you pay an 80 zł deposit by BLIK to 690 360 164 (or a regular bank transfer if you prefer), and the rest before or after the lesson. There are no online payments on the site.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-8-q">Can I cancel or reschedule?</summary>
+          <div class="faq-odp" data-i18n="faq-8-a"><p>Yes, free of charge up to 24 hours before the lesson — the deposit moves to the new date or I refund it. If you cancel later, the deposit may be forfeited. Details in the <a href="regulamin.html">Terms of Service</a>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-9-q">Do you teach in English?</summary>
+          <div class="faq-odp" data-i18n="faq-9-a"><p>Yes, at the same price as in Polish — I’m just starting out teaching in English. If you’re looking for an instructor with many years of experience in English or Arabic, see <a href="#khaled">Instructor Khaled’s offer (ALP)</a>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq-10-q">Do you run a full category B driving course?</summary>
+          <div class="faq-odp" data-i18n="faq-10-a"><p>I also run courses, but at another driving school. If you’re interested, please get in touch. Refresher lessons on their own aren’t a driving-school course, so I don’t issue certificates for them — a receipt is available on request.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" aria-hidden="true"></div>
+
+  <section id="kontakt" class="section">
+    <div class="container">
+      <p class="section-kicker reveal" data-i18n="kontakt-kicker">Book a lesson</p>
+      <h2 class="section-title reveal" data-i18n="kontakt-title">Contact</h2>
+      <div class="contact-grid reveal">
+        <div>
+          <p><strong data-i18n="kontakt-instruktor-label">Instructor:</strong> Michael</p>
+          <p><strong data-i18n="kontakt-telefon-label">Phone:</strong> <a href="tel:+48690360164">690 360 164</a></p>
+          <p><strong>E-mail:</strong> <a href="mailto:MichaelRabti@gmail.com">MichaelRabti@gmail.com</a></p>
+          <p><strong data-i18n="kontakt-obszar-label">Service area:</strong> <span data-i18n="kontakt-obszar-tekst">Wawer, Mokotów and the surrounding Warsaw area — other districts by arrangement.</span></p>
+        </div>
+        <div lang="en">
+          <p><strong>Instructor:</strong> Khaled (ALP Driving School)</p>
+          <p><strong>Phone:</strong> <a href="tel:+48570971757">570 971 757</a></p>
+          <p><strong>Contact:</strong> SMS, WhatsApp or a phone call — no e-mail or online form.</p>
+          <p><strong>Languages:</strong> English, Arabic, Polish.</p>
+        </div>
+      </div>
+
+      <!-- Miejsca spotkań: dwa slajdery z tego samego komponentu (js/slajder.js).
+           Karty to zwykłe linki do Map Google, BEZ osadzonej mapy (iframe) —
+           osadzona mapa ładowałaby skrypty i cookies Google u każdego
+           odwiedzającego, a Polityka prywatności obiecuje brak trackerów. -->
+      <div class="miejsca reveal">
+        <h3 class="miejsca-tytul" data-i18n="miejsca-1-tytul">Main meeting points — free of charge, any day of the week. Another spot can be arranged by phone.</h3>
+        <div class="slajder" data-slajder>
+          <button type="button" class="slajder-strzalka" data-slajder-prev aria-label="Previous spots" data-i18n-attr="aria-label:slajder-prev">‹</button>
+          <div class="slajder-tor" data-slajder-tor tabindex="0" role="group" aria-label="Main meeting points" data-i18n-attr="aria-label:miejsca-1-label">
+            <article class="miejsce-karta miejsce-bezplatne">
+              <h4 class="miejsce-nazwa" data-i18n="m1-1">Będzińska / K&amp;M Park</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Free of charge</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.18149683839272,21.190286834215232" target="_blank" rel="noopener">
+                <img src="img/mapy/bedzinska-km-park.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Będzińska / K&amp;M Park</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-bezplatne">
+              <h4 class="miejsce-nazwa" data-i18n="m1-2">Zerzeń / DoubleTree by Hilton</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Free of charge</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.185637864370754,21.142463683183966" target="_blank" rel="noopener">
+                <img src="img/mapy/zerzen-doubletree.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Zerzeń / DoubleTree by Hilton</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-bezplatne">
+              <h4 class="miejsce-nazwa" data-i18n="m1-3">Ferio Wawer</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-bezplatne">Free of charge</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.20643961512142,21.16806456403142" target="_blank" rel="noopener">
+                <img src="img/mapy/ferio-wawer.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Ferio Wawer</span>
+              </a>
+            </article>
+          </div>
+          <button type="button" class="slajder-strzalka" data-slajder-next aria-label="Next spots" data-i18n-attr="aria-label:slajder-next">›</button>
+        </div>
+        <p class="miejsca-atrybucja"><span data-i18n="mapy-atrybucja">Satellite imagery:</span> © <a href="https://www.esri.com/en-us/legal/terms/data-attributions" target="_blank" rel="noopener" data-i18n="mapy-osm">Esri, Maxar, Earthstar Geographics</a></p>
+      </div>
+
+      <div class="miejsca reveal">
+        <h3 class="miejsca-tytul" data-i18n="miejsca-2-tytul">Additional spots — I sometimes come here at no extra cost if I happen to be in the area, but this needs to be agreed in advance — WhatsApp, SMS or a phone call.</h3>
+        <div class="slajder" data-slajder>
+          <button type="button" class="slajder-strzalka" data-slajder-prev aria-label="Previous spots" data-i18n-attr="aria-label:slajder-prev">‹</button>
+          <div class="slajder-tor" data-slajder-tor tabindex="0" role="group" aria-label="Additional spots" data-i18n-attr="aria-label:miejsca-2-label">
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-1">Bricoman Warszawa Wilanów</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.15297185146504,21.093351761354374" target="_blank" rel="noopener">
+                <img src="img/mapy/bricoman-wilanow.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Bricoman Warszawa Wilanów</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-2">Auchan Puławska 427</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.141826658341266,21.02387121970856" target="_blank" rel="noopener">
+                <img src="img/mapy/auchan-pulawska-427.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Auchan Puławska 427</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-3">Shell station near Galeria Mokotów</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.17777456510009,21.006682123623765" target="_blank" rel="noopener">
+                <img src="img/mapy/shell-galeria-mokotow.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Stacja Shell koło Galerii Mokotów</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-4">Car park at Cynamonowa 4 (by the Mazda dealer)</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.1489457,21.055811" target="_blank" rel="noopener">
+                <img src="img/mapy/cynamonowa-4.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Parking Cynamonowa 4 (koło dealera Mazdy)</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-5">Łopuszańska 22</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.19257846238642,20.95163280598338" target="_blank" rel="noopener">
+                <img src="img/mapy/lopuszanska-22.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: Łopuszańska 22</span>
+              </a>
+            </article>
+            <article class="miejsce-karta miejsce-warunkowe">
+              <h4 class="miejsce-nazwa" data-i18n="m2-6">al. Niepodległości 213 — car park by the National Library</h4>
+              <p class="miejsce-status" data-i18n="miejsce-status-warunkowe">To be agreed by phone</p>
+              <a class="miejsce-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.21431110095896,21.005091288313384" target="_blank" rel="noopener">
+                <img src="img/mapy/niepodleglosci-213.webp" alt="" width="480" height="270" loading="lazy">
+                <span class="miejsce-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="22.6" rx="4.5" ry="1.2" fill="#1b1d21" opacity=".3"/><g transform="translate(0,2)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#f5a300" stroke="#1b1d21" stroke-width="1"/><circle cx="12" cy="9" r="2.6" fill="#1b1d21"/></g></svg></span>
+                <span class="miejsce-mapa-chip"><span data-i18n="miejsce-otworz">Open in Google Maps</span> ↗</span>
+                <span class="visually-hidden">: al. Niepodległości 213 — parking pod Biblioteką Narodową</span>
+              </a>
+            </article>
+          </div>
+          <button type="button" class="slajder-strzalka" data-slajder-next aria-label="Next spots" data-i18n-attr="aria-label:slajder-next">›</button>
+        </div>
+        <p class="miejsca-atrybucja"><span data-i18n="mapy-atrybucja">Satellite imagery:</span> © <a href="https://www.esri.com/en-us/legal/terms/data-attributions" target="_blank" rel="noopener" data-i18n="mapy-osm">Esri, Maxar, Earthstar Geographics</a></p>
+        <p class="miejsca-nota" data-i18n="miejsca-2-nota">A lesson at one of these points costs 175 zł/h (a 15 zł/h travel surcharge) — unless I’m already nearby that day because I have a lesson at the same or a neighbouring point; then it’s 160 zł/h. The schedule shows the exact price next to every time.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="site-footer">
+  <div class="container footer-inner">
+    <p data-i18n="footer-prawa">© 2026 LajtELka – Jazdy doszkalające. All rights reserved.</p>
+    <nav class="footer-dokumenty" aria-label="Dokumenty">
+      <a href="regulamin.html" data-i18n="footer-regulamin">Terms of Service</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Privacy Policy</a>
+    </nav>
+    <p class="footer-area" data-i18n="footer-area">Refresher driving lessons Warsaw · Wawer</p>
+  </div>
+</footer>
+
+<!-- Pływające przyciski kontaktu — dwa małe, okrągłe, z samą ikoną.
+     Pokazują się po przewinięciu poza Hero. Podpis jest w aria-label
+     i title (dymek po najechaniu myszą). SMS i e-mail są w Kontakcie
+     i w panelu terminu w grafiku, więc tu ich nie powielamy. -->
+
+<a href="https://wa.me/48690360164" class="js-fab whatsapp-fab" id="whatsapp-fab" target="_blank" rel="noopener" aria-label="Message on WhatsApp" title="Message on WhatsApp" data-i18n-attr="aria-label:whatsapp-fab-label,title:whatsapp-fab-label">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2.1-.2-.5-.5-.5-.6-.5h-.6c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/>
+    <path d="M12 2C6.5 2 2 6.4 2 11.8c0 1.9.5 3.6 1.5 5.2L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.4 10-9.9C22 6.4 17.5 2 12 2zm0 18.1c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.9.9-3-.2-.3c-.9-1.4-1.4-3-1.4-4.6 0-4.6 3.8-8.3 8.4-8.3 4.6 0 8.4 3.7 8.4 8.3 0 4.6-3.8 8.4-8.4 8.4z"/>
+  </svg>
+</a>
+
+<a href="tel:+48690360164" class="js-fab call-fab" id="call-fab" aria-label="Call" title="Call" data-i18n-attr="aria-label:fab-label,title:fab-label">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+  </svg>
+</a>
+
+<!-- Panel wybranego terminu — treść wypełnia grafik.js, zależnie od trybu -->
+<div class="termin-panel" id="termin-panel" role="dialog" aria-modal="true" aria-labelledby="termin-tytul" hidden>
+  <div class="termin-box">
+    <button type="button" class="termin-zamknij" id="termin-zamknij" aria-label="Close" data-i18n-attr="aria-label:zamknij-label">&times;</button>
+    <h3 class="termin-tytul" id="termin-tytul">Wybrany termin</h3>
+    <p class="termin-podsumowanie" id="termin-podsumowanie"></p>
+    <div id="termin-tresc"></div>
+  </div>
+</div>
+
+<!-- Lightbox — wspólny dla galerii i opinii -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Preview" hidden data-i18n-attr="aria-label:lightbox-label">
+  <button type="button" class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Close preview" data-i18n-attr="aria-label:lightbox-close-label">&times;</button>
+  <button type="button" class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Previous" data-i18n-attr="aria-label:lightbox-prev-label">&#8249;</button>
+  <button type="button" class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Next" data-i18n-attr="aria-label:lightbox-next-label">&#8250;</button>
+  <figure class="lightbox-figure">
+    <div class="lightbox-media" id="lightbox-media"></div>
+    <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<script src="js/i18n-data-index.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/slajder.js"></script>
+<script src="js/pasek-auto.js"></script>
+<script src="js/grafik.js"></script>
+</body>
+</html>
