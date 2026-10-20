@@ -65,6 +65,12 @@ window.I18N = {
   'par5-6': 'If the lesson doesn’t happen due to the Provider’s fault — a new time is offered or the deposit is refunded (under Art.&nbsp;394&nbsp;§&nbsp;1 of the Civil Code the Customer may instead demand double the deposit amount).',
   'par5-7': 'If the lesson doesn’t happen for reasons outside either party’s control — the deposit is refunded in full (Art.&nbsp;394&nbsp;§&nbsp;3 of the Civil Code).',
   'par5-8': 'Deposit refunds: within 14 days, via BLIK or bank transfer, at no cost to the Customer.',
+  'par5-9': 'A Customer with an account can also cancel a booking themselves under My account: a provisional booking at any time, a confirmed one no later than 24 hours before the lesson.',
+  'par3-7': 'You can create a free <strong>Customer account</strong> on the website: all you need is your e-mail address and a one-time code sent to it (no password). The account is used to book times and view your own bookings — it is a service provided electronically, free of charge and for an indefinite period.',
+  'par3-8': 'Free times in the schedule are visible after signing in. You can also arrange a time without an account — by phone, SMS or WhatsApp.',
+  'par3-9': 'To use the account you need a device with an up-to-date web browser and access to your e-mail inbox. No app needs to be installed.',
+  'par3-10': 'The Customer can delete the account at any time (My account → Delete account) or ask the Provider to do so. Deleting the account does not cancel confirmed lessons.',
+  'par3-11': 'About 26 hours before the lesson the Provider sends a reminder by e-mail and text message to the phone number given when booking.',
 
   'par6-h': '§ 6. Right of withdrawal (14 days)',
   'par6-1': 'A Customer who is a consumer and enters into a distance contract has the right to withdraw from it within <strong>14 days, without giving a reason and at no cost</strong> — subject to points (6) and (7) below (Art.&nbsp;27 of the Polish Consumer Rights Act).',
@@ -92,7 +98,7 @@ window.I18N = {
   'par9-2': 'No provision of these Terms limits a consumer’s statutory rights — in case of conflict, the law prevails.',
   'par9-3': 'For how personal data is handled, see the <a href="polityka-prywatnosci.html">Privacy Policy</a>.',
   'par9-4': 'Changes to these Terms take effect on publication of the new version; a time slot confirmed earlier is governed by the version in force at the time it was confirmed (earlier versions available on request).',
-  'par9-5': 'These Terms, in this wording, are in effect from <strong>28 September 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
+  'par9-5': 'These Terms, in this wording, are in effect from <strong>20 October 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
 
   'powrot': '← Back to the homepage',
 
