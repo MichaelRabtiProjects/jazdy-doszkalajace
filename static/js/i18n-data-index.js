@@ -73,22 +73,12 @@ window.I18N = {
   /* --- Grafik / Schedule --- */
   'grafik-kicker': 'Available slots',
   'grafik-title': 'Schedule',
-  'grafik-lead': 'Available times for the coming weeks. Pick a lesson length, click the time that suits you and send a short form — the time will be provisionally reserved for you straight away.',
+  'grafik-lead': 'Available times for the coming weeks. Choose a meeting point, the lesson length and a time, then send a short form — the time will be provisionally reserved for you straight away.',
   'grafik-umow-note':
     'We usually meet around Wawer, but if the commute doesn’t suit you, just message me and we’ll ' +
     'agree on another spot. Message or call to arrange a time and details – the longer you put it off, ' +
     'the longer the stress waits for „someday” :P',
-  'grafik-dlugosc-label': 'Lesson length',
-  'grafik-miejsce-label': 'Meeting point',
-  'grafik-widok-label': 'Schedule view',
-  'grafik-widok-dzien': 'Day',
-  'grafik-widok-tydzien': 'Week',
-  'tydzien-lewo-label': 'Previous week',
-  'tydzien-prawo-label': 'Next week',
   'grafik-wczytywanie': 'Loading available times…',
-  'dni-lewo-label': 'Earlier days',
-  'dni-pasek-label': 'Choose a day',
-  'dni-prawo-label': 'Later days',
   'grafik-call-btn': 'Call: 690 360 164',
   'grafik-email-btn': 'Send an e-mail',
   'dlugosc-2h': '2 hours',
@@ -324,7 +314,7 @@ window.I18N = {
   'faq-5-a': '<p>A Hyundai i20.</p>',
   'faq-6-q': 'How do I book a lesson?',
   'faq-6-a':
-    '<p>In the <a href="#grafik">schedule</a>, pick the lesson length and a time, then send a short ' +
+    '<p>In the <a href="#grafik">schedule</a>, pick a meeting point, the lesson length and a time, then send a short ' +
     'form — the slot is provisionally booked, and I confirm it by e-mail, text or phone. You can ' +
     'also just call: <a href="tel:+48690360164">+48 690 360 164</a>.</p>',
   'faq-7-q': 'How does payment work?',
@@ -358,8 +348,7 @@ window.I18N = {
   'fab-label': 'Call',
   'whatsapp-fab-label': 'Message on WhatsApp',
 
-  /* --- Panel terminu / lightbox --- */
-  'zamknij-label': 'Close',
+  /* --- Lightbox --- */
   'lightbox-label': 'Preview',
   'lightbox-close-label': 'Close preview',
   'lightbox-prev-label': 'Previous',

@@ -276,8 +276,8 @@
       <p class="section-kicker reveal" data-i18n="grafik-kicker">Wolne terminy</p>
       <h2 class="section-title reveal" data-i18n="grafik-title">Grafik</h2>
       <p class="section-lead reveal" data-i18n="grafik-lead">
-        Wolne terminy na najbliższe tygodnie. Wybierz długość jazdy, kliknij godzinę, która Ci pasuje,
-        i wyślij krótki formularz — termin od razu zostanie wstępnie zarezerwowany dla Ciebie.
+        Wolne terminy na najbliższe tygodnie. Wybierz miejsce spotkania, długość jazdy i godzinę,
+        a potem wyślij krótki formularz — termin od razu zostanie wstępnie zarezerwowany dla Ciebie.
       </p>
 
       <p class="umow-note reveal" data-i18n="grafik-umow-note">
@@ -286,57 +286,13 @@
         zwlekasz, tym dłużej stres czeka na „kiedyś” :P
       </p>
 
-      <div class="grafik reveal" id="grafik-widget">
-        <div class="grafik-dlugosci" id="grafik-dlugosci" role="group" aria-label="Długość jazdy" data-i18n-attr="aria-label:grafik-dlugosc-label">
-          <button type="button" class="dlugosc-btn is-active" data-dlugosc="2">
-            <span data-i18n="dlugosc-2h">2 godziny</span> <span class="dlugosc-cena">320 zł</span>
-          </button>
-          <button type="button" class="dlugosc-btn" data-dlugosc="3">
-            <span data-i18n="dlugosc-3h">3 godziny</span> <span class="dlugosc-cena">480 zł</span>
-          </button>
-          <button type="button" class="dlugosc-btn" data-dlugosc="4">
-            <span data-i18n="dlugosc-4h">4 godziny</span> <span class="dlugosc-cena">640 zł</span>
-          </button>
-        </div>
-
-        <!-- Miejsce spotkania — obowiązkowe: od niego zależą godziny (czas
-             mojego dojazdu między jazdami) i cena (dopłata za dojazd). -->
-        <div class="grafik-miejsce">
-          <label class="grafik-miejsce-label" for="grafik-miejsce" data-i18n="grafik-miejsce-label">Miejsce spotkania</label>
-          <select id="grafik-miejsce" class="grafik-miejsce-select"></select>
-          <p class="grafik-miejsce-info" id="grafik-miejsce-info" hidden></p>
-        </div>
-
-        <div class="grafik-widoki" id="grafik-widoki" role="group" aria-label="Widok grafiku" data-i18n-attr="aria-label:grafik-widok-label" hidden>
-          <button type="button" class="widok-btn is-active" data-widok="dzien" aria-pressed="true" data-i18n="grafik-widok-dzien">Dzień</button>
-          <button type="button" class="widok-btn" data-widok="tydzien" aria-pressed="false" data-i18n="grafik-widok-tydzien">Tydzień</button>
-        </div>
-
-        <p class="grafik-komunikat" id="grafik-komunikat" data-i18n="grafik-wczytywanie">Wczytywanie wolnych terminów…</p>
-
-        <!-- Kalendarz w dwóch częściach, jak w Calendesk: u góry przewijany
-             pasek dni do wyboru, pod spodem godziny WYBRANEGO dnia. -->
-        <div class="grafik-kalendarz" id="grafik-kalendarz" hidden>
-          <div class="dni-pasek-wrap">
-            <button type="button" class="dni-strzalka dni-strzalka-lewo" id="dni-lewo" aria-label="Wcześniejsze dni" data-i18n-attr="aria-label:dni-lewo-label">‹</button>
-            <div class="dni-pasek" id="dni-pasek" role="group" aria-label="Wybierz dzień" data-i18n-attr="aria-label:dni-pasek-label"></div>
-            <button type="button" class="dni-strzalka dni-strzalka-prawo" id="dni-prawo" aria-label="Kolejne dni" data-i18n-attr="aria-label:dni-prawo-label">›</button>
-          </div>
-          <div class="godziny-panel" id="godziny-panel"></div>
-        </div>
-
-        <!-- Widok tygodniowy (jak w Calendesku): 7 kolumn od poniedziałku,
-             w każdej wolne godziny tego dnia. -->
-        <div class="grafik-tydzien" id="grafik-tydzien" hidden>
-          <div class="tydzien-nawigacja">
-            <button type="button" class="dni-strzalka" id="tydzien-lewo" aria-label="Poprzedni tydzień" data-i18n-attr="aria-label:tydzien-lewo-label">‹</button>
-            <p class="tydzien-zakres" id="tydzien-zakres" aria-live="polite"></p>
-            <button type="button" class="dni-strzalka" id="tydzien-prawo" aria-label="Następny tydzień" data-i18n-attr="aria-label:tydzien-prawo-label">›</button>
-          </div>
-          <div class="tydzien-kolumny" id="tydzien-kolumny"></div>
-        </div>
-
-        <p class="grafik-legenda" id="grafik-legenda" hidden></p>
+      <!-- Rezerwacja w 4 krokach, jak w widżecie Calendesk: miejsce spotkania →
+           długość jazdy → termin (kalendarz miesiąca + godziny dnia) →
+           podsumowanie z formularzem. Całą kartę rysuje js/grafik.js; gdy
+           konta kursantów są włączone, gość widzi tu rozmyty obrazek
+           i zaproszenie do logowania. -->
+      <div class="gk reveal" id="grafik-widget">
+        <p class="gk-komunikat" data-i18n="grafik-wczytywanie">Wczytywanie wolnych terminów…</p>
       </div>
 
       <div class="contact-cta reveal">
@@ -846,7 +802,7 @@
         <details class="faq-item">
           <summary data-i18n="faq-6-q">Jak zarezerwować termin?</summary>
           <div class="faq-odp" data-i18n="faq-6-a">
-            <p>W <a href="#grafik">grafiku</a> wybierz długość jazdy i godzinę, a potem wyślij krótki formularz — termin zostanie wstępnie zarezerwowany, a ja potwierdzam go e-mailem, SMS-em lub telefonicznie. Możesz też po prostu zadzwonić: <a href="tel:+48690360164">690 360 164</a>.</p>
+            <p>W <a href="#grafik">grafiku</a> wybierz miejsce spotkania, długość jazdy i godzinę, a potem wyślij krótki formularz — termin zostanie wstępnie zarezerwowany, a ja potwierdzam go e-mailem, SMS-em lub telefonicznie. Możesz też po prostu zadzwonić: <a href="tel:+48690360164">690 360 164</a>.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -1033,7 +989,7 @@
 <!-- Pływające przyciski kontaktu — dwa małe, okrągłe, z samą ikoną.
      Pokazują się po przewinięciu poza Hero. Podpis jest w aria-label
      i title (dymek po najechaniu myszą). SMS i e-mail są w Kontakcie
-     i w panelu terminu w grafiku, więc tu ich nie powielamy. -->
+     i w podsumowaniu rezerwacji w grafiku, więc tu ich nie powielamy. -->
 
 <a href="https://wa.me/48690360164" class="js-fab whatsapp-fab" id="whatsapp-fab" target="_blank" rel="noopener" aria-label="Napisz na WhatsApp" title="Napisz na WhatsApp" data-i18n-attr="aria-label:whatsapp-fab-label,title:whatsapp-fab-label">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1047,16 +1003,6 @@
     <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
   </svg>
 </a>
-
-<!-- Panel wybranego terminu — treść wypełnia grafik.js, zależnie od trybu -->
-<div class="termin-panel" id="termin-panel" role="dialog" aria-modal="true" aria-labelledby="termin-tytul" hidden>
-  <div class="termin-box">
-    <button type="button" class="termin-zamknij" id="termin-zamknij" aria-label="Zamknij" data-i18n-attr="aria-label:zamknij-label">&times;</button>
-    <h3 class="termin-tytul" id="termin-tytul">Wybrany termin</h3>
-    <p class="termin-podsumowanie" id="termin-podsumowanie"></p>
-    <div id="termin-tresc"></div>
-  </div>
-</div>
 
 <!-- Lightbox — wspólny dla galerii i opinii -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd" hidden data-i18n-attr="aria-label:lightbox-label">

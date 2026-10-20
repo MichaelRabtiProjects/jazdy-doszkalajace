@@ -113,6 +113,11 @@ tu nową wersję z datą.
    wyłączone), Turnstile, uwierzytelnienie domeny lajtelka.pl w Brevo.
 3. **Moje rezerwacje**, odwoływanie przez kursanta, zakładka Kursanci w panelu.
 4. **Nowy grafik** w stylu Calendesk + rozmyty grafik dla gości + bramka API.
+   **Zrobione na gałęzi `test` (20.10.2026):** `static/js/grafik.js` (kroki,
+   kalendarz miesiąca, pasek z DALEJ, podsumowanie w karcie, „Jedzie inna
+   osoba”), bramka w `/api/dostepnosc` i POST `/api/rezerwacja` (401
+   BRAK_SESJI / 409 PROFIL; e-mail rezerwacji = e-mail konta),
+   testy `testy/grafik-bramka.test.mjs`.
 5. **Regulamin i polityka prywatności** (konta, SMS, retencja), FAQ, wersja EN.
 6. **Uruchomienie na lajtelka.pl:** kopia bazy, merge, włączenie wyłącznika,
    usunięcie starych wdrożeń (stare adresy `<hash>.jazdy-doszkalajace.pages.dev`

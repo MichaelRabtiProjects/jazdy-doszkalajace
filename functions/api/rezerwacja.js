@@ -4,6 +4,10 @@
  * POST — wstępna rezerwacja z formularza przy grafiku. Termin od razu
  *        znika z wolnych godzin i pokazuje się jako "wstępna rezerwacja".
  *        Wysyła dwa maile: do instruktora i do kursanta.
+ *        Gdy konta są włączone, rezerwować może tylko zalogowany kursant
+ *        z uzupełnionym profilem (401 BRAK_SESJI / 409 PROFIL); e-mail
+ *        rezerwacji to wtedy zawsze e-mail konta, a imię i telefon mogą
+ *        należeć do innej osoby jadącej (np. rodzic zapisuje dziecko).
  *
  * GET ?t=TOKEN — dane jednej rezerwacji dla strony "Twoja rezerwacja"
  *        (link z maila). Token jest losowy i niezgadywalny, a odpowiedź
@@ -14,7 +18,15 @@ import { utworzWstepna, widokPubliczny, BladRezerwacji } from '../../lib/rezerwa
 import { wyslijEmail } from '../../lib/email.js';
 import { mailNowaRezerwacja, mailWstepnaDoKursanta } from '../../lib/maile.js';
 import { json, blad, wymagajBazy } from '../../lib/http.js';
-import { kontaWlaczone, kontoZSesji } from '../../lib/konto.js';
+import { kontaWlaczone, kontoZSesji, profilKompletny } from '../../lib/konto.js';
+
+const KOMUNIKATY = {
+  sesja: { pl: 'Zaloguj się, żeby zobaczyć wolne terminy.', en: 'Please sign in to see available times.' },
+  profil: {
+    pl: 'Uzupełnij imię i nazwisko oraz telefon w swoim koncie, żeby zarezerwować jazdę.',
+    en: 'Please complete your name and phone number in your account to book a lesson.',
+  },
+};
 
 export async function onRequestPost({ request, env }) {
   let dane;
@@ -32,8 +44,17 @@ export async function onRequestPost({ request, env }) {
 
   try {
     const db = wymagajBazy(env);
-    // Zalogowany kursant — rezerwacja zapisuje się na jego koncie
-    const konto = kontaWlaczone(env) ? await kontoZSesji(db, request) : null;
+    const jezyk = dane && dane.jezyk === 'en' ? 'en' : 'pl';
+    let konto = null;
+    if (kontaWlaczone(env)) {
+      // Zalogowany kursant — rezerwacja zapisuje się na jego koncie
+      konto = await kontoZSesji(db, request);
+      if (!konto) return blad(KOMUNIKATY.sesja[jezyk], 401, 'BRAK_SESJI');
+      if (!profilKompletny(konto)) return blad(KOMUNIKATY.profil[jezyk], 409, 'PROFIL');
+      // Potwierdzenie i link do rezerwacji idą zawsze na adres konta
+      // (sprawdzony kodem), nie na adres wpisany w przeglądarce.
+      dane = { ...dane, email: konto.email };
+    }
     const r = await utworzWstepna(db, dane, { uzytkownikId: konto ? konto.id : null });
     const origin = new URL(request.url).origin;
 

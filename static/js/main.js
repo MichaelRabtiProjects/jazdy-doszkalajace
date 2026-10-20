@@ -117,9 +117,11 @@
     var heroVisible = true;
     var footerVisible = false;
     var grafikVisible = false;
-    // Na wąskim ekranie przyciski wchodziłyby na godziny w grafiku —
-    // tam je chowamy. Na desktopie jest dość miejsca po prawej.
-    var waskiEkran = window.matchMedia('(max-width: 720px)');
+    // Gdy karta grafiku sięga prawie do prawej krawędzi ekranu, przyciski
+    // wchodziłyby na godziny i na przyklejony pasek z przyciskiem "Dalej" —
+    // wtedy je chowamy. Dopiero na szerokim ekranie (kontener 1100 px
+    // wyśrodkowany) jest dość miejsca po prawej.
+    var waskiEkran = window.matchMedia('(max-width: 1180px)');
 
     var updateFabs = function () {
       var zaslania = grafikVisible && waskiEkran.matches;

@@ -10,6 +10,13 @@
   'use strict';
 
   var tresc = document.getElementById('konto-tresc');
+  // Wejście z grafiku ("Zaloguj się, żeby zobaczyć wolne terminy",
+  // js/grafik.js) — po zalogowaniu z kompletem danych wracamy do grafiku.
+  var POWROT_GRAFIK = /[?&]powrot=grafik(&|$)/.test(window.location.search);
+
+  function wrocDoGrafiku() {
+    window.location.replace('index.html#grafik');
+  }
   var stan = { widok: 'ladowanie', email: '', konto: null, rezerwacje: [], blad: '', info: '', wysylanie: false };
 
   var T = {
@@ -299,6 +306,7 @@
   function poZalogowaniu(konto) {
     stan.konto = konto;
     if (!konto.kompletny) return ustaw({ widok: 'profil', wysylanie: false, blad: '', info: '' });
+    if (POWROT_GRAFIK) return wrocDoGrafiku();
     return wczytajPanel();
   }
 
@@ -326,6 +334,7 @@
       api('/api/konto/profil', dane)
         .then(function (d) {
           stan.konto = d.konto;
+          if (bylNowy && POWROT_GRAFIK && d.konto.kompletny) return wrocDoGrafiku();
           stan.info = bylNowy ? '' : t('zapisano');
           return wczytajPanel();
         })
