@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moje konto | LajtELka – Jazdy doszkalające</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Strona konta nie ma czego szukać w wyszukiwarce -->
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="header-left">
+      <div class="lang-switch" role="group" aria-label="Język strony / Site language">
+        <button type="button" class="lang-btn is-active" data-lang="pl" aria-pressed="true" title="Polski">🇵🇱</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+      </div>
+      <a href="index.html#hero" class="logo"><span class="logo-l">L</span>ajt<span class="logo-l">EL</span>ka<span class="logo-accent logo-sep"> – </span><span class="logo-sub">Jazdy doszkalające</span></a>
+    </div>
+    <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container konto">
+    <h1 class="section-title" data-i18n="tytul">Moje konto</h1>
+    <!-- Treść rysuje js/konto.js: logowanie kodem, dane, rezerwacje -->
+    <div id="konto-tresc" aria-live="polite"><p class="konto-drobne">…</p></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p data-i18n="footer-prawa">&copy; 2026 LajtELka – Jazdy doszkalające. Wszystkie prawa zastrzeżone.</p>
+    <nav class="footer-dokumenty" aria-label="Dokumenty">
+      <a href="regulamin.html" data-i18n="footer-regulamin">Regulamin</a>
+      <a href="polityka-prywatnosci.html" data-i18n="footer-polityka">Polityka prywatności</a>
+    </nav>
+    <p class="footer-area" data-i18n="footer-area">Jazdy doszkalające Warszawa &middot; Wawer</p>
+  </div>
+</footer>
+
+<script>
+  window.I18N = {
+    'header-grafik': 'Schedule',
+    'tytul': 'My account',
+    'footer-prawa': '&copy; 2026 LajtELka – Refresher driving lessons. All rights reserved.',
+    'footer-regulamin': 'Terms of Service',
+    'footer-polityka': 'Privacy Policy',
+    'footer-area': 'Refresher driving lessons Warsaw &middot; Wawer',
+  };
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/konto.js"></script>
+</body>
+</html>

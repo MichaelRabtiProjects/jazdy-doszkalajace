@@ -27,7 +27,10 @@
     </div>
     <!-- Świadomie bez klasy .main-nav: to menu zwija się na telefonie i wymaga
          przycisku hamburgera, którego ta podstrona nie ma. -->
-    <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
+    <div class="header-linki">
+      <a class="header-link nav-konto" href="konto.html" id="nav-konto" hidden>Zaloguj się</a>
+      <a class="header-link" href="index.html#grafik" data-i18n="header-grafik">Grafik</a>
+    </div>
   </div>
 </header>
 
@@ -57,5 +60,6 @@
 <script src="js/i18n-data-potwierdzenie.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/potwierdzenie.js"></script>
+<script src="js/konto-przycisk.js"></script>
 </body>
 </html>

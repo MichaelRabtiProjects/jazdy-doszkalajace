@@ -3312,3 +3312,225 @@ body.lightbox-open {
     scroll-snap-align: start;
   }
 }
+
+/* ======================================================================
+   Konto kursanta (static/konto.html, js/konto.js)
+   ====================================================================== */
+
+.konto {
+  max-width: 640px;
+}
+
+.konto-karta {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-karta);
+  box-shadow: var(--cien-karta);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.konto-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.konto-form label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-top: 6px;
+}
+
+.konto-form input[type='text'],
+.konto-form input[type='tel'],
+.konto-form input[type='email'],
+.konto-form select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 11px 12px;
+  border: 1px solid #cfccc0;
+  border-radius: 6px;
+  min-height: 46px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.konto-form .btn {
+  margin-top: 12px;
+}
+
+.konto-kod {
+  font-size: 1.6rem !important;
+  letter-spacing: 0.35em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.konto-zgoda {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 400 !important;
+  line-height: 1.45;
+}
+
+.konto-zgoda input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--amber-dark);
+}
+
+.konto-drobne {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: 2px 0 6px;
+}
+
+.konto-blad {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fbe9e7;
+  color: #8c1d18;
+  font-weight: 600;
+}
+
+.konto-info {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #e7f4ea;
+  color: #1e5b2c;
+  font-weight: 600;
+}
+
+.konto-linki {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+}
+
+.konto-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--amber-dark);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.konto-witaj {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.konto-witaj p {
+  margin: 0;
+}
+
+.konto-naglowek {
+  font-size: 1.4rem;
+  margin: 24px 0 10px;
+}
+
+.konto-rez {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.konto-rez-wstepna {
+  border-left: 4px dashed var(--amber);
+}
+
+.konto-rez-potwierdzona,
+.konto-rez-oplacone {
+  border-left-color: var(--amber);
+}
+
+.konto-rez-anulowane,
+.konto-rez-odrzucona,
+.konto-rez-wygasle {
+  opacity: 0.7;
+}
+
+.konto-rez-glowa {
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+}
+
+.konto-znaczek {
+  display: inline-block;
+  margin: 6px 0 2px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--paper-alt);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.konto-znaczek-wstepna {
+  background: rgba(245, 163, 0, 0.18);
+}
+
+.konto-znaczek-potwierdzona,
+.konto-znaczek-oplacone {
+  background: #e7f4ea;
+  color: #1e5b2c;
+}
+
+.konto-akcje {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.konto-akcje .btn {
+  padding: 9px 16px;
+  font-size: 0.92rem;
+}
+
+.konto-stopka {
+  margin-top: 24px;
+}
+
+.konto-historia {
+  margin-top: 16px;
+}
+
+.konto-historia summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 6px 0;
+}
+
+.konto-ostrozny {
+  border-color: #b3261e !important;
+  color: #b3261e !important;
+}
+
+.btn-primary.konto-ostrozny {
+  background: #b3261e;
+  color: #ffffff !important;
+}
+
+/* Link "Zaloguj się / Moje konto" w menu (js/konto-przycisk.js) */
+.nav-konto {
+  white-space: nowrap;
+}
+
+.header-linki {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
