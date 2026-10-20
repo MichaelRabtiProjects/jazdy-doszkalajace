@@ -47,10 +47,13 @@ z etapem SMS — patrz plan; to polecenie warto wykonać od razu.)
    najmniejszy pakiet.
 
 ## 5. Obejrzyj i zaakceptuj (gdy punkt 1 gotowy)
-- Kalendarz w panelu: **https://test.jazdy-doszkalajace.pages.dev/admin**
+- **Nowy grafik dla kursantów** (kroki, kalendarz miesiąca, rozmyty dla gości):
+  **https://test.jazdy-doszkalajace.pages.dev/#grafik** — najpierw jako gość,
+  potem zalogowany (punkt 7).
+- Kalendarz w panelu i zakładka Kursanci: **https://test.jazdy-doszkalajace.pages.dev/admin**
 - Wersja angielska i FAQ: **https://test.jazdy-doszkalajace.pages.dev/en**
 - Napisz, co zmienić. Po Twoim „OK” wypuszczę na lajtelka.pl
-  (migracje bazy 0009 i 0010 robię ja).
+  (migracje bazy 0009–0011 robię ja, przed publikacją).
 
 ## 6. Przeczytaj regulamin i politykę prywatności (ok. 10 min)
 Dopisałem konta, przypomnienia SMS ok. 26 h przed jazdą, samodzielne
