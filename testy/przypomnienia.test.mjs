@@ -110,12 +110,19 @@ test('SMS: dokładna treść (PL i EN)', () => {
   const teraz = T('2026-10-21T10:00:00Z'); // śr 12:00
   assert.equal(
     bezPolskichZnakow(smsPrzypomnienie(jazda(), teraz)),
-    'Przypomnienie: jazda jutro (czw 22.10) 14:00-16:00, Ferio Wawer. Wez prawo jazdy. LajtELka, tel. 690 360 164'
+    'Przypomnienie: jazda jutro (czw 22.10) 14:00-16:00, Ferio Wawer. Wez prawo jazdy/Numer PKK. LajtELka, tel. 690 360 164'
   );
   assert.equal(
     bezPolskichZnakow(smsPrzypomnienie(jazda({ jezyk: 'en' }), teraz)),
-    'Reminder: lesson tomorrow (Thu 22.10) 14:00-16:00, Ferio Wawer. Bring your licence. LajtELka, +48 690 360 164'
+    'Reminder: lesson tomorrow (Thu 22.10) 14:00-16:00, Ferio Wawer. Bring your licence/PKK number. LajtELka, +48 690 360 164'
   );
+});
+
+test('SMS i e-mail: jazda bez miejsca — "miejsce do ustalenia"', () => {
+  const teraz = T('2026-10-21T10:00:00Z');
+  assert.match(smsPrzypomnienie(jazda({ miejsce: null }), teraz), /14:00-16:00, miejsce do ustalenia\./);
+  assert.match(smsPrzypomnienie(jazda({ miejsce: null, jezyk: 'en' }), teraz), /14:00-16:00, meeting point to be agreed\./);
+  assert.equal(mailPrzypomnienie(jazda({ miejsce: null }), 'x', {}, teraz).temat, 'Przypomnienie: jazda jutro o 14:00 — miejsce do ustalenia');
 });
 
 test('SMS: "pojutrze" przy wysyłce wieczorem i "dziś" przy późnym potwierdzeniu', () => {
@@ -131,24 +138,39 @@ test('SMS: bez terminu odwołania i bez "Michael" (decyzja właściciela)', () =
   assert.match(tekst, /LajtELka, tel\. 690 360 164$/);
 });
 
-test('SMS: każde miejsce, długość i język mieści się w 1 SMS-ie (160 znaków GSM)', () => {
+test('SMS: każdy dzień tygodnia, miejsce, długość i język mieści się w 1 SMS-ie (160 znaków GSM)', () => {
   const miejsca = [...MIEJSCA.map((m) => m.id), null];
-  const teraz = T('2026-10-20T08:00:00Z'); // "pojutrze" — najdłuższe słowo
-  for (const miejsce of miejsca) {
-    for (const jezyk of ['pl', 'en']) {
-      for (let dl = 1; dl <= 8; dl++) {
-        const tekst = bezPolskichZnakow(smsPrzypomnienie(jazda({ miejsce, jezyk, start_min: 835, koniec_min: 835 + dl * 60 }), teraz));
-        assert.ok(tekst.length <= 160, `${miejsce}/${jezyk}/${dl}h: ${tekst.length} znaków — ${tekst}`);
-        for (const z of tekst) assert.ok(GSM7.has(z), `znak spoza GSM-7 "${z}" w: ${tekst}`);
+  let najdluzszy = '';
+  // 7 kolejnych dni (pon 26.10 – nd 1.11) — skróty dni mają różną długość;
+  // wysyłka 2 dni wcześniej daje najdłuższe słowo "pojutrze" / "in 2 days".
+  for (let d = 0; d < 7; d++) {
+    const data = '2026-' + (d < 6 ? '10-' + (26 + d) : '11-01');
+    const teraz = new Date(chwilaPL(data, 0).getTime() - 2 * 24 * 3600 * 1000 + 8 * 3600 * 1000);
+    for (const miejsce of miejsca) {
+      for (const jezyk of ['pl', 'en']) {
+        for (let dl = 1; dl <= 8; dl++) {
+          const tekst = bezPolskichZnakow(smsPrzypomnienie(jazda({ data, miejsce, jezyk, start_min: 835, koniec_min: 835 + dl * 60 }), teraz));
+          assert.ok(tekst.length <= 160, `${data}/${miejsce}/${jezyk}/${dl}h: ${tekst.length} znaków — ${tekst}`);
+          for (const z of tekst) assert.ok(GSM7.has(z), `znak spoza GSM-7 "${z}" w: ${tekst}`);
+          if (tekst.length > najdluzszy.length) najdluzszy = tekst;
+        }
       }
     }
   }
+  assert.match(najdluzszy, /pojutrze|in 2 days/, 'test naprawdę sprawdził wariant "pojutrze"');
 });
 
-test('E-mail: temat i termin odwołania', () => {
+test('E-mail: temat, termin odwołania, PKK', () => {
   const m = mailPrzypomnienie(jazda(), 'https://lajtelka.pl', {}, T('2026-10-21T10:00:00Z'));
   assert.equal(m.temat, 'Przypomnienie: jazda jutro o 14:00 — Ferio Wawer');
   assert.match(m.tekst, /Bezpłatnie odwołasz lub przełożysz jazdę do śr 14:00/);
+  assert.match(m.tekst, /prawo jazdy albo numer PKK/);
+});
+
+test('E-mail: bez otrzymanego zadatku pełna cena, z zadatkiem — reszta', () => {
+  const teraz = T('2026-10-21T10:00:00Z');
+  assert.match(mailPrzypomnienie(jazda(), 'x', {}, teraz).tekst, /Cena \(wysłany zadatek odliczę\): 320 zł/);
+  assert.match(mailPrzypomnienie(jazda({ zadatek_otrzymany_o: '2026-10-19T10:00:00Z' }), 'x', {}, teraz).tekst, /Reszta — przed lub po jeździe: 240 zł/);
 });
 
 /* ------------------------------------------------------------------ */
@@ -245,10 +267,57 @@ test('baza: nieudany SMS — błąd w panelu, ponowienie, najwyżej MAKS_PROB pr
   assert.match(r.sms_blad, /Brevo 400/);
   assert.ok(r.przypomnienie_o, 'e-mail wychodzi mimo błędu SMS-a');
 
-  for (let i = 0; i < MAKS_PROB + 3; i++) await wyslijPrzypomnienia(db, ENV, 'x', { teraz: MOMENT });
+  // to samo uruchomienie jeszcze raz od razu — odstęp 10 min jeszcze nie minął
+  await wyslijPrzypomnienia(db, ENV, 'x', { teraz: T('2026-10-21T10:05:00Z') });
+  assert.equal(wiersz(db, id).sms_proby, 1);
+
+  // automat co 10 minut przez 9 godzin — próby co 10/30/60/120 min, razem najwyżej 5
+  for (let min = 10; min <= 540; min += 10) {
+    await wyslijPrzypomnienia(db, ENV, 'x', { teraz: new Date(MOMENT.getTime() + min * 60000) });
+  }
   r = wiersz(db, id);
   assert.equal(r.sms_proby, MAKS_PROB);
-  assert.equal(wyslane.filter((x) => x.kanal === 'sms').length, MAKS_PROB);
+  const smsy = wyslane.filter((x) => x.kanal === 'sms').length;
+  assert.equal(smsy, MAKS_PROB);
+});
+
+test('baza: odstępy między próbami — 5 prób rozłożonych na ok. 3,5 h', async () => {
+  const db = nowaBaza();
+  const id = dodajJazde(db);
+  odpowiedzSms = () => new Response('{"message":"Not enough credits"}', { status: 400 });
+  const proby = [];
+  for (let min = 0; min <= 300; min += 10) {
+    const przed = wiersz(db, id).sms_proby;
+    await wyslijPrzypomnienia(db, ENV, 'x', { teraz: new Date(MOMENT.getTime() + min * 60000) });
+    if (wiersz(db, id).sms_proby > przed) proby.push(min);
+  }
+  assert.deepEqual(proby, [0, 10, 40, 100, 220]);
+});
+
+test('baza: po wyczerpaniu prób przycisk w panelu wysyła ręcznie (np. po doładowaniu kredytów)', async () => {
+  const db = nowaBaza();
+  const id = dodajJazde(db);
+  odpowiedzSms = () => new Response('{"message":"Not enough credits"}', { status: 400 });
+  for (let min = 0; min <= 300; min += 10) {
+    await wyslijPrzypomnienia(db, ENV, 'x', { teraz: new Date(MOMENT.getTime() + min * 60000) });
+  }
+  assert.equal(wiersz(db, id).sms_proby, MAKS_PROB);
+  // automat już się poddał
+  const auto = await wyslijPrzypomnienia(db, ENV, 'x', { teraz: T('2026-10-21T16:00:00Z') });
+  assert.equal(auto.smsy, 0);
+  // kredyty doładowane — instruktor klika "Wyślij przypomnienia teraz"
+  odpowiedzSms = () => new Response('{"messageId":7}', { status: 201 });
+  const w = await wyslijPrzypomnienia(db, ENV, 'x', { teraz: T('2026-10-21T16:00:00Z'), wymus: true });
+  assert.equal(w.smsy, 1);
+  assert.ok(wiersz(db, id).sms_przypomnienie_o);
+  assert.equal(wiersz(db, id).sms_blad, null);
+});
+
+test('baza: błędna lista SMS_TYLKO_NUMERY blokuje wszystkie SMS-y (zamiast przepuszczać)', async () => {
+  const db = nowaBaza();
+  dodajJazde(db);
+  await wyslijPrzypomnienia(db, { ...ENV, SMS_TYLKO_NUMERY: '69O36O164' }, 'x', { teraz: MOMENT }); // litera O zamiast zera
+  assert.equal(wyslane.filter((x) => x.kanal === 'sms').length, 0);
 });
 
 test('baza: dzienny limit SMS-ów', async () => {

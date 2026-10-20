@@ -228,7 +228,7 @@
     if (r.jezyk === 'en') znaczki.push('<span class="znaczek">EN</span>');
     if (r.przypomnienie_o) znaczki.push('<span class="znaczek">e-mail z przypomnieniem ' + esc(kiedy(r.przypomnienie_o)) + '</span>');
     if (r.sms_przypomnienie_o) znaczki.push('<span class="znaczek">SMS wysłany ' + esc(kiedy(r.sms_przypomnienie_o)) + '</span>');
-    else if (r.sms_blad) znaczki.push('<span class="znaczek znaczek-blad" title="' + esc(r.sms_blad) + '">SMS nie wyszedł (próby: ' + esc(r.sms_proby) + '/5)</span>');
+    else if (r.sms_blad) znaczki.push('<span class="znaczek znaczek-blad" title="' + esc(r.sms_blad) + ' — ponów przyciskiem „Wyślij przypomnienia teraz”">SMS nie wyszedł (próby: ' + esc(r.sms_proby) + ')</span>');
     if (r.status === 'odrzucona') znaczki.push('<span class="znaczek znaczek-szary">odrzucona</span>');
     if (r.status === 'anulowane') znaczki.push('<span class="znaczek znaczek-szary">odwołana</span>');
 
@@ -293,7 +293,7 @@
       '<option value="15"' + (r.doplata_h ? ' selected' : '') + '>+15 zł/h (175 zł/h)</option>' +
       '</select></label>' +
       '</div>' +
-      '<p class="admin-drobne">Możesz ustawić dowolną godzinę, także z krótszym buforem niż wyliczył grafik — pilnuję tylko, żeby jazdy na siebie nie nachodziły. Kursant nie dostaje automatycznej wiadomości o zmianie.</p>' +
+      '<p class="admin-drobne">Możesz ustawić dowolną godzinę, także z krótszym buforem niż wyliczył grafik — pilnuję tylko, żeby jazdy na siebie nie nachodziły. Kursant nie dostaje automatycznej wiadomości o zmianie, a jeśli przypomnienie już wyszło, nowego nie będzie — daj mu znać sam.</p>' +
       '<div class="rez-akcje">' +
       '<button type="button" class="btn btn-primary" data-akcja="zapisz-edycje">Zapisz zmianę</button>' +
       '<button type="button" class="btn btn-secondary" data-akcja="anuluj-edycje">Anuluj</button>' +

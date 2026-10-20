@@ -41,6 +41,12 @@ npx wrangler d1 execute jazdy-doszkalajace-db --remote --file migrations/0001_in
 # ... i tak samo 0002 → 0009, po kolei
 ```
 
+**Brevo (e-maile):** załóż darmowe konto na brevo.com → *Senders, Domains &
+Dedicated IPs → Senders* → dodaj i potwierdź `MichaelRabti@gmail.com` →
+*SMTP & API → API Keys* → wygeneruj klucz i wklej go jako `BREVO_API_KEY`.
+Limit darmowy: 300 maili dziennie. Bez własnej domeny część maili może
+trafiać do spamu — kursant dostaje w formularzu podpowiedź, żeby tam zajrzał.
+
 ### Środowisko testowe
 
 Każda gałąź inna niż `master` publikuje się pod adresem
@@ -66,8 +72,34 @@ npx wrangler secret put BREVO_API_KEY    # raz — bez klucza nic nie wychodzi
 npx wrangler deploy --env test           # wersja testowa (baza testowa)
 ```
 
-**SMS w Brevo:** kredyty SMS kupuje się w Brevo (*SMS → Credits*), a nazwę
-nadawcy `LajtELka` trzeba zgłosić dla Polski (*SMS → Senders*).
+**Gdzie co ustawić** — Worker i strona mają **osobne** ustawienia; klucz
+ze strony do Workera nie trafia:
+
+| Miejsce | Co | Jak |
+|---|---|---|
+| Worker produkcyjny | `SMS_WLACZONE`, `SMS_LIMIT_DZIENNY` | `przypomnienia/wrangler.jsonc` → `vars`, potem `npx wrangler deploy` |
+| Worker produkcyjny | `BREVO_API_KEY` | `npx wrangler secret put BREVO_API_KEY` |
+| Worker testowy | j.w. + `SMS_TYLKO_NUMERY` | `wrangler.jsonc` → `env.test.vars`; klucz: `npx wrangler secret put BREVO_API_KEY --env test` |
+| Strona — Production | `BREVO_API_KEY`, `SMS_WLACZONE` (opcj. `SMS_LIMIT_DZIENNY`) | panel Pages → Settings → Variables and Secrets |
+| Strona — Preview | `BREVO_API_KEY`, `SMS_WLACZONE`, **`SMS_TYLKO_NUMERY`** (obowiązkowo) | j.w., przełącznik środowiska na **Preview** |
+
+Automat (Worker) wysyła przypomnienia ok. 26 h przed jazdą; strona (Pages)
+wysyła je tylko po kliknięciu w panelu (potwierdzenie, dodanie, zmiana,
+przycisk „Wyślij przypomnienia teraz”). SMS-y wychodzą tylko tam, gdzie
+`SMS_WLACZONE=tak`.
+
+Nieudana wysyłka: automat próbuje do 5 razy w odstępach 10/30/60/120 min,
+potem się poddaje (w panelu czerwony znaczek). Przycisk „Wyślij przypomnienia
+teraz” ponawia ręcznie, np. po doładowaniu kredytów SMS.
+
+**SMS w Brevo:** kredyty: menu konta → *My Plan* → *SMS & WhatsApp messages*.
+Nazwę nadawcy `LajtELka` trzeba zgłosić dla Polski: menu konta → *Settings* →
+*Campaigns* → *SMS Sender ID* → *Request Sender ID*.
+
+**Kolejność wdrożenia zmian w bazie:** najpierw migracja na bazę produkcyjną
+(`npx wrangler d1 execute jazdy-doszkalajace-db --remote --file migrations/00XX_….sql`),
+dopiero potem merge do `master` i `wrangler deploy` Workera — nowy kod czyta
+nowe kolumny i bez migracji panel przestałby działać.
 
 ### Testy automatyczne
 
@@ -76,14 +108,8 @@ node --test "testy/*.test.mjs"
 ```
 
 Testują przypomnienia (czas polski i zmiana czasu, cisza nocna, długość SMS-a,
-brak podwójnej wysyłki) na bazie SQLite w pamięci z wszystkimi migracjami —
-bez Cloudflare i bez prawdziwej wysyłki.
-
-**Brevo (e-maile):** załóż darmowe konto na brevo.com → *Senders, Domains &
-Dedicated IPs → Senders* → dodaj i potwierdź `MichaelRabti@gmail.com` →
-*SMTP & API → API Keys* → wygeneruj klucz i wklej go jako `BREVO_API_KEY`.
-Limit darmowy: 300 maili dziennie. Bez własnej domeny część maili może
-trafiać do spamu — kursant dostaje w formularzu podpowiedź, żeby tam zajrzał.
+brak podwójnej wysyłki, odstępy między próbami) na bazie SQLite w pamięci
+z wszystkimi migracjami — bez Cloudflare i bez prawdziwej wysyłki.
 
 ### Testy lokalne
 

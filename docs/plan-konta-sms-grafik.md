@@ -44,6 +44,15 @@ tu nową wersję z datą.
 - **E-mail z przypomnieniem** wychodzi **razem z SMS-em** (zamiast dotychczasowego
   o 18:00 dzień wcześniej).
 - Treść bez polskich znaków, maks. 160 znaków (1 SMS), bez treści reklamowych.
+- **Treść SMS (ustalona 20.10.2026):**
+  `Przypomnienie: jazda jutro (czw 23.10) 14:00-16:00, Ferio Wawer. Wez prawo jazdy/Numer PKK. LajtELka, tel. 690 360 164`
+  — bez terminu odwołania, bez „Michael”; numer zostaje, bo na SMS od nazwy
+  nadawcy nie da się odpisać. „jutro” zmienia się na „dziś”/„pojutrze”, gdy
+  trzeba. E-mail z przypomnieniem zawiera termin bezpłatnego odwołania.
+- **Jedno przypomnienie na jazdę** — po zmianie godziny/miejsca w panelu nowe
+  nie wychodzi (o zmianie instruktor informuje sam).
+- Nieudana wysyłka: do 5 prób co 10/30/60/120 min, potem ręcznie przyciskiem
+  w panelu.
 
 ### Grafik (wygląd jak Calendesk)
 - Kroki: **1 Miejsce → 2 Długość → 3 Termin → 4 Podsumowanie.**
@@ -87,3 +96,15 @@ tu nową wersję z datą.
 - Lekcje na stronie: 2, 3 lub 4 h (`lib/dostepnosc.js`, `DLUGOSCI`).
 - Dane rezerwacji kasują się 180 dni po jeździe — historia w koncie sięga pół
   roku, chyba że zmienimy politykę prywatności.
+
+## Lista kontrolna: etap 1 (SMS) na lajtelka.pl
+1. Brevo: zatwierdzony nadawca `LajtELka` dla Polski + kupione kredyty SMS.
+2. Test na `test.jazdy-doszkalajace.pages.dev`: SMS tylko na numer instruktora
+   (`SMS_TYLKO_NUMERY`), sprawdzić nadawcę i treść na telefonie.
+3. Migracja `0009` na bazę produkcyjną (`--remote`) — PRZED merge.
+4. W polityce prywatności zmienić datę „Wersja z dnia / obowiązuje od”.
+5. Merge `test` → `master` (strona publikuje się sama).
+6. Worker: `npx wrangler secret put BREVO_API_KEY` (brakuje go od początku!),
+   `SMS_WLACZONE: "tak"` w `przypomnienia/wrangler.jsonc`, `npx wrangler deploy`.
+7. Pages Production: `SMS_WLACZONE=tak` (żeby panel też wysyłał SMS-y).
+8. Przez pierwsze dni: znaczki „SMS wysłany” w panelu, logi Workera.
