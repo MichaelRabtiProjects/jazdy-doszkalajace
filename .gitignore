@@ -12,3 +12,6 @@ wrangler.toml
 
 # Sekrety do testów lokalnych (hasło panelu, klucz Brevo) - nigdy w repo
 .dev.vars
+
+# Sekrety srodowisk (np. haslo panelu na adresie testowym) - nigdy w repo
+.dev.vars.*
