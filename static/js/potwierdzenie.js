@@ -86,7 +86,7 @@
     var dzien = new Date(Date.UTC(+cz[0], +cz[1] - 1, +cz[2])).getUTCDay();
     return (
       DNI[jezyk() === 'en' ? 'en' : 'pl'][dzien] + ' ' + cz[2] + '.' + cz[1] + '.' + cz[0] + ', ' +
-      godz(r.start) + '–' + godz(r.koniec) + ' (' + r.dlugosc + ' h)'
+      godz(r.start) + '–' + godz(r.koniec) + ' (' + (r.dlugosc_opis || r.dlugosc + ' h') + ')'
     );
   }
 

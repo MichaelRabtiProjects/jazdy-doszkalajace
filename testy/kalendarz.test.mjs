@@ -185,3 +185,74 @@ test('stare blokady są kasowane razem ze starymi danymi (180 dni)', async () =>
   await usunStareDane(db);
   assert.equal(db.sqlite.prepare('SELECT COUNT(*) AS n FROM blokady').get().n, 0);
 });
+
+/* ------------------------------------------------------------------ */
+/* Poprawki z przeglądu kodu                                           */
+/* ------------------------------------------------------------------ */
+
+import { onRequestPost as rezerwacjePost } from '../functions/api/admin/rezerwacje.js';
+import { widokPubliczny } from '../lib/rezerwacje.js';
+import { mailPotwierdzonaDoKursanta, mailPrzypomnienie } from '../lib/maile.js';
+
+/** Woła akcję panelu tak, jak robi to Cloudflare; e-maile łapie atrapa fetch. */
+async function panel(db, dane) {
+  const maile = [];
+  const staryFetch = globalThis.fetch;
+  globalThis.fetch = async (url, o) => {
+    maile.push(JSON.parse(o.body).subject);
+    return new Response('{}', { status: 201 });
+  };
+  try {
+    const odp = await rezerwacjePost({
+      request: new Request('https://lajtelka.pl/api/admin/rezerwacje', { method: 'POST', body: JSON.stringify(dane) }),
+      env: { DB: db, BREVO_API_KEY: 'k' },
+      waitUntil: () => {},
+    });
+    return { status: odp.status, json: await odp.json(), maile };
+  } finally {
+    globalThis.fetch = staryFetch;
+  }
+}
+
+test('panel: rezerwacja "Wstępna" wysyła mail o wstępnej, nie "Termin potwierdzony"', async () => {
+  const db = nowaBaza();
+  const data = otwartyDzien(db);
+  const w = await panel(db, { akcja: 'dodaj', data, start: 600, dlugosc: 2, ...osoba(), status: 'wstepna', powiadom: true });
+  assert.equal(w.status, 200);
+  assert.equal(w.maile.length, 1);
+  assert.match(w.maile[0], /wstępna/i);
+  assert.doesNotMatch(w.maile[0], /potwierdzony/i);
+  const p = await panel(db, { akcja: 'dodaj', data, start: 900, dlugosc: 2, ...osoba({ email: 'b@example.com' }), powiadom: true });
+  assert.match(p.maile[0], /potwierdzony/i);
+});
+
+test('panel: jazda z przeszłą datą nie wysyła maila (jak obiecuje ostrzeżenie)', async () => {
+  const db = nowaBaza();
+  const w = await panel(db, { akcja: 'dodaj', data: dodajDni(dataPL(), -3), start: 600, dlugosc: 2, ...osoba(), powiadom: true });
+  assert.equal(w.status, 200);
+  assert.deepEqual(w.maile, []);
+  assert.equal(w.json.email_wyslany, null);
+});
+
+test('jazda 85 min: w mailu "1 h 25 min" i pełne złote, strona kursanta też', () => {
+  const r = { data: '2026-10-22', start_min: 600, koniec_min: 685, doplata_h: 0, kwota_zadatku: 80, jezyk: 'pl',
+    imie: 'Anna Kowalska', email: 'a@example.com', telefon: '600100200', kod_rezerwacji: 'JD-2210-10', token: 't', miejsce: 'ferio',
+    zadatek_otrzymany_o: '2026-10-20T10:00:00Z', status: 'potwierdzona' };
+  const potw = mailPotwierdzonaDoKursanta(r, 'https://lajtelka.pl', {});
+  assert.match(potw.tekst, /10:00–11:25 \(1 h 25 min\)/);
+  assert.doesNotMatch(potw.tekst + potw.temat, /\.\d{6,}/); // żadnego "1.4166666666666667"
+  assert.match(mailPrzypomnienie(r, 'x', {}, new Date('2026-10-21T08:00:00Z')).tekst, /Reszta — przed lub po jeździe: 147 zł/);
+  const w = widokPubliczny(r);
+  assert.equal(w.do_zaplaty_na_miejscu, 147);
+  assert.equal(w.dlugosc_opis, '1 h 25 min');
+  assert.equal(widokPubliczny({ ...r, koniec_min: 690 }).dlugosc_opis, '1,5 h');
+});
+
+test('szukaj kursantów: polskie litery bez względu na wielkość ("łuk" → "Łukasz")', async () => {
+  const db = nowaBaza();
+  const data = otwartyDzien(db);
+  await utworzZPanelu(db, { data, start: 600, dlugosc: 2, imie: 'Łukasz Śliwa', telefon: '512 345 678', email: '' });
+  assert.equal((await szukajKursantow(db, 'łuk'))[0].imie, 'Łukasz Śliwa');
+  assert.equal((await szukajKursantow(db, 'ŚLIWA'))[0].imie, 'Łukasz Śliwa');
+  assert.equal((await szukajKursantow(db, '345 678'))[0].imie, 'Łukasz Śliwa');
+});

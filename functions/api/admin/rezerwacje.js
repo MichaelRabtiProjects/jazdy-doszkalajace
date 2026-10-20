@@ -20,7 +20,7 @@
 import { utworzZPanelu, edytujZPanelu, zwolnijTermin, usunStareDane, BladRezerwacji } from '../../../lib/rezerwacje.js';
 import { MIEJSCA } from '../../../lib/miejsca.js';
 import { wyslijEmail } from '../../../lib/email.js';
-import { mailPotwierdzonaDoKursanta, mailOdrzuconaDoKursanta } from '../../../lib/maile.js';
+import { mailPotwierdzonaDoKursanta, mailOdrzuconaDoKursanta, mailWstepnaDoKursanta } from '../../../lib/maile.js';
 import { dataPL, dodajDni } from '../../../lib/czas.js';
 import { wyslijPrzypomnienia } from '../../../lib/przypomnienia.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
@@ -140,8 +140,11 @@ export async function onRequestPost({ request, env, waitUntil }) {
       }
       case 'dodaj': {
         const r = await utworzZPanelu(db, dane);
-        if (dane.powiadom && r.email) {
-          emailWyslany = await wyslijEmail(env, mailPotwierdzonaDoKursanta(r, origin, env));
+        // Jazdy z przeszłości (np. przepisane z Calendeska dla porządku) — bez
+        // maila; tak też obiecuje ostrzeżenie w oknie "Nowa rezerwacja".
+        if (dane.powiadom && r.email && r.data >= dataPL()) {
+          const mail = r.status === 'wstepna' ? mailWstepnaDoKursanta(r, origin, env) : mailPotwierdzonaDoKursanta(r, origin, env);
+          emailWyslany = await wyslijEmail(env, mail);
         }
         sprawdzPrzypomnienie = r.id;
         break;

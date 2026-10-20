@@ -43,6 +43,8 @@
     os: { od: 420, do: 1260 }, // zakres osi godzin w minutach
     nrWczytania: 0,
     nieaktualne: true,
+    zaladowany: null, // { widok, data } ostatnio wczytanych danych
+    podpisOtwartego: '', // co pokazuje okno szczegółów (żeby nie odświeżać go bez potrzeby)
     otwarte: null, // { typ: 'rez'|'blok'|'dzien', id, data } — okno szczegółów
     tryb: 'rezerwacja', // okno "Nowa rezerwacja": 'rezerwacja' | 'blokada'
     edytowanaBlokada: null,
@@ -121,6 +123,7 @@
     return { od: poniedzialek(pierwszy), do: dodaj(poniedzialek(ostatni), 6) };
   }
 
+  /** Wczytuje widok K.widok / K.data. Zwraca obietnicę true (udało się) / false. */
   function wczytaj() {
     var z = zakresWidoku();
     var nr = ++K.nrWczytania;
@@ -128,19 +131,31 @@
     rysujPasek(z);
     return P.api('/api/admin/kalendarz?od=' + z.od + '&do=' + z.do)
       .then(function (d) {
-        if (nr !== K.nrWczytania) return; // w międzyczasie kliknięto dalej
+        if (nr !== K.nrWczytania) return false; // w międzyczasie kliknięto dalej
         K.dane = d;
         K.zakres = z;
+        K.zaladowany = { widok: K.widok, data: K.data };
         K.nieaktualne = false;
         if (!P.stan.miejsca.length) P.stan.miejsca = d.miejsca;
         rysuj();
         odswiezOtwarte();
+        return true;
       })
       .catch(function (err) {
+        if (nr !== K.nrWczytania) return false;
+        // Wracamy do widoku, którego dane naprawdę mamy, i spróbujemy jeszcze raz
+        K.nieaktualne = true;
+        if (K.zaladowany) {
+          K.widok = K.zaladowany.widok;
+          K.data = K.zaladowany.data;
+          rysujPasek(K.zakres);
+        }
         P.komunikat(err.message, true);
+        return false;
       })
-      .then(function () {
+      .then(function (ok) {
         if (nr === K.nrWczytania) obszar.classList.remove('is-ladowanie');
+        return ok;
       });
   }
 
@@ -185,9 +200,22 @@
     $('kal-dzis').disabled = widacDzis;
   }
 
+  /**
+   * Kalendarz zajmuje ekran do samego dołu, ale nie więcej — inaczej na
+   * telefonie dolne godziny chowały się pod krawędzią i trzeba było przewijać
+   * i stronę, i kalendarz.
+   */
+  function dopasujWysokosc() {
+    if ($('panel-kalendarz').hidden) return;
+    var widoczna = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var gora = obszar.getBoundingClientRect().top + (window.scrollY || 0);
+    obszar.style.maxHeight = Math.max(360, Math.round(widoczna - Math.max(gora - (window.scrollY || 0), 0) - 12)) + 'px';
+  }
+
   function rysuj() {
     if (!K.dane) return;
     rysujPasek(K.zakres);
+    dopasujWysokosc();
     if (K.widok === 'miesiac') return rysujMiesiac();
     var daty = [];
     for (var d = K.zakres.od; d <= K.zakres.do; d = dodaj(d, 1)) daty.push(d);
@@ -303,12 +331,11 @@
     var teraz = K.dane.dzisiaj === dzisPL() ? terazPL() : K.dane.teraz;
     K.os = policzOs(daty);
     var wys = (K.os.do - K.os.od) * PX;
-    var waskiEkran = window.innerWidth < 720;
-    var minKol = daty.length > 1 && waskiEkran ? '112px' : '0px';
     var wszystkie = wydarzeniaDni(daty);
 
+    // Minimalna szerokość kolumny tygodnia na telefonie ustawia CSS (.is-tydzien)
     var html =
-      '<div class="kal-siatka" style="--k-kol:' + daty.length + ';--k-min-kol:' + minKol + '">' +
+      '<div class="kal-siatka' + (daty.length > 1 ? ' is-tydzien' : '') + '" style="--k-kol:' + daty.length + '">' +
       '<div class="kal-rog" title="Numer tygodnia">Tydz. ' + nrTygodnia(daty[0]) + '</div>';
 
     daty.forEach(function (data) {
@@ -490,6 +517,7 @@
     var tytul = $('dlg-szczegoly-tytul');
     var tresc = $('dlg-szczegoly-tresc');
     if (!o) return false;
+    K.podpisOtwartego = podpisOtwartego();
 
     if (o.typ === 'rez') {
       var r = rezerwacja(o.id);
@@ -528,11 +556,15 @@
 
     // Zamknięty cały dzień
     if (!dzien(o.data).zamkniety) return zamknijSzczegoly();
+    var przeszly = o.data < dzis();
     tytul.textContent = 'Dzień zamknięty';
     tresc.innerHTML =
       '<p class="rez-termin"><strong>' + esc(fmt(o.data, { weekday: 'long', day: 'numeric', month: 'long' })) + '</strong></p>' +
-      '<p class="admin-drobne">Tego dnia nic nie da się zarezerwować. Jazdy, które już były, zostają.</p>' +
-      '<div class="rez-akcje"><button type="button" class="btn btn-primary" id="dzien-otworz">Otwórz dzień</button></div>';
+      (przeszly
+        ? '<p class="admin-drobne">Ten dzień już minął.</p>'
+        : '<p class="admin-drobne">Tego dnia nic nie da się zarezerwować. Jazdy, które już były, zostają.</p>' +
+          '<div class="rez-akcje"><button type="button" class="btn btn-primary" id="dzien-otworz">Otwórz dzień</button></div>');
+    if (przeszly) return true;
     $('dzien-otworz').addEventListener('click', function (e) {
       e.target.disabled = true;
       P.api('/api/admin/grafik', { akcja: 'dzien', data: o.data, zamkniety: false })
@@ -555,17 +587,36 @@
     return false;
   }
 
-  /** Po zmianie danych — okno pokazuje świeży stan albo się zamyka. */
+  /** Co dokładnie pokazuje okno — zmiana podpisu = trzeba je narysować od nowa. */
+  function podpisOtwartego() {
+    var o = K.otwarte;
+    if (!o) return '';
+    if (o.typ === 'rez') return JSON.stringify(rezerwacja(o.id));
+    if (o.typ === 'blok') return JSON.stringify(blokada(o.id));
+    return String(dzien(o.data).zamkniety);
+  }
+
+  /**
+   * Po wczytaniu danych — okno pokazuje świeży stan albo się zamyka. Gdy nic
+   * się nie zmieniło, nie ruszamy go: odświeżenie w tle (np. po powrocie
+   * z rozmowy telefonicznej) nie może skasować otwartego formularza zmiany
+   * godziny ani odznaczonego "Wyślij kursantowi e-mail".
+   */
   function odswiezOtwarte() {
-    if (dlgSzczegoly.open && K.otwarte) wypelnijSzczegoly();
+    if (!dlgSzczegoly.open || !K.otwarte) return;
+    if (podpisOtwartego() === K.podpisOtwartego) return;
+    wypelnijSzczegoly();
   }
 
   dlgSzczegoly.addEventListener('close', function () {
     K.otwarte = null;
   });
-  // Klik w przyciemnione tło zamyka okno szczegółów
+  // Klik w przyciemnione tło (poza oknem) zamyka okno szczegółów. Na telefonie
+  // okno zajmuje cały ekran — tam stuknięcie w puste miejsce niczego nie zamyka.
   dlgSzczegoly.addEventListener('click', function (e) {
-    if (e.target === dlgSzczegoly) dlgSzczegoly.close();
+    if (e.target !== dlgSzczegoly) return;
+    var r = dlgSzczegoly.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlgSzczegoly.close();
   });
 
   function usunBlokade(b) {
@@ -605,6 +656,8 @@
       F.elements.koniec.value = godz(b.koniec_min % 1440);
       F.elements.opis.value = b.opis || '';
     }
+    // Przy zmianie istniejącej blokady nie ma przełączania na "Rezerwacja"
+    F.querySelector('.dlg-zakladki').hidden = Boolean(b);
     ustawTryb(opcje.tryb || 'rezerwacja');
     if (!b) przeliczKoniec();
     odswiezCene();
@@ -632,7 +685,6 @@
     $('nowa-zapisz').textContent = tryb === 'rezerwacja' ? 'Dodaj rezerwację' : edycja ? 'Zapisz blokadę' : 'Zablokuj';
     $('nowa-kiedy').textContent = tryb === 'rezerwacja' ? 'Kiedy ma się odbyć spotkanie?' : 'Który czas zablokować?';
     $('nowa-stopka-blokady').hidden = !edycja;
-    F.elements.caly_dzien.disabled = Boolean(edycja);
     if (tryb === 'blokada' && !K.edytowanaBlokada && P.minuty(F.elements.koniec.value) <= P.minuty(F.elements.start.value)) {
       F.elements.koniec.value = godz(Math.min(P.minuty(F.elements.start.value) + 60, 1435));
     }
@@ -643,17 +695,24 @@
     return Number(F.elements.usluga.value) || 120;
   }
 
+  /** Koniec = start + usługa. Jazda kończąca się o północy pokazuje "00:00". */
   function przeliczKoniec() {
     if (K.tryb !== 'rezerwacja' || F.elements.koniec_recznie.checked) return;
     var start = P.minuty(F.elements.start.value);
     if (isNaN(start)) return;
-    F.elements.koniec.value = godz(Math.min(start + dlugoscUslugi(), 1435));
+    var koniec = start + dlugoscUslugi();
+    F.elements.koniec.value = koniec > 1440 ? '' : godz(koniec % 1440);
+    P.pokazBlad('blad-nowa', koniec > 1440 ? 'Ta jazda skończyłaby się po północy — wybierz wcześniejszą godzinę.' : '');
   }
 
   function odswiezPolaCzasu() {
+    var przeszly = F.elements.data.value && F.elements.data.value < dzis();
+    if (przeszly) F.elements.caly_dzien.checked = false; // przeszłego dnia nie da się zamknąć
+    F.elements.caly_dzien.disabled = Boolean(K.edytowanaBlokada) || przeszly;
     var calyDzien = K.tryb === 'blokada' && F.elements.caly_dzien.checked;
     F.elements.start.disabled = calyDzien;
     F.elements.koniec.disabled = calyDzien;
+    F.elements.opis.disabled = calyDzien; // zamknięty dzień nie ma opisu
     F.elements.koniec.readOnly = K.tryb === 'rezerwacja' && !F.elements.koniec_recznie.checked;
   }
 
@@ -681,18 +740,16 @@
     });
   });
 
-  F.addEventListener('input', function (e) {
+  function poZmianiePola(e) {
     var n = e.target.name;
-    if (n === 'start' || n === 'usluga') przeliczKoniec();
-    if (n === 'koniec_recznie' || n === 'caly_dzien') odswiezPolaCzasu();
+    if (n === 'koniec_recznie' || n === 'caly_dzien' || n === 'data') odswiezPolaCzasu();
+    // Odznaczenie "koniec ręcznie" wraca do końca wyliczonego z usługi
+    if (n === 'start' || n === 'usluga' || n === 'koniec_recznie') przeliczKoniec();
     if (n === 'data') odswiezPrzeszlosc();
     odswiezCene();
-  });
-  F.addEventListener('change', function (e) {
-    if (e.target.name === 'koniec_recznie' || e.target.name === 'caly_dzien') odswiezPolaCzasu();
-    if (e.target.name === 'usluga' || e.target.name === 'start') przeliczKoniec();
-    odswiezCene();
-  });
+  }
+  F.addEventListener('input', poZmianiePola);
+  F.addEventListener('change', poZmianiePola);
 
   document.querySelectorAll('dialog [data-zamknij]').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -915,6 +972,24 @@
     return null;
   }
 
+  /** Widoczna część kalendarza (bez przyklejonych nagłówków), przycięta do ekranu. */
+  function widocznyObszar() {
+    var r = obszar.getBoundingClientRect();
+    var glowa = obszar.querySelector('.kal-cd');
+    var os = obszar.querySelector('.kal-os');
+    var wys = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    return {
+      gora: Math.max(r.top, 0) + (glowa ? glowa.getBoundingClientRect().bottom - r.top : 0),
+      dol: Math.min(r.bottom, wys),
+      lewo: r.left + (os ? os.getBoundingClientRect().width : 0),
+      prawo: Math.min(r.right, window.innerWidth),
+    };
+  }
+
+  function schowajDucha() {
+    if (ciag && ciag.duch && ciag.duch.parentElement) ciag.duch.parentElement.removeChild(ciag.duch);
+  }
+
   function ruch(e) {
     if (!ciag) return;
     var odl = Math.hypot(e.clientX - ciag.sx, e.clientY - ciag.sy);
@@ -928,11 +1003,17 @@
     }
     e.preventDefault();
 
-    var kol = kolumnaPod(e.clientX) || (ciag.duch && ciag.duch.parentElement);
-    if (!kol) return;
+    // Poza widoczną siatką = brak celu; puszczenie tam anuluje przenoszenie
+    var w = widocznyObszar();
+    var kol = kolumnaPod(e.clientX);
+    if (!kol || e.clientY < w.gora - 30 || e.clientY > w.dol + 30 || e.clientX < w.lewo || e.clientX > w.prawo) {
+      ciag.cel = null;
+      schowajDucha();
+      return;
+    }
     var r = kol.getBoundingClientRect();
     var start = Math.round((K.os.od + (e.clientY - r.top) / PX - ciag.chwyt) / KROK) * KROK;
-    start = Math.max(0, Math.min(start, 24 * 60 - ciag.dl));
+    start = Math.max(K.os.od, Math.min(start, K.os.do - ciag.dl, 24 * 60 - ciag.dl));
     ciag.cel = { data: kol.dataset.data, start: start };
 
     if (!ciag.duch) {
@@ -947,11 +1028,18 @@
     ciag.duch.style.right = '3px';
     ciag.duch.firstChild.textContent = P.krotko(ciag.cel.data) + ' · ' + godz(start) + '–' + godz((start + ciag.dl) % 1440 || 0);
 
-    // Przewijanie, gdy przeciągamy przy krawędzi
-    var ro = obszar.getBoundingClientRect();
-    if (e.clientY < ro.top + 40) obszar.scrollTop -= 12;
-    else if (e.clientY > ro.bottom - 40) obszar.scrollTop += 12;
+    // Przewijanie, gdy przeciągamy przy krawędzi widocznej części kalendarza
+    // (w pionie, a w tygodniu na telefonie także w poziomie — do innych dni)
+    if (e.clientY < w.gora + 36) obszar.scrollTop -= 14;
+    else if (e.clientY > w.dol - 36) obszar.scrollTop += 14;
+    if (e.clientX < w.lewo + 30) obszar.scrollLeft -= 14;
+    else if (e.clientX > w.prawo - 30) obszar.scrollLeft += 14;
   }
+
+  // Escape przerywa przeciąganie
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ciag && ciag.aktywne) przerwij();
+  });
 
   function sprzatnij() {
     document.removeEventListener('pointermove', ruch);
@@ -1060,8 +1148,8 @@
     wczytaj();
   });
   $('kal-odswiez').addEventListener('click', function () {
-    wczytaj().then(function () {
-      P.komunikat('Odświeżono.');
+    wczytaj().then(function (ok) {
+      if (ok) P.komunikat('Odświeżono.');
     });
   });
   $('kal-dodaj').addEventListener('click', function () {
@@ -1100,14 +1188,41 @@
   if (WIDOKI.indexOf(K.widok) === -1) K.widok = window.innerWidth < 720 ? 'dzien' : 'tydzien';
   K.data = dzisPL();
 
+  // Obrót telefonu / zmiana okna — wysokość i szerokość kolumn
+  var zegarRozmiaru = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(zegarRozmiaru);
+    zegarRozmiaru = setTimeout(function () {
+      if (K.dane && !$('panel-kalendarz').hidden) rysuj();
+    }, 150);
+  });
+
   window.Kalendarz = {
+    /**
+     * Zakładka Kalendarz: od razu to, co mamy, i zawsze świeże dane z serwera —
+     * zmiany z zakładek Grafik / Ustawienia (godziny pracy, zamknięte dni)
+     * też muszą tu dotrzeć.
+     */
     pokaz: function () {
-      if (!K.dane || K.nieaktualne) wczytaj();
-      else rysuj();
+      if (K.dane) rysuj();
+      wczytaj();
     },
     odswiez: wczytaj,
     nowa: nowa,
     rezerwacja: rezerwacja,
+    /** Wylogowanie: żadne dane kursantów nie zostają w stronie. */
+    wyczysc: function () {
+      K.dane = null;
+      K.zakres = null;
+      K.zaladowany = null;
+      K.nieaktualne = true;
+      K.otwarte = null;
+      K.nrWczytania++;
+      obszar.innerHTML = '';
+      $('dlg-szczegoly-tresc').innerHTML = '';
+      F.reset();
+      schowajPodpowiedzi();
+    },
   };
 
   // Gdy panel otworzył się na zakładce Kalendarz, zanim ten plik się wczytał

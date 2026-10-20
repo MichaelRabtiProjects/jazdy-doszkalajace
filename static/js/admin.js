@@ -89,8 +89,15 @@
   }
 
   var zegarKomunikatu = null;
+  var miejsceKomunikatu = null;
   function komunikat(tekst, blad) {
     var el = $('komunikat');
+    // Otwarte okno (dialog) leży nad całą stroną — komunikat musi trafić do
+    // niego, inaczej np. "e-mail nie wyszedł" schowałby się pod spodem.
+    if (!miejsceKomunikatu) miejsceKomunikatu = el.parentNode;
+    var okno = document.querySelector('dialog[open]');
+    var cel = okno || miejsceKomunikatu;
+    if (el.parentNode !== cel) cel.appendChild(el);
     el.textContent = tekst;
     el.className = 'admin-komunikat' + (blad ? ' is-blad' : '');
     el.hidden = false;
@@ -135,6 +142,16 @@
   /* ------------------------------------------------------------------ */
 
   function pokazLogowanie(uwaga) {
+    // Dane kursantów nie mogą zostać w stronie po wylogowaniu / wygaśnięciu sesji
+    document.querySelectorAll('dialog[open]').forEach(function (d) {
+      d.close();
+    });
+    ['lista-wstepne', 'lista-nadchodzace', 'lista-historia', 'grafik-dni'].forEach(function (id) {
+      $(id).innerHTML = '';
+    });
+    stan.rezerwacje = [];
+    stan.grafik = null;
+    if (window.Kalendarz) window.Kalendarz.wyczysc();
     $('widok-panel').hidden = true;
     $('wyloguj').hidden = true;
     $('widok-logowanie').hidden = false;
@@ -305,6 +322,7 @@
     return (
       '<div class="rez-edycja" hidden>' +
       '<div class="admin-siatka">' +
+      '<label>Dzień <input type="date" class="ed-data" value="' + esc(r.data) + '"></label>' +
       '<label>Start <input type="time" class="ed-start" step="300" value="' + godz(r.start_min) + '"></label>' +
       '<label>Długość <select class="ed-dlugosc">' + opcjeDl + '</select></label>' +
       '<label>Miejsce <select class="ed-miejsce">' + opcjeMiejsc(r.miejsce, true) + '</select></label>' +
@@ -313,7 +331,7 @@
       '<option value="15"' + (r.doplata_h ? ' selected' : '') + '>+15 zł/h (175 zł/h)</option>' +
       '</select></label>' +
       '</div>' +
-      '<p class="admin-drobne">Możesz ustawić dowolną godzinę, także z krótszym buforem niż wyliczył grafik — pilnuję tylko, żeby jazdy na siebie nie nachodziły. Kursant nie dostaje automatycznej wiadomości o zmianie, a jeśli przypomnienie już wyszło, nowego nie będzie — daj mu znać sam.</p>' +
+      '<p class="admin-drobne">Możesz ustawić dowolny dzień i godzinę, także z krótszym buforem niż wyliczył grafik — pilnuję tylko, żeby jazdy na siebie nie nachodziły. Kursant nie dostaje automatycznej wiadomości o zmianie, a jeśli przypomnienie już wyszło, nowego nie będzie — daj mu znać sam.</p>' +
       '<div class="rez-akcje">' +
       '<button type="button" class="btn btn-primary" data-akcja="zapisz-edycje">Zapisz zmianę</button>' +
       '<button type="button" class="btn btn-secondary" data-akcja="anuluj-edycje">Anuluj</button>' +
@@ -371,7 +389,9 @@
     if (!przycisk) return;
     var karta = przycisk.closest('.rez');
     if (!karta) return;
-    var r = znajdz(Number(karta.dataset.id));
+    var id = Number(karta.dataset.id);
+    // W oknie z kalendarza liczy się to, co widać w oknie (świeże dane kalendarza)
+    var r = (karta.closest('#dlg-szczegoly') && window.Kalendarz && window.Kalendarz.rezerwacja(id)) || znajdz(id);
     if (!r) return;
     var akcja = przycisk.dataset.akcja;
     var opis = krotko(r.data) + ' ' + zakres(r) + ' — ' + r.imie;
@@ -397,6 +417,7 @@
       dane.otrzymany = !r.zadatek_otrzymany_o;
     } else if (akcja === 'zapisz-edycje') {
       dane.akcja = 'edytuj';
+      dane.data = edycja.querySelector('.ed-data').value || r.data;
       dane.start = minuty(edycja.querySelector('.ed-start').value);
       dane.koniec = dane.start + Number(edycja.querySelector('.ed-dlugosc').value);
       dane.miejsce = edycja.querySelector('.ed-miejsce').value;
@@ -738,6 +759,18 @@
       if (stan.zakladka === 'grafik') wczytajGrafik();
       if (stan.zakladka === 'kalendarz' && window.Kalendarz) window.Kalendarz.odswiez();
     }
+  });
+
+  // Komunikat pokazany w oknie nie może zniknąć razem z oknem (np. jazda
+  // przeniesiona na inny tydzień zamyka okno szczegółów). Obserwujemy atrybut
+  // "open" zamiast zdarzenia "close" — to drugie bywa w przeglądarkach opóźnione.
+  var obserwatorOkien = new MutationObserver(function () {
+    var el = $('komunikat');
+    var okno = el.closest('dialog');
+    if (okno && !okno.open && miejsceKomunikatu) miejsceKomunikatu.appendChild(el);
+  });
+  document.querySelectorAll('dialog').forEach(function (okno) {
+    obserwatorOkien.observe(okno, { attributes: true, attributeFilter: ['open'] });
   });
 
   // Zamykanie zmiany dnia z kalendarza też musi odświeżyć zakładkę Grafik

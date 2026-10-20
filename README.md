@@ -38,7 +38,7 @@ migracje po kolei:
 ```powershell
 npx wrangler d1 create jazdy-doszkalajace-db
 npx wrangler d1 execute jazdy-doszkalajace-db --remote --file migrations/0001_init.sql
-# ... i tak samo 0002 → 0009, po kolei
+# ... i tak samo 0002 → 0010, po kolei
 ```
 
 **Brevo (e-maile):** załóż darmowe konto na brevo.com → *Senders, Domains &
@@ -55,6 +55,26 @@ Każda gałąź inna niż `master` publikuje się pod adresem
 nie obejmuje. W panelu Pages środowisko **Preview** ma osobną bazę
 `jazdy-doszkalajace-db-test` (bez danych klientów) i osobne zmienne.
 Plan zmian i decyzje: `docs/plan-konta-sms-grafik.md`.
+
+### Kalendarz w panelu
+
+Zakładka **Kalendarz** (domyślna) wygląda jak panel Calendesk: widok dnia,
+tygodnia i miesiąca, jazdy jako bloki na osi godzin, czas poza godzinami pracy
+przyciemniony, czerwona linia „teraz”. Na telefonie otwiera się widok dnia.
+
+- **Klik w jazdę** → szczegóły (Zadzwoń / SMS / WhatsApp) i te same akcje co
+  na liście: potwierdź, odrzuć, zadatek, zmiana godziny/miejsca, notatka, odwołaj.
+- **Klik w puste miejsce** albo „+ Dodaj rezerwację” → okno „Nowa rezerwacja”
+  (usługa, kursant z podpowiedziami z wcześniejszych rezerwacji, miejsce, status,
+  koniec ręcznie, „nie wysyłaj powiadomień”) z zakładką **Blokada kalendarza**.
+- **Blokada** (tabela `blokady`, migracja 0010) znika z grafiku kursantów i nie
+  da się jej zarezerwować — pilnuje tego także sam zapis rezerwacji. Opis widzi
+  tylko instruktor. „Cały dzień” zamyka dzień (tabela `wyjatki`).
+- **Przeciąganie** jazdy albo blokady na inną godzinę lub dzień (na telefonie:
+  przytrzymaj blok, potem przesuń). Kursant nie dostaje wiadomości o zmianie.
+
+Logika: `static/js/kalendarz.js`, `functions/api/admin/kalendarz.js`,
+`lib/blokady.js`, `lib/kursanci.js`. Panel ma ciemny motyw (`static/css/admin.css`).
 
 ### Przypomnienia (e-mail + SMS)
 

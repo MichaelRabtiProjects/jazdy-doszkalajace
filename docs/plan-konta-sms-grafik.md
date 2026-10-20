@@ -104,7 +104,8 @@ tu nową wersję z datą.
    Worker co 10 min, nowe kolumny w bazie, nadawca LajtELka, znaczek „SMS
    wysłany” w panelu, polityka prywatności.
 1b. **Kalendarz w panelu admina** (tydzień jak Calendesk, blokady, nowa
-   rezerwacja, przeciąganie) — przed kontami.
+   rezerwacja, przeciąganie) — przed kontami. **Zrobione na gałęzi `test`
+   (20.10.2026)**, migracja `0010_blokady.sql`.
 2. **Konta i logowanie kodem** za wyłącznikiem `KONTA_WLACZONE` (domyślnie
    wyłączone), Turnstile, uwierzytelnienie domeny lajtelka.pl w Brevo.
 3. **Moje rezerwacje**, odwoływanie przez kursanta, zakładka Kursanci w panelu.
@@ -120,6 +121,12 @@ tu nową wersję z datą.
 - Lekcje na stronie: 2, 3 lub 4 h (`lib/dostepnosc.js`, `DLUGOSCI`).
 - Dane rezerwacji kasują się 180 dni po jeździe — historia w koncie sięga pół
   roku, chyba że zmienimy politykę prywatności.
+
+## Lista kontrolna: kalendarz w panelu na lajtelka.pl
+1. Akceptacja właściciela na `test.jazdy-doszkalajace.pages.dev/admin`.
+2. Migracja `0010_blokady.sql` na bazę produkcyjną (`--remote`) — PRZED merge
+   (razem z `0009`, jeśli SMS wchodzi w tym samym wdrożeniu).
+3. Merge `test` → `master`.
 
 ## Lista kontrolna: etap 1 (SMS) na lajtelka.pl
 1. Brevo: zatwierdzony nadawca `LajtELka` dla Polski + kupione kredyty SMS.
