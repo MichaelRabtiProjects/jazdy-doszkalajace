@@ -106,7 +106,10 @@ tu nową wersję z datą.
 1b. **Kalendarz w panelu admina** (tydzień jak Calendesk, blokady, nowa
    rezerwacja, przeciąganie) — przed kontami. **Zrobione na gałęzi `test`
    (20.10.2026)**, migracja `0010_blokady.sql`.
-2. **Konta i logowanie kodem** za wyłącznikiem `KONTA_WLACZONE` (domyślnie
+2. **Konta i logowanie kodem** — **backend zrobiony 20.10.2026** (migracja 0011,
+   lib/konto.js, functions/api/konto/*, testy/konto.test.mjs; konta włączone
+   automatycznie na gałęziach ≠ master); strona /konto w toku. Turnstile — później.
+   Konta i logowanie kodem za wyłącznikiem `KONTA_WLACZONE` (domyślnie
    wyłączone), Turnstile, uwierzytelnienie domeny lajtelka.pl w Brevo.
 3. **Moje rezerwacje**, odwoływanie przez kursanta, zakładka Kursanci w panelu.
 4. **Nowy grafik** w stylu Calendesk + rozmyty grafik dla gości + bramka API.

@@ -14,6 +14,7 @@ import { utworzWstepna, widokPubliczny, BladRezerwacji } from '../../lib/rezerwa
 import { wyslijEmail } from '../../lib/email.js';
 import { mailNowaRezerwacja, mailWstepnaDoKursanta } from '../../lib/maile.js';
 import { json, blad, wymagajBazy } from '../../lib/http.js';
+import { kontaWlaczone, kontoZSesji } from '../../lib/konto.js';
 
 export async function onRequestPost({ request, env }) {
   let dane;
@@ -31,7 +32,9 @@ export async function onRequestPost({ request, env }) {
 
   try {
     const db = wymagajBazy(env);
-    const r = await utworzWstepna(db, dane);
+    // Zalogowany kursant — rezerwacja zapisuje się na jego koncie
+    const konto = kontaWlaczone(env) ? await kontoZSesji(db, request) : null;
+    const r = await utworzWstepna(db, dane, { uzytkownikId: konto ? konto.id : null });
     const origin = new URL(request.url).origin;
 
     // Oba maile równolegle. wyslijEmail nigdy nie rzuca wyjątku — nieudany
