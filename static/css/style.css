@@ -3880,3 +3880,16 @@ body.lightbox-open {
   align-items: center;
   gap: 18px;
 }
+
+/* Menu z linkiem "Moje konto" — na średnich ekranach (tablet, mały laptop)
+   ciaśniej, żeby nic się nie zawijało ani nie ucinało. Poniżej 720 px menu
+   i tak chowa się pod przyciskiem. */
+@media (min-width: 721px) and (max-width: 1180px) {
+  .main-nav {
+    gap: 14px;
+  }
+
+  .main-nav a {
+    font-size: 0.86rem;
+  }
+}
