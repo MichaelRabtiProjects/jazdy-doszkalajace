@@ -14,7 +14,9 @@
   var TYDZIEN = [1, 2, 3, 4, 5, 6, 0];
   var ZAJMUJACE = ['wstepna', 'potwierdzona', 'oczekuje', 'oplacone'];
 
-  var stan = { dzisiaj: null, rezerwacje: [], miejsca: [], grafik: null, zakladka: 'rezerwacje' };
+  var ZAKLADKI = ['kalendarz', 'rezerwacje', 'grafik', 'ustawienia'];
+
+  var stan = { dzisiaj: null, rezerwacje: [], miejsca: [], grafik: null, zakladka: 'kalendarz' };
 
   var $ = function (id) {
     return document.getElementById(id);
@@ -145,7 +147,7 @@
     $('widok-panel').hidden = false;
     $('wyloguj').hidden = false;
     var z = (location.hash || '').slice(1);
-    przelaczZakladke(['rezerwacje', 'grafik', 'ustawienia'].indexOf(z) !== -1 ? z : 'rezerwacje');
+    przelaczZakladke(ZAKLADKI.indexOf(z) !== -1 ? z : 'kalendarz');
     wczytajRezerwacje();
   }
 
@@ -186,11 +188,13 @@
       b.classList.toggle('is-active', aktywna);
       b.setAttribute('aria-selected', String(aktywna));
     });
-    ['rezerwacje', 'grafik', 'ustawienia'].forEach(function (n) {
+    ZAKLADKI.forEach(function (n) {
       $('panel-' + n).hidden = n !== nazwa;
     });
+    document.body.classList.toggle('kal-szeroki', nazwa === 'kalendarz');
     if (history.replaceState) history.replaceState(null, '', '#' + nazwa);
     if ((nazwa === 'grafik' || nazwa === 'ustawienia') && !stan.grafik) wczytajGrafik();
+    if (nazwa === 'kalendarz' && window.Kalendarz) window.Kalendarz.pokaz();
   }
 
   document.querySelectorAll('.admin-zakladka').forEach(function (b) {
@@ -258,7 +262,7 @@
     return (
       '<article class="admin-karta rez rez-' + esc(r.status) + '" data-id="' + r.id + '">' +
       '<div class="rez-termin"><strong>' + esc(krotko(r.data)) + '</strong> ' + zakres(r) +
-      ' <span class="rez-dl">' + dl + ' h</span></div>' +
+      ' <span class="rez-dl">' + godziny(dl) + '</span></div>' +
       '<div class="rez-miejsce">' + esc(nazwaMiejsca(r.miejsce)) + ' · <strong>' + (160 + (r.doplata_h || 0)) + ' zł/h</strong>' +
       (r.doplata_h ? ' <span class="znaczek">+' + r.doplata_h + ' zł/h dojazd</span>' : '') + '</div>' +
       '<div class="rez-osoba">' + esc(r.imie) + '</div>' +
@@ -277,11 +281,27 @@
     );
   }
 
+  /** 1.5 → '1,5 h' */
+  function godziny(h) {
+    return String(Math.round(h * 100) / 100).replace('.', ',') + ' h';
+  }
+
   /** Ukryty formularz ręcznej zmiany godziny / długości / miejsca / dopłaty. */
   function formularzEdycji(r) {
-    var dl = (r.koniec_min - r.start_min) / 60;
+    // Długość w minutach — także pół godziny i długość ustawiona ręcznie
+    // w kalendarzu (np. 85 min); inaczej zapis bez zmiany długości po cichu
+    // zmieniłby jazdę.
+    var dl = r.koniec_min - r.start_min;
+    var dlugosci = [60, 90, 120, 150, 180, 210, 240];
+    if (dlugosci.indexOf(dl) === -1) dlugosci.push(dl);
+    dlugosci.sort(function (a, b) {
+      return a - b;
+    });
     var opcjeDl = '';
-    for (var h = 1; h <= 4; h++) opcjeDl += '<option value="' + h + '"' + (h === dl ? ' selected' : '') + '>' + h + ' h</option>';
+    dlugosci.forEach(function (m) {
+      opcjeDl += '<option value="' + m + '"' + (m === dl ? ' selected' : '') + '>' +
+        (m % 30 === 0 ? godziny(m / 60) : Math.floor(m / 60) + ' h ' + (m % 60) + ' min') + '</option>';
+    });
     return (
       '<div class="rez-edycja" hidden>' +
       '<div class="admin-siatka">' +
@@ -333,14 +353,24 @@
 
   function znajdz(id) {
     for (var i = 0; i < stan.rezerwacje.length; i++) if (stan.rezerwacje[i].id === id) return stan.rezerwacje[i];
-    return null;
+    // Kalendarz może pokazywać jazdy starsze niż lista (14 dni wstecz)
+    return window.Kalendarz ? window.Kalendarz.rezerwacja(id) : null;
   }
 
-  // Jeden słuchacz na cały panel rezerwacji zamiast osobnego na każdym przycisku
-  $('panel-rezerwacje').addEventListener('click', function (e) {
+  /** Po każdej zmianie: lista, grafik i kalendarz wczytują się od nowa. */
+  function poZmianie() {
+    stan.grafik = null;
+    document.dispatchEvent(new CustomEvent('panel:zmiana'));
+    return wczytajRezerwacje();
+  }
+
+  // Jeden słuchacz na całą listę rezerwacji (i okno szczegółów w kalendarzu)
+  // zamiast osobnego na każdym przycisku
+  function obsluzAkcje(e) {
     var przycisk = e.target.closest('button[data-akcja]');
     if (!przycisk) return;
     var karta = przycisk.closest('.rez');
+    if (!karta) return;
     var r = znajdz(Number(karta.dataset.id));
     if (!r) return;
     var akcja = przycisk.dataset.akcja;
@@ -368,7 +398,7 @@
     } else if (akcja === 'zapisz-edycje') {
       dane.akcja = 'edytuj';
       dane.start = minuty(edycja.querySelector('.ed-start').value);
-      dane.dlugosc = Number(edycja.querySelector('.ed-dlugosc').value);
+      dane.koniec = dane.start + Number(edycja.querySelector('.ed-dlugosc').value);
       dane.miejsce = edycja.querySelector('.ed-miejsce').value;
       dane.doplata_h = Number(edycja.querySelector('.ed-doplata').value);
     } else if (akcja === 'notatka') {
@@ -394,14 +424,16 @@
         if (wynik.email_wyslany === true) tekst += ' Kursant dostał e-mail.';
         if (wynik.email_wyslany === false) tekst += ' Uwaga: e-maila nie udało się wysłać — daj znać kursantowi SMS-em.';
         komunikat(tekst, wynik.email_wyslany === false);
-        stan.grafik = null;
-        return wczytajRezerwacje();
+        return poZmianie();
       })
       .catch(function (err) {
         przycisk.disabled = false;
         komunikat(err.message, true);
       });
-  });
+  }
+
+  $('panel-rezerwacje').addEventListener('click', obsluzAkcje);
+  $('dlg-szczegoly').addEventListener('click', obsluzAkcje);
 
   // Przypomnienia (e-mail + SMS) wysyła automat ok. 26 h przed jazdą — ten
   // przycisk robi to od razu dla jazd w ciągu 48 h i pokazuje treść SMS-a.
@@ -442,52 +474,10 @@
     });
   });
 
-  /* ---- Ręczne dodawanie ------------------------------------------------ */
+  /* ---- Ręczne dodawanie — okno "Nowa rezerwacja" z kalendarza -------- */
 
   $('pokaz-dodaj').addEventListener('click', function () {
-    var f = $('form-dodaj');
-    f.hidden = false;
-    if (!f.elements.data.value) f.elements.data.value = stan.dzisiaj || '';
-    f.elements.data.focus();
-  });
-
-  $('anuluj-dodaj').addEventListener('click', function () {
-    $('form-dodaj').hidden = true;
-    pokazBlad('blad-dodaj', '');
-  });
-
-  $('form-dodaj').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var f = e.target;
-    var przycisk = f.querySelector('button[type=submit]');
-    przycisk.disabled = true;
-    pokazBlad('blad-dodaj', '');
-    api('/api/admin/rezerwacje', {
-      akcja: 'dodaj',
-      data: f.elements.data.value,
-      start: minuty(f.elements.start.value),
-      dlugosc: Number(f.elements.dlugosc.value),
-      miejsce: f.elements.miejsce.value,
-      doplata_h: Number(f.elements.doplata_h.value),
-      imie: f.elements.imie.value,
-      telefon: f.elements.telefon.value,
-      email: f.elements.email.value,
-      notatka: f.elements.notatka.value,
-      powiadom: f.elements.powiadom.checked,
-    })
-      .then(function (wynik) {
-        f.reset();
-        f.hidden = true;
-        komunikat('Rezerwacja dodana.' + (wynik.email_wyslany ? ' Kursant dostał e-mail.' : ''));
-        stan.grafik = null;
-        return wczytajRezerwacje();
-      })
-      .catch(function (err) {
-        pokazBlad('blad-dodaj', err.message);
-      })
-      .then(function () {
-        przycisk.disabled = false;
-      });
+    if (window.Kalendarz) window.Kalendarz.nowa({});
   });
 
   /* ------------------------------------------------------------------ */
@@ -510,6 +500,7 @@
   function klasaGodziny(h, dzien) {
     if (h.rezerwacja) return h.rezerwacja.status === 'wstepna' ? 'h-wstepna' : 'h-zajeta';
     if (dzien.zablokowany) return 'h-zamknieta';
+    if (h.blokada) return 'h-blokada';
     return h.otwarta ? 'h-otwarta' : 'h-zamknieta';
   }
 
@@ -537,11 +528,13 @@
         var tytul = h.rezerwacja
           ? (h.rezerwacja.status === 'wstepna' ? 'Wstępna: ' : 'Jazda: ') + h.rezerwacja.imie + ' ' +
             godz(h.rezerwacja.start) + '–' + godz(h.rezerwacja.koniec) + ', ' + nazwaMiejsca(h.rezerwacja.miejsce)
-          : h.otwarta && !dzien.zablokowany ? 'Otwarta — kliknij, żeby zamknąć' : 'Zamknięta — kliknij, żeby otworzyć';
+          : h.blokada && !dzien.zablokowany
+            ? 'Zablokowane ' + godz(h.blokada.start) + '–' + godz(h.blokada.koniec) + (h.blokada.opis ? ': ' + h.blokada.opis : '') + ' — zmienisz w Kalendarzu'
+            : h.otwarta && !dzien.zablokowany ? 'Otwarta — kliknij, żeby zamknąć' : 'Zamknięta — kliknij, żeby otworzyć';
         html +=
           '<button type="button" class="h ' + klasaGodziny(h, dzien) + '" data-godzina="' + h.godzina + '"' +
           ' data-otwarta="' + (h.otwarta ? '1' : '0') + '" title="' + esc(tytul) + '" aria-label="' + dwie(h.godzina) + ':00 — ' + esc(tytul) + '"' +
-          (h.rezerwacja || dzien.zablokowany ? ' disabled' : '') + '>' +
+          (h.rezerwacja || h.blokada || dzien.zablokowany ? ' disabled' : '') + '>' +
           dwie(h.godzina) +
           (h.rezerwacja && h.rezerwacja.poczatek ? '<span class="h-imie">' + esc(String(h.rezerwacja.imie).split(' ')[0]) + '</span>' : '') +
           '</button>';
@@ -743,8 +736,34 @@
     if (document.visibilityState === 'visible' && !$('widok-panel').hidden) {
       wczytajRezerwacje();
       if (stan.zakladka === 'grafik') wczytajGrafik();
+      if (stan.zakladka === 'kalendarz' && window.Kalendarz) window.Kalendarz.odswiez();
     }
   });
+
+  // Zamykanie zmiany dnia z kalendarza też musi odświeżyć zakładkę Grafik
+  document.addEventListener('panel:zmiana', function () {
+    stan.grafik = null;
+  });
+
+  // Wspólne narzędzia dla kalendarza (js/kalendarz.js)
+  window.Panel = {
+    api: api,
+    esc: esc,
+    godz: godz,
+    minuty: minuty,
+    dwie: dwie,
+    krotko: krotko,
+    kiedy: kiedy,
+    komunikat: komunikat,
+    pokazBlad: pokazBlad,
+    kartaRezerwacji: kartaRezerwacji,
+    opcjeMiejsc: opcjeMiejsc,
+    nazwaMiejsca: nazwaMiejsca,
+    poZmianie: poZmianie,
+    stan: stan,
+    DNI: DNI,
+    ZAJMUJACE: ZAJMUJACE,
+  };
 
   api('/api/admin/login')
     .then(function (s) {

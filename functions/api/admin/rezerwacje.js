@@ -9,9 +9,10 @@
  *   zadatek    { id, otrzymany } zaznacza / odznacza wpłatę zadatku
  *   notatka    { id, notatka }   notatka widoczna tylko w panelu
  *   usun       { id }            trwałe usunięcie (np. prośba o usunięcie danych)
- *   edytuj     { id, start?, dlugosc?, miejsce?, doplata_h? }  ręczna zmiana
- *              (np. krótszy bufor na dojazd po rozmowie z kursantem)
- *   dodaj      { data, start, dlugosc, miejsce?, doplata_h?, imie, telefon, email?, notatka?, powiadom }
+ *   edytuj     { id, data?, start?, dlugosc? | koniec?, miejsce?, doplata_h? }  ręczna zmiana
+ *              (np. krótszy bufor na dojazd; przeciągnięcie jazdy w kalendarzu)
+ *   dodaj      { data, start, dlugosc | koniec, miejsce?, doplata_h?, imie, telefon, email?,
+ *                notatka?, status? ('potwierdzona' | 'wstepna'), jezyk?, powiadom }
  *
  * Godziny w minutach od północy (start: 805 = 13:25).
  */
@@ -127,7 +128,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
       case 'edytuj': {
         const r = await pobierz(db, dane.id);
         const zmiany = {};
-        for (const k of ['start', 'dlugosc', 'miejsce', 'doplata_h']) {
+        for (const k of ['data', 'start', 'dlugosc', 'koniec', 'miejsce', 'doplata_h']) {
           if (dane[k] !== undefined) zmiany[k] = dane[k];
         }
         await edytujZPanelu(db, r.id, zmiany);

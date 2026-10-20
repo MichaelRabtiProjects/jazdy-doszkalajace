@@ -10,6 +10,7 @@
 <!-- Panel nie może trafić do wyszukiwarek -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#1b1d21">
+<meta name="color-scheme" content="dark">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/admin.css">
 </head>
@@ -39,7 +40,8 @@
   <!-- Panel -->
   <section id="widok-panel" hidden>
     <nav class="admin-zakladki" role="tablist" aria-label="Sekcje panelu">
-      <button type="button" role="tab" class="admin-zakladka is-active" data-zakladka="rezerwacje" aria-selected="true">
+      <button type="button" role="tab" class="admin-zakladka is-active" data-zakladka="kalendarz" aria-selected="true">Kalendarz</button>
+      <button type="button" role="tab" class="admin-zakladka" data-zakladka="rezerwacje" aria-selected="false">
         Rezerwacje <span class="admin-licznik" id="licznik-wstepnych" hidden></span>
       </button>
       <button type="button" role="tab" class="admin-zakladka" data-zakladka="grafik" aria-selected="false">Grafik</button>
@@ -48,50 +50,42 @@
 
     <p class="admin-komunikat" id="komunikat" role="status" hidden></p>
 
+    <!-- Kalendarz (jak w panelu Calendesk) -->
+    <div class="admin-panel" id="panel-kalendarz" role="tabpanel">
+      <div class="kal-pasek">
+        <div class="kal-nawigacja">
+          <button type="button" class="kal-ikona" id="kal-wstecz" aria-label="Wcześniej">‹</button>
+          <h1 class="kal-tytul" id="kal-tytul" aria-live="polite"></h1>
+          <button type="button" class="kal-ikona" id="kal-dalej" aria-label="Później">›</button>
+          <button type="button" class="kal-dzis" id="kal-dzis">Dziś</button>
+        </div>
+        <div class="kal-widoki" role="group" aria-label="Widok">
+          <button type="button" class="kal-widok" data-widok="dzien">Dzień</button>
+          <button type="button" class="kal-widok" data-widok="tydzien">Tydzień</button>
+          <button type="button" class="kal-widok" data-widok="miesiac">Miesiąc</button>
+        </div>
+        <div class="kal-akcje">
+          <button type="button" class="btn btn-primary" id="kal-dodaj">+ Dodaj rezerwację</button>
+          <button type="button" class="kal-ikona" id="kal-odswiez" aria-label="Odśwież" title="Odśwież">⟳</button>
+        </div>
+      </div>
+      <ul class="kal-legenda" aria-label="Legenda">
+        <li><i class="kal-l-potw"></i> potwierdzona</li>
+        <li><i class="kal-l-wst"></i> wstępna — czeka na Ciebie</li>
+        <li><i class="kal-l-blok"></i> blokada</li>
+        <li><i class="kal-l-poza"></i> poza godzinami pracy</li>
+        <li class="kal-legenda-podpowiedz">Kliknij puste miejsce, żeby dodać · przeciągnij jazdę, żeby przenieść</li>
+      </ul>
+      <div class="kal-obszar" id="kal-obszar"></div>
+    </div>
+
     <!-- Rezerwacje -->
-    <div class="admin-panel" id="panel-rezerwacje" role="tabpanel">
+    <div class="admin-panel" id="panel-rezerwacje" role="tabpanel" hidden>
       <div class="admin-pasek">
         <button type="button" class="btn btn-secondary" id="pokaz-dodaj">+ Dodaj rezerwację</button>
         <button type="button" class="btn btn-secondary" id="odswiez">Odśwież</button>
         <button type="button" class="btn btn-secondary" id="przypomnij-teraz">Wyślij przypomnienia teraz (48 h)</button>
       </div>
-
-      <form class="admin-karta admin-dodaj" id="form-dodaj" hidden>
-        <h2>Nowa rezerwacja (od razu potwierdzona)</h2>
-        <div class="admin-siatka">
-          <label>Data <input type="date" name="data" required></label>
-          <label>Godzina <input type="time" name="start" step="300" value="10:00" required></label>
-          <label>Długość
-            <select name="dlugosc">
-              <option value="1">1 h</option>
-              <option value="2" selected>2 h</option>
-              <option value="3">3 h</option>
-              <option value="4">4 h</option>
-            </select>
-          </label>
-        </div>
-        <div class="admin-siatka">
-          <label>Miejsce spotkania
-            <select name="miejsce" class="sel-miejsce"><option value="">— do ustalenia —</option></select>
-          </label>
-          <label>Dopłata za dojazd
-            <select name="doplata_h">
-              <option value="0">brak (160 zł/h)</option>
-              <option value="15">+15 zł/h (175 zł/h)</option>
-            </select>
-          </label>
-        </div>
-        <label>Imię i nazwisko <input type="text" name="imie" required maxlength="80" autocomplete="off"></label>
-        <label>Telefon <input type="tel" name="telefon" required maxlength="25" autocomplete="off"></label>
-        <label>E-mail (opcjonalnie) <input type="email" name="email" maxlength="120" autocomplete="off"></label>
-        <label>Notatka (widzisz tylko Ty) <input type="text" name="notatka" maxlength="500" autocomplete="off"></label>
-        <label class="admin-check"><input type="checkbox" name="powiadom" checked> Wyślij kursantowi e-mail z potwierdzeniem (jeśli podano e-mail)</label>
-        <p class="admin-blad" id="blad-dodaj" role="alert" hidden></p>
-        <div class="admin-pasek">
-          <button type="submit" class="btn btn-primary">Zapisz</button>
-          <button type="button" class="btn btn-secondary" id="anuluj-dodaj">Anuluj</button>
-        </div>
-      </form>
 
       <h2 class="admin-naglowek">Do potwierdzenia</h2>
       <div id="lista-wstepne" class="admin-lista"></div>
@@ -116,6 +110,7 @@
         <li><span class="h h-zamknieta"></span> zamknięta</li>
         <li><span class="h h-wstepna"></span> wstępna rezerwacja</li>
         <li><span class="h h-zajeta"></span> potwierdzona jazda</li>
+        <li><span class="h h-blokada"></span> blokada (zmienisz w Kalendarzu)</li>
       </ul>
       <div id="grafik-dni"></div>
     </div>
@@ -165,6 +160,111 @@
   </section>
 </main>
 
+<!-- Szczegóły jazdy / blokady (klik w kalendarzu) -->
+<dialog class="dlg" id="dlg-szczegoly" aria-labelledby="dlg-szczegoly-tytul">
+  <div class="dlg-naglowek">
+    <h2 id="dlg-szczegoly-tytul">Rezerwacja</h2>
+    <button type="button" class="dlg-zamknij" data-zamknij aria-label="Zamknij">×</button>
+  </div>
+  <div class="dlg-tresc" id="dlg-szczegoly-tresc"></div>
+</dialog>
+
+<!-- Nowa rezerwacja / blokada kalendarza (jak "Nowa rezerwacja" w Calendesku) -->
+<dialog class="dlg dlg-szeroki" id="dlg-nowa" aria-labelledby="dlg-nowa-tytul">
+  <form id="form-nowa" novalidate>
+    <div class="dlg-naglowek">
+      <button type="button" class="dlg-zamknij" data-zamknij aria-label="Zamknij">×</button>
+      <h2 id="dlg-nowa-tytul">Nowa rezerwacja</h2>
+      <button type="submit" class="btn btn-primary" id="nowa-zapisz">Dodaj rezerwację</button>
+    </div>
+    <div class="dlg-zakladki" role="tablist">
+      <button type="button" role="tab" class="dlg-zakladka is-active" data-tryb="rezerwacja" aria-selected="true">Rezerwacja</button>
+      <button type="button" role="tab" class="dlg-zakladka" data-tryb="blokada" aria-selected="false">Blokada kalendarza</button>
+    </div>
+    <p class="dlg-ostrzezenie" id="nowa-przeszlosc" hidden>Ta data już minęła — kursant nie dostanie powiadomień ani przypomnień.</p>
+
+    <div class="dlg-kolumny">
+      <div class="dlg-kolumna" data-tryb-tylko="rezerwacja">
+        <h3>Na jaką usługę chcesz zarezerwować spotkanie?</h3>
+        <label>Usługa
+          <select name="usluga">
+            <option value="120">Jazda doszkalająca — 2 h</option>
+            <option value="180">Jazda doszkalająca — 3 h</option>
+            <option value="240">Jazda doszkalająca — 4 h</option>
+            <option value="60">Jazda — 1 h</option>
+            <option value="90">Jazda — 1,5 h</option>
+          </select>
+        </label>
+
+        <h3>Z kim odbędzie się spotkanie?</h3>
+        <div class="kursant-pole">
+          <label>Imię i nazwisko
+            <input type="text" name="imie" maxlength="80" autocomplete="off" placeholder="Wpisz — podpowiem kursantów, którzy już jeździli"
+                   role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="kursant-lista">
+          </label>
+          <ul class="kursant-lista" id="kursant-lista" role="listbox" hidden></ul>
+        </div>
+        <div class="admin-siatka">
+          <label>Telefon <input type="tel" name="telefon" maxlength="25" autocomplete="off"></label>
+          <label>E-mail (opcjonalnie) <input type="email" name="email" maxlength="120" autocomplete="off"></label>
+        </div>
+
+        <h3>Miejsce i cena</h3>
+        <div class="admin-siatka">
+          <label>Miejsce spotkania <select name="miejsce" class="sel-miejsce"><option value="">— do ustalenia —</option></select></label>
+          <label>Dopłata za dojazd
+            <select name="doplata_h">
+              <option value="0">brak (160 zł/h)</option>
+              <option value="15">+15 zł/h (175 zł/h)</option>
+            </select>
+          </label>
+        </div>
+        <p class="dlg-cena" id="nowa-cena"></p>
+
+        <h3>Dodatkowe ustawienia</h3>
+        <div class="admin-siatka">
+          <label>Status
+            <select name="status">
+              <option value="potwierdzona">Potwierdzona</option>
+              <option value="wstepna">Wstępna (czeka na potwierdzenie)</option>
+            </select>
+          </label>
+          <label>Język kursanta
+            <select name="jezyk">
+              <option value="pl">polski</option>
+              <option value="en">angielski</option>
+            </select>
+          </label>
+        </div>
+        <label>Prywatne notatki (widzisz tylko Ty) <textarea name="notatka" maxlength="500"></textarea></label>
+        <label class="admin-check"><input type="checkbox" name="bez_powiadomien"> Nie wysyłaj powiadomień po utworzeniu (e-maila z potwierdzeniem)</label>
+      </div>
+
+      <div class="dlg-kolumna">
+        <h3 id="nowa-kiedy">Kiedy ma się odbyć spotkanie?</h3>
+        <div class="admin-siatka">
+          <label>Od (dzień) <input type="date" name="data" required></label>
+          <label>Od (godz.) <input type="time" name="start" step="300" required></label>
+          <label>Do (godz.) <input type="time" name="koniec" step="300" required></label>
+        </div>
+        <label class="admin-check" data-tryb-tylko="rezerwacja"><input type="checkbox" name="koniec_recznie"> Chcę ustawić koniec spotkania ręcznie</label>
+        <div data-tryb-tylko="blokada" hidden>
+          <label class="admin-check"><input type="checkbox" name="caly_dzien"> Cały dzień (zamknij dzień — nic nie da się zarezerwować)</label>
+          <label>Opis (widzisz tylko Ty)
+            <input type="text" name="opis" maxlength="120" autocomplete="off" placeholder="np. Prywatne doszkalanie">
+          </label>
+          <p class="admin-drobne">Zablokowany czas od razu znika z grafiku kursantów — nikt się na niego nie zapisze. Kursanci nie widzą opisu.</p>
+        </div>
+        <p class="admin-blad" id="blad-nowa" role="alert" hidden></p>
+      </div>
+    </div>
+    <div class="dlg-stopka" id="nowa-stopka-blokady" hidden>
+      <button type="button" class="btn btn-secondary btn-ostrozny" id="blokada-usun">Usuń blokadę</button>
+    </div>
+  </form>
+</dialog>
+
 <script src="js/admin.js"></script>
+<script src="js/kalendarz.js"></script>
 </body>
 </html>

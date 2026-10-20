@@ -64,6 +64,28 @@ tu nową wersję z datą.
   na dole z przyciskiem DALEJ.
 - **PL i EN od razu** (ekrany, e-maile z kodem, SMS-y).
 
+### Kalendarz w panelu admina (decyzje z 20.10.2026, po zrzutach z Calendesk)
+- **Widok tygodnia z osią godzin jak w panelu Calendesk** (Dzień / Tydzień /
+  Miesiąc, „Dziś”, strzałki, linia „teraz”) — **tylko dla instruktora**.
+  Kursanci wybierają termin w ustalonym układzie (kalendarz miesiąca + godziny).
+- **Wygląd panelu:** ciemny, ale nie za ciemny — dobry kontrast, nie razi
+  w oczy; kolorystyka marki LajtELka (bursztyn + grafit).
+- **Funkcje:** klik w jazdę → szczegóły i akcje (potwierdź, odrzuć, zadatek,
+  zmiana godziny/miejsca, notatka, telefon/SMS/WhatsApp); **blokada kalendarza**
+  (zablokowane godziny znikają z grafiku kursantów — nie da się na nie zapisać);
+  **„Nowa rezerwacja” jak w Calendesku**; **przeciąganie jazdy** na inną
+  godzinę/dzień.
+- **Kolejność:** kalendarz w panelu PRZED kontami (konta czekają na
+  potwierdzenie domeny lajtelka.pl w Brevo).
+
+### Nadawca e-maili, przycisk konta, stare rezerwacje (20.10.2026)
+- Maile (w tym kody logowania) z domeny **lajtelka.pl** (np.
+  powiadomienia@lajtelka.pl), odpowiedzi na Gmail instruktora — wymaga
+  potwierdzenia domeny w Brevo (wpisy DNS w Cloudflare).
+- **„Zaloguj się” / „Moje konto” w menu na każdej stronie** + logowanie
+  w miejscu grafiku.
+- **Dawne rezerwacje podpinane do konta po e-mailu** (po zalogowaniu kodem).
+
 ### Testowanie i wdrażanie
 - **Etapami na adresie testowym** z osobną, pustą bazą testową. Na lajtelka.pl
   każda część trafia dopiero po akceptacji właściciela.
@@ -81,6 +103,8 @@ tu nową wersję z datą.
 1. **SMS ok. 26 h przed** (niezależne od kont, można wypuścić pierwsze):
    Worker co 10 min, nowe kolumny w bazie, nadawca LajtELka, znaczek „SMS
    wysłany” w panelu, polityka prywatności.
+1b. **Kalendarz w panelu admina** (tydzień jak Calendesk, blokady, nowa
+   rezerwacja, przeciąganie) — przed kontami.
 2. **Konta i logowanie kodem** za wyłącznikiem `KONTA_WLACZONE` (domyślnie
    wyłączone), Turnstile, uwierzytelnienie domeny lajtelka.pl w Brevo.
 3. **Moje rezerwacje**, odwoływanie przez kursanta, zakładka Kursanci w panelu.

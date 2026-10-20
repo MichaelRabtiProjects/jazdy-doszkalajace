@@ -17,7 +17,7 @@
  * dzieje się tutaj, na serwerze, żeby panel nie musiał znać tych szczegółów.
  */
 
-import { otwarteGodziny, ZYWE_STATUSY } from '../../../lib/dostepnosc.js';
+import { otwarteGodziny, ZYWE_STATUSY, blokadyWZakresie } from '../../../lib/dostepnosc.js';
 import { MIEJSCA, miejsce as znajdzMiejsce, domyslnyDojazd } from '../../../lib/miejsca.js';
 import { dataPL, dzienTygodnia, zakresDat, nazwaDnia } from '../../../lib/czas.js';
 import { wczytajUstawienia, zapiszUstawienie, kwotaZadatku, horyzontTygodni } from '../../../lib/ustawienia.js';
@@ -36,7 +36,7 @@ export async function onRequestGet({ env }) {
     const koniec = daty[daty.length - 1];
     const zywe = ZYWE_STATUSY.map(() => '?').join(', ');
 
-    const [szablon, wyjatki, rezerwacje, ustawienia, dojazdy] = await Promise.all([
+    const [szablon, wyjatki, rezerwacje, ustawienia, dojazdy, blokady] = await Promise.all([
       db.prepare('SELECT dzien_tygodnia, godzina_start, godzina_koniec FROM szablon_tygodniowy ORDER BY dzien_tygodnia, godzina_start').all(),
       db.prepare('SELECT data, typ, godzina_start, godzina_koniec FROM wyjatki WHERE data BETWEEN ? AND ?').bind(dzisiaj, koniec).all(),
       db
@@ -48,6 +48,7 @@ export async function onRequestGet({ env }) {
         .all(),
       wczytajUstawienia(db),
       db.prepare('SELECT z, do_miejsca, normalnie, szczyt FROM dojazdy').all(),
+      blokadyWZakresie(db, dzisiaj, koniec),
     ]);
 
     const dni = daty.map((data) => {
@@ -56,17 +57,21 @@ export async function onRequestGet({ env }) {
       const wyj = wyjatki.results.filter((w) => w.data === data);
       const { aktywny, zablokowanyDzien, otwarte } = otwarteGodziny(wpisy, wyj);
       const rezDnia = rezerwacje.results.filter((r) => r.data === data);
+      const blokadyDnia = blokady.filter((b) => b.data === data);
 
       const godziny = [];
       for (let g = PIERWSZA_GODZINA; g <= OSTATNIA_GODZINA; g++) {
         // Godzina jest zajęta, jeśli jakakolwiek jazda nachodzi na [g:00, g+1:00)
         const rez = rezDnia.find((r) => r.start_min < (g + 1) * 60 && r.koniec_min > g * 60);
+        // Blokada z kalendarza — zmienia się ją w zakładce Kalendarz, nie tutaj
+        const blok = blokadyDnia.find((b) => b.start_min < (g + 1) * 60 && b.koniec_min > g * 60);
         godziny.push({
           godzina: g,
           otwarta: otwarte.has(g),
           rezerwacja: rez
             ? { id: rez.id, imie: rez.imie, status: rez.status, poczatek: Math.floor(rez.start_min / 60) === g, start: rez.start_min, koniec: rez.koniec_min, miejsce: rez.miejsce }
             : null,
+          blokada: blok && !rez ? { opis: blok.opis, start: blok.start_min, koniec: blok.koniec_min } : null,
         });
       }
       return { data, nazwa_dnia: nazwaDnia(data), aktywny, zablokowany: zablokowanyDzien, godziny };
