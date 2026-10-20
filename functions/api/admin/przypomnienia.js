@@ -1,9 +1,12 @@
 /**
  * POST /api/admin/przypomnienia  (chronione przez _middleware.js)
  *
- * Wysyła od razu przypomnienia o JUTRZEJSZYCH jazdach — bez czekania na
- * 18:00. Przydaje się do sprawdzenia, jak wyglądają, albo gdy jazdę
- * potwierdzasz już po 18:00. Nikt nie dostanie przypomnienia dwa razy.
+ * Wysyła od razu przypomnienia (e-mail + SMS, jeśli włączone) o potwierdzonych
+ * jazdach w ciągu najbliższych 48 h — bez czekania na "26 h przed" i bez
+ * ciszy nocnej. Nikt nie dostanie tego samego przypomnienia dwa razy.
+ *
+ * Odpowiedź zawiera podgląd treści SMS-ów — także wtedy, gdy wysyłka SMS
+ * jest wyłączona — żeby dało się sprawdzić, jak wyglądają.
  */
 
 import { wyslijPrzypomnienia } from '../../../lib/przypomnienia.js';

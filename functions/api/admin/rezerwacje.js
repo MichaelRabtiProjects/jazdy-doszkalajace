@@ -21,6 +21,7 @@ import { MIEJSCA } from '../../../lib/miejsca.js';
 import { wyslijEmail } from '../../../lib/email.js';
 import { mailPotwierdzonaDoKursanta, mailOdrzuconaDoKursanta } from '../../../lib/maile.js';
 import { dataPL, dodajDni } from '../../../lib/czas.js';
+import { wyslijPrzypomnienia, wyzerujPrzypomnienia } from '../../../lib/przypomnienia.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
 
 const ZAJMUJACE = ['wstepna', 'potwierdzona', 'oczekuje', 'oplacone'];
@@ -36,7 +37,7 @@ export async function onRequestGet({ request, env }) {
       .prepare(
         `SELECT id, data, start_min, koniec_min, miejsce, doplata_h, imie, telefon, email, kod_rezerwacji,
                 kwota_zadatku, status, jezyk, zrodlo, utworzono_o, potwierdzono_o,
-                zadatek_zgloszony_o, zadatek_otrzymany_o, przypomnienie_o, notatka
+                zadatek_zgloszony_o, zadatek_otrzymany_o, przypomnienie_o, sms_przypomnienie_o, sms_proby, sms_blad, notatka
          FROM rezerwacje WHERE data >= ?
          ORDER BY data, start_min`
       )
@@ -57,7 +58,7 @@ async function pobierz(db, id) {
   return r;
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost({ request, env, waitUntil }) {
   let dane;
   try {
     dane = await request.json();
@@ -68,6 +69,9 @@ export async function onRequestPost({ request, env }) {
   const db = wymagajBazy(env);
   const origin = new URL(request.url).origin;
   let emailWyslany = null;
+  // Rezerwacja, której przypomnienie może być już należne (np. potwierdzona
+  // później niż 26 h przed jazdą) — wysyłamy je w tle, nie czekając na automat.
+  let sprawdzPrzypomnienie = null;
 
   try {
     switch (dane && dane.akcja) {
@@ -82,6 +86,7 @@ export async function onRequestPost({ request, env }) {
         if (dane.powiadom && r.email) {
           emailWyslany = await wyslijEmail(env, mailPotwierdzonaDoKursanta(r, origin, env));
         }
+        sprawdzPrzypomnienie = r.id;
         break;
       }
       case 'odrzuc': {
@@ -125,7 +130,12 @@ export async function onRequestPost({ request, env }) {
         for (const k of ['start', 'dlugosc', 'miejsce', 'doplata_h']) {
           if (dane[k] !== undefined) zmiany[k] = dane[k];
         }
-        await edytujZPanelu(db, r.id, zmiany);
+        const nowa = await edytujZPanelu(db, r.id, zmiany);
+        // Inna godzina albo miejsce — stare przypomnienie jest nieaktualne.
+        if (nowa.start_min !== r.start_min || nowa.koniec_min !== r.koniec_min || nowa.miejsce !== r.miejsce) {
+          await wyzerujPrzypomnienia(db, r.id);
+          sprawdzPrzypomnienie = r.id;
+        }
         break;
       }
       case 'dodaj': {
@@ -133,10 +143,17 @@ export async function onRequestPost({ request, env }) {
         if (dane.powiadom && r.email) {
           emailWyslany = await wyslijEmail(env, mailPotwierdzonaDoKursanta(r, origin, env));
         }
+        sprawdzPrzypomnienie = r.id;
         break;
       }
       default:
         return blad('Nieznana akcja.', 400);
+    }
+    if (sprawdzPrzypomnienie != null) {
+      const zadanie = wyslijPrzypomnienia(db, env, origin, { id: sprawdzPrzypomnienie }).catch((err) =>
+        console.error('Przypomnienie po zmianie w panelu:', err)
+      );
+      if (waitUntil) waitUntil(zadanie);
     }
     return json({ ok: true, email_wyslany: emailWyslany });
   } catch (err) {

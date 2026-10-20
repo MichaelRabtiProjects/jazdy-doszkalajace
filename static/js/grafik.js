@@ -110,6 +110,10 @@
     formTytul: { pl: 'Zarezerwuj ten termin', en: 'Book this time' },
     formImie: { pl: 'Imię i nazwisko', en: 'First and last name' },
     formTelefon: { pl: 'Telefon', en: 'Phone' },
+    formTelefonSms: {
+      pl: 'Na ten numer przyjdzie SMS z przypomnieniem ok. 26 h przed jazdą.',
+      en: 'You’ll get a text reminder at this number about 26 hours before the lesson.',
+    },
     formEmail: { pl: 'E-mail', en: 'E-mail' },
     formZgoda: {
       pl: 'Akceptuję <a href="regulamin.html" target="_blank" rel="noopener">Regulamin</a> ' +
@@ -831,7 +835,8 @@
       '<label for="rez-imie">' + t('formImie') + '</label>' +
       '<input id="rez-imie" name="imie" type="text" required minlength="3" maxlength="80" autocomplete="name">' +
       '<label for="rez-telefon">' + t('formTelefon') + '</label>' +
-      '<input id="rez-telefon" name="telefon" type="tel" required maxlength="25" autocomplete="tel" inputmode="tel">' +
+      '<input id="rez-telefon" name="telefon" type="tel" required maxlength="25" autocomplete="tel" inputmode="tel" aria-describedby="rez-telefon-info">' +
+      '<p class="termin-pole-info" id="rez-telefon-info">' + t('formTelefonSms') + '</p>' +
       '<label for="rez-email">' + t('formEmail') + '</label>' +
       '<input id="rez-email" name="email" type="email" required maxlength="120" autocomplete="email">' +
       // Pułapka na boty: człowiek tego pola nie widzi (ani czytnik ekranu),

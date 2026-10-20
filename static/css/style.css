@@ -1074,6 +1074,13 @@ a.lang-btn {
   color: var(--ink-soft);
 }
 
+/* Podpowiedź pod polem formularza (np. o SMS-ie z przypomnieniem) */
+.termin-pole-info {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
 .termin-akcje {
   display: flex;
   flex-wrap: wrap;

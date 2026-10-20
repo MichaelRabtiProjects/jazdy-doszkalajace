@@ -27,6 +27,9 @@ Pages → projekt → **Settings → Variables and Secrets** (typ **Secret**):
 | `ADMIN_HASLO` | hasło do panelu `/admin` (długie, np. 4–5 losowych słów) |
 | `BREVO_API_KEY` | klucz API z Brevo — bez niego maile się nie wysyłają |
 | `EMAIL_INSTRUKTORA` | opcjonalnie; domyślnie `MichaelRabti@gmail.com` |
+| `SMS_WLACZONE` | `tak` = SMS-y z przypomnieniem naprawdę wychodzą (płatne); inaczej tylko w logu |
+| `SMS_LIMIT_DZIENNY` | opcjonalnie; bezpiecznik kosztów, domyślnie 40 SMS-ów na dobę |
+| `SMS_TYLKO_NUMERY` | tylko na teście: SMS-y wyłącznie na te numery (np. `48690360164`) |
 
 Pages → projekt → **Settings → Bindings → D1 database**: nazwa zmiennej
 `DB`, baza `jazdy-doszkalajace-db`. Bazę tworzy się raz i wgrywa do niej
@@ -35,8 +38,46 @@ migracje po kolei:
 ```powershell
 npx wrangler d1 create jazdy-doszkalajace-db
 npx wrangler d1 execute jazdy-doszkalajace-db --remote --file migrations/0001_init.sql
-# ... i tak samo 0002 → 0007, po kolei
+# ... i tak samo 0002 → 0009, po kolei
 ```
+
+### Środowisko testowe
+
+Każda gałąź inna niż `master` publikuje się pod adresem
+`https://<gałąź>.jazdy-doszkalajace.pages.dev` — np. gałąź `test` →
+`test.jazdy-doszkalajace.pages.dev`. Przekierowanie na lajtelka.pl tych adresów
+nie obejmuje. W panelu Pages środowisko **Preview** ma osobną bazę
+`jazdy-doszkalajace-db-test` (bez danych klientów) i osobne zmienne.
+Plan zmian i decyzje: `docs/plan-konta-sms-grafik.md`.
+
+### Przypomnienia (e-mail + SMS)
+
+Worker `przypomnienia/` co 10 minut wysyła przypomnienia o potwierdzonych
+jazdach — ok. **26 h przed jazdą**, nigdy między 22:00 a 6:00 (wtedy wcześniej,
+o 21:30 poprzedniego wieczoru). Logika: `lib/przypomnienia.js`. Panel wysyła
+przypomnienie od razu, gdy jazdę potwierdzisz później niż 26 h przed nią.
+
+Worker **nie** publikuje się z gita — po zmianie w `lib/` wdróż go ręcznie:
+
+```powershell
+cd przypomnienia
+npx wrangler deploy                      # produkcja
+npx wrangler secret put BREVO_API_KEY    # raz — bez klucza nic nie wychodzi
+npx wrangler deploy --env test           # wersja testowa (baza testowa)
+```
+
+**SMS w Brevo:** kredyty SMS kupuje się w Brevo (*SMS → Credits*), a nazwę
+nadawcy `LajtELka` trzeba zgłosić dla Polski (*SMS → Senders*).
+
+### Testy automatyczne
+
+```powershell
+node --test "testy/*.test.mjs"
+```
+
+Testują przypomnienia (czas polski i zmiana czasu, cisza nocna, długość SMS-a,
+brak podwójnej wysyłki) na bazie SQLite w pamięci z wszystkimi migracjami —
+bez Cloudflare i bez prawdziwej wysyłki.
 
 **Brevo (e-maile):** załóż darmowe konto na brevo.com → *Senders, Domains &
 Dedicated IPs → Senders* → dodaj i potwierdź `MichaelRabti@gmail.com` →

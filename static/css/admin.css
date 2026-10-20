@@ -168,6 +168,13 @@ body.admin {
   color: var(--ink-soft);
 }
 
+/* Np. "SMS nie wyszedł" — powód w dymku (title) */
+.znaczek-blad {
+  color: #b3261e;
+  background: #fbe9e7;
+  cursor: help;
+}
+
 /* Komunikat po akcji — przyklejony u dołu ekranu, dobrze widoczny na telefonie */
 .admin-komunikat {
   position: fixed;
