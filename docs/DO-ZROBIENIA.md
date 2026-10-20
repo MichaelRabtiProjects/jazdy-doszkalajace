@@ -51,3 +51,19 @@ z etapem SMS — patrz plan; to polecenie warto wykonać od razu.)
 - Wersja angielska i FAQ: **https://test.jazdy-doszkalajace.pages.dev/en**
 - Napisz, co zmienić. Po Twoim „OK” wypuszczę na lajtelka.pl
   (migracje bazy 0009 i 0010 robię ja).
+
+## 6. Przeczytaj regulamin i politykę prywatności (ok. 10 min)
+Dopisałem konta, przypomnienia SMS ok. 26 h przed jazdą, samodzielne
+odwołanie i pliki cookie sesji (wersja z 20.10.2026). To wersja robocza —
+przeczytaj na stronie testowej (`/regulamin`, `/polityka-prywatnosci`),
+najlepiej daj do przejrzenia osobie znającej prawo. Data „obowiązuje od”
+zmienię na dzień wejścia na lajtelka.pl.
+
+## 7. Konta kursantów — jak sprawdzić na teście
+Wymaga punktu 1 (`BREVO_API_KEY` w Preview), bo kod logowania przychodzi
+e-mailem. Wejdź na **https://test.jazdy-doszkalajace.pages.dev/konto**, podaj
+swój e-mail, wpisz kod, uzupełnij dane. W menu pojawi się „Moje konto”.
+W panelu: zakładka **Kursanci**.
+
+Na lajtelka.pl konta są wyłączone, dopóki nie zdecydujesz — włącza je zmienna
+`KONTA_WLACZONE=tak` (Production) i zrobię to ja po Twoim „OK”.
