@@ -10,7 +10,7 @@ import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { chwilaPL, minutyPL } from '../lib/czas.js';
-import { momentPrzypomnienia, nalezne, wyslijPrzypomnienia, wyzerujPrzypomnienia, MAKS_PROB } from '../lib/przypomnienia.js';
+import { momentPrzypomnienia, nalezne, wyslijPrzypomnienia, MAKS_PROB } from '../lib/przypomnienia.js';
 import { smsPrzypomnienie, mailPrzypomnienie } from '../lib/maile.js';
 import { bezPolskichZnakow } from '../lib/sms.js';
 import { MIEJSCA } from '../lib/miejsca.js';
@@ -110,25 +110,30 @@ test('SMS: dokładna treść (PL i EN)', () => {
   const teraz = T('2026-10-21T10:00:00Z'); // śr 12:00
   assert.equal(
     bezPolskichZnakow(smsPrzypomnienie(jazda(), teraz)),
-    'Przypomnienie: jazda jutro (czw 22.10) 14:00-16:00, Ferio Wawer. Bezplatne odwolanie do sr 14:00. Wez prawo jazdy. Michael, 690 360 164'
+    'Przypomnienie: jazda jutro (czw 22.10) 14:00-16:00, Ferio Wawer. Wez prawo jazdy. LajtELka, tel. 690 360 164'
   );
   assert.equal(
     bezPolskichZnakow(smsPrzypomnienie(jazda({ jezyk: 'en' }), teraz)),
-    'Lesson tomorrow (Thu 22.10) 14:00-16:00, Ferio Wawer. Free cancellation until Wed 14:00. Bring your licence. Michael, +48 690 360 164'
+    'Reminder: lesson tomorrow (Thu 22.10) 14:00-16:00, Ferio Wawer. Bring your licence. LajtELka, +48 690 360 164'
   );
 });
 
-test('SMS: "pojutrze" przy wysyłce wieczorem i "dziś" bez terminu odwołania', () => {
+test('SMS: "pojutrze" przy wysyłce wieczorem i "dziś" przy późnym potwierdzeniu', () => {
   const rano = jazda({ start_min: 420, koniec_min: 540 }); // czw 7:00
   assert.match(smsPrzypomnienie(rano, T('2026-10-20T19:30:00Z')), /^Przypomnienie: jazda pojutrze \(czw 22\.10\) 07:00-09:00/);
   const pozno = smsPrzypomnienie(jazda(), T('2026-10-22T08:00:00Z')); // czw 10:00, jazda 14:00
   assert.match(pozno, /jazda dziś \(czw 22\.10\)/);
-  assert.doesNotMatch(pozno, /odwołanie/);
+});
+
+test('SMS: bez terminu odwołania i bez "Michael" (decyzja właściciela)', () => {
+  const tekst = smsPrzypomnienie(jazda(), T('2026-10-21T10:00:00Z'));
+  assert.doesNotMatch(tekst, /odwoł|Michael/);
+  assert.match(tekst, /LajtELka, tel\. 690 360 164$/);
 });
 
 test('SMS: każde miejsce, długość i język mieści się w 1 SMS-ie (160 znaków GSM)', () => {
   const miejsca = [...MIEJSCA.map((m) => m.id), null];
-  const teraz = T('2026-10-20T08:00:00Z'); // "pojutrze" + termin odwołania — najdłuższy wariant
+  const teraz = T('2026-10-20T08:00:00Z'); // "pojutrze" — najdłuższe słowo
   for (const miejsce of miejsca) {
     for (const jezyk of ['pl', 'en']) {
       for (let dl = 1; dl <= 8; dl++) {
@@ -274,12 +279,24 @@ test('baza: test — SMS tylko na dozwolone numery', async () => {
   assert.deepEqual(wyslane.filter((x) => x.kanal === 'sms').map((x) => x.do), ['48690360164']);
 });
 
-test('baza: zmiana godziny w panelu — nowe przypomnienie', async () => {
+test('baza: jedno przypomnienie na jazdę — także po zmianie godziny w panelu', async () => {
   const db = nowaBaza();
   const id = dodajJazde(db);
   await wyslijPrzypomnienia(db, ENV, 'x', { teraz: MOMENT });
-  await wyzerujPrzypomnienia(db, id);
+  // panel: inna godzina tej samej jazdy, potem sprawdzenie przypomnienia
+  db.sqlite.prepare('UPDATE rezerwacje SET start_min = 900, koniec_min = 1020 WHERE id = ?').run(id);
   const w = await wyslijPrzypomnienia(db, ENV, 'x', { id, teraz: T('2026-10-21T11:00:00Z') });
+  assert.deepEqual([w.maile, w.smsy], [0, 0]);
+  assert.equal(wyslane.length, 2);
+});
+
+test('baza: zmiana godziny na bliżej niż 26 h, gdy przypomnienie jeszcze nie wyszło — idzie od razu', async () => {
+  const db = nowaBaza();
+  const id = dodajJazde(db, { data: '2026-10-23' }); // pt 14:00 — jeszcze daleko
+  await wyslijPrzypomnienia(db, ENV, 'x', { teraz: MOMENT });
+  assert.equal(wyslane.length, 0);
+  db.sqlite.prepare("UPDATE rezerwacje SET data = '2026-10-22' WHERE id = ?").run(id); // przeniesiona na czw
+  const w = await wyslijPrzypomnienia(db, ENV, 'x', { id, teraz: MOMENT });
   assert.deepEqual([w.maile, w.smsy], [1, 1]);
 });
 

@@ -21,7 +21,7 @@ import { MIEJSCA } from '../../../lib/miejsca.js';
 import { wyslijEmail } from '../../../lib/email.js';
 import { mailPotwierdzonaDoKursanta, mailOdrzuconaDoKursanta } from '../../../lib/maile.js';
 import { dataPL, dodajDni } from '../../../lib/czas.js';
-import { wyslijPrzypomnienia, wyzerujPrzypomnienia } from '../../../lib/przypomnienia.js';
+import { wyslijPrzypomnienia } from '../../../lib/przypomnienia.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
 
 const ZAJMUJACE = ['wstepna', 'potwierdzona', 'oczekuje', 'oplacone'];
@@ -130,12 +130,11 @@ export async function onRequestPost({ request, env, waitUntil }) {
         for (const k of ['start', 'dlugosc', 'miejsce', 'doplata_h']) {
           if (dane[k] !== undefined) zmiany[k] = dane[k];
         }
-        const nowa = await edytujZPanelu(db, r.id, zmiany);
-        // Inna godzina albo miejsce — stare przypomnienie jest nieaktualne.
-        if (nowa.start_min !== r.start_min || nowa.koniec_min !== r.koniec_min || nowa.miejsce !== r.miejsce) {
-          await wyzerujPrzypomnienia(db, r.id);
-          sprawdzPrzypomnienie = r.id;
-        }
+        await edytujZPanelu(db, r.id, zmiany);
+        // Jedno przypomnienie na jazdę (decyzja właściciela) — po zmianie
+        // godziny nie wysyłamy nowego. Jeśli jeszcze żadne nie wyszło, a jazda
+        // przesunęła się bliżej niż 26 h, wyjdzie teraz.
+        sprawdzPrzypomnienie = r.id;
         break;
       }
       case 'dodaj': {
