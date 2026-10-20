@@ -196,3 +196,21 @@ test('API: e-mail → kod z maila → zalogowany → odwołanie własnej jazdy',
     globalThis.fetch = staryFetch;
   }
 });
+
+import { listaKont, kontoZHistoria, zablokujKonto } from '../lib/kursanci.js';
+
+test('panel "Kursanci": lista z wyszukiwaniem, historia, blokada wylogowuje', async () => {
+  const db = nowaBaza();
+  const u = await kontoDlaEmaila(db, 'lukasz@example.com', 'pl');
+  await zapiszProfil(db, u, { imie: 'Łukasz Śliwa', telefon: '512 345 678', zgoda_regulamin: true });
+  await kontoDlaEmaila(db, 'ola@example.com', 'pl');
+  assert.equal((await listaKont(db, '')).length, 2);
+  assert.equal((await listaKont(db, 'łuk'))[0].email, 'lukasz@example.com');
+  assert.equal((await listaKont(db, '345678'))[0].email, 'lukasz@example.com');
+  assert.equal((await kontoZHistoria(db, u.id)).rezerwacje.length, 0);
+  const token = await utworzSesje(db, u.id);
+  await zablokujKonto(db, u.id, true);
+  const zap = new Request('https://x.example/api/konto/ja', { headers: { Cookie: '__Host-lajtelka_sesja=' + token } });
+  assert.equal(await kontoZSesji(db, zap), null);
+  await bladKonta(kontoDlaEmaila(db, 'lukasz@example.com', 'pl'), 'ZABLOKOWANE');
+});

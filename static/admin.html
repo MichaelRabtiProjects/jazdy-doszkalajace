@@ -44,6 +44,7 @@
       <button type="button" role="tab" class="admin-zakladka" data-zakladka="rezerwacje" aria-selected="false">
         Rezerwacje <span class="admin-licznik" id="licznik-wstepnych" hidden></span>
       </button>
+      <button type="button" role="tab" class="admin-zakladka" data-zakladka="kursanci" aria-selected="false">Kursanci</button>
       <button type="button" role="tab" class="admin-zakladka" data-zakladka="grafik" aria-selected="false">Grafik</button>
       <button type="button" role="tab" class="admin-zakladka" data-zakladka="ustawienia" aria-selected="false">Ustawienia</button>
     </nav>
@@ -97,6 +98,13 @@
         <summary>Historia i odrzucone</summary>
         <div id="lista-historia" class="admin-lista"></div>
       </details>
+    </div>
+
+    <!-- Kursanci (konta) -->
+    <div class="admin-panel" id="panel-kursanci" role="tabpanel" hidden>
+      <p class="admin-drobne">Kursanci, którzy założyli konto (logowanie kodem z e-maila). Kliknij osobę, żeby zobaczyć jej jazdy.</p>
+      <label>Szukaj <input type="search" id="kursanci-q" placeholder="imię, nazwisko, telefon albo e-mail" autocomplete="off"></label>
+      <div id="kursanci-lista" class="admin-lista"></div>
     </div>
 
     <!-- Grafik -->

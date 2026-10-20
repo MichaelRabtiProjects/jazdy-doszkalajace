@@ -14,7 +14,7 @@
   var TYDZIEN = [1, 2, 3, 4, 5, 6, 0];
   var ZAJMUJACE = ['wstepna', 'potwierdzona', 'oczekuje', 'oplacone'];
 
-  var ZAKLADKI = ['kalendarz', 'rezerwacje', 'grafik', 'ustawienia'];
+  var ZAKLADKI = ['kalendarz', 'rezerwacje', 'kursanci', 'grafik', 'ustawienia'];
 
   var stan = { dzisiaj: null, rezerwacje: [], miejsca: [], grafik: null, zakladka: 'kalendarz' };
 
@@ -212,6 +212,7 @@
     if (history.replaceState) history.replaceState(null, '', '#' + nazwa);
     if ((nazwa === 'grafik' || nazwa === 'ustawienia') && !stan.grafik) wczytajGrafik();
     if (nazwa === 'kalendarz' && window.Kalendarz) window.Kalendarz.pokaz();
+    if (nazwa === 'kursanci') wczytajKursantow();
   }
 
   document.querySelectorAll('.admin-zakladka').forEach(function (b) {
@@ -500,6 +501,96 @@
   $('pokaz-dodaj').addEventListener('click', function () {
     if (window.Kalendarz) window.Kalendarz.nowa({});
   });
+
+  /* ------------------------------------------------------------------ */
+  /* Kursanci (konta)                                                    */
+  /* ------------------------------------------------------------------ */
+
+  var STATUSY = { wstepna: 'wstępna', potwierdzona: 'potwierdzona', oplacone: 'potwierdzona', anulowane: 'odwołana', odrzucona: 'odrzucona', wygasle: 'wygasła', oczekuje: 'oczekuje' };
+  var zegarKursantow = null;
+
+  function wczytajKursantow() {
+    var q = $('kursanci-q').value.trim();
+    return api('/api/admin/kursanci?konta=1&q=' + encodeURIComponent(q))
+      .then(function (d) {
+        $('kursanci-lista').innerHTML = d.konta.length
+          ? d.konta.map(function (k) {
+              return (
+                '<details class="admin-karta kursant" data-id="' + k.id + '"><summary>' +
+                '<strong>' + esc(k.imie || '(bez imienia)') + '</strong> · ' + esc(k.telefon || '—') + ' · ' + esc(k.email) +
+                ' · jazd: ' + k.jazd + (k.ostatnia ? ' · ostatnio ' + esc(krotko(k.ostatnia)) : '') +
+                (k.zablokowany ? ' <span class="znaczek znaczek-blad">zablokowany</span>' : '') +
+                '</summary><div class="kursant-tresc"><p class="admin-pusto">…</p></div></details>'
+              );
+            }).join('')
+          : '<p class="admin-pusto">Brak kont' + (q ? ' pasujących do wyszukiwania' : '') + '.</p>';
+      })
+      .catch(function (err) {
+        komunikat(err.message, true);
+      });
+  }
+
+  $('kursanci-q').addEventListener('input', function () {
+    clearTimeout(zegarKursantow);
+    zegarKursantow = setTimeout(wczytajKursantow, 250);
+  });
+
+  // Historia jazd wczytuje się dopiero po rozwinięciu osoby
+  $('kursanci-lista').addEventListener('toggle', function (e) {
+    var el = e.target;
+    if (!el.classList || !el.classList.contains('kursant') || !el.open) return;
+    api('/api/admin/kursanci?id=' + el.dataset.id)
+      .then(function (d) {
+        var k = d.konto;
+        el.querySelector('.kursant-tresc').innerHTML =
+          '<p class="admin-drobne">Konto od ' + esc(kiedy(k.utworzono_o)) +
+          (k.ostatnio_o ? ' · ostatnie logowanie ' + esc(kiedy(k.ostatnio_o)) : '') + ' · język: ' + esc(k.jezyk) + '</p>' +
+          (k.rezerwacje.length
+            ? '<ul class="kursant-jazdy">' + k.rezerwacje.map(function (r) {
+                return '<li><strong>' + esc(krotko(r.data)) + '</strong> ' + zakres(r) + ' · ' + esc(nazwaMiejsca(r.miejsce)) +
+                  ' · ' + esc(STATUSY[r.status] || r.status) + (r.zadatek_otrzymany_o ? ' · zadatek ✓' : '') +
+                  (r.imie !== k.imie ? ' · jedzie: ' + esc(r.imie) : '') +
+                  ' <span class="znaczek">' + esc(r.kod_rezerwacji) + '</span></li>';
+              }).join('') + '</ul>'
+            : '<p class="admin-pusto">Brak jazd na tym koncie.</p>') +
+          '<div class="rez-akcje">' +
+          '<button type="button" class="btn btn-secondary" data-kursant="zablokuj" data-zablokowany="' + (k.zablokowany ? '0' : '1') + '">' +
+          (k.zablokowany ? 'Odblokuj konto' : 'Zablokuj konto') + '</button>' +
+          '<button type="button" class="btn btn-secondary btn-ostrozny" data-kursant="usun">Usuń konto</button>' +
+          '</div>';
+      })
+      .catch(function (err) {
+        komunikat(err.message, true);
+      });
+  }, true);
+
+  $('kursanci-lista').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-kursant]');
+    if (!b) return;
+    var el = b.closest('.kursant');
+    var id = Number(el.dataset.id);
+    var nazwa = el.querySelector('summary strong').textContent;
+    var dane;
+    if (b.dataset.kursant === 'usun') {
+      if (!window.confirm('Usunąć konto: ' + nazwa + '?\n\nKursant straci dostęp do konta. Jego rezerwacje zostaną (rozliczenia) i znikną po 180 dniach. Tego nie da się cofnąć.')) return;
+      dane = { akcja: 'usun', id: id };
+    } else {
+      var zablokuj = b.dataset.zablokowany === '1';
+      if (zablokuj && !window.confirm('Zablokować konto: ' + nazwa + '?\n\nKursant zostanie wylogowany i nie zaloguje się, dopóki nie odblokujesz.')) return;
+      dane = { akcja: 'zablokuj', id: id, zablokowany: zablokuj };
+    }
+    b.disabled = true;
+    api('/api/admin/kursanci', dane)
+      .then(function () {
+        komunikat(dane.akcja === 'usun' ? 'Konto usunięte.' : dane.zablokowany ? 'Konto zablokowane.' : 'Konto odblokowane.');
+        return wczytajKursantow();
+      })
+      .catch(function (err) {
+        b.disabled = false;
+        komunikat(err.message, true);
+      });
+  });
+
 
   /* ------------------------------------------------------------------ */
   /* Grafik                                                              */

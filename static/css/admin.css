@@ -1532,3 +1532,27 @@ body.kal-przeciaganie * {
     transition: none;
   }
 }
+
+/* ---- Kursanci ----------------------------------------------------------- */
+#kursanci-q {
+  margin-bottom: 12px;
+}
+
+.kursant summary {
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.kursant-tresc {
+  margin-top: 10px;
+}
+
+.kursant-jazdy {
+  margin: 8px 0;
+  padding-left: 18px;
+  font-size: 0.92rem;
+}
+
+.kursant-jazdy li {
+  margin: 4px 0;
+}
