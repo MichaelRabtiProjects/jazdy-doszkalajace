@@ -123,6 +123,17 @@ tu nową wersję z datą.
    usunięcie starych wdrożeń (stare adresy `<hash>.jazdy-doszkalajace.pages.dev`
    pozwalałyby rezerwować bez logowania).
 
+## Stan 21.10.2026 — na lajtelka.pl
+- Wypuszczone: kalendarz w panelu, konta (domyślnie włączone; awaryjnie
+  `KONTA_WLACZONE=nie`), nowy grafik, przypomnienia e-mail ok. 26 h przed
+  (Worker wdrożony, `SMS_WLACZONE: "nie"`), regulamin/polityka od 21.10.2026.
+- Migracje 0009–0011 wgrane na bazę produkcyjną **pojedynczo**
+  (`d1 execute --file`). Uwaga: tabela `d1_migrations` na produkcji nie zna
+  migracji 0001–0011 (wgrywane ręcznie) — **nie używać `d1 migrations apply`
+  na produkcji**, kolejne migracje też wgrywać przez `d1 execute --file`.
+- Czeka: SMS (nadawca LajtELka + kredyty w Brevo), domena lajtelka.pl w Brevo
+  (`EMAIL_NADAWCA`), usunięcie starych wdrożeń `<hash>.jazdy-doszkalajace.pages.dev`.
+
 ## Do pamiętania
 - Worker przypomnień (`przypomnienia/`) **nie** publikuje się z gita — po
   każdej zmianie w `lib/` trzeba go wdrożyć ręcznie (`npx wrangler deploy`).
