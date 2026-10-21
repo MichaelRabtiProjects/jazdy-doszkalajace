@@ -250,6 +250,12 @@ window.I18N = {
   'gal-21-alt': 'Instructor and student in the car during a refresher driving lesson in Warsaw',
   'gal-22': 'A happy student after a refresher driving lesson in Warsaw',
   'gal-22-alt': 'Student giving a thumbs up after a refresher driving lesson in Warsaw',
+  'gal-23': 'Instructor with a student before a refresher driving lesson in Warsaw Wawer',
+  'gal-23-alt': 'Refresher driving instructor with a student in the car in Warsaw Wawer',
+  'gal-24': 'A smiling student after a refresher driving lesson in Warsaw',
+  'gal-24-alt': 'Smiling student with the instructor after a refresher driving lesson in Warsaw',
+  'gal-25': 'A happy student after a category B driving lesson in Warsaw',
+  'gal-25-alt': 'Student giving a thumbs up after a category B driving lesson with the instructor in Warsaw',
 
   /* --- Kontakt / Contact --- */
   'kontakt-kicker': 'Book a lesson',
@@ -310,12 +316,12 @@ window.I18N = {
     'Park, Zerzeń / DoubleTree by Hilton and Ferio Wawer. There are also additional spots in other ' +
     'parts of Warsaw (listed in the <a href="#kontakt">Contact</a> section), and another place can ' +
     'be agreed by phone.</p>',
-  'faq-5-q': 'What car do we drive?',
-  'faq-5-a': '<p>A Hyundai i20.</p>',
+  'faq-pokaz-wiecej': 'Show more questions',
+  'faq-pokaz-mniej': 'Show fewer questions',
   'faq-6-q': 'How do I book a lesson?',
   'faq-6-a':
-    '<p>In the <a href="#grafik">schedule</a>, pick a meeting point, the lesson length and a time, then send a short ' +
-    'form — the slot is provisionally booked, and I confirm it by e-mail, text or phone. You can ' +
+    '<p>In the <a href="#grafik">schedule</a>, sign in with a code from your e-mail (no password), pick a meeting point, ' +
+    'the lesson length and a time, then send your booking — the slot is provisionally booked, and I confirm it by e-mail, text or phone. You can ' +
     'also just call: <a href="tel:+48690360164">+48 690 360 164</a>.</p>',
   'faq-7-q': 'How does payment work?',
   'faq-7-a':

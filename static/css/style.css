@@ -683,6 +683,52 @@ a.lang-btn {
   font-weight: 600;
 }
 
+/* Dalsze pytania schowane pod przyciskiem — lista nie zajmuje pół strony. */
+.faq-wiecej:not([hidden]) {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-pokaz {
+  justify-self: center;
+  margin-top: 6px;
+  padding: 10px 22px;
+  border: 1px solid var(--amber);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.faq-pokaz:hover {
+  background: var(--amber);
+}
+
+.faq-pokaz:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.faq-pokaz::after {
+  content: " ▾";
+}
+
+.faq-pokaz[aria-expanded="true"]::after {
+  content: " ▴";
+}
+
+.faq-pokaz-mniej,
+.faq-pokaz[aria-expanded="true"] .faq-pokaz-wiecej {
+  display: none;
+}
+
+.faq-pokaz[aria-expanded="true"] .faq-pokaz-mniej {
+  display: inline;
+}
+
 /* Plakietki tras egzaminacyjnych — ciemne tło z pomarańczową obwódką,
    spójne z paletą strony (wcześniej zieleń wypadała z motywu). */
 .route-badges {

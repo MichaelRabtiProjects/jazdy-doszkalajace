@@ -7,6 +7,27 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ======================================================================
+     FAQ — dalsze pytania pod przyciskiem „Pokaż więcej pytań”
+     ====================================================================== */
+  var faqPokaz = document.querySelector('.faq-pokaz');
+  var faqWiecej = document.getElementById('faq-wiecej');
+
+  if (faqPokaz && faqWiecej) {
+    var pokazFaq = function (otwarte) {
+      if (otwarte) faqWiecej.removeAttribute('hidden');
+      else faqWiecej.setAttribute('hidden', 'until-found');
+      faqPokaz.setAttribute('aria-expanded', String(otwarte));
+    };
+    faqPokaz.addEventListener('click', function () {
+      pokazFaq(faqPokaz.getAttribute('aria-expanded') !== 'true');
+    });
+    // Wyszukiwanie w przeglądarce (Ctrl+F) samo odsłania schowane pytania.
+    faqWiecej.addEventListener('beforematch', function () {
+      pokazFaq(true);
+    });
+  }
+
+  /* ======================================================================
      Menu mobilne
      ====================================================================== */
   var navToggle = document.getElementById('nav-toggle');
