@@ -317,7 +317,7 @@ window.I18N = {
     'parts of Warsaw (listed in the <a href="#kontakt">Contact</a> section), and another place can ' +
     'be agreed by phone.</p>',
   'faq-pokaz-wiecej': 'Show more questions',
-  'faq-pokaz-mniej': 'Show fewer questions',
+  'faq-pokaz-mniej': 'Show less',
   'faq-6-q': 'How do I book a lesson?',
   'faq-6-a':
     '<p>In the <a href="#grafik">schedule</a>, sign in with a code from your e-mail (no password), pick a meeting point, ' +

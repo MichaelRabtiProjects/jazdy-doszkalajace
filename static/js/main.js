@@ -14,16 +14,21 @@
 
   if (faqPokaz && faqWiecej) {
     var pokazFaq = function (otwarte) {
-      if (otwarte) faqWiecej.removeAttribute('hidden');
-      else faqWiecej.setAttribute('hidden', 'until-found');
+      faqWiecej.classList.toggle('is-otwarte', otwarte);
       faqPokaz.setAttribute('aria-expanded', String(otwarte));
+      // Przygaszone pytania nie łapią fokusu z klawiatury.
+      faqWiecej.querySelectorAll('summary').forEach(function (s) {
+        if (otwarte) s.removeAttribute('tabindex');
+        else s.setAttribute('tabindex', '-1');
+      });
     };
+    pokazFaq(false);
     faqPokaz.addEventListener('click', function () {
       pokazFaq(faqPokaz.getAttribute('aria-expanded') !== 'true');
     });
-    // Wyszukiwanie w przeglądarce (Ctrl+F) samo odsłania schowane pytania.
-    faqWiecej.addEventListener('beforematch', function () {
-      pokazFaq(true);
+    // Klik w przygaszone pytanie też rozwija listę.
+    faqWiecej.addEventListener('click', function () {
+      if (!faqWiecej.classList.contains('is-otwarte')) pokazFaq(true);
     });
   }
 

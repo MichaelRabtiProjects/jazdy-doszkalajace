@@ -686,33 +686,35 @@ a.lang-btn {
   font-weight: 600;
 }
 
-/* Dalsze pytania schowane pod przyciskiem — lista nie zajmuje pół strony. */
-.faq-wiecej:not([hidden]) {
+/* Dalsze pytania pod przyciskiem — lista nie zajmuje pół strony. Pierwsze
+   z nich widać przygaszone, żeby było jasne, że pytań jest więcej.
+   Bez JavaScriptu (brak klasy js-reveal) widać wszystkie, bez przycisku. */
+.faq-wiecej {
   display: grid;
   gap: 10px;
 }
 
-.faq-pokaz {
-  justify-self: center;
-  margin-top: 6px;
-  padding: 10px 22px;
-  border: 1px solid var(--amber);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  font-weight: 600;
+.js-reveal .faq-wiecej:not(.is-otwarte) {
+  max-height: 60px;
+  overflow: hidden;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+  filter: blur(0.7px);
 }
 
-.faq-pokaz:hover {
-  background: var(--amber);
+.js-reveal .faq-wiecej:not(.is-otwarte) .faq-item {
+  pointer-events: none;
 }
 
-.faq-pokaz:focus-visible {
-  outline: 2px solid var(--amber);
-  outline-offset: 2px;
+.faq-pokaz {
+  display: none;
+}
+
+.js-reveal .faq-pokaz {
+  display: inline-block;
+  justify-self: center;
+  margin-top: 4px;
 }
 
 .faq-pokaz::after {
