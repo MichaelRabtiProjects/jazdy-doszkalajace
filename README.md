@@ -15,7 +15,7 @@ Jak to działa:
    miejsce spotkania → długość jazdy → termin (kalendarz miesiąca + godziny
    dnia) → podsumowanie z formularzem (imię i nazwisko, telefon, e-mail).
    Termin od razu pokazuje się jako „wstępna rezerwacja”. Gdy konta kursantów
-   są włączone (gałęzie ≠ master albo `KONTA_WLACZONE=tak`), grafik
+   są włączone (domyślnie wszędzie; awaryjnie wyłącza je `KONTA_WLACZONE=nie`), grafik
    i rezerwacja wymagają zalogowania (API odpowiada 401), a gość widzi
    rozmyty grafik z zaproszeniem do logowania.
 2. Instruktor dostaje e-mail, kursant — e-mail „rezerwacja wstępna przyjęta”

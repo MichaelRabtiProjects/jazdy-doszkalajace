@@ -36,12 +36,13 @@ test('e-mail: małe litery, bez spacji, odrzuca błędne', () => {
   assert.equal(normalizujEmail(''), null);
 });
 
-test('konta: włączone na teście, wyłączone na produkcji (chyba że KONTA_WLACZONE=tak)', () => {
+test('konta: włączone wszędzie, chyba że KONTA_WLACZONE=nie', () => {
   assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'test' }), true);
-  assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'master' }), false);
-  assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'master', KONTA_WLACZONE: 'tak' }), true);
+  assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'master' }), true);
+  assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'master', KONTA_WLACZONE: 'nie' }), false);
   assert.equal(kontaWlaczone({ CF_PAGES_BRANCH: 'test', KONTA_WLACZONE: 'nie' }), false);
-  assert.equal(kontaWlaczone({}), false);
+  assert.equal(kontaWlaczone({}), true);
+  assert.equal(kontaWlaczone(null), false);
 });
 
 test('logowanie kodem: poprawny kod raz, dawne rezerwacje podpięte po e-mailu', async () => {
@@ -143,10 +144,10 @@ test('usunięcie konta: znika konto i sesje, rezerwacje zostają u instruktora',
 /* Cała ścieżka przez API (jak w przeglądarce)                         */
 /* ------------------------------------------------------------------ */
 
-test('API: strażnik — konta wyłączone na produkcji, POST tylko jako JSON z tej samej strony', async () => {
+test('API: strażnik — konta wyłączone (KONTA_WLACZONE=nie) → 404, POST tylko jako JSON z tej samej strony', async () => {
   const dalej = async () => new Response('ok');
   const zap = (o) => new Request('https://lajtelka.pl/api/konto/kod', { method: 'POST', ...o });
-  assert.equal((await straznik({ request: zap({}), env: { CF_PAGES_BRANCH: 'master' }, next: dalej })).status, 404);
+  assert.equal((await straznik({ request: zap({}), env: { CF_PAGES_BRANCH: 'master', KONTA_WLACZONE: 'nie' }, next: dalej })).status, 404);
   const env = { CF_PAGES_BRANCH: 'test' };
   assert.equal((await straznik({ request: zap({ headers: { 'Content-Type': 'text/plain' } }), env, next: dalej })).status, 415);
   assert.equal((await straznik({ request: zap({ headers: { 'Content-Type': 'application/json', 'Sec-Fetch-Site': 'cross-site' } }), env, next: dalej })).status, 403);

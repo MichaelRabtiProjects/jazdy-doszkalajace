@@ -82,9 +82,9 @@ test('bramka: na teście bez sesji grafik i rezerwacja odpowiadają 401 BRAK_SES
   assert.equal(db.sqlite.prepare('SELECT COUNT(*) AS n FROM rezerwacje').get().n, 0);
 });
 
-test('bramka: na produkcji (master) grafik i rezerwacja bez logowania, jak dotąd', async () => {
+test('bramka: z KONTA_WLACZONE=nie grafik i rezerwacja bez logowania, jak dawniej', async () => {
   const db = nowaBaza();
-  const env = { DB: db, BREVO_API_KEY: 'k', CF_PAGES_BRANCH: 'master' };
+  const env = { DB: db, BREVO_API_KEY: 'k', CF_PAGES_BRANCH: 'master', KONTA_WLACZONE: 'nie' };
   const data = otwartyDzien(db);
 
   const g = await getDostepnosc(env);
