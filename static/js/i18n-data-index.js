@@ -160,7 +160,7 @@ window.I18N = {
   'egz-dostep': 'Full access comes with refresher driving lessons at LajtELka, or costs <strong>100 zł a month</strong>.',
   'egz-btn-1': 'Try it for free',
   'egz-btn-2': 'Create an account',
-  'egz-zrzut-alt': 'Studying for the category B theory test in LajtELka Egzaminy — a question with a photo and YES/NO answers on a phone',
+  'egz-zrzut-alt': 'The LajtELka Egzaminy service on a phone — category B driving theory, step by step',
 
   /* --- Cennik / Pricing --- */
   'cennik-kicker': 'Clear pricing',
