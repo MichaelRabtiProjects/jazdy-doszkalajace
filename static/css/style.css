@@ -3327,8 +3327,12 @@ body.lightbox-open {
     border-bottom: 3px solid var(--amber);
   }
 
+  /* Wysokość ekranu pod nagłówkiem zamiast stałych 480 px (9 pozycji się nie
+     mieściło i „Zaloguj się” było ucięte); na niskim ekranie menu się przewija. */
   .main-nav.is-open {
-    max-height: 480px;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
   }
 
   .main-nav a {
