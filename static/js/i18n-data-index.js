@@ -19,7 +19,7 @@ window.I18N = {
   'nav-oferta': 'Offer',
   'nav-grafik': 'Schedule',
   'nav-omnie': 'About me',
-  'nav-egzaminy': 'Theory test',
+  'nav-egzaminy': 'Theory',
   'nav-cennik': 'Pricing',
   'nav-opinie': 'Reviews',
   'nav-galeria': 'Gallery',
@@ -153,11 +153,11 @@ window.I18N = {
   'egz-lead':
     'Get ready for the category B driving theory test. Category B questions from the official question bank ' +
     'of the Polish Ministry of Infrastructure, with photos and videos. The service is currently in Polish.',
-  'egz-p1': 'Study questions from the official Ministry of Infrastructure (MI) question bank, with photos and videos',
-  'egz-p2': 'A practice test that follows the rules set out in the MI regulation',
+  'egz-p1': 'Study questions from the official Ministry of Infrastructure question bank, with photos and videos',
+  'egz-p2': 'A practice test that follows the rules set out in the Minister of Infrastructure’s regulation',
   'egz-p3': '<strong>My results</strong>: your progress and reviews of the questions you find difficult',
   'egz-p4': 'Some questions for free, no account needed',
-  'egz-dostep': 'Full access comes with refresher driving lessons at LajtELka, or costs <strong>100 zł a month</strong>.',
+  'egz-dostep': 'Full access is included with refresher driving lessons at LajtELka.',
   'egz-btn-1': 'Try it for free',
   'egz-btn-2': 'Create an account',
   'egz-zrzut-alt': 'The LajtELka Egzaminy service on a phone — category B driving theory, step by step',
