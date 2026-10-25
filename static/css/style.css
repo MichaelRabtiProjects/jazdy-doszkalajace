@@ -3790,8 +3790,9 @@ body.lightbox-open {
     margin-bottom: 4px;
   }
 
+  /* Odstęp pod plakietką — inaczej dotyka przycisków filtrów pod spodem */
   .rating-badge {
-    margin-top: 0;
+    margin: -2px 0 14px;
   }
 }
 
