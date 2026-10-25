@@ -3548,20 +3548,21 @@ body.lightbox-open {
 }
 
 /* ==========================================================================
-   LajtELka Egzaminy — tekst i zrzut ekranu serwisu z teorią obok siebie,
-   na telefonie jedno pod drugim.
+   LajtELka Egzaminy — zrzut serwisu nie wydłuża sekcji: na telefonie leży
+   przygaszony za tekstem przy prawej krawędzi, na szerokim ekranie stoi
+   obok tekstu, lekko przechylony.
    ========================================================================== */
-.egz-uklad {
-  display: grid;
-  gap: 28px;
-  align-items: center;
+#egzaminy {
+  overflow: hidden;
 }
 
-@media (min-width: 900px) {
-  .egz-uklad {
-    grid-template-columns: minmax(0, 1fr) 220px;
-    gap: 56px;
-  }
+.egz-uklad {
+  position: relative;
+}
+
+.egz-tekst {
+  position: relative;
+  z-index: 1;
 }
 
 .egz-tekst .section-lead {
@@ -3607,21 +3608,36 @@ body.lightbox-open {
   margin-bottom: 0;
 }
 
-/* Zrzut w ramce telefonu */
+/* Zrzut w ramce telefonu — na telefonie tylko tło, nie przeszkadza w czytaniu */
 .egz-zrzut {
-  width: 100%;
-  max-width: 180px;
-  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  right: -70px;
+  z-index: 0;
+  width: 210px;
+  margin: 0;
   overflow: hidden;
   border: 6px solid var(--asphalt);
   border-radius: 24px;
   background: var(--asphalt);
-  box-shadow: 0 18px 40px rgba(27, 29, 33, 0.22);
+  opacity: 0.13;
+  filter: grayscale(1);
+  transform: translateY(-50%) rotate(8deg);
+  pointer-events: none;
 }
 
 @media (min-width: 900px) {
+  .egz-tekst {
+    max-width: calc(100% - 300px);
+  }
+
   .egz-zrzut {
-    max-width: 220px;
+    right: 16px;
+    width: 230px;
+    opacity: 1;
+    filter: none;
+    transform: translateY(-50%) rotate(4deg);
+    box-shadow: 0 18px 40px rgba(27, 29, 33, 0.22);
   }
 }
 
