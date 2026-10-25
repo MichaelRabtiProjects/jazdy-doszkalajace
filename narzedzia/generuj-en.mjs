@@ -22,7 +22,9 @@ import vm from 'node:vm';
 const KATALOG = fileURLToPath(new URL('../static/', import.meta.url));
 const ADRES = 'https://lajtelka.pl';
 
-let html = readFileSync(KATALOG + 'index.html', 'utf8');
+// Git na Windowsie może wypakować plik z końcami linii CRLF — wzorce niżej
+// zakładają samo \n.
+let html = readFileSync(KATALOG + 'index.html', 'utf8').replace(/\r\n/g, '\n');
 
 const piaskownica = { window: {} };
 vm.runInNewContext(readFileSync(KATALOG + 'js/i18n-data-index.js', 'utf8'), piaskownica);
