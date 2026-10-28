@@ -187,6 +187,7 @@ window.I18N = {
   'opinie-title': 'Reviews',
   'opinie-lead': 'Real student reviews — straight from the Google listing and messages after passed exams.',
   'opinie-w-google': 'on Google',
+  'opinie-wystaw': 'Leave a Google review',
   'opinie-filtruj-label': 'Filter reviews',
   'opinie-filtr-wszystkie': 'All',
   'opinie-jezyk-nota':

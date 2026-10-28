@@ -2315,6 +2315,20 @@ button.gk-godzina:hover {
   color: #d8d8d4;
 }
 
+/* Plakietka "4,9 w Google" i pod nią link do wystawienia opinii (formularz
+   opinii z wizytówki, otwiera się w nowej karcie). */
+.reviews-ocena {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.btn-wystaw-opinie {
+  padding: 9px 18px;
+  font-size: 0.95rem;
+}
+
 .reviews-filters {
   display: flex;
   flex-wrap: wrap;
@@ -3790,9 +3804,15 @@ body.lightbox-open {
     margin-bottom: 4px;
   }
 
-  /* Odstęp pod plakietką — inaczej dotyka przycisków filtrów pod spodem */
+  /* Odstęp pod plakietką i przyciskiem opinii — inaczej dotykają przycisków
+     filtrów pod spodem */
   .rating-badge {
-    margin: -2px 0 14px;
+    margin: -2px 0 0;
+  }
+
+  .reviews-ocena {
+    align-items: flex-start;
+    margin-bottom: 14px;
   }
 }
 
