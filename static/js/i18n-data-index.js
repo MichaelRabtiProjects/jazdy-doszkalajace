@@ -273,6 +273,14 @@ window.I18N = {
   'gal-24-alt': 'Smiling student with the instructor after a refresher driving lesson in Warsaw',
   'gal-25': 'A happy student after a category B driving lesson in Warsaw',
   'gal-25-alt': 'Student giving a thumbs up after a category B driving lesson with the instructor in Warsaw',
+  'gal-26': 'A student with the instructor before a category B driving lesson in Wawer',
+  'gal-26-alt': 'Student with the instructor in the car before a category B refresher driving lesson in Warsaw Wawer',
+  'gal-27': 'A happy student during a refresher driving lesson in Warsaw',
+  'gal-27-alt': 'Smiling student at the wheel with the instructor during a refresher driving lesson in Warsaw',
+  'gal-28': 'A student after a driving lesson with the instructor in Warsaw Wawer',
+  'gal-28-alt': 'Smiling student and the instructor after a refresher driving lesson in Warsaw Wawer',
+  'gal-29': 'Refresher driving lessons for women with the instructor in Wawer',
+  'gal-29-alt': 'Student with the instructor in the learner car — refresher driving lessons for women in Wawer',
 
   /* --- Kontakt / Contact --- */
   'kontakt-kicker': 'Book a lesson',
