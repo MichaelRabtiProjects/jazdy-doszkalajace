@@ -287,22 +287,23 @@ window.I18N = {
   'kontakt-obszar-tekst': 'Wawer, Mokotów and the surrounding Warsaw area — other districts by arrangement.',
 
   /* --- Miejsca spotkań / Meeting points --- */
-  'miejsca-1-tytul':
-    'Main meeting points — free of charge, any day of the week. Another spot can be arranged by phone.',
-  'miejsca-1-label': 'Main meeting points',
-  'miejsca-2-tytul':
-    'Additional spots — I sometimes come here at no extra cost if I happen to be in the area, but this ' +
-    'needs to be agreed in advance — WhatsApp, SMS or a phone call.',
-  'miejsca-2-label': 'Additional spots',
-  'miejsca-2-nota':
-    'A lesson at one of these points costs 175 zł/h (a 15 zł/h travel surcharge) — unless I’m already nearby that day because I have a lesson at the same or a neighbouring point; then it’s 160 zł/h. The schedule shows the exact price next to every time.',
-  'slajder-prev': 'Previous spots',
-  'slajder-next': 'Next spots',
-  'miejsce-status-bezplatne': 'Free of charge',
-  'miejsce-status-warunkowe': 'To be agreed by phone',
-  'miejsce-otworz': 'Open in Google Maps',
-  'mapy-atrybucja': 'Satellite imagery:',
-  'mapy-osm': 'Esri, Maxar, Earthstar Geographics',
+  'miejsca-tytul':
+    'Meeting points — tap a pin to see the price and how to get there by public transport. Another spot can be arranged by phone.',
+  'mapa-alt': 'Satellite map of southern Warsaw with 9 meeting points for refresher driving lessons — from Łopuszańska to Wawer',
+  'mk-9': 'National Library',
+  'mapa-przybliz': 'Zoom in on Google Maps',
+  'mapa-nota': 'the Google map loads only after you click “Zoom in” — Google may then set its own cookies.',
+  'mapy-atrybucja': 'Satellite imagery and labels:',
+  'mapa-legenda-1': '160 zł/h — free travel',
+  'mapa-legenda-2': '175 zł/h — to be agreed',
+  'mapa-dymek-zamknij': 'Close',
+  'miejsce-gratis': 'Free travel · 160 zł/h',
+  'miejsce-gratis-opis': 'Any day of the week.',
+  'miejsce-uzg': 'To be agreed · 175 zł/h',
+  'miejsce-uzg-opis':
+    'A 15 zł/h travel surcharge, unless I’m already nearby that day — then 160 zł/h. Please arrange it in advance: WhatsApp, SMS or a phone call.',
+  'miejsce-trasa': 'Public transport',
+  'miejsce-mapa': 'Map',
   // Nazwy własne zostają jak są; tłumaczymy tylko opisowe dopiski
   'm1-1': 'Będzińska / K&amp;M Park',
   'm1-2': 'Zerzeń / DoubleTree by Hilton',

@@ -2777,7 +2777,11 @@ body.lightbox-open {
 }
 
 /* ==========================================================================
-   Miejsca spotkań — dwa slajdery z jednego komponentu (js/slajder.js)
+   Miejsca spotkań — jedna duża mapa z pinezkami i dymkami.
+   Zdjęcie satelitarne: narzedzia/generuj-mape-miejsc.py (dwa kadry:
+   16:9 desktop i 1:1 telefon; skrypt podaje pozycje pinezek).
+   Klik w pinezkę = dymek (js/main.js). Interaktywna mapa Google (iframe)
+   dochodzi dopiero po kliknięciu „Przybliż na mapie Google”.
    ========================================================================== */
 .miejsca {
   margin-top: 44px;
@@ -2790,183 +2794,372 @@ body.lightbox-open {
   margin: 0 0 18px;
 }
 
-.miejsca-nota {
-  max-width: 760px;
-  margin: 16px 0 0;
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-}
-
-.slajder {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.slajder-tor {
-  --karta-gap: 16px;
-  display: flex;
-  gap: var(--karta-gap);
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  /* Pasek przewijania ukryty — na telefonie przewija się palcem, na
-     desktopie strzałkami. Zapas u dołu, żeby cień kart nie był ucięty. */
-  scrollbar-width: none;
-  padding: 4px 2px 10px;
-}
-
-.slajder-tor::-webkit-scrollbar {
-  display: none;
-}
-
-.slajder-tor:focus-visible {
-  outline: 2px solid var(--amber-dark);
-  outline-offset: 4px;
-  border-radius: 6px;
-}
-
-.slajder-strzalka {
-  flex: 0 0 auto;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--white);
-  color: var(--asphalt);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s ease;
-}
-
-.slajder-strzalka:hover:not(:disabled) {
-  border-color: var(--amber-dark);
-}
-
-.slajder-strzalka:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-/* Szerokość karty = ile kart widać naraz. Desktop: 3. */
-.miejsce-karta {
-  flex: 0 0 calc((100% - 2 * var(--karta-gap)) / 3);
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--amber);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-/* Miejsca warunkowe — ciemniejszy, spokojniejszy akcent niż bezpłatne,
-   żeby na pierwszy rzut oka było widać, że to druga kategoria. */
-.miejsce-warunkowe {
-  border-top-color: var(--asphalt-2);
-}
-
-.miejsce-nazwa {
-  font-size: 1.15rem;
-  line-height: 1.25;
-  margin: 0;
-}
-
-.miejsce-status {
-  margin: 0;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #1f7a45;
-}
-
-.miejsce-warunkowe .miejsce-status {
-  color: var(--amber-dark);
-}
-
-/* Mapka: statyczny obrazek z własnego serwera (narzedzia/generuj-mapki.mjs),
-   wycentrowany co do piksela na współrzędnych miejsca — dlatego pinezka
-   może stać po prostu na środku. Cała mapka jest linkiem do Map Google. */
-.miejsce-mapa {
+.mapa-miejsc {
   position: relative;
-  display: block;
-  /* Mapki zawsze na dole karty, równo w jednej linii, nawet gdy nazwy
-     mają różną długość */
-  margin-top: auto;
-  border-radius: 6px;
+  /* Podpisy pinezek zależą od szerokości SAMEJ mapy, nie ekranu */
+  container-type: inline-size;
+  aspect-ratio: 1770 / 996;
+  border-radius: 14px;
   overflow: hidden;
-  border: 1px solid var(--line);
-  aspect-ratio: 16 / 9;
-  background: var(--paper-alt);
+  background: #39433a;
+  box-shadow: 0 1px 2px rgba(27, 29, 33, 0.05), 0 4px 14px rgba(27, 29, 33, 0.08);
 }
 
-.miejsce-mapa img {
+.mapa-miejsc picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mapa-podglad {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  /* Lekko przyciemnione, żeby pinezki i podpisy odcinały się od zieleni */
+  filter: brightness(0.86);
 }
 
-.miejsce-mapa:hover img {
-  transform: scale(1.04);
+/* Pinezka: <a> ma zerowy rozmiar i stoi DOKŁADNIE w punkcie (--x, --y);
+   grot ikony i podpis są rozmieszczone względem tego punktu. */
+.mapa-pin {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 0;
+  height: 0;
+  z-index: 1;
+  color: var(--ink);
+  text-decoration: none;
 }
 
-.miejsce-mapa:focus-visible {
+.mapa-pin:hover,
+.mapa-pin:focus-visible,
+.mapa-pin.is-aktywny {
+  z-index: 2;
+  outline: none;
+}
+
+.mapa-pin-ikona {
+  position: absolute;
+  left: -14px;
+  top: -36px;
+  width: 28px;
+  height: 36px;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 36'%3E%3Cpath d='M14 34.5s-11.5-12-11.5-20.5a11.5 11.5 0 0 1 23 0c0 8.5-11.5 20.5-11.5 20.5z' fill='%23179a4f' stroke='%23fff' stroke-width='2.6'/%3E%3Ccircle cx='14' cy='14' r='4.5' fill='%23fff'/%3E%3C/svg%3E");
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.15s ease;
+  transform-origin: 50% 100%;
+  cursor: pointer;
+}
+
+.mapa-pin-uzgodnienie .mapa-pin-ikona {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 36'%3E%3Cpath d='M14 34.5s-11.5-12-11.5-20.5a11.5 11.5 0 0 1 23 0c0 8.5-11.5 20.5-11.5 20.5z' fill='%23f5a300' stroke='%23fff' stroke-width='2.6'/%3E%3Ccircle cx='14' cy='14' r='4.5' fill='%231b1d21'/%3E%3C/svg%3E");
+}
+
+.mapa-pin:hover .mapa-pin-ikona,
+.mapa-pin:focus-visible .mapa-pin-ikona,
+.mapa-pin.is-aktywny .mapa-pin-ikona {
+  transform: scale(1.25);
+}
+
+/* Podpis: nazwa + cena, domyślnie na prawo od główki pinezki */
+.mapa-pin-etykieta {
+  position: absolute;
+  left: 17px;
+  top: -34px;
+  white-space: nowrap;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mapa-pin-etykieta b {
+  margin-left: 3px;
+  color: #1f7a45;
+}
+
+.mapa-pin-uzgodnienie .mapa-pin-etykieta b {
+  color: #9a5c00;
+}
+
+.etykieta-lewo .mapa-pin-etykieta {
+  left: auto;
+  right: 17px;
+}
+
+/* Pod pinezką, wyrównany do prawej / lewej — gdy z boku brakuje miejsca */
+.etykieta-dol-lewo .mapa-pin-etykieta {
+  left: auto;
+  right: -20px;
+  top: 5px;
+}
+
+.etykieta-dol-prawo .mapa-pin-etykieta {
+  left: -20px;
+  top: 5px;
+}
+
+.mapa-pin:hover .mapa-pin-etykieta,
+.mapa-pin:focus-visible .mapa-pin-etykieta,
+.mapa-pin.is-aktywny .mapa-pin-etykieta {
+  background: var(--asphalt);
+  color: var(--white);
+}
+
+.mapa-pin:hover .mapa-pin-etykieta b,
+.mapa-pin:focus-visible .mapa-pin-etykieta b,
+.mapa-pin.is-aktywny .mapa-pin-etykieta b {
+  color: var(--amber);
+}
+
+.mapa-pin:focus-visible .mapa-pin-etykieta {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---- Dymek z opisem miejsca (pozycję ustawia js/main.js) ------------- */
+.mapa-dymek {
+  position: absolute;
+  z-index: 5;
+  width: min(290px, calc(100% - 16px));
+  padding: 12px 16px 14px;
+  background: var(--white);
+  border-top: 4px solid #179a4f;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.38);
+}
+
+.mapa-dymek-uzgodnienie {
+  border-top-color: var(--amber);
+}
+
+.mapa-dymek:focus {
+  outline: none;
+}
+
+.mapa-dymek-zamknij {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mapa-dymek-zamknij:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.mapa-dymek-zamknij:focus-visible {
+  outline: 2px solid var(--amber-dark);
+}
+
+.mapa-dymek-cena {
+  margin: 0 30px 2px 0;
+  color: #1f7a45;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mapa-dymek-uzgodnienie .mapa-dymek-cena {
+  color: #9a5c00;
+}
+
+.mapa-dymek-tytul {
+  margin: 0 24px 4px 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.mapa-dymek-opis {
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.mapa-dymek-linki {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mapa-dymek-trasa,
+.mapa-dymek-mapa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.mapa-dymek-trasa {
+  background: var(--asphalt);
+  color: var(--white);
+}
+
+.mapa-dymek-trasa svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.mapa-dymek-trasa:hover {
+  color: var(--amber);
+}
+
+.mapa-dymek-mapa {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.mapa-dymek-mapa:hover {
+  border-color: var(--amber-dark);
+}
+
+.mapa-dymek-trasa:focus-visible,
+.mapa-dymek-mapa:focus-visible {
   outline: 2px solid var(--amber-dark);
   outline-offset: 2px;
 }
 
-/* Czubek pinezki dokładnie w środku mapki */
-.miejsce-pin {
+/* ---- Przycisk „Przybliż na mapie Google” ------------------------------ */
+.mapa-przybliz {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 30px;
-  height: 30px;
-  /* Grot pinezki (nie środek obrazka SVG) ma stać dokładnie na współrzędnych —
-     stąd -100% w pionie: SVG ma teraz kwadratowy viewBox 24×24, a sam
-     kształt pinezki jest w nim przesunięty tak, żeby grot wypadał
-     dokładnie na dolnej krawędzi. Cień "naziemny" jest już częścią SVG,
-     więc tu zostaje tylko lekki cień samej bryłki, nie podwójny efekt. */
-  transform: translate(-50%, -100%);
-  filter: drop-shadow(0 1px 1px rgba(27, 29, 33, 0.25));
-  pointer-events: none;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--amber);
+  color: var(--asphalt);
+  font: 700 0.95rem/1.2 var(--font-body);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: background 0.15s ease;
 }
 
-.miejsce-pin svg {
+.mapa-przybliz svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.mapa-przybliz:hover {
+  background: #ffb81f;
+}
+
+.mapa-przybliz:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* Po kliknięciu: iframe z mapą Google przykrywa podgląd */
+.mapa-miejsc iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
   width: 100%;
   height: 100%;
-  display: block;
+  border: 0;
 }
 
-.miejsce-mapa-chip {
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: rgba(27, 29, 33, 0.82);
-  color: var(--white);
-  font-size: 0.75rem;
+.mapa-miejsc.is-google .mapa-przybliz {
+  display: none;
+}
+
+/* Węższa mapa: podpisy nachodziłyby na siebie — zostają same pinezki
+   (nazwa, cena i dojazd są w dymku po kliknięciu). */
+@container (max-width: 859px) {
+  .mapa-pin-etykieta {
+    display: none;
+  }
+}
+
+@container (max-width: 599px) {
+  .mapa-dymek {
+    width: calc(100% - 16px);
+    padding: 10px 14px 12px;
+  }
+
+  .mapa-pin-ikona {
+    left: -12px;
+    top: -31px;
+    width: 24px;
+    height: 31px;
+  }
+
+  .mapa-przybliz {
+    right: 8px;
+    bottom: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .mapa-przybliz svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* ---- Legenda kolorów i podpis licencji pod mapą ----------------------- */
+.mapa-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 20px;
+  margin: 10px 0 0;
+  font-size: 0.85rem;
   font-weight: 600;
-  line-height: 1.3;
 }
 
-.miejsce-mapa:hover .miejsce-mapa-chip {
-  background: var(--asphalt);
-  color: var(--amber);
+.mapa-legenda-kropka {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #179a4f;
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 3px rgba(27, 29, 33, 0.25);
 }
 
-/* Podpis wymagany przez licencję OpenStreetMap */
+.mapa-legenda-poz {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mapa-legenda-kropka-uzg {
+  background: var(--amber);
+}
+
+/* Podpis wymagany przez licencję Esri */
 .miejsca-atrybucja {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   font-size: 0.75rem;
   color: var(--ink-soft);
 }
@@ -2975,22 +3168,33 @@ body.lightbox-open {
   color: inherit;
 }
 
-/* Średni ekran: 2 karty naraz */
-@media (max-width: 900px) {
-  .miejsce-karta {
-    flex-basis: calc((100% - var(--karta-gap)) / 2);
+/* Telefon: kadr 1:1 (ciaśniejszy — pinezki dalej od siebie) od krawędzi
+   do krawędzi ekranu. Pozycje pinezek z drugiego kadru: --xm/--ym. */
+@media (max-width: 760px) {
+  .mapa-miejsc {
+    aspect-ratio: 1 / 1;
+    margin: 0 -20px;
+    border-radius: 0;
+  }
+
+  .mapa-pin {
+    left: var(--xm);
+    top: var(--ym);
+  }
+
+  .mapa-miejsc.is-google {
+    aspect-ratio: auto;
+    height: 460px;
   }
 }
 
-/* Telefon: jedna karta + wystający brzeg następnej (sygnał, że można
-   przesunąć palcem); strzałki znikają — gest wystarczy. */
-@media (max-width: 560px) {
-  .miejsce-karta {
-    flex-basis: 84%;
-  }
-
-  .slajder-strzalka {
-    display: none !important;
+@media (prefers-reduced-motion: reduce) {
+  .mapa-pin-ikona,
+  .mapa-pin-etykieta,
+  .mapa-przybliz,
+  .mapa-dymek-trasa,
+  .mapa-dymek-mapa {
+    transition: none;
   }
 }
 
@@ -3416,8 +3620,7 @@ body.lightbox-open {
 .offer-card,
 .price-card,
 .review-item,
-.gallery-item,
-.miejsce-karta {
+.gallery-item {
   border-radius: var(--radius-karta);
   box-shadow: var(--cien-karta);
   transition: transform var(--ruch), box-shadow var(--ruch), border-color var(--ruch);
@@ -3433,20 +3636,10 @@ body.lightbox-open {
   }
 
   .review-item:hover,
-  .gallery-item:hover,
-  .miejsce-karta:hover {
+  .gallery-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--cien-karta-hover);
   }
-}
-
-/* Karty w slajderze mają cień niżej — zapas, żeby nie był ucięty. */
-.slajder-tor {
-  padding: 6px 4px 18px;
-}
-
-.miejsce-mapa {
-  border-radius: 10px;
 }
 
 /* ---- Przyciski: płynna zmiana koloru i cienia ------------------------- */
@@ -3477,7 +3670,6 @@ body.lightbox-open {
   .price-card,
   .review-item,
   .gallery-item,
-  .miejsce-karta,
   .btn {
     transition: none;
   }
@@ -3486,7 +3678,6 @@ body.lightbox-open {
   .price-card:hover,
   .review-item:hover,
   .gallery-item:hover,
-  .miejsce-karta:hover,
   .btn-primary:hover {
     transform: none;
   }

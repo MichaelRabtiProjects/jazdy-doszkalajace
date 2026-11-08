@@ -354,4 +354,123 @@
       }
     });
   }
+
+  /* ======================================================================
+     Mapa miejsc spotkań — interaktywna mapa Google (Moje Mapy) dopiero
+     po kliknięciu „Przybliż na mapie Google”. Do tego czasu strona pokazuje
+     zdjęcie satelitarne z własnego serwera i nie łączy się z Mapami Google.
+     ====================================================================== */
+  var mapaMiejsc = document.querySelector('[data-mapa-miejsc]');
+  var mapaSrc = mapaMiejsc && mapaMiejsc.getAttribute('data-mapa-src');
+  var mapaPrzybliz = mapaMiejsc && mapaMiejsc.querySelector('[data-mapa-przybliz]');
+
+  if (mapaSrc && mapaPrzybliz) {
+    mapaPrzybliz.hidden = false;
+    var mapaNota = document.querySelector('[data-mapa-nota]');
+    if (mapaNota) mapaNota.hidden = false;
+
+    mapaPrzybliz.addEventListener('click', function () {
+      var ramka = document.createElement('iframe');
+      ramka.src = mapaSrc;
+      ramka.title = document.documentElement.lang === 'en'
+        ? 'Google map — LajtELka meeting points'
+        : 'Mapa Google — miejsca spotkań LajtELka';
+      ramka.setAttribute('allowfullscreen', '');
+      ramka.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      mapaMiejsc.classList.add('is-google');
+      mapaMiejsc.appendChild(ramka);
+      ramka.focus();
+    });
+  }
+
+  /* Dymki pinezek: klik w pinezkę pokazuje NA MAPIE dymek z nazwą, ceną,
+     opisem i linkami (dojazd komunikacją / Mapy Google). Bez JS pinezka
+     zostaje zwykłym linkiem do trasy komunikacją miejską. */
+  var otwartyDymek = null;
+  var otwartyPin = null;
+
+  var zamknijDymek = function (oddajFokus) {
+    if (!otwartyDymek) return;
+    otwartyDymek.hidden = true;
+    otwartyPin.classList.remove('is-aktywny');
+    otwartyPin.setAttribute('aria-expanded', 'false');
+    if (oddajFokus) otwartyPin.focus();
+    otwartyDymek = null;
+    otwartyPin = null;
+  };
+
+  // Dymek nad pinezką; gdy się nie mieści — pod, z prawej albo z lewej.
+  var ustawDymek = function () {
+    if (!otwartyDymek) return;
+    var W = mapaMiejsc.clientWidth;
+    var H = mapaMiejsc.clientHeight;
+    var x = otwartyPin.offsetLeft; // pinezka ma zerowy rozmiar: to jest punkt na mapie
+    var y = otwartyPin.offsetTop;
+    var w = otwartyDymek.offsetWidth;
+    var h = otwartyDymek.offsetHeight;
+    var M = 8; // odstęp od krawędzi mapy
+    var srodekX = Math.min(Math.max(x - w / 2, M), W - w - M);
+    var srodekY = Math.min(Math.max(y - 18 - h / 2, M), H - h - M);
+    var opcje = [
+      [srodekX, y - 44 - h], // nad pinezką (ikona ma ok. 36 px wysokości)
+      [srodekX, y + 10], // pod
+      [x + 22, srodekY], // z prawej
+      [x - 22 - w, srodekY], // z lewej
+    ];
+    // Wąska mapa (telefon): dymek to karta na całą szerokość — na dole mapy,
+    // a gdy zasłoniłaby pinezkę, na górze.
+    if (W < 600) {
+      opcje = [[M, H - M - h], [M, M]];
+    }
+    var zaslania = function (o) {
+      return o[0] < x + 16 && o[0] + w > x - 16 && o[1] < y + 4 && o[1] + h > y - 40;
+    };
+    var wybor = opcje.filter(function (o) {
+      return o[0] >= M && o[0] + w <= W - M && o[1] >= M && o[1] + h <= H - M && !zaslania(o);
+    })[0] || opcje.filter(function (o) {
+      return o[1] >= M && o[1] + h <= H - M;
+    })[0] || [srodekX, Math.max(M, Math.min(y + 10, H - h - M))];
+    otwartyDymek.style.left = wybor[0] + 'px';
+    otwartyDymek.style.top = wybor[1] + 'px';
+  };
+
+  if (mapaMiejsc) {
+    mapaMiejsc.querySelectorAll('[data-dymek]').forEach(function (pin) {
+      var dymek = document.getElementById(pin.getAttribute('data-dymek'));
+      if (!dymek) return;
+      pin.setAttribute('aria-expanded', 'false');
+      pin.addEventListener('click', function (event) {
+        event.preventDefault();
+        var tenSam = otwartyPin === pin;
+        zamknijDymek(false);
+        if (tenSam) return;
+        otwartyPin = pin;
+        otwartyDymek = dymek;
+        pin.classList.add('is-aktywny');
+        pin.setAttribute('aria-expanded', 'true');
+        dymek.hidden = false;
+        ustawDymek();
+        dymek.focus({ preventScroll: true });
+      });
+    });
+
+    mapaMiejsc.querySelectorAll('[data-dymek-zamknij]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        zamknijDymek(true);
+      });
+    });
+
+    // Klik w samą mapę (poza pinezką i dymkiem) zamyka dymek
+    mapaMiejsc.addEventListener('click', function (event) {
+      if (!otwartyDymek) return;
+      if (event.target.closest('[data-dymek]') || event.target.closest('.mapa-dymek')) return;
+      zamknijDymek(false);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && otwartyDymek) zamknijDymek(true);
+    });
+
+    window.addEventListener('resize', ustawDymek);
+  }
 })();

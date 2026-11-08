@@ -20,7 +20,7 @@ window.I18N = {
     '</ul>',
   'p5': '<strong>How long it’s kept:</strong> booking data — 180 days from the lesson date; your account — until you delete it (My account → Delete account) or ask me to; sign-in codes — 10 minutes; sign-in session — 90 days from last use; abuse-protection records (a hash of your IP address) — up to 24&nbsp;hours.',
   'p6': '<strong>Your rights:</strong> access, rectification, erasure, restriction of processing, data portability, objection, and the right to lodge a complaint with the Polish data protection authority, UODO (<span class="dokument-mono">uodo.gov.pl</span>). Contact: <strong>MichaelRabti@gmail.com</strong> or 690&nbsp;360&nbsp;164.',
-  'p7': '<strong>Cookies:</strong> no trackers or analytics. Only strictly necessary cookies are used: your account session (after signing in, up to 90 days) and the admin panel session (instructor only) — they don’t require consent.',
+  'p7': '<strong>Cookies:</strong> no trackers or analytics. Only strictly necessary cookies are used: your account session (after signing in, up to 90 days) and the admin panel session (instructor only) — they don’t require consent. The Google map of meeting points (Contact section) loads only after you click “Zoom in on Google Maps” — Google (Google Ireland Ltd.) then receives your IP address and may set its own cookies under its <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">privacy policy</a>.',
 
   'powrot': '← Back to the homepage',
 
