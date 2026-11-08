@@ -2837,7 +2837,7 @@ body.lightbox-open {
 /* ==========================================================================
    Miejsca spotkań — jedna duża mapa z pinezkami i dymkami.
    Zdjęcie satelitarne: narzedzia/generuj-mape-miejsc.py (dwa kadry:
-   16:9 desktop i 1:1 telefon; skrypt podaje pozycje pinezek).
+   16:9 desktop i 1:1,15 telefon; skrypt podaje pozycje pinezek).
    Klik w pinezkę = dymek (js/main.js). Interaktywna mapa Google (iframe)
    dochodzi dopiero po kliknięciu „Przybliż na mapie Google”.
    ========================================================================== */
@@ -3045,11 +3045,29 @@ body.lightbox-open {
   line-height: 1.25;
 }
 
-.mapa-dymek-opis {
-  margin: 0 0 10px;
+/* Co jest obok + dojazd komunikacją (przystanki, metro/SKM) */
+.mapa-dymek-okolica {
+  margin: 0 0 6px;
   color: var(--ink-soft);
   font-size: 0.8rem;
   line-height: 1.4;
+}
+
+.mapa-dymek-dojazd {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.mapa-dymek-dojazd svg {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+  fill: var(--ink-soft);
 }
 
 .mapa-dymek-linki {
@@ -3169,10 +3187,18 @@ body.lightbox-open {
     margin-bottom: 2px;
   }
 
-  .mapa-dymek-opis {
-    margin-bottom: 8px;
+  .mapa-dymek-okolica,
+  .mapa-dymek-dojazd {
     font-size: 0.76rem;
     line-height: 1.35;
+  }
+
+  .mapa-dymek-okolica {
+    margin-bottom: 4px;
+  }
+
+  .mapa-dymek-dojazd {
+    margin-bottom: 8px;
   }
 
   .mapa-pin-ikona {
@@ -3210,6 +3236,7 @@ body.lightbox-open {
   flex: 0 0 auto;
   width: 13px;
   height: 13px;
+  margin-top: 0.2em;
   border-radius: 50%;
   background: #179a4f;
   box-shadow: 0 0 0 2px var(--white), 0 0 0 3px rgba(27, 29, 33, 0.25);
@@ -3217,7 +3244,7 @@ body.lightbox-open {
 
 .mapa-legenda-poz {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
@@ -3236,11 +3263,11 @@ body.lightbox-open {
   color: inherit;
 }
 
-/* Telefon: kadr 1:1 (ciaśniejszy — pinezki dalej od siebie) od krawędzi
+/* Telefon: kadr 1:1,15 (ciaśniejszy — pinezki dalej od siebie) od krawędzi
    do krawędzi ekranu. Pozycje pinezek z drugiego kadru: --xm/--ym. */
 @media (max-width: 760px) {
   .mapa-miejsc {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1100 / 1265;
     margin: 0 -20px;
     border-radius: 0;
   }

@@ -1,0 +1,82 @@
+[
+ {
+  "tytul": "Będzińska / K&M Park",
+  "okolica": "Centrum K&M Park Radość, ul. Patriotów 193",
+  "dojazd": "SKM/KM Warszawa Radość — 1 min pieszo · autobusy: PKP Radość, Tomaszowska — 1–2 min",
+  "lat": 52.18149683839272,
+  "lng": 21.190286834215232,
+  "typ": "gratis"
+ },
+ {
+  "tytul": "Zerzeń / DoubleTree by Hilton",
+  "okolica": "Parking hotelu DoubleTree by Hilton, ul. Skalnicowa 21",
+  "dojazd": "Autobusy: Ośrodek Szkoleniowy — 2 min pieszo",
+  "lat": 52.185637864370754,
+  "lng": 21.142463683183966,
+  "typ": "gratis"
+ },
+ {
+  "tytul": "Ferio Wawer",
+  "okolica": "Galeria Ferio (Kaufland, Carrefour), ul. Szpotańskiego 4",
+  "dojazd": "SKM/KM Warszawa Międzylesie — 5 min pieszo · autobusy: PKP Międzylesie — 2 min",
+  "lat": 52.20643961512142,
+  "lng": 21.16806456403142,
+  "typ": "gratis"
+ },
+ {
+  "tytul": "Bricoman Warszawa Wilanów",
+  "okolica": "Parking marketu budowlanego Bricoman",
+  "dojazd": "Autobusy: Powsinek — 2 min pieszo",
+  "lat": 52.15297185146504,
+  "lng": 21.093351761354374,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "Auchan Puławska 427",
+  "okolica": "Centrum Handlowe Ursynów (Auchan, OBI)",
+  "dojazd": "Autobusy: CH Ursynów — 2 min pieszo · metro Imielin ok. 1,7 km",
+  "lat": 52.141826658341266,
+  "lng": 21.02387121970856,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "Stacja Shell koło Westfield Mokotów",
+  "okolica": "Obok Westfield Mokotów (dawniej Galeria Mokotów)",
+  "dojazd": "Autobusy: Instytut Fizyki — 1 min pieszo · metro Wilanowska ok. 1,2 km",
+  "lat": 52.17777456510009,
+  "lng": 21.006682123623765,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "Parking Cynamonowa 4",
+  "okolica": "Obok salonu Mazda Bołtowicz",
+  "dojazd": "Autobusy: Cynamonowa — tuż obok · metro Imielin — 10 min pieszo",
+  "lat": 52.1489457,
+  "lng": 21.055811,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "Centrum Łopuszańska 22",
+  "okolica": "Parking galerii handlowej, ul. Łopuszańska 22 (Włochy)",
+  "dojazd": "Autobusy: Orzechowa — 2 min · tramwaje: Hynka — 8 min pieszo",
+  "lat": 52.19257846238642,
+  "lng": 20.95163280598338,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "al. Niepodległości 213",
+  "okolica": "Parking pod Biblioteką Narodową",
+  "dojazd": "Tramwaje i autobusy: Biblioteka Narodowa — 2 min · metro Pole Mokotowskie — 10 min pieszo",
+  "lat": 52.21431110095896,
+  "lng": 21.005091288313384,
+  "typ": "uzgodnienie"
+ },
+ {
+  "tytul": "Hangar 646",
+  "okolica": "Przy parku trampolin Hangar 646, Wał Miedzeszyński 646 (Gocław)",
+  "dojazd": "Autobusy: Algierska — 2 min, Os. Jantar — 3 min pieszo",
+  "lat": 52.2220217,
+  "lng": 21.0827851,
+  "typ": "uzgodnienie"
+ }
+]

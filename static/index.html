@@ -90,7 +90,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/style.css?v=20261108c">
+<link rel="stylesheet" href="css/style.css?v=20261108d">
 
 <!--
   Pierwsze zdjęcie w przesuwającym się tle hero jest pierwszą rzeczą, jaką
@@ -906,9 +906,10 @@
 
       <!-- Miejsca spotkań: jedna duża mapa. Zdjęcie satelitarne leży na naszym
            serwerze (narzedzia/generuj-mape-miejsc.py — dwa kadry: 16:9 desktop
-           i 4:3 telefon; skrypt podaje pozycje pinezek --x/--y i --xm/--ym).
-           Klik w pinezkę otwiera dymek z opisem i linkami (js/main.js); bez JS
-           pinezka jest zwykłym linkiem do trasy komunikacją miejską.
+           i 1:1,15 telefon; skrypt podaje pozycje pinezek --x/--y i --xm/--ym).
+           Klik w pinezkę otwiera dymek z opisem okolicy, dojazdem i linkami
+           (js/main.js); bez JS pinezka jest zwykłym linkiem do trasy komunikacją.
+           Przystanki i stacje: OpenStreetMap (listopad 2026), tylko działające.
            Interaktywna mapa Google (Moje Mapy, iframe) ładuje się DOPIERO po
            kliknięciu „Przybliż na mapie Google” — osadzona od razu ładowałaby
            cookies Google u każdego odwiedzającego, a Polityka prywatności
@@ -917,46 +918,46 @@
         <h3 class="miejsca-tytul" data-i18n="miejsca-tytul">Miejsca spotkań — kliknij pinezkę, żeby zobaczyć cenę i dojazd komunikacją miejską. Inne miejsce można dogadać telefonicznie.</h3>
         <div class="mapa-miejsc" data-mapa-miejsc data-mapa-src="">
           <picture>
-            <source media="(max-width: 760px)" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp" width="1100" height="825">
+            <source media="(max-width: 760px)" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp" width="1100" height="1265">
             <img class="mapa-podglad" src="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp 900w, img/mapy/mapa-miejsc-spotkan-warszawa.webp 1770w" sizes="(max-width: 1100px) calc(100vw - 40px), 1060px" width="1770" height="996" alt="Mapa satelitarna południowej Warszawy z 10 miejscami spotkań na jazdy doszkalające — od Łopuszańskiej po Wawer" loading="lazy" data-i18n-attr="alt:mapa-alt">
           </picture>
-          <a class="mapa-pin mapa-pin-gratis etykieta-dol-lewo" style="--x:89.29%;--y:50.41%;--xm:96.05%;--ym:50.27%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.181497,21.190287&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-1" aria-controls="dymek-1">
+          <a class="mapa-pin mapa-pin-gratis etykieta-dol-lewo" style="--x:89.29%;--y:50.41%;--xm:96.05%;--ym:50.24%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.181497,21.190287&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-1" aria-controls="dymek-1">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Będzińska / K&amp;M Park</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:73.55%;--y:46.46%;--xm:77.6%;--ym:47.67%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185638,21.142464&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-2" aria-controls="dymek-2">
+          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:73.55%;--y:46.46%;--xm:77.6%;--ym:47.97%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185638,21.142464&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-2" aria-controls="dymek-2">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Zerzeń / DoubleTree</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:81.97%;--y:26.62%;--xm:87.48%;--ym:34.58%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.206440,21.168065&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-3" aria-controls="dymek-3">
+          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:81.97%;--y:26.62%;--xm:87.48%;--ym:36.58%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.206440,21.168065&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-3" aria-controls="dymek-3">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Ferio Wawer</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:57.38%;--y:77.62%;--xm:58.65%;--ym:68.22%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.152972,21.093352&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-4" aria-controls="dymek-4">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:57.38%;--y:77.62%;--xm:58.65%;--ym:65.84%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.152972,21.093352&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-4" aria-controls="dymek-4">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Bricoman Wilanów</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-lewo" style="--x:34.52%;--y:88.24%;--xm:31.85%;--ym:75.22%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141827,21.023871&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-5" aria-controls="dymek-5">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-lewo" style="--x:34.52%;--y:88.24%;--xm:31.85%;--ym:71.94%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141827,21.023871&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-5" aria-controls="dymek-5">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Auchan Puławska 427</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.86%;--y:53.97%;--xm:25.22%;--ym:52.62%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.177775,21.006682&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-6" aria-controls="dymek-6">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.86%;--y:53.97%;--xm:25.22%;--ym:52.28%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.177775,21.006682&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-6" aria-controls="dymek-6">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
-            <span class="mapa-pin-etykieta"><span>Shell, Galeria Mokotów</span> <b>175 zł/h</b></span>
+            <span class="mapa-pin-etykieta"><span>Shell, Westfield Mokotów</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-dol-prawo" style="--x:45.03%;--y:81.45%;--xm:44.17%;--ym:70.75%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.148946,21.055811&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-7" aria-controls="dymek-7">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-dol-prawo" style="--x:45.03%;--y:81.45%;--xm:44.17%;--ym:68.05%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.148946,21.055811&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-7" aria-controls="dymek-7">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Cynamonowa 4</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:10.74%;--y:39.84%;--xm:3.98%;--ym:43.3%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.192578,20.951633&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-8" aria-controls="dymek-8">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:10.74%;--y:39.84%;--xm:3.98%;--ym:44.17%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.192578,20.951633&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-8" aria-controls="dymek-8">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
-            <span class="mapa-pin-etykieta"><span>Łopuszańska 22</span> <b>175 zł/h</b></span>
+            <span class="mapa-pin-etykieta"><span>Centrum Łopuszańska 22</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.33%;--y:19.1%;--xm:24.6%;--ym:29.62%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-9" aria-controls="dymek-9">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.33%;--y:19.1%;--xm:24.6%;--ym:32.27%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-9" aria-controls="dymek-9">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span data-i18n="mk-9">Biblioteka Narodowa</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:53.91%;--y:11.74%;--xm:54.58%;--ym:24.76%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.222022,21.082785&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-10" aria-controls="dymek-10">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:53.91%;--y:11.74%;--xm:54.58%;--ym:28.05%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.222022,21.082785&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-10" aria-controls="dymek-10">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Hangar 646</span> <b>175 zł/h</b></span>
           </a>
@@ -964,7 +965,8 @@
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-gratis">Dojazd gratis · 160 zł/h</p>
             <h4 class="mapa-dymek-tytul" id="dymek-1-tytul" data-i18n="m1-1">Będzińska / K&amp;M Park</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-gratis-opis">Niezależnie od dnia tygodnia.</p>
+            <p class="mapa-dymek-okolica" data-i18n="mo-1">Centrum K&amp;M Park Radość, ul. Patriotów 193</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-1">SKM/KM Warszawa Radość — 1 min pieszo · autobusy: PKP Radość, Tomaszowska — 1–2 min</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.181497,21.190287&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.18149683839272,21.190286834215232" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -974,7 +976,8 @@
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-gratis">Dojazd gratis · 160 zł/h</p>
             <h4 class="mapa-dymek-tytul" id="dymek-2-tytul" data-i18n="m1-2">Zerzeń / DoubleTree by Hilton</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-gratis-opis">Niezależnie od dnia tygodnia.</p>
+            <p class="mapa-dymek-okolica" data-i18n="mo-2">Parking hotelu DoubleTree by Hilton, ul. Skalnicowa 21</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-2">Autobusy: Ośrodek Szkoleniowy — 2 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185638,21.142464&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.185637864370754,21.142463683183966" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -984,7 +987,8 @@
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-gratis">Dojazd gratis · 160 zł/h</p>
             <h4 class="mapa-dymek-tytul" id="dymek-3-tytul" data-i18n="m1-3">Ferio Wawer</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-gratis-opis">Niezależnie od dnia tygodnia.</p>
+            <p class="mapa-dymek-okolica" data-i18n="mo-3">Galeria Ferio (Kaufland, Carrefour), ul. Szpotańskiego 4</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-3">SKM/KM Warszawa Międzylesie — 5 min pieszo · autobusy: PKP Międzylesie — 2 min</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.206440,21.168065&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.20643961512142,21.16806456403142" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -994,7 +998,8 @@
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
             <h4 class="mapa-dymek-tytul" id="dymek-4-tytul" data-i18n="m2-1">Bricoman Warszawa Wilanów</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <p class="mapa-dymek-okolica" data-i18n="mo-4">Parking marketu budowlanego Bricoman</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-4">Autobusy: Powsinek — 2 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.152972,21.093352&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.15297185146504,21.093351761354374" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1004,7 +1009,8 @@
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
             <h4 class="mapa-dymek-tytul" id="dymek-5-tytul" data-i18n="m2-2">Auchan Puławska 427</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <p class="mapa-dymek-okolica" data-i18n="mo-5">Centrum Handlowe Ursynów (Auchan, OBI)</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-5">Autobusy: CH Ursynów — 2 min pieszo · metro Imielin ok. 1,7 km</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141827,21.023871&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.141826658341266,21.02387121970856" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1013,8 +1019,9 @@
           <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-6" role="dialog" aria-labelledby="dymek-6-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
-            <h4 class="mapa-dymek-tytul" id="dymek-6-tytul" data-i18n="m2-3">Stacja Shell koło Galerii Mokotów</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-6-tytul" data-i18n="m2-3">Stacja Shell koło Westfield Mokotów</h4>
+            <p class="mapa-dymek-okolica" data-i18n="mo-6">Obok Westfield Mokotów (dawniej Galeria Mokotów)</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-6">Autobusy: Instytut Fizyki — 1 min pieszo · metro Wilanowska ok. 1,2 km</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.177775,21.006682&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.17777456510009,21.006682123623765" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1023,8 +1030,9 @@
           <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-7" role="dialog" aria-labelledby="dymek-7-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
-            <h4 class="mapa-dymek-tytul" id="dymek-7-tytul" data-i18n="m2-4">Parking Cynamonowa 4 (koło dealera Mazdy)</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-7-tytul" data-i18n="m2-4">Parking Cynamonowa 4</h4>
+            <p class="mapa-dymek-okolica" data-i18n="mo-7">Obok salonu Mazda Bołtowicz</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-7">Autobusy: Cynamonowa — tuż obok · metro Imielin — 10 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.148946,21.055811&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.1489457,21.055811" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1033,8 +1041,9 @@
           <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-8" role="dialog" aria-labelledby="dymek-8-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
-            <h4 class="mapa-dymek-tytul" id="dymek-8-tytul" data-i18n="m2-5">Łopuszańska 22</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-8-tytul" data-i18n="m2-5">Centrum Łopuszańska 22</h4>
+            <p class="mapa-dymek-okolica" data-i18n="mo-8">Parking galerii handlowej, ul. Łopuszańska 22 (Włochy)</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-8">Autobusy: Orzechowa — 2 min · tramwaje: Hynka — 8 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.192578,20.951633&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.19257846238642,20.95163280598338" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1043,8 +1052,9 @@
           <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-9" role="dialog" aria-labelledby="dymek-9-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
-            <h4 class="mapa-dymek-tytul" id="dymek-9-tytul" data-i18n="m2-6">al. Niepodległości 213 — parking pod Biblioteką Narodową</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-9-tytul" data-i18n="m2-6">al. Niepodległości 213</h4>
+            <p class="mapa-dymek-okolica" data-i18n="mo-9">Parking pod Biblioteką Narodową</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-9">Tramwaje i autobusy: Biblioteka Narodowa — 2 min · metro Pole Mokotowskie — 10 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.21431110095896,21.005091288313384" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1053,8 +1063,9 @@
           <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-10" role="dialog" aria-labelledby="dymek-10-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Zamknij" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
             <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">Do uzgodnienia · 175 zł/h</p>
-            <h4 class="mapa-dymek-tytul" id="dymek-10-tytul" data-i18n="m2-7">Wał Miedzeszyński 646 (obok Hangar 646)</h4>
-            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">Dopłata 15 zł/h za dojazd, chyba że tego dnia i tak jestem w pobliżu — wtedy 160 zł/h. Trzeba wcześniej dogadać: WhatsApp, SMS lub telefon.</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-10-tytul" data-i18n="m2-7">Hangar 646</h4>
+            <p class="mapa-dymek-okolica" data-i18n="mo-10">Przy parku trampolin Hangar 646, Wał Miedzeszyński 646 (Gocław)</p>
+            <p class="mapa-dymek-dojazd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="md-10">Autobusy: Algierska — 2 min, Os. Jantar — 3 min pieszo</span></p>
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.222022,21.082785&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Dojazd komunikacją</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.2220217,21.0827851" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Mapa</span> ↗</a>
@@ -1062,7 +1073,7 @@
           </div>
           <button type="button" class="mapa-przybliz" data-mapa-przybliz hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg><span data-i18n="mapa-przybliz">Przybliż na mapie Google</span></button>
         </div>
-        <p class="mapa-legenda"><span class="mapa-legenda-poz"><span class="mapa-legenda-kropka" aria-hidden="true"></span><span data-i18n="mapa-legenda-1">160 zł/h — dojazd gratis</span></span><span class="mapa-legenda-poz"><span class="mapa-legenda-kropka mapa-legenda-kropka-uzg" aria-hidden="true"></span><span data-i18n="mapa-legenda-2">175 zł/h — do uzgodnienia</span></span></p>
+        <p class="mapa-legenda"><span class="mapa-legenda-poz"><span class="mapa-legenda-kropka" aria-hidden="true"></span><span data-i18n="mapa-legenda-1">160 zł/h — dojazd gratis, każdego dnia</span></span><span class="mapa-legenda-poz"><span class="mapa-legenda-kropka mapa-legenda-kropka-uzg" aria-hidden="true"></span><span data-i18n="mapa-legenda-2">175 zł/h — do uzgodnienia: WhatsApp, SMS lub telefon (160 zł/h, gdy tego dnia i tak jestem w pobliżu)</span></span></p>
         <p class="miejsca-atrybucja"><span data-i18n="mapy-atrybucja">Zdjęcie satelitarne i opisy:</span> © <a href="https://www.esri.com/en-us/legal/terms/data-attributions" target="_blank" rel="noopener">Esri, Maxar, Earthstar Geographics, HERE, Garmin, OpenStreetMap</a><span data-mapa-nota hidden> · <span data-i18n="mapa-nota">mapa Google ładuje się dopiero po kliknięciu „Przybliż” — wtedy Google może zapisać swoje pliki cookie.</span></span></p>
       </div>
     </div>
@@ -1110,11 +1121,11 @@
   </figure>
 </div>
 
-<script src="js/i18n-data-index.js?v=20261108c"></script>
-<script src="js/i18n.js?v=20261108c"></script>
-<script src="js/main.js?v=20261108c"></script>
-<script src="js/pasek-auto.js?v=20261108c"></script>
-<script src="js/grafik.js?v=20261108c"></script>
-<script src="js/konto-przycisk.js?v=20261108c"></script>
+<script src="js/i18n-data-index.js?v=20261108d"></script>
+<script src="js/i18n.js?v=20261108d"></script>
+<script src="js/main.js?v=20261108d"></script>
+<script src="js/pasek-auto.js?v=20261108d"></script>
+<script src="js/grafik.js?v=20261108d"></script>
+<script src="js/konto-przycisk.js?v=20261108d"></script>
 </body>
 </html>

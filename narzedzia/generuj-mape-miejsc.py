@@ -4,7 +4,7 @@ oraz plik KML do zaimportowania w Moich Mapach Google.
 Co powstaje (dwa kadry tej samej okolicy):
   static/img/mapy/mapa-miejsc-spotkan-warszawa.webp          (16:9, desktop)
   static/img/mapy/mapa-miejsc-spotkan-warszawa-900.webp      (16:9, mniejsza)
-  static/img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp  (1:1, ciaśniej —
+  static/img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp  (1:1,15, ciaśniej —
       na telefonie pinezki są dalej od siebie)
   marka/mapa-miejsc-spotkan.kml                               (do Moich Map Google)
 oraz na wyjściu: pozycje pinezek w % dla obu kadrów (do index.html:
@@ -45,7 +45,7 @@ KAFEL = 256
 # Kadry: (dopisek w nazwie pliku, zapas po bokach skrajnych pinezek w px, proporcje, szerokości plików)
 KADRY = [
     ('', 190, 16 / 9, [None, 900]),       # None = pełna szerokość wycinka
-    ('-telefon', 60, 1, [1100]),          # kwadrat: nad i pod pinezkami jest miejsce na dymek
+    ('-telefon', 60, 1 / 1.15, [1100]),   # trochę wyższy niż szeroki: nad i pod pinezkami mieści się dymek
 ]
 
 # typ: 'gratis' = dojazd bezpłatny (160 zł/h), 'uzgodnienie' = 175 zł/h.
@@ -139,10 +139,17 @@ def main():
         'uzgodnienie': ('ff007cf5', '175 zł/h (dopłata 15 zł/h za dojazd) — do uzgodnienia: WhatsApp, SMS bądź telefon 690 360 164. Gdy tego dnia i tak jestem w pobliżu — 160 zł/h.'),
     }
     cena = {'gratis': '160 zł/h', 'uzgodnienie': '175 zł/h'}
+    # Nazwy, „co jest obok” i przystanki — te same co w dymkach na stronie
+    # (narzedzia/miejsca-opisy.json, w tej samej kolejności co MIEJSCA).
+    with open(os.path.join('narzedzia', 'miejsca-opisy.json'), encoding='utf-8') as f:
+        opisy = json.load(f)
+    assert len(opisy) == len(MIEJSCA), 'miejsca-opisy.json: inna liczba miejsc niż MIEJSCA'
     znaczniki = []
-    for slug, nazwa, lat, lng, typ in MIEJSCA:
+    for (slug, nazwa, lat, lng, typ), o in zip(MIEJSCA, opisy):
+        nazwa = o['tytul']
         trasa = f'https://www.google.com/maps/dir/?api=1&destination={lat:.6f},{lng:.6f}&travelmode=transit'
-        opis = (f'{style[typ][1]}\n\nDojazd komunikacją miejską: {trasa}\n\n'
+        opis = (f'{style[typ][1]}\n\n{o["okolica"]}\n{o["dojazd"]}\n\n'
+                f'Trasa komunikacją miejską: {trasa}\n\n'
                 f'Wolne terminy i rezerwacja: https://lajtelka.pl/#grafik')
         znaczniki.append(
             f'    <Placemark>\n      <name>{escape(nazwa)} · {cena[typ]}</name>\n'
