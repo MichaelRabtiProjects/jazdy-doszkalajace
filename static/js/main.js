@@ -370,8 +370,21 @@
     if (mapaNota) mapaNota.hidden = false;
 
     mapaPrzybliz.addEventListener('click', function () {
+      // Przybliżenie dobrane do szerokości mapy tak, żeby wszystkie pinezki
+      // (Łopuszańska ↔ Będzińska, ok. 16 km) zmieściły się w kadrze, jak na
+      // zdjęciu. Środek kadru (ll=) jest w data-mapa-src.
+      var szerokosc = mapaMiejsc.clientWidth;
+      var zoom = szerokosc >= 800 ? 12 : 11;
+
+      // Telefon: osadzona mapa Google otwiera się z panelem listy, który
+      // zasłania całą mapę — lepiej pełny ekran Moich Map w nowej karcie.
+      if (szerokosc < 700) {
+        window.open(mapaSrc.replace('/embed?', '/viewer?') + '&z=' + zoom, '_blank', 'noopener');
+        return;
+      }
+
       var ramka = document.createElement('iframe');
-      ramka.src = mapaSrc;
+      ramka.src = mapaSrc + '&z=' + zoom;
       ramka.title = document.documentElement.lang === 'en'
         ? 'Google map — LajtELka meeting points'
         : 'Mapa Google — miejsca spotkań LajtELka';
