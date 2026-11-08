@@ -288,7 +288,9 @@ window.I18N = {
 
   /* --- Miejsca spotkań / Meeting points --- */
   'miejsca-tytul':
-    'Meeting points — tap a pin to see the price and how to get there by public transport. Another spot can be arranged by phone.',
+    'Meeting points — tap a pin to see the price and how to get there by public transport.',
+  'miejsca-inne':
+    '<strong>Somewhere else nearby?</strong> A meeting point not on the map can be arranged by phone: <a href="tel:+48690360164">690&nbsp;360&nbsp;164</a>.',
   'mapa-alt': 'Satellite map of southern Warsaw with 10 meeting points for refresher driving lessons — from Łopuszańska to Wawer',
   'mapa-przybliz': 'Zoom in on Google Maps',
   'mapa-nota': 'the Google map loads only after you click “Zoom in” — Google may then set its own cookies.',

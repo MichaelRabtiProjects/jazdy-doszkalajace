@@ -2852,6 +2852,27 @@ body.lightbox-open {
   margin: 0 0 18px;
 }
 
+/* Notka nad mapą: inne miejsce spotkania do ustalenia telefonicznie */
+.miejsca-tytul:has(+ .miejsca-inne) {
+  margin-bottom: 10px;
+}
+
+.miejsca-inne {
+  max-width: 760px;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-left: 4px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  background: rgba(245, 163, 0, 0.12);
+  line-height: 1.5;
+}
+
+.miejsca-inne a {
+  font-weight: 600;
+  white-space: nowrap;
+  color: inherit;
+}
+
 .mapa-miejsc {
   position: relative;
   /* Podpisy pinezek zależą od szerokości SAMEJ mapy, nie ekranu */
