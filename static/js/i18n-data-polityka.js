@@ -15,7 +15,6 @@ window.I18N = {
     '<ul>' +
     '<li>Cloudflare — hosting for the website and the admin panel,</li>' +
     '<li>Brevo (Sendinblue SAS, France) — sending booking confirmation e-mails, and a reminder by e-mail and text message about 26&nbsp;hours before the lesson (to the phone number given when booking),</li>' +
-    '<li>Google Fonts — loading typefaces (your IP address is sent to Google),</li>' +
     '<li>WhatsApp / Meta — only if you choose that contact channel yourself.</li>' +
     '</ul>',
   'p5': '<strong>How long it’s kept:</strong> booking data — 180 days from the lesson date; your account — until you delete it (My account → Delete account) or ask me to; sign-in codes — 10 minutes; sign-in session — 90 days from last use; abuse-protection records (a hash of your IP address) — up to 24&nbsp;hours.',
