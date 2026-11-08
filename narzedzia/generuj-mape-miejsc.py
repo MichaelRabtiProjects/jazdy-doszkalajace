@@ -48,7 +48,8 @@ KADRY = [
     ('-telefon', 60, 1, [1100]),          # kwadrat: nad i pod pinezkami jest miejsce na dymek
 ]
 
-# typ: 'gratis' = dojazd bezpłatny (160 zł/h), 'uzgodnienie' = 175 zł/h
+# typ: 'gratis' = dojazd bezpłatny (160 zł/h), 'uzgodnienie' = 175 zł/h.
+# Te same miejsca (i współrzędne) są w lib/miejsca.js — grafik rezerwacji.
 MIEJSCA = [
     ('bedzinska-km-park', 'Będzińska / K&M Park', 52.18149683839272, 21.190286834215232, 'gratis'),
     ('zerzen-doubletree', 'Zerzeń / DoubleTree by Hilton', 52.185637864370754, 21.142463683183966, 'gratis'),
@@ -59,6 +60,7 @@ MIEJSCA = [
     ('cynamonowa-4', 'Parking Cynamonowa 4 (koło dealera Mazdy)', 52.1489457, 21.055811, 'uzgodnienie'),
     ('lopuszanska-22', 'Łopuszańska 22', 52.19257846238642, 20.95163280598338, 'uzgodnienie'),
     ('niepodleglosci-213', 'al. Niepodległości 213 — parking pod Biblioteką Narodową', 52.21431110095896, 21.005091288313384, 'uzgodnienie'),
+    ('hangar-646', 'Wał Miedzeszyński 646 (obok Hangar 646)', 52.2220217, 21.0827851, 'uzgodnienie'),
 ]
 
 WARSTWY = [

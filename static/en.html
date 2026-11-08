@@ -799,7 +799,7 @@
 
       <!-- Miejsca spotkań: jedna duża mapa. Zdjęcie satelitarne leży na naszym
            serwerze (narzedzia/generuj-mape-miejsc.py — dwa kadry: 16:9 desktop
-           i 1:1 telefon; skrypt podaje pozycje pinezek --x/--y i --xm/--ym).
+           i 4:3 telefon; skrypt podaje pozycje pinezek --x/--y i --xm/--ym).
            Klik w pinezkę otwiera dymek z opisem i linkami (js/main.js); bez JS
            pinezka jest zwykłym linkiem do trasy komunikacją miejską.
            Interaktywna mapa Google (Moje Mapy, iframe) ładuje się DOPIERO po
@@ -810,44 +810,48 @@
         <h3 class="miejsca-tytul" data-i18n="miejsca-tytul">Meeting points — tap a pin to see the price and how to get there by public transport. Another spot can be arranged by phone.</h3>
         <div class="mapa-miejsc" data-mapa-miejsc data-mapa-src="">
           <picture>
-            <source media="(max-width: 760px)" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp" width="1100" height="1100">
-            <img class="mapa-podglad" src="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp 900w, img/mapy/mapa-miejsc-spotkan-warszawa.webp 1770w" sizes="(max-width: 1100px) calc(100vw - 40px), 1060px" width="1770" height="996" alt="Satellite map of southern Warsaw with 9 meeting points for refresher driving lessons — from Łopuszańska to Wawer" loading="lazy" data-i18n-attr="alt:mapa-alt">
+            <source media="(max-width: 760px)" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-telefon.webp" width="1100" height="825">
+            <img class="mapa-podglad" src="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp" srcset="img/mapy/mapa-miejsc-spotkan-warszawa-900.webp 900w, img/mapy/mapa-miejsc-spotkan-warszawa.webp 1770w" sizes="(max-width: 1100px) calc(100vw - 40px), 1060px" width="1770" height="996" alt="Satellite map of southern Warsaw with 10 meeting points for refresher driving lessons — from Łopuszańska to Wawer" loading="lazy" data-i18n-attr="alt:mapa-alt">
           </picture>
-          <a class="mapa-pin mapa-pin-gratis etykieta-dol-lewo" style="--x:89.29%;--y:46.7%;--xm:96.05%;--ym:47.82%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.181497,21.190287&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-1" aria-controls="dymek-1">
+          <a class="mapa-pin mapa-pin-gratis etykieta-dol-lewo" style="--x:89.29%;--y:50.41%;--xm:96.05%;--ym:50.27%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.181497,21.190287&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-1" aria-controls="dymek-1">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Będzińska / K&amp;M Park</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:73.55%;--y:42.75%;--xm:77.6%;--ym:45.22%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185638,21.142464&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-2" aria-controls="dymek-2">
+          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:73.55%;--y:46.46%;--xm:77.6%;--ym:47.67%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.185638,21.142464&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-2" aria-controls="dymek-2">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Zerzeń / DoubleTree</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:81.97%;--y:22.9%;--xm:87.48%;--ym:32.13%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.206440,21.168065&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-3" aria-controls="dymek-3">
+          <a class="mapa-pin mapa-pin-gratis etykieta-lewo" style="--x:81.97%;--y:26.62%;--xm:87.48%;--ym:34.58%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.206440,21.168065&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-3" aria-controls="dymek-3">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Ferio Wawer</span> <b>160 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:57.38%;--y:73.9%;--xm:58.65%;--ym:65.76%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.152972,21.093352&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-4" aria-controls="dymek-4">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:57.38%;--y:77.62%;--xm:58.65%;--ym:68.22%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.152972,21.093352&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-4" aria-controls="dymek-4">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Bricoman Wilanów</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-lewo" style="--x:34.52%;--y:84.52%;--xm:31.85%;--ym:72.77%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141827,21.023871&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-5" aria-controls="dymek-5">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-lewo" style="--x:34.52%;--y:88.24%;--xm:31.85%;--ym:75.22%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.141827,21.023871&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-5" aria-controls="dymek-5">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Auchan Puławska 427</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.86%;--y:50.25%;--xm:25.22%;--ym:50.17%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.177775,21.006682&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-6" aria-controls="dymek-6">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.86%;--y:53.97%;--xm:25.22%;--ym:52.62%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.177775,21.006682&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-6" aria-controls="dymek-6">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Shell, Galeria Mokotów</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-dol-prawo" style="--x:45.03%;--y:77.74%;--xm:44.17%;--ym:68.3%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.148946,21.055811&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-7" aria-controls="dymek-7">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-dol-prawo" style="--x:45.03%;--y:81.45%;--xm:44.17%;--ym:70.75%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.148946,21.055811&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-7" aria-controls="dymek-7">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Cynamonowa 4</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:10.74%;--y:36.13%;--xm:3.98%;--ym:40.85%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.192578,20.951633&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-8" aria-controls="dymek-8">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:10.74%;--y:39.84%;--xm:3.98%;--ym:43.3%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.192578,20.951633&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-8" aria-controls="dymek-8">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span>Łopuszańska 22</span> <b>175 zł/h</b></span>
           </a>
-          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.33%;--y:15.39%;--xm:24.6%;--ym:27.17%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-9" aria-controls="dymek-9">
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:28.33%;--y:19.1%;--xm:24.6%;--ym:29.62%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-9" aria-controls="dymek-9">
             <span class="mapa-pin-ikona" aria-hidden="true"></span>
             <span class="mapa-pin-etykieta"><span data-i18n="mk-9">National Library</span> <b>175 zł/h</b></span>
+          </a>
+          <a class="mapa-pin mapa-pin-uzgodnienie etykieta-prawo" style="--x:53.91%;--y:11.74%;--xm:54.58%;--ym:24.76%" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.222022,21.082785&amp;travelmode=transit" target="_blank" rel="noopener" data-dymek="dymek-10" aria-controls="dymek-10">
+            <span class="mapa-pin-ikona" aria-hidden="true"></span>
+            <span class="mapa-pin-etykieta"><span>Hangar 646</span> <b>175 zł/h</b></span>
           </a>
           <div class="mapa-dymek mapa-dymek-gratis" id="dymek-1" role="dialog" aria-labelledby="dymek-1-tytul" tabindex="-1" hidden>
             <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Close" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
@@ -937,6 +941,16 @@
             <div class="mapa-dymek-linki">
               <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.214311,21.005091&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Public transport</span></a>
               <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.21431110095896,21.005091288313384" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Map</span> ↗</a>
+            </div>
+          </div>
+          <div class="mapa-dymek mapa-dymek-uzgodnienie" id="dymek-10" role="dialog" aria-labelledby="dymek-10-tytul" tabindex="-1" hidden>
+            <button type="button" class="mapa-dymek-zamknij" data-dymek-zamknij aria-label="Close" data-i18n-attr="aria-label:mapa-dymek-zamknij">&times;</button>
+            <p class="mapa-dymek-cena" data-i18n="miejsce-uzg">To be agreed · 175 zł/h</p>
+            <h4 class="mapa-dymek-tytul" id="dymek-10-tytul" data-i18n="m2-7">Wał Miedzeszyński 646 (next to Hangar 646)</h4>
+            <p class="mapa-dymek-opis" data-i18n="miejsce-uzg-opis">A 15 zł/h travel surcharge, unless I’m already nearby that day — then 160 zł/h. Please arrange it in advance: WhatsApp, SMS or a phone call.</p>
+            <div class="mapa-dymek-linki">
+              <a class="mapa-dymek-trasa" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.222022,21.082785&amp;travelmode=transit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg><span data-i18n="miejsce-trasa">Public transport</span></a>
+              <a class="mapa-dymek-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=52.2220217,21.0827851" target="_blank" rel="noopener"><span data-i18n="miejsce-mapa">Map</span> ↗</a>
             </div>
           </div>
           <button type="button" class="mapa-przybliz" data-mapa-przybliz hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg><span data-i18n="mapa-przybliz">Zoom in on Google Maps</span></button>

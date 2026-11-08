@@ -3162,7 +3162,17 @@ body.lightbox-open {
 @container (max-width: 599px) {
   .mapa-dymek {
     width: calc(100% - 16px);
-    padding: 10px 14px 12px;
+    padding: 9px 14px 11px;
+  }
+
+  .mapa-dymek-tytul {
+    margin-bottom: 2px;
+  }
+
+  .mapa-dymek-opis {
+    margin-bottom: 8px;
+    font-size: 0.76rem;
+    line-height: 1.35;
   }
 
   .mapa-pin-ikona {

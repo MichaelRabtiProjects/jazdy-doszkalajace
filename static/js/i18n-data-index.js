@@ -289,7 +289,7 @@ window.I18N = {
   /* --- Miejsca spotkań / Meeting points --- */
   'miejsca-tytul':
     'Meeting points — tap a pin to see the price and how to get there by public transport. Another spot can be arranged by phone.',
-  'mapa-alt': 'Satellite map of southern Warsaw with 9 meeting points for refresher driving lessons — from Łopuszańska to Wawer',
+  'mapa-alt': 'Satellite map of southern Warsaw with 10 meeting points for refresher driving lessons — from Łopuszańska to Wawer',
   'mk-9': 'National Library',
   'mapa-przybliz': 'Zoom in on Google Maps',
   'mapa-nota': 'the Google map loads only after you click “Zoom in” — Google may then set its own cookies.',
@@ -314,6 +314,7 @@ window.I18N = {
   'm2-4': 'Car park at Cynamonowa 4 (by the Mazda dealer)',
   'm2-5': 'Łopuszańska 22',
   'm2-6': 'al. Niepodległości 213 — car park by the National Library',
+  'm2-7': 'Wał Miedzeszyński 646 (next to Hangar 646)',
 
   /* --- Najczęstsze pytania / FAQ --- */
   'faq-kicker': 'Questions and answers',
