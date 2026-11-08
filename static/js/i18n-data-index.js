@@ -293,6 +293,7 @@ window.I18N = {
     '<strong>Somewhere else nearby?</strong> A meeting point not on the map can be arranged by phone: <a href="tel:+48690360164">690&nbsp;360&nbsp;164</a>.',
   'mapa-alt': 'Satellite map of southern Warsaw with 10 meeting points for refresher driving lessons — from Łopuszańska to Wawer',
   'mapa-przybliz': 'Zoom in on Google Maps',
+  'mapa-wroc': 'Previous view',
   'mapa-nota': 'the Google map loads only after you click “Zoom in” — Google may then set its own cookies.',
   'mapy-atrybucja': 'Satellite imagery and labels:',
   'mapa-legenda-1': '160 zł/h — free travel, any day',

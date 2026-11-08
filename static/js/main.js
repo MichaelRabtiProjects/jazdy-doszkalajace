@@ -364,12 +364,35 @@
   var mapaSrc = mapaMiejsc && mapaMiejsc.getAttribute('data-mapa-src');
   var mapaPrzybliz = mapaMiejsc && mapaMiejsc.querySelector('[data-mapa-przybliz]');
 
+  var mapaWroc = mapaMiejsc && mapaMiejsc.querySelector('[data-mapa-wroc]');
+  var mapaRamka = null;
+
   if (mapaSrc && mapaPrzybliz) {
     mapaPrzybliz.hidden = false;
     var mapaNota = document.querySelector('[data-mapa-nota]');
     if (mapaNota) mapaNota.hidden = false;
 
+    // „Poprzedni widok” — z powrotem zdjęcie z pinezkami i cenami. Ramka
+    // zostaje (ukryta), więc ponowne „Przybliż” pokaże mapę Google bez
+    // ponownego ładowania i w tym miejscu, w którym ją zostawiono.
+    if (mapaWroc) {
+      mapaWroc.addEventListener('click', function () {
+        if (mapaRamka) mapaRamka.hidden = true;
+        mapaMiejsc.classList.remove('is-google');
+        mapaWroc.hidden = true;
+        mapaPrzybliz.focus();
+      });
+    }
+
     mapaPrzybliz.addEventListener('click', function () {
+      if (mapaRamka) {
+        mapaRamka.hidden = false;
+        mapaMiejsc.classList.add('is-google');
+        if (mapaWroc) mapaWroc.hidden = false;
+        mapaRamka.focus();
+        return;
+      }
+
       // Przybliżenie dobrane do szerokości mapy tak, żeby wszystkie pinezki
       // (Łopuszańska ↔ Będzińska, ok. 16 km) zmieściły się w kadrze, jak na
       // zdjęciu. Środek kadru (ll=) jest w data-mapa-src.
@@ -392,6 +415,8 @@
       ramka.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
       mapaMiejsc.classList.add('is-google');
       mapaMiejsc.appendChild(ramka);
+      mapaRamka = ramka;
+      if (mapaWroc) mapaWroc.hidden = false;
       ramka.focus();
     });
   }
