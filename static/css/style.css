@@ -3199,12 +3199,14 @@ body.lightbox-open {
   display: none;
 }
 
-/* Powrót z mapy Google do zdjęcia z cenami — lewy górny róg, nad ramką */
+/* Powrót z mapy Google do zdjęcia z cenami — prawy górny róg, nad ramką.
+   Lewą stronę zajmuje panel Google z opisem klikniętej pinezki, dół —
+   logo, przyciski przybliżania i informacje o danych mapy. */
 .mapa-wroc {
   top: 12px;
-  right: auto;
+  right: 12px;
   bottom: auto;
-  left: 12px;
+  left: auto;
   z-index: 7;
 }
 
