@@ -180,9 +180,6 @@ window.I18N = {
     'I run courses at Babska Autoszkoła, ul. Wałbrzyska 48 (Mokotów). You buy and pay for the course at the driving school — ' +
     '<strong>I don’t accept payments for courses</strong>. When signing up, ask for lessons with instructor Michael. Limited availability.',
   'cennik-kurs-link': 'Course prices',
-  'cennik-stali':
-    'Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.',
-  'cennik-osk': 'I run lessons in cooperation with a licensed driver training centre.',
   'cennik-en':
     'Lessons with me in English cost the same. <strong>Instructor Khaled has his own pricing, different from ' +
     'the prices on this site</strong> — currently 200 zł/h, subject to change (<a href="#khaled">see his section</a>).',

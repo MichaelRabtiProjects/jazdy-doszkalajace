@@ -3445,12 +3445,6 @@ body.lightbox-open {
   }
 }
 
-/* Notka o zniżce dla stałych klientów — ten sam styl co reszta
-   drobnego druku pod cennikiem, tylko bliżej poprzedniej notki. */
-.price-note-stali {
-  margin-top: 8px;
-}
-
 /* ==========================================================================
    Pływające przyciski kontaktu
    ========================================================================== */
