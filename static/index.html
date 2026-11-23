@@ -90,7 +90,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/style.css?v=20261108h">
+<link rel="stylesheet" href="css/style.css?v=20261123a">
 
 <!--
   Pierwsze zdjęcie w przesuwającym się tle hero jest pierwszą rzeczą, jaką
@@ -213,6 +213,7 @@
           <p data-i18n="oferta-1-p">
             Dla osób, które mają prawo jazdy, ale od dawna nie prowadziły. Spokojne tempo,
             oswojenie z autem, ruchem miejskim i aktualnymi przepisami — bez stresu i oceniania.
+            Jeździsz autem bez „L” na dachu, jak każdy kierowca.
           </p>
           <a class="offer-link" href="jazdy-po-przerwie.html" data-i18n="oferta-1-link">Więcej o jazdach po przerwie →</a>
         </article>
@@ -227,7 +228,8 @@
           <h3 data-i18n="oferta-2-h">Przygotowanie do egzaminu WORD</h3>
           <p data-i18n="oferta-2-p">
             Jazda po realnych trasach egzaminacyjnych, żeby dzień egzaminu nie był pierwszym razem,
-            gdy je widzisz.
+            gdy je widzisz. Jazdy dla kursantów z numerem PKK prowadzę we współpracy z ośrodkiem
+            szkolenia kierowców.
           </p>
           <ul class="route-badges" aria-label="Trasy egzaminacyjne WORD" data-i18n-attr="aria-label:oferta-2-badges-label">
             <li class="route-badge">Odlewnicza</li>
@@ -265,8 +267,8 @@
 
       <div class="offer-alp-note reveal">
         <p data-i18n="oferta-alp-note">
-          Zajęcia prowadzimy też w języku angielskim i arabskim — te lekcje prowadzi
-          instruktor Khaled w ramach ALP.
+          Kursy i jazdy po angielsku i arabsku prowadzi instruktor Khaled w ramach ALP.
+          Ma własny cennik, inny niż mój — obecnie 200 zł/h.
         </p>
         <a href="#khaled" class="btn btn-secondary" data-i18n="oferta-alp-btn">Zobacz ofertę ALP ↓</a>
       </div>
@@ -462,9 +464,11 @@
   <!--
     Sekcja po angielsku — wyłącznie fakty z listy ustalonej z klientem:
     prowadził szkołę jazdy ALP, ponad 20 lat nauczania (Polska i zagranica),
-    uczy po angielsku i arabsku, kontakt tylko SMS/WhatsApp/telefon,
-    wycena indywidualna. Świadomie NIE wspomina o żadnym pokrewieństwie
-    ani nie dopisuje faktów spoza tej listy.
+    prowadzi kursy i jazdy po angielsku i arabsku (także po polsku), kontakt
+    tylko SMS/WhatsApp/telefon, WŁASNY cennik inny niż LajtELki: obecnie
+    200 zł/h, może się zmienić (ustalone 23.11.2026), cena kursu — zapytać.
+    Świadomie NIE wspomina o żadnym pokrewieństwie ani nie dopisuje faktów
+    spoza tej listy.
   -->
   <section id="khaled" class="section section-dark" lang="en">
     <div class="container about-container">
@@ -473,12 +477,21 @@
 
       <p class="about-intro reveal">
         Khaled ran the ALP driving school and has over 20 years of experience teaching drivers,
-        both in Poland and abroad. Lessons are taught in English, Arabic, and Polish.
+        both in Poland and abroad. He runs <strong>category B courses and driving lessons in
+        English and Arabic</strong> — and in Polish too.
       </p>
 
-      <p class="section-lead reveal">
-        Pricing is individual — get in touch to talk through what you need and agree on a rate.
-      </p>
+      <div class="khaled-cena reveal">
+        <p class="khaled-cena-kwota"><strong>200 zł</strong> / hour of driving</p>
+        <p>
+          Khaled has his own pricing, <strong>different from the LajtELka prices on this website</strong>.
+          The current rate may change, so please confirm it when you get in touch. Course price on request.
+        </p>
+        <p class="khaled-cena-pl" lang="pl">
+          Instruktor Khaled ma własny cennik, inny niż ceny LajtELki na tej stronie: obecnie
+          200 zł/h, cena może się zmienić. Prowadzi kursy i jazdy po angielsku i arabsku.
+        </p>
+      </div>
 
       <p class="umow-note reveal">
         Khaled doesn't use e-mail or an online form for this — the fastest way to reach him is
@@ -499,7 +512,7 @@
     <div class="container">
       <p class="section-kicker reveal" data-i18n="cennik-kicker">Przejrzyste ceny</p>
       <h2 class="section-title reveal" data-i18n="cennik-title">Cennik</h2>
-      <p class="section-lead reveal" data-i18n="cennik-lead">Jedna stawka godzinowa, bez ukrytych kosztów.</p>
+      <p class="section-lead reveal" data-i18n="cennik-lead">Ceny jazd doszkalających ze mną, Michaelem. Jedna stawka godzinowa, bez ukrytych kosztów.</p>
 
       <div class="price-grid">
         <div class="price-card price-card-rate reveal">
@@ -514,18 +527,24 @@
           <span class="price-duration" data-i18n="dlugosc-3h">3 godziny</span>
           <span class="price-value">480 zł</span>
         </div>
-        <div class="price-card price-card-kurs reveal">
-          <span class="price-package-badge price-kurs-badge" data-i18n="cennik-kurs-badge">W trakcie realizacji</span>
-          <span class="price-duration" data-i18n="cennik-kurs-nazwa">Kurs kat. B</span>
-          <span class="price-value">4990 zł</span>
-          <span class="price-package-note" data-i18n="cennik-kurs-note">Kursy też realizuję, ale w innym ośrodku. Zainteresowanych proszę o kontakt.</span>
-        </div>
         <div class="price-card price-card-pakiet reveal">
           <span class="price-package-badge" data-i18n="cennik-pakiet-badge">Pakiet</span>
           <span class="price-duration" data-i18n="cennik-pakiet-godzin">10 godzin</span>
           <span class="price-value">1500 zł</span>
           <span class="price-package-note" data-i18n="cennik-pakiet-note">150 zł/h — 10 zł taniej za godzinę</span>
         </div>
+      </div>
+
+      <!-- Kursy kat. B Michael prowadzi WYŁĄCZNIE w Babskiej Autoszkole: kurs
+           kupuje się i opłaca w ośrodku (Michael nie przyjmuje płatności za
+           kursy), więc bez ceny — tylko link do cennika Babskiej. -->
+      <div class="price-kurs reveal">
+        <div class="price-kurs-glowa">
+          <span class="price-package-badge price-kurs-badge" data-i18n="cennik-kurs-badge">Babska Autoszkoła</span>
+          <span class="price-kurs-nazwa" data-i18n="cennik-kurs-nazwa">Kurs kat. B</span>
+        </div>
+        <p class="price-kurs-tekst" data-i18n="cennik-kurs-note">Prowadzę kursy w Babskiej Autoszkole, ul. Wałbrzyska 48 (Mokotów). Kurs kupujesz i opłacasz w ośrodku — przy zapisie poproś o jazdy z instruktorem Michaelem. Dostępność ograniczona.</p>
+        <a class="price-kurs-link" href="https://babska.pl/cennik/" target="_blank" rel="noopener"><span data-i18n="cennik-kurs-link">Ceny kursów</span> ↗</a>
       </div>
 
       <p class="price-note reveal" data-i18n="cennik-note">
@@ -538,9 +557,14 @@
         współpracy.
       </p>
 
+      <p class="price-note reveal" data-i18n="cennik-osk">
+        Jazdy prowadzę we współpracy z ośrodkiem szkolenia kierowców.
+      </p>
+
       <p class="price-note reveal" data-i18n="cennik-en">
-        Ceny takie same w języku angielskim (dotyczy jazd ze mną — dla lekcji z Instruktorem
-        Khaledem w j. angielskim/arabskim ceny są indywidualne, zobacz jego sekcję).
+        Jazdy ze mną po angielsku kosztują tyle samo. <strong>Instruktor Khaled ma własny cennik,
+        inny niż na tej stronie</strong> — obecnie 200 zł/h, cena może się zmienić
+        (<a href="#khaled">zobacz jego sekcję</a>).
       </p>
     </div>
   </section>
@@ -865,13 +889,14 @@
           <details class="faq-item">
             <summary data-i18n="faq-9-q">Czy prowadzisz jazdy po angielsku?</summary>
             <div class="faq-odp" data-i18n="faq-9-a">
-              <p>Tak, w tej samej cenie co po polsku — to mój początek w nauczaniu po angielsku. Jeśli szukasz instruktora z wieloletnią praktyką w angielskim lub arabskim, zobacz <a href="#khaled">ofertę Instruktora Khaleda (ALP)</a>.</p>
+              <p>Tak, w tej samej cenie co po polsku — to mój początek w nauczaniu po angielsku. Jeśli szukasz instruktora z wieloletnią praktyką w angielskim lub arabskim, zobacz <a href="#khaled">ofertę Instruktora Khaleda (ALP)</a> — ma własny cennik.</p>
             </div>
           </details>
           <details class="faq-item">
             <summary data-i18n="faq-10-q">Czy prowadzisz pełny kurs na prawo jazdy kat. B?</summary>
             <div class="faq-odp" data-i18n="faq-10-a">
-              <p>Kursy też realizuję, ale w innym ośrodku. Zainteresowanych proszę o kontakt. Same jazdy doszkalające to nie kurs ośrodka, więc nie wystawiam do nich zaświadczeń — rachunek na żądanie.</p>
+              <p>Tak, ale tylko w Babskiej Autoszkole — ul. Wałbrzyska 48 na Mokotowie. Kurs kupujesz i opłacasz bezpośrednio w ośrodku (<a href="https://babska.pl/cennik/" target="_blank" rel="noopener">ceny kursów na babska.pl</a>), a przy zapisie prosisz o jazdy z instruktorem Michaelem. Za kursy nie przyjmuję płatności. Dostępność jest ograniczona.</p>
+              <p>Same jazdy doszkalające to nie kurs ośrodka, więc nie wystawiam do nich zaświadczeń — rachunek na żądanie.</p>
             </div>
           </details>
         </div>
@@ -1123,11 +1148,11 @@
   </figure>
 </div>
 
-<script src="js/i18n-data-index.js?v=20261108h"></script>
-<script src="js/i18n.js?v=20261108h"></script>
-<script src="js/main.js?v=20261108h"></script>
-<script src="js/pasek-auto.js?v=20261108h"></script>
-<script src="js/grafik.js?v=20261108h"></script>
-<script src="js/konto-przycisk.js?v=20261108h"></script>
+<script src="js/i18n-data-index.js?v=20261123a"></script>
+<script src="js/i18n.js?v=20261123a"></script>
+<script src="js/main.js?v=20261123a"></script>
+<script src="js/pasek-auto.js?v=20261123a"></script>
+<script src="js/grafik.js?v=20261123a"></script>
+<script src="js/konto-przycisk.js?v=20261123a"></script>
 </body>
 </html>

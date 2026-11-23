@@ -45,11 +45,14 @@ window.I18N = {
   'oferta-1-h': 'Back behind the wheel',
   'oferta-1-p':
     'For people who already hold a licence but haven’t driven in a long time. A calm pace, ' +
-    'getting used to the car, city traffic and current rules again — no stress, no judgement.',
+    'getting used to the car, city traffic and current rules again — no stress, no judgement. ' +
+    'You drive a car without an “L” sign on the roof, like any other driver.',
   'oferta-1-link': 'More about lessons after a break (in Polish) →',
   'oferta-2-h': 'WORD exam preparation',
   'oferta-2-p':
-    'Driving the actual exam routes, so exam day isn’t the first time you see them.',
+    'Driving the actual exam routes, so exam day isn’t the first time you see them. ' +
+    'Lessons for learner drivers with a PKK number (candidate driver profile) are run ' +
+    'in cooperation with a licensed driver training centre.',
   'oferta-2-badges-label': 'WORD exam routes',
   'oferta-3-h': 'Individual lessons',
   'oferta-3-p':
@@ -68,7 +71,8 @@ window.I18N = {
     'looking for someone with years of practice in English, also check out ' +
     '<a href="#khaled">Instructor Khaled’s offer</a>.',
   'oferta-alp-note':
-    'Lessons are also available in English and Arabic — taught by instructor Khaled as part of ALP.',
+    'Courses and lessons in English and Arabic are taught by instructor Khaled as part of ALP. ' +
+    'He has his own pricing, different from mine — currently 200 zł/h.',
   'oferta-alp-btn': 'See the ALP offer ↓',
 
   /* --- Grafik / Schedule --- */
@@ -165,19 +169,23 @@ window.I18N = {
   /* --- Cennik / Pricing --- */
   'cennik-kicker': 'Clear pricing',
   'cennik-title': 'Pricing',
-  'cennik-lead': 'One hourly rate, no hidden costs.',
+  'cennik-lead': 'Prices for refresher lessons with me, Michael. One hourly rate, no hidden costs.',
   'cennik-za-godzine': 'per hour',
   'cennik-pakiet-badge': 'Package',
   'cennik-pakiet-godzin': '10 hours',
   'cennik-pakiet-note': '150 zł/h — 10 zł cheaper per hour',
-  'cennik-kurs-badge': 'In progress',
+  'cennik-kurs-badge': 'Babska Autoszkoła',
   'cennik-kurs-nazwa': 'Category B course',
-  'cennik-kurs-note': 'I also run courses, but at another driving school. If you’re interested, please get in touch.',
+  'cennik-kurs-note':
+    'I run courses at Babska Autoszkoła, ul. Wałbrzyska 48 (Mokotów). You buy and pay for the course at the driving school — ' +
+    'when signing up, ask for lessons with instructor Michael. Limited availability.',
+  'cennik-kurs-link': 'Course prices',
   'cennik-stali':
     'Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.',
+  'cennik-osk': 'I run lessons in cooperation with a licensed driver training centre.',
   'cennik-en':
-    'Same prices in English (this applies to lessons with me — for lessons with Instructor Khaled ' +
-    'in English/Arabic, pricing is individual, see his section).',
+    'Lessons with me in English cost the same. <strong>Instructor Khaled has his own pricing, different from ' +
+    'the prices on this site</strong> — currently 200 zł/h, subject to change (<a href="#khaled">see his section</a>).',
   'cennik-note':
     'A single lesson is 2 to 4 hours — the 10-hour package is split across several sessions, arranged ' +
     'when you get in touch.',
@@ -380,12 +388,14 @@ window.I18N = {
   'faq-9-a':
     '<p>Yes, at the same price as in Polish — I’m just starting out teaching in English. If you’re ' +
     'looking for an instructor with many years of experience in English or Arabic, see ' +
-    '<a href="#khaled">Instructor Khaled’s offer (ALP)</a>.</p>',
+    '<a href="#khaled">Instructor Khaled’s offer (ALP)</a> — he has his own pricing.</p>',
   'faq-10-q': 'Do you run a full category B driving course?',
   'faq-10-a':
-    '<p>I also run courses, but at another driving school. If you’re interested, please get in ' +
-    'touch. Refresher lessons on their own aren’t a driving-school course, so I don’t issue ' +
-    'certificates for them — a receipt is available on request.</p>',
+    '<p>Yes, but only at Babska Autoszkoła — ul. Wałbrzyska 48 in Mokotów. You buy and pay for the course directly at the ' +
+    'driving school (<a href="https://babska.pl/cennik/" target="_blank" rel="noopener">course prices at babska.pl</a>) and, when signing up, ' +
+    'ask for lessons with instructor Michael. I don’t accept payments for courses. Availability is limited.</p>' +
+    '<p>Refresher lessons on their own are not a driving school course, so I don’t issue certificates for them — ' +
+    'a receipt is available on request.</p>',
 
   /* --- Stopka / Footer --- */
   'footer-prawa': '© 2026 LajtELka – Jazdy doszkalające. All rights reserved.',

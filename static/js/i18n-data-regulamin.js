@@ -32,10 +32,13 @@ window.I18N = {
 
   'par2-h': '§ 2. Scope of services',
   'par2-1': 'Category B refresher driving lessons for people who already hold a licence — not a driving course and not training by a licensed driving school; no certificates are issued.',
+  'par2-1a': 'The Provider runs the lessons in cooperation with a licensed driver training centre.',
+  'par2-1b': 'Category B driving courses that the Provider teaches as an instructor at a driver training centre are bought and paid for ' +
+    'directly at that centre. They are not covered by these Terms, and the Provider does not accept payments for them.',
   'par2-2': 'Lesson length: <strong>2–4 h</strong>. Price: <strong>160 zł/h</strong> (320 / 480 / 640 zł).',
   'par2-3': 'Lessons at the Wawer meeting points (Będzińska / K&amp;M Park, Zerzeń / DoubleTree by Hilton, Ferio Wawer) always cost 160&nbsp;zł/h. At the other meeting points listed on the website, <strong>15 zł per hour</strong> is added (175&nbsp;zł/h) — unless, on that day, the Provider has an adjacent lesson at the same meeting point or at one of the two points closest to it; then 160&nbsp;zł/h applies. The price of a given lesson is shown in the schedule before booking and does not change afterwards. Start times in the schedule allow for the Provider’s travel time between meeting points (e.g. 13:25).',
   'par2-4': 'Location: Warsaw, mainly the Wawer district — the exact meeting point is agreed when you get in touch.',
-  'par2-5': 'Vehicle: <strong>[VEHICLE]</strong>.',
+  'par2-5': 'Vehicle: <strong>Hyundai i20</strong>.',
   'par2-6': 'A valid category B driving licence is required and must be shown before the lesson.',
   'par2-7': 'The Provider may refuse to start or may stop a lesson if the Customer: has no valid licence, is under the influence of alcohol or drugs, or seriously breaches safety rules — in which case the lesson counts as not taking place through the Customer’s fault (§&nbsp;5(4)).',
   'par2-8': 'The Customer must follow traffic law and the Provider’s instructions.',
@@ -98,7 +101,7 @@ window.I18N = {
   'par9-2': 'No provision of these Terms limits a consumer’s statutory rights — in case of conflict, the law prevails.',
   'par9-3': 'For how personal data is handled, see the <a href="polityka-prywatnosci.html">Privacy Policy</a>.',
   'par9-4': 'Changes to these Terms take effect on publication of the new version; a time slot confirmed earlier is governed by the version in force at the time it was confirmed (earlier versions available on request).',
-  'par9-5': 'These Terms, in this wording, are in effect from <strong>20 October 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
+  'par9-5': 'These Terms, in this wording, are in effect from <strong>23 November 2026</strong>. The Polish-language version is the authoritative text; this English version is provided for convenience.',
 
   'powrot': '← Back to the homepage',
 
