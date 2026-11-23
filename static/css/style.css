@@ -4055,7 +4055,7 @@ body.lightbox-open {
   padding: 14px 18px;
   border-left: 4px solid var(--amber);
   border-radius: 0 10px 10px 0;
-  background: var(--white);
+  background: var(--paper);
 }
 
 .egz-tekst .contact-cta {
