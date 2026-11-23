@@ -146,7 +146,7 @@ window.I18N = {
     'of this, so don’t expect perfect fluency from me — I see it as a shared experience with the ' +
     'student. If you’d like to practise the language along the way, with no pressure and no ' +
     'judgement, you’re welcome to book.',
-  'omnie-reviews-link': 'See student reviews ↓',
+  'omnie-reviews-link': 'See student reviews ↑',
   'omnie-closing':
     'Best wishes to all my students – those who’ve already passed, those still preparing for their exam, ' +
     'and those who simply came to brush up their skills. I hope you all have a long, safe road ahead.',
