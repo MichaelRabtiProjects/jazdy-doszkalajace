@@ -33,6 +33,40 @@
   }
 
   /* ======================================================================
+     O mnie — dalsza część pod przyciskiem „Czytaj więcej o mnie”
+     ====================================================================== */
+  var omniePokaz = document.querySelector('.omnie-pokaz');
+  var omnieWiecej = document.getElementById('omnie-wiecej');
+
+  if (omniePokaz && omnieWiecej) {
+    var pokazOmnie = function (otwarte) {
+      omnieWiecej.classList.toggle('is-otwarte', otwarte);
+      omniePokaz.setAttribute('aria-expanded', String(otwarte));
+      // Linki w przygaszonym tekście nie łapią fokusu z klawiatury.
+      omnieWiecej.querySelectorAll('a').forEach(function (a) {
+        if (otwarte) a.removeAttribute('tabindex');
+        else a.setAttribute('tabindex', '-1');
+      });
+    };
+    pokazOmnie(false);
+    omniePokaz.addEventListener('click', function () {
+      var otworz = omniePokaz.getAttribute('aria-expanded') !== 'true';
+      pokazOmnie(otworz);
+      // Po zwinięciu wracamy na początek sekcji, żeby nie zgubić miejsca na stronie.
+      if (!otworz) {
+        var sekcja = document.getElementById('o-mnie');
+        if (sekcja && sekcja.getBoundingClientRect().top < 0) {
+          sekcja.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      }
+    });
+    // Klik w przygaszony tekst też rozwija.
+    omnieWiecej.addEventListener('click', function () {
+      if (!omnieWiecej.classList.contains('is-otwarte')) pokazOmnie(true);
+    });
+  }
+
+  /* ======================================================================
      Menu mobilne
      ====================================================================== */
   var navToggle = document.getElementById('nav-toggle');

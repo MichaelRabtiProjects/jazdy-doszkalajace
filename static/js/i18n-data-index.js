@@ -178,7 +178,7 @@ window.I18N = {
   'cennik-kurs-nazwa': 'Category B course',
   'cennik-kurs-note':
     'I run courses at Babska Autoszkoła, ul. Wałbrzyska 48 (Mokotów). You buy and pay for the course at the driving school — ' +
-    'when signing up, ask for lessons with instructor Michael. Limited availability.',
+    '<strong>I don’t accept payments for courses</strong>. When signing up, ask for lessons with instructor Michael. Limited availability.',
   'cennik-kurs-link': 'Course prices',
   'cennik-stali':
     'Regular students pay less — 10–15 zł/h below the prices above. Details once we’re working together regularly.',
@@ -365,10 +365,12 @@ window.I18N = {
   'faq-4-a':
     '<p>Usually in Wawer. At the main meeting spots there’s no travel charge: Będzińska / K&amp;M ' +
     'Park, Zerzeń / DoubleTree by Hilton and Ferio Wawer. There are also additional spots in other ' +
-    'parts of Warsaw (listed in the <a href="#kontakt">Contact</a> section), and another place can ' +
+    'parts of Warsaw (see the <a href="#miejsca-spotkan">meeting point map</a> next to the prices), and another place can ' +
     'be agreed by phone.</p>',
   'faq-pokaz-wiecej': 'Show more questions',
   'faq-pokaz-mniej': 'Show less',
+  'omnie-pokaz-wiecej': 'Read more about me',
+  'omnie-pokaz-mniej': 'Show less',
   'faq-6-q': 'How do I book a lesson?',
   'faq-6-a':
     '<p>In the <a href="#grafik">schedule</a>, sign in with a code from your e-mail (no password), pick a meeting point, ' +

@@ -796,6 +796,48 @@ a.lang-btn {
   display: inline;
 }
 
+/* „O mnie” — dalsza część pod przyciskiem „Czytaj więcej o mnie”, ten sam
+   wzorzec co dalsze pytania w FAQ: widać przygaszony początek. Bez
+   JavaScriptu (brak klasy js-reveal) widać całość, bez przycisku. */
+.js-reveal .omnie-wiecej:not(.is-otwarte) {
+  max-height: 120px;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.js-reveal .omnie-wiecej:not(.is-otwarte) a {
+  pointer-events: none;
+}
+
+.omnie-pokaz-wiersz {
+  display: none;
+}
+
+.js-reveal .omnie-pokaz-wiersz {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.omnie-pokaz::after {
+  content: " ▾";
+}
+
+.omnie-pokaz[aria-expanded="true"]::after {
+  content: " ▴";
+}
+
+.omnie-pokaz-mniej,
+.omnie-pokaz[aria-expanded="true"] .omnie-pokaz-wiecej {
+  display: none;
+}
+
+.omnie-pokaz[aria-expanded="true"] .omnie-pokaz-mniej {
+  display: inline;
+}
+
 /* Plakietki tras egzaminacyjnych — ciemne tło z pomarańczową obwódką,
    spójne z paletą strony (wcześniej zieleń wypadała z motywu). */
 .route-badges {
