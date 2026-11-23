@@ -178,7 +178,7 @@ window.I18N = {
   'cennik-kurs-nazwa': 'Category B course',
   'cennik-kurs-note':
     'I run courses at Babska Autoszkoła, ul. Wałbrzyska 48 (Mokotów). You buy and pay for the course at the driving school — ' +
-    '<strong>I don’t accept payments for courses</strong>. When signing up, ask for lessons with instructor Michael. Limited availability.',
+    '<strong>I don’t accept payments for courses</strong>. When signing up, ask for lessons with instructor Michael. <strong>Limited availability.</strong>',
   'cennik-kurs-link': 'Course prices',
   'cennik-en':
     'Lessons with me in English cost the same. <strong>Instructor Khaled has his own pricing, different from ' +
