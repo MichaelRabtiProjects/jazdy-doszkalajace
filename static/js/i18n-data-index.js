@@ -367,6 +367,8 @@ window.I18N = {
   'faq-pokaz-wiecej': 'Show more questions',
   'faq-pokaz-mniej': 'Show less',
   'omnie-pokaz-wiecej': 'Read more about me',
+  'miejsca-pokaz': 'Show the meeting point map',
+  'miejsca-zwin': 'Hide the map',
   'omnie-pokaz-mniej': 'Show less',
   'faq-6-q': 'How do I book a lesson?',
   'faq-6-a':

@@ -838,6 +838,41 @@ a.lang-btn {
   display: inline;
 }
 
+/* Mapa miejsc spotkań przy cenniku — zwinięta pod przyciskiem, bo zajmuje
+   dużo miejsca. Bez JavaScriptu (brak klasy js-reveal) widać ją od razu. */
+.miejsca-pokaz {
+  display: none;
+}
+
+.js-reveal .miejsca-pokaz {
+  display: inline-block;
+}
+
+.js-reveal .miejsca-zwijane:not(.is-otwarte) {
+  display: none;
+}
+
+.miejsca-zwijane.is-otwarte {
+  margin-top: 18px;
+}
+
+.miejsca-pokaz::after {
+  content: " ▾";
+}
+
+.miejsca-pokaz[aria-expanded="true"]::after {
+  content: " ▴";
+}
+
+.miejsca-pokaz-mniej,
+.miejsca-pokaz[aria-expanded="true"] .miejsca-pokaz-wiecej {
+  display: none;
+}
+
+.miejsca-pokaz[aria-expanded="true"] .miejsca-pokaz-mniej {
+  display: inline;
+}
+
 /* Plakietki tras egzaminacyjnych — ciemne tło z pomarańczową obwódką,
    spójne z paletą strony (wcześniej zieleń wypadała z motywu). */
 .route-badges {

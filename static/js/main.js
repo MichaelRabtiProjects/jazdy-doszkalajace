@@ -33,6 +33,29 @@
   }
 
   /* ======================================================================
+     Mapa miejsc spotkań przy cenniku — zwinięta pod przyciskiem.
+     Link #miejsca-spotkan (np. z FAQ) od razu ją rozwija.
+     ====================================================================== */
+  var miejscaPokaz = document.querySelector('.miejsca-pokaz');
+  var miejscaZwijane = document.getElementById('miejsca-zwijane');
+
+  if (miejscaPokaz && miejscaZwijane) {
+    var pokazMape = function (otwarte) {
+      miejscaZwijane.classList.toggle('is-otwarte', otwarte);
+      miejscaPokaz.setAttribute('aria-expanded', String(otwarte));
+    };
+    pokazMape(location.hash === '#miejsca-spotkan');
+    miejscaPokaz.addEventListener('click', function () {
+      pokazMape(miejscaPokaz.getAttribute('aria-expanded') !== 'true');
+    });
+    document.querySelectorAll('a[href="#miejsca-spotkan"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        pokazMape(true);
+      });
+    });
+  }
+
+  /* ======================================================================
      O mnie — dalsza część pod przyciskiem „Czytaj więcej o mnie”
      ====================================================================== */
   var omniePokaz = document.querySelector('.omnie-pokaz');
