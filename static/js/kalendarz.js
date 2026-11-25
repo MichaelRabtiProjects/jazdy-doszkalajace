@@ -794,8 +794,9 @@
         });
       }
     } else {
-      if (!F.elements.imie.value.trim() || !F.elements.telefon.value.trim()) {
-        return P.pokazBlad('blad-nowa', 'Podaj imię i nazwisko oraz telefon kursanta.');
+      // Telefon i e-mail są opcjonalne — bez nich rezerwacja jest tylko wpisem dla instruktora.
+      if (!F.elements.imie.value.trim()) {
+        return P.pokazBlad('blad-nowa', 'Podaj imię kursanta.');
       }
       zadanie = P.api('/api/admin/rezerwacje', {
         akcja: 'dodaj',
@@ -861,7 +862,7 @@
             .map(function (k, i) {
               return (
                 '<li role="option"><button type="button" data-i="' + i + '">' + esc(k.imie) +
-                '<small>' + esc(k.telefon) + (k.email ? ' · ' + esc(k.email) : '') + ' · jazd: ' + k.liczba +
+                '<small>' + esc(k.telefon || '—') + (k.email ? ' · ' + esc(k.email) : '') + ' · jazd: ' + k.liczba +
                 ', ostatnio ' + esc(P.krotko(k.ostatnia)) + '</small></button></li>'
               );
             })
@@ -906,7 +907,7 @@
     if (!b) return;
     var k = wyniki[Number(b.dataset.i)];
     F.elements.imie.value = k.imie;
-    F.elements.telefon.value = k.telefon;
+    F.elements.telefon.value = k.telefon || '';
     F.elements.email.value = k.email || '';
     F.elements.jezyk.value = k.jezyk === 'en' ? 'en' : 'pl';
     schowajPodpowiedzi();

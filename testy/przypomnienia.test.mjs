@@ -226,6 +226,15 @@ test('baza: należna jazda dostaje e-mail i SMS dokładnie raz', async () => {
   assert.equal(wyslane.length, 2);
 });
 
+test('baza: jazda z panelu bez telefonu — tylko e-mail, bez SMS-a i bez błędu', async () => {
+  const db = nowaBaza();
+  const id = dodajJazde(db, { telefon: '' });
+  const w = await wyslijPrzypomnienia(db, ENV, 'https://lajtelka.pl', { teraz: MOMENT });
+  assert.deepEqual([w.maile, w.smsy, w.bledy.length], [1, 0, 0]);
+  assert.equal(wyslane.filter((x) => x.kanal === 'sms').length, 0);
+  assert.equal(wiersz(db, id).sms_proby, 0);
+});
+
 test('baza: przed momentem nic nie wychodzi', async () => {
   const db = nowaBaza();
   dodajJazde(db);

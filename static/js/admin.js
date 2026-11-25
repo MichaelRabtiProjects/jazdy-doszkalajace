@@ -243,7 +243,7 @@
   }
 
   function kartaRezerwacji(r, typ) {
-    var tel = String(r.telefon).replace(/[^\d+]/g, '');
+    var tel = String(r.telefon || '').replace(/[^\d+]/g, '');
     var dl = (r.koniec_min - r.start_min) / 60;
     var znaczki = ['<span class="znaczek">' + esc(r.kod_rezerwacji) + '</span>'];
     if (r.zrodlo === 'panel') znaczki.push('<span class="znaczek">wpisana ręcznie</span>');
@@ -284,8 +284,12 @@
       '<div class="rez-miejsce">' + esc(nazwaMiejsca(r.miejsce)) + ' · <strong>' + (160 + (r.doplata_h || 0)) + ' zł/h</strong>' +
       (r.doplata_h ? ' <span class="znaczek">+' + r.doplata_h + ' zł/h dojazd</span>' : '') + '</div>' +
       '<div class="rez-osoba">' + esc(r.imie) + '</div>' +
-      '<div class="rez-kontakt"><a href="tel:' + esc(tel) + '">' + esc(r.telefon) + '</a>' +
-      (r.email ? ' · <a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a>' : '') + '</div>' +
+      // Rezerwacja z panelu może nie mieć telefonu ani e-maila
+      '<div class="rez-kontakt">' +
+      [r.telefon ? '<a href="tel:' + esc(tel) + '">' + esc(r.telefon) + '</a>' : '',
+        r.email ? '<a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a>' : '']
+        .filter(Boolean).join(' · ') +
+      (r.telefon || r.email ? '' : 'bez kontaktu') + '</div>' +
       '<div class="rez-znaczki">' + znaczki.join('') + '</div>' +
       (aktywna ? '<div class="rez-zadatek">' + zadatek + '</div>' : '') +
       (r.notatka ? '<div class="rez-notatka">' + esc(r.notatka) + '</div>' : '') +
@@ -516,14 +520,16 @@
         $('kursanci-lista').innerHTML = d.konta.length
           ? d.konta.map(function (k) {
               return (
-                '<details class="admin-karta kursant" data-id="' + k.id + '"><summary>' +
-                '<strong>' + esc(k.imie || '(bez imienia)') + '</strong> · ' + esc(k.telefon || '—') + ' · ' + esc(k.email) +
+                // Osoba bez konta (z rezerwacji wpisanej w panelu) ma klucz zamiast id
+                '<details class="admin-karta kursant" ' + (k.bez_konta ? 'data-osoba="' + esc(k.klucz) + '"' : 'data-id="' + k.id + '"') + '><summary>' +
+                '<strong>' + esc(k.imie || '(bez imienia)') + '</strong> · ' + esc(k.telefon || '—') + (k.email ? ' · ' + esc(k.email) : '') +
                 ' · jazd: ' + k.jazd + (k.ostatnia ? ' · ostatnio ' + esc(krotko(k.ostatnia)) : '') +
+                (k.bez_konta ? ' <span class="znaczek">bez konta</span>' : '') +
                 (k.zablokowany ? ' <span class="znaczek znaczek-blad">zablokowany</span>' : '') +
                 '</summary><div class="kursant-tresc"><p class="admin-pusto">…</p></div></details>'
               );
             }).join('')
-          : '<p class="admin-pusto">Brak kont' + (q ? ' pasujących do wyszukiwania' : '') + '.</p>';
+          : '<p class="admin-pusto">Brak kursantów' + (q ? ' pasujących do wyszukiwania' : '') + '.</p>';
       })
       .catch(function (err) {
         komunikat(err.message, true);
@@ -539,12 +545,15 @@
   $('kursanci-lista').addEventListener('toggle', function (e) {
     var el = e.target;
     if (!el.classList || !el.classList.contains('kursant') || !el.open) return;
-    api('/api/admin/kursanci?id=' + el.dataset.id)
+    var adres = el.dataset.osoba ? 'osoba=' + encodeURIComponent(el.dataset.osoba) : 'id=' + el.dataset.id;
+    api('/api/admin/kursanci?' + adres)
       .then(function (d) {
         var k = d.konto;
         el.querySelector('.kursant-tresc').innerHTML =
-          '<p class="admin-drobne">Konto od ' + esc(kiedy(k.utworzono_o)) +
-          (k.ostatnio_o ? ' · ostatnie logowanie ' + esc(kiedy(k.ostatnio_o)) : '') + ' · język: ' + esc(k.jezyk) + '</p>' +
+          (k.bez_konta
+            ? '<p class="admin-drobne">Bez konta — osoba z rezerwacji wpisanych ręcznie · język: ' + esc(k.jezyk) + '</p>'
+            : '<p class="admin-drobne">Konto od ' + esc(kiedy(k.utworzono_o)) +
+              (k.ostatnio_o ? ' · ostatnie logowanie ' + esc(kiedy(k.ostatnio_o)) : '') + ' · język: ' + esc(k.jezyk) + '</p>') +
           (k.rezerwacje.length
             ? '<ul class="kursant-jazdy">' + k.rezerwacje.map(function (r) {
                 return '<li><strong>' + esc(krotko(r.data)) + '</strong> ' + zakres(r) + ' · ' + esc(nazwaMiejsca(r.miejsce)) +
@@ -553,11 +562,12 @@
                   ' <span class="znaczek">' + esc(r.kod_rezerwacji) + '</span></li>';
               }).join('') + '</ul>'
             : '<p class="admin-pusto">Brak jazd na tym koncie.</p>') +
+          (k.bez_konta ? '' :
           '<div class="rez-akcje">' +
           '<button type="button" class="btn btn-secondary" data-kursant="zablokuj" data-zablokowany="' + (k.zablokowany ? '0' : '1') + '">' +
           (k.zablokowany ? 'Odblokuj konto' : 'Zablokuj konto') + '</button>' +
           '<button type="button" class="btn btn-secondary btn-ostrozny" data-kursant="usun">Usuń konto</button>' +
-          '</div>';
+          '</div>');
       })
       .catch(function (err) {
         komunikat(err.message, true);

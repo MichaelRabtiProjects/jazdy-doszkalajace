@@ -102,7 +102,7 @@
 
     <!-- Kursanci (konta) -->
     <div class="admin-panel" id="panel-kursanci" role="tabpanel" hidden>
-      <p class="admin-drobne">Kursanci, którzy założyli konto (logowanie kodem z e-maila). Kliknij osobę, żeby zobaczyć jej jazdy.</p>
+      <p class="admin-drobne">Kursanci z kontem (logowanie kodem z e-maila) oraz osoby z rezerwacji wpisanych przez Ciebie — jeśli podałeś telefon albo e-mail (znaczek „bez konta”). Kliknij osobę, żeby zobaczyć jej jazdy.</p>
       <label>Szukaj <input type="search" id="kursanci-q" placeholder="imię, nazwisko, telefon albo e-mail" autocomplete="off"></label>
       <div id="kursanci-lista" class="admin-lista"></div>
     </div>
@@ -213,7 +213,7 @@
           <ul class="kursant-lista" id="kursant-lista" role="listbox" hidden></ul>
         </div>
         <div class="admin-siatka">
-          <label>Telefon <input type="tel" name="telefon" maxlength="25" autocomplete="off"></label>
+          <label>Telefon (opcjonalnie) <input type="tel" name="telefon" maxlength="25" autocomplete="off"></label>
           <label>E-mail (opcjonalnie) <input type="email" name="email" maxlength="120" autocomplete="off"></label>
         </div>
 

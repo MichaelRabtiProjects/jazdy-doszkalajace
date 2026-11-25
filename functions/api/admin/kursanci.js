@@ -2,14 +2,15 @@
  * /api/admin/kursanci  (chronione przez _middleware.js)
  *
  * GET ?q=...        podpowiedzi do "Nowa rezerwacja" (osoby z rezerwacji)
- * GET ?konta=1&q=   zakładka "Kursanci": konta z liczbą jazd
+ * GET ?konta=1&q=   zakładka "Kursanci": konta i osoby bez konta (z rezerwacji) z liczbą jazd
  * GET ?id=N         konto z historią jazd
+ * GET ?osoba=tel:…  osoba bez konta z historią jazd (klucz z listy)
  * POST { akcja: 'zablokuj', id, zablokowany }  blokada / odblokowanie konta
  * POST { akcja: 'usun', id }                   usunięcie konta (RODO);
  *      rezerwacje zostają (rozliczenia) i kasują się po 180 dniach
  */
 
-import { szukajKursantow, listaKont, kontoZHistoria, zablokujKonto } from '../../../lib/kursanci.js';
+import { szukajKursantow, listaKont, kontoZHistoria, osobaZHistoria, zablokujKonto } from '../../../lib/kursanci.js';
 import { usunKonto } from '../../../lib/konto.js';
 import { json, blad, wymagajBazy } from '../../../lib/http.js';
 
@@ -20,6 +21,10 @@ export async function onRequestGet({ request, env }) {
     if (p.get('id')) {
       const k = await kontoZHistoria(db, Number(p.get('id')));
       return k ? json({ konto: k }) : blad('Nie ma takiego konta.', 404);
+    }
+    if (p.get('osoba')) {
+      const o = await osobaZHistoria(db, p.get('osoba'));
+      return o ? json({ konto: o }) : blad('Nie ma takiej osoby.', 404);
     }
     if (p.get('konta')) return json({ konta: await listaKont(db, p.get('q') || '') });
     return json({ kursanci: await szukajKursantow(db, p.get('q') || '') });
