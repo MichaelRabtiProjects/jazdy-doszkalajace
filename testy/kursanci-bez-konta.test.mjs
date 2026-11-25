@@ -10,6 +10,8 @@ import assert from 'node:assert/strict';
 import { utworzZPanelu, utworzWstepna, BladRezerwacji } from '../lib/rezerwacje.js';
 import { listaKont, osobaZHistoria } from '../lib/kursanci.js';
 import { dataPL, dodajDni } from '../lib/czas.js';
+import { mailZaproszenieDoKonta } from '../lib/maile.js';
+import { kontoDlaEmaila } from '../lib/konto.js';
 import { nowaBaza } from './d1-sqlite.mjs';
 
 function otwartyDzien(db, ileDni = 2) {
@@ -75,4 +77,30 @@ test('Kursanci: osoby z rezerwacji z panelu (z telefonem lub e-mailem) bez konta
   assert.equal(h.rezerwacje.length, 2);
   assert.equal(h.telefon !== '', true);
   assert.equal(await osobaZHistoria(db, 'tel:999999999'), null);
+});
+
+test('Zaproszenie do konta: e-mail na adres z rezerwacji, najbliższe jazdy, link do konta (PL i EN)', async () => {
+  const db = nowaBaza();
+  const data = otwartyDzien(db);
+  await utworzZPanelu(db, { data, start: 600, dlugosc: 2, imie: 'Ola Nowak', telefon: '600 100 200', email: 'Ola@Example.com' });
+  const osoba = await osobaZHistoria(db, 'tel:600100200');
+  const m = mailZaproszenieDoKonta(osoba, 'https://lajtelka.pl', {});
+  assert.equal(m.do, 'Ola@Example.com');
+  assert.match(m.tekst, /Cześć Ola!/);
+  assert.ok(m.tekst.includes('https://lajtelka.pl/konto'));
+  assert.match(m.tekst, /10:00–12:00/);
+  assert.match(m.html, /Przejdź do konta/);
+  const en = mailZaproszenieDoKonta({ ...osoba, jezyk: 'en' }, 'https://lajtelka.pl', {});
+  assert.match(en.tekst, /How to sign in/);
+});
+
+test('Po pierwszym logowaniu tym e-mailem rezerwacje podpinają się do konta, osoba znika z „bez konta”', async () => {
+  const db = nowaBaza();
+  const data = otwartyDzien(db);
+  await utworzZPanelu(db, { data, start: 600, dlugosc: 2, imie: 'Ola Nowak', telefon: '600 100 200', email: 'ola@example.com' });
+  assert.equal((await listaKont(db)).filter((k) => k.bez_konta).length, 1);
+  const u = await kontoDlaEmaila(db, 'ola@example.com', 'pl');
+  const lista = await listaKont(db);
+  assert.equal(lista.filter((k) => k.bez_konta).length, 0);
+  assert.equal(lista.find((k) => k.id === u.id).jazd, 1);
 });

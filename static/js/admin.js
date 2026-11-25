@@ -562,7 +562,12 @@
                   ' <span class="znaczek">' + esc(r.kod_rezerwacji) + '</span></li>';
               }).join('') + '</ul>'
             : '<p class="admin-pusto">Brak jazd na tym koncie.</p>') +
-          (k.bez_konta ? '' :
+          (k.bez_konta
+            ? (k.email
+                ? '<div class="rez-akcje"><button type="button" class="btn btn-secondary" data-kursant="zapros" data-email="' + esc(k.email) + '">Zaproś do konta</button></div>' +
+                  '<p class="admin-drobne">Wyślę e-mail na ' + esc(k.email) + ': logowanie tym adresem i kodem z e-maila, a rezerwacje tej osoby same podepną się do konta.</p>'
+                : '<p class="admin-drobne">Bez e-maila — nie da się wysłać zaproszenia do konta.</p>')
+            :
           '<div class="rez-akcje">' +
           '<button type="button" class="btn btn-secondary" data-kursant="zablokuj" data-zablokowany="' + (k.zablokowany ? '0' : '1') + '">' +
           (k.zablokowany ? 'Odblokuj konto' : 'Zablokuj konto') + '</button>' +
@@ -581,6 +586,20 @@
     var id = Number(el.dataset.id);
     var nazwa = el.querySelector('summary strong').textContent;
     var dane;
+    if (b.dataset.kursant === 'zapros') {
+      if (!window.confirm('Wysłać zaproszenie do konta?\n\n' + nazwa + ' dostanie e-mail na ' + b.dataset.email + ' z instrukcją logowania (adres + kod z e-maila, bez haseł).')) return;
+      b.disabled = true;
+      api('/api/admin/kursanci', { akcja: 'zapros', osoba: el.dataset.osoba })
+        .then(function (w) {
+          b.textContent = 'Zaproszenie wysłane ✓';
+          komunikat('Zaproszenie wysłane na ' + w.email + '.');
+        })
+        .catch(function (err) {
+          b.disabled = false;
+          komunikat(err.message, true);
+        });
+      return;
+    }
     if (b.dataset.kursant === 'usun') {
       if (!window.confirm('Usunąć konto: ' + nazwa + '?\n\nKursant straci dostęp do konta. Jego rezerwacje zostaną (rozliczenia) i znikną po 180 dniach. Tego nie da się cofnąć.')) return;
       dane = { akcja: 'usun', id: id };
